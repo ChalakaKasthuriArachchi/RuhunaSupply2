@@ -9,6 +9,10 @@ namespace RuhunaSupply.Model
 {
     public class User
     {
+        public User()
+        {
+
+        }
         [Key]
         public int Id { get; set; }
         [Required]
