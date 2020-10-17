@@ -26,3 +26,5 @@ namespace RuhunaSupply.Data
         public DbSet<UserPerchaseRequest> UserPerchaseRequests { get; set; }
     }
 }
+
+//*******
