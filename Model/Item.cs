@@ -19,6 +19,7 @@ namespace RuhunaSupply.Model
         [Column(TypeName = "nvarchar(50)")]
         [Required]
         public string Name { get; set; }
+        [MaxLength (150)]
         [Column(TypeName = "nvarchar(150)")]
         [Required]
         public string Description { get; set; }
