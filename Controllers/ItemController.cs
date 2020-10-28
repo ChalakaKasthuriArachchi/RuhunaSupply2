@@ -17,7 +17,6 @@ namespace RuhunaSupply.Controllers
             this._db = context;
         }
         [HttpPost]
-
         public IActionResult Add(string Name, string Description, int CategoryId1, int CategoryId2, int CategoryId3)
         {
             int max_id = 0;
