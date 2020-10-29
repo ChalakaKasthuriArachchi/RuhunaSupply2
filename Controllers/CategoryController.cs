@@ -11,7 +11,7 @@ namespace RuhunaSupply.Controllers
     public class CategoryController : ControllerBase
     {
         private ApplicationDbContext _db;
-        
+
         public CategoryController(ApplicationDbContext context)
         {
             this._db = context;
@@ -48,7 +48,7 @@ namespace RuhunaSupply.Controllers
             return Ok();
         }
         [HttpPost]
-        public IActionResult Add2(int PId,string Name, string Description)
+        public IActionResult Add2(Category1 ParentCategory,string Name, string Description)
         {
             int max_id = 0;
             try
@@ -60,7 +60,7 @@ namespace RuhunaSupply.Controllers
             Category2 cat2= new Category2()
             {
                 Id = max_id + 1,
-                PId=PId,
+                ParentCategory =ParentCategory,
                 Name = Name,
                 Description = Description
             };
@@ -69,12 +69,12 @@ namespace RuhunaSupply.Controllers
             return Ok();
         }
         [HttpPost]
-        public IActionResult Edit2(int Id, int PId, String Name, String Description)
+        public IActionResult Edit2(int Id, Category1 ParentCategory, string Name, string Description)
         {
             _db.Category2.Update(new Category2()
             {
                 Id = Id,
-                PId = PId,
+                ParentCategory = ParentCategory,
                 Name = Name,
                 Description = Description
             });
@@ -82,7 +82,7 @@ namespace RuhunaSupply.Controllers
             return Ok();
         }
         [HttpPost]
-        public IActionResult Delete2(int Id,int PId,String Name,String Description)
+        public IActionResult Delete2(int Id,Category1 Parent,String Name,String Description)
 
         {
             _db.Category2.Remove(new Category2 { Id = Id });
@@ -90,7 +90,7 @@ namespace RuhunaSupply.Controllers
             return Ok();
         }
         [HttpPost]
-        public IActionResult Add3(int PId,int GpId,String Name,String Description)
+        public IActionResult Add3(Category2 PCategory,Category1 GPCategory,String Name,String Description)
         {
             int max_id = 0;
             try 
@@ -101,8 +101,8 @@ namespace RuhunaSupply.Controllers
             Category3 cat3 = new Category3()
             {
                 Id = max_id + 1,
-                PId = PId,
-                GpId = GpId,
+                ParentCategory = PCategory,
+                GPCategory = GPCategory,
                 Name = Name,
                 Description = Description
             };
@@ -111,13 +111,13 @@ namespace RuhunaSupply.Controllers
             return Ok();
         }
         [HttpPost]
-        public IActionResult Edit3(int Id,int PId,int GpId,String Name,String Description)
+        public IActionResult Edit3(int Id,Category2 PCategory,Category1 GPCategory,String Name,String Description)
         {
             _db.Category3.Update(new Category3()
             {
                 Id = Id,
-                PId = PId,
-                GpId = GpId,
+                ParentCategory = PCategory,
+                GPCategory = GPCategory,
                 Name = Name,
                 Description = Description
             });
