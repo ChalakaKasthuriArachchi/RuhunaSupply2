@@ -24,11 +24,11 @@ namespace RuhunaSupply.Model
         [Required]
         public string Description { get; set; }
         [Required]
-        public Category1 CategoryId1 { get; set; }
+        public Category1 Category1 { get; set; }
         [Required]
-        public Category2 CategoryId2 { get; set; }
+        public Category2 Category2 { get; set; }
         [Required]
-        public Category3 CategoryId3 { get; set; }
+        public Category3 Category3 { get; set; }
 
     }
 

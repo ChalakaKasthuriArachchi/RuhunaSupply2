@@ -17,7 +17,7 @@ namespace RuhunaSupply.Controllers
         {
             this._db = context;
         }
-        public IActionResult Add(PurchaseRequest PurchaseRequestId, Supplier SupplierId, QuatationStatus Status, DateTime Date)
+        public IActionResult Add(PurchaseRequest PurchaseRequest, Supplier Supplier, QuatationStatus Status, DateTime Date)
         {
             int max_id = 0;
             try
@@ -31,8 +31,8 @@ namespace RuhunaSupply.Controllers
             Quatation qt = new Quatation()
             {
                 Id = max_id + 1,
-                PurchaseRequestId=PurchaseRequestId,
-                SupplierId=SupplierId,
+                PurchaseRequest=PurchaseRequest,
+                Supplier=Supplier,
                 Status = Status,
                 Date = Date
 
@@ -43,13 +43,13 @@ namespace RuhunaSupply.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(int Id, PurchaseRequest PurchaseRequestId, Supplier SupplierId, QuatationStatus Status, DateTime Date)
+        public IActionResult Edit(int Id, PurchaseRequest PurchaseRequest, Supplier Supplier, QuatationStatus Status, DateTime Date)
         {
             _db.Quatations.Update(new Quatation()
             {
                 Id = Id,
-                PurchaseRequestId = PurchaseRequestId,
-                SupplierId = SupplierId,
+                PurchaseRequest = PurchaseRequest,
+                Supplier = Supplier,
                 Status = Status,
                 Date = Date
             });

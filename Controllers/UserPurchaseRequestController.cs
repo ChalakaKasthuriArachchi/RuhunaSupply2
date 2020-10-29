@@ -17,7 +17,7 @@ namespace RuhunaSupply.Controllers
         {
             this._db = context;
         }
-        public IActionResult Add(User UserId, int PurchaseRequestId, DateTime Date, Involvements Involvement)
+        public IActionResult Add(User User, int PurchaseRequest, DateTime Date, Involvements Involvement)
         {
             int max_id = 0;
             try
@@ -31,8 +31,8 @@ namespace RuhunaSupply.Controllers
             UserPurchaseRequest upr = new UserPurchaseRequest()
             {
                 Id = max_id + 1,
-                UserId = UserId,
-                PurchaseRequestId = PurchaseRequestId,
+                User = User,
+                PurchaseRequest = PurchaseRequest,
                 Date = Date,
                 Involvement = Involvement
             };
@@ -42,9 +42,9 @@ namespace RuhunaSupply.Controllers
             return Ok();
         }
         [HttpPost]
-        public IActionResult Edit(int Id, User UserId, int PurchaseRequestId, DateTime Date, Involvements Involvement)
+        public IActionResult Edit(int Id, User User, int PurchaseRequest, DateTime Date, Involvements Involvement)
         {
-            _db.UserPurchaseRequests.Update(new UserPurchaseRequest() { Id = Id, UserId = UserId, PurchaseRequestId = PurchaseRequestId ,Date = Date,Involvement = Involvement});
+            _db.UserPurchaseRequests.Update(new UserPurchaseRequest() { Id = Id, User = User, PurchaseRequest = PurchaseRequest ,Date = Date,Involvement = Involvement});
             _db.SaveChanges();
             return Ok();
         }

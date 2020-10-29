@@ -17,9 +17,9 @@ namespace RuhunaSupply.Model
         [Key]
         public int Id { get; set; }
 
-        public Quatation QuatationId { get; set; }
-        public PurchaseRequestItem PurchaseRequestItemId { get; set; }
-        public Item ItemId { get; set; }
+        public Quatation Quatation { get; set; }
+        public PurchaseRequestItem PurchaseRequestItem { get; set; }
+        public Item Item { get; set; }
 
         public QuatationStatus Status { get; set; }
 

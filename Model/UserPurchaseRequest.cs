@@ -17,8 +17,8 @@ namespace RuhunaSupply.Model
      
         [Key]
         public int Id { get; set; }
-        public User UserId { get; set; }
-        public int PurchaseRequestId { get; set; }
+        public User User { get; set; }
+        public int PurchaseRequest { get; set; }
         public DateTime Date { get; set; }
         public Involvements Involvement { get; set; }
     }

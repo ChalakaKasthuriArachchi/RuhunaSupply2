@@ -15,7 +15,7 @@ namespace RuhunaSupply.Controllers
         {
             this._db = context;
         }
-        public IActionResult Add(PurchaseRequestItem PurchaseRequestItemId, Specification SpecificationId)
+        public IActionResult Add(PurchaseRequestItem PurchaseRequestItem, Specification Specification)
         {
             int max_id = 0;
             try
@@ -28,8 +28,8 @@ namespace RuhunaSupply.Controllers
             PurchaseRequestItemSpecification pris = new PurchaseRequestItemSpecification()
             {
                 Id = max_id,
-                PurchaseRequestItemId = PurchaseRequestItemId,
-                SpecificationId = SpecificationId
+                PurchaseRequestItem = PurchaseRequestItem,
+                Specification = Specification
             };
             _db.PurchaseRequestItemSpecifications.Add(pris);
             _db.SaveChanges();
@@ -37,14 +37,14 @@ namespace RuhunaSupply.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(int Id, PurchaseRequestItem PurchaseRequestItemId, Specification SpecificationId)
+        public IActionResult Edit(int Id, PurchaseRequestItem PurchaseRequestItem, Specification Specification)
         {
             _db.PurchaseRequestItemSpecifications.Update(new PurchaseRequestItemSpecification()
             {
 
                 Id = Id,
-                PurchaseRequestItemId = PurchaseRequestItemId,
-                SpecificationId = SpecificationId
+                PurchaseRequestItem = PurchaseRequestItem,
+                Specification = Specification
             });
             _db.SaveChanges();
             return Ok();

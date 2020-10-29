@@ -16,7 +16,7 @@ namespace RuhunaSupply.Controllers
         {
             this._db = context;
         }
-        public IActionResult Add(QuatationItem QuatationItemId, Specification SpecificationId, string Satisfied, string Description)
+        public IActionResult Add(QuatationItem QuatationItem, Specification Specification, string Satisfied, string Description)
         {
             int max_id = 0;
             try
@@ -30,8 +30,8 @@ namespace RuhunaSupply.Controllers
             QuatationItemSpecification qis = new QuatationItemSpecification()
             {
                 Id = max_id,
-                QuatationItemId = QuatationItemId,
-                SpecificationId = SpecificationId,
+                QuatationItem = QuatationItem,
+                Specification = Specification,
                 Satisfied = Satisfied,
                 Description = Description
             };
@@ -40,13 +40,13 @@ namespace RuhunaSupply.Controllers
             return Ok();
         }
         [HttpPost]
-        public IActionResult Edit(int Id, QuatationItem QuatationItemId, Specification SpecificationId, string Satisfied, string Description)
+        public IActionResult Edit(int Id, QuatationItem QuatationItem, Specification Specification, string Satisfied, string Description)
         {
             _db.QuatationItemSpecifications.Update(new QuatationItemSpecification()
             {
                 Id = Id,
-                QuatationItemId = QuatationItemId,
-                SpecificationId = SpecificationId,
+                QuatationItem = QuatationItem,
+                Specification = Specification,
                 Satisfied = Satisfied,
                 Description = Description
             });

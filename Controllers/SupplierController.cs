@@ -16,7 +16,7 @@ namespace RuhunaSupply.Controllers
         {
             this._db = context;
         }
-        public IActionResult Add(int RegisterNumber, Category2 Category2Id, DateTime RegisterDate, string TelephoneNumber,  string BusinessName,  string BusinessMail, string BusinessAddress)
+        public IActionResult Add(string RegisterNumber, Category2 Category2, DateTime RegisterDate, string TelephoneNumber,  string BusinessName,  string BusinessMail, string BusinessAddress)
         {
             int max_id = 0;
             try
@@ -30,7 +30,7 @@ namespace RuhunaSupply.Controllers
             Supplier sup = new Supplier()
             {
                 Id = max_id,
-                Category2Id=Category2Id,
+                Category2=Category2,
                 RegisterNumber = RegisterNumber,
                 RegisterDate = RegisterDate,
                 TelephoneNumber = TelephoneNumber,
@@ -43,12 +43,12 @@ namespace RuhunaSupply.Controllers
             return Ok();
         }
         [HttpPost]
-        public IActionResult Edit(int Id, Category2 Category2Id, int RegisterNumber, DateTime RegisterDate, string TelephoneNumber, string BusinessName, string BusinessMail, string BusinessAddress)
+        public IActionResult Edit(int Id, Category2 Category2, string RegisterNumber, DateTime RegisterDate, string TelephoneNumber, string BusinessName, string BusinessMail, string BusinessAddress)
         {
             _db.Suppliers.Update(new Supplier()
             {
                 Id = Id,
-                Category2Id=Category2Id,
+                Category2=Category2,
                 RegisterNumber = RegisterNumber,
                 RegisterDate = RegisterDate,
                 TelephoneNumber = TelephoneNumber,

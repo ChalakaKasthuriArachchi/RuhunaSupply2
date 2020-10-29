@@ -16,7 +16,7 @@ namespace RuhunaSupply.Controllers
         {
             this._db = context;
         }
-        public IActionResult Add(Item ItemId, SpecificationCategory SpecificationCategoryId, string Name, string Value)
+        public IActionResult Add(Item Item, SpecificationCategory SpecificationCategory, string Name, string Value)
         {
             int max_id = 0;
             try
@@ -30,8 +30,8 @@ namespace RuhunaSupply.Controllers
             Specification sp = new Specification()
             {
                 Id = max_id + 1,
-                SpecificationCategoryId= SpecificationCategoryId,
-                ItemId =ItemId,
+                SpecificationCategory= SpecificationCategory,
+                Item =Item,
                 Name = Name,
                 Value=Value
             };
@@ -43,10 +43,10 @@ namespace RuhunaSupply.Controllers
 
 
         [HttpPost]
-        public IActionResult Edit(int Id, SpecificationCategory SpecificationCategoryId, Item ItemId, string Name, string Value)
+        public IActionResult Edit(int Id, SpecificationCategory SpecificationCategory, Item Item, string Name, string Value)
         {
             _db.Specification.Update(
-                new Specification() { Id = Id, SpecificationCategoryId= SpecificationCategoryId, ItemId = ItemId, Name = Name, Value = Value });
+                new Specification() { Id = Id, SpecificationCategory= SpecificationCategory, Item = Item, Name = Name, Value = Value });
             _db.SaveChanges();
             return Ok();
         }

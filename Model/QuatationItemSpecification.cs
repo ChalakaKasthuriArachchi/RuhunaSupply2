@@ -15,8 +15,8 @@ namespace RuhunaSupply.Model
 
         [Key]
         public int Id { get; set; }
-        public QuatationItem QuatationItemId { get; set; }
-        public Specification SpecificationId { get; set; }
+        public QuatationItem QuatationItem { get; set; }
+        public Specification Specification { get; set; }
         [Column(TypeName ="nvarchar(20)")]
         public string Satisfied { get; set; }
         [Column(TypeName = "nvarchar(100)")]

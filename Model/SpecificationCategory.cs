@@ -15,7 +15,7 @@ namespace RuhunaSupply.Model
 
         [Key]
         public int Id { get; set; }
-        public Item ItemId { get; set; }
+        public Item Item { get; set; }
         [Column(TypeName ="nvarchar(100)")]
         public string Title { get; set; }
         [Column(TypeName ="nvarchar(150)")]

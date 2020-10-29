@@ -17,7 +17,7 @@ namespace RuhunaSupply.Controllers
             this._db = context;
         }
         [HttpPost]
-        public IActionResult Add(string Name, string Description, Category1 CategoryId1, Category2 CategoryId2, Category3 CategoryId3)
+        public IActionResult Add(string Name, string Description, Category1 Category1, Category2 Category2, Category3 Category3)
         {
             int max_id = 0;
             try
@@ -33,9 +33,9 @@ namespace RuhunaSupply.Controllers
                 Id = max_id + 1,
                 Name = Name,
                 Description = Description,
-                CategoryId1 = CategoryId1,
-                CategoryId2 = CategoryId2,
-                CategoryId3 = CategoryId3
+                Category1 = Category1,
+                Category2 = Category2,
+                Category3 = Category3
             };
             _db.Item.Add(it);
             _db.SaveChanges();
@@ -48,10 +48,10 @@ namespace RuhunaSupply.Controllers
         // }
 
         [HttpPost]
-        public IActionResult Edit(int id, string Name, string Description, Category1 CategoryId1, Category2 CategoryId2, Category3 CategoryId3)
+        public IActionResult Edit(int id, string Name, string Description, Category1 Category1, Category2 Category2, Category3 Category3)
         {
             _db.Item.Update(
-                new Item() { Id = id, Name = Name, Description = Description, CategoryId1 = CategoryId1, CategoryId2 = CategoryId2, CategoryId3 = CategoryId3 });
+                new Item() { Id = id, Name = Name, Description = Description, Category1 = Category1, Category2 = Category2, Category3 = Category3 });
             _db.SaveChanges();
             return Ok();
         }
