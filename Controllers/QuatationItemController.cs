@@ -18,7 +18,7 @@ namespace RuhunaSupply.Controllers
             this._db = context;
         }
         [HttpPost]
-        public IActionResult Add(int QuatationId, int PurchaseRequestItemId, int ItemId, QuatationStatus Status, string IsSupply, string Description)
+        public IActionResult Add(Quatation QuatationId, PurchaseRequestItem PurchaseRequestItemId, Item ItemId, QuatationStatus Status, string IsSupply, string Description, int Qty, int Total, string Rate)
         {
             int max_id = 0;
 
@@ -40,7 +40,10 @@ namespace RuhunaSupply.Controllers
                 ItemId=ItemId,
                 Status =Status,
                 IsSupply=IsSupply,
-                Description=Description
+                Description=Description,
+                Qty = Qty,
+                Total = Total,
+                Rate = Rate
             };
 
             _db.QuatationItems.Add(qt);
@@ -49,9 +52,9 @@ namespace RuhunaSupply.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(int Id, int QuatationId, int PurchaseRequestItemId, int ItemId, QuatationStatus Status, string IsSupply, string Description)
+        public IActionResult Edit(int Id, Quatation QuatationId, PurchaseRequestItem PurchaseRequestItemId, Item ItemId, QuatationStatus Status, string IsSupply, string Description, int Qty, int Total, string Rate)
         {
-            _db.QuatationItems.Update(new QuatationItem { Id = Id, QuatationId = QuatationId,PurchaseRequestItemId = PurchaseRequestItemId,ItemId = ItemId,Status = Status, IsSupply = IsSupply, Description = Description });
+            _db.QuatationItems.Update(new QuatationItem { Id = Id, QuatationId = QuatationId,PurchaseRequestItemId = PurchaseRequestItemId,ItemId = ItemId,Status = Status, IsSupply = IsSupply, Description = Description,Qty=Qty, Total=Total, Rate=Rate});
             _db.SaveChanges();
             return Ok();
         }

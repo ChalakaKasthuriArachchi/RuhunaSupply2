@@ -18,7 +18,7 @@ namespace RuhunaSupply.Controllers
             this._db = context;
         }
         [HttpPost]
-        public IActionResult Add(double Cost, int QtyRequired, int QtyAlreadyAvailable,int QtySupplied, double Rate, double TotalValue, int PurchaseRequestId)
+        public IActionResult Add(double Cost, int QtyRequired, int QtySupplied, double Rate, double TotalValue, PurchaseRequest PurchaseRequestId, Item ItemId)
         {
             int max_id = 0;
             try
@@ -35,12 +35,12 @@ namespace RuhunaSupply.Controllers
                 Id = max_id + 1,
                 EstimatedCost=Cost,
                 QtyRequired=QtyRequired,
-                ItemId=QtyAlreadyAvailable,
                 QtySupplied =QtySupplied,
                 Rate=Rate,
                 TotalValue=TotalValue,
-                PurchaseRequestId=PurchaseRequestId
-        
+                PurchaseRequestId=PurchaseRequestId,
+                ItemId=ItemId
+
             };
 
             _db.PurchaseRequestItems.Add(pri);
@@ -51,11 +51,11 @@ namespace RuhunaSupply.Controllers
 
 
         [HttpPost]
-        public IActionResult Edit(double Cost, int QtyRequired, int QtyAlreadyAvailable, int QtySupplied, double Rate, double TotalValue, int PurchaseRequestId)
+        public IActionResult Edit(double Cost, int QtyRequired, int QtyAlreadyAvailable, int QtySupplied, double Rate, double TotalValue, PurchaseRequest PurchaseRequestId, Item ItemId)
         {
             
             _db.PurchaseRequestItems.Update(
-                new PurchaseRequestItem(){EstimatedCost = Cost,QtyRequired = QtyRequired,ItemId = QtyAlreadyAvailable,QtySupplied = QtySupplied,Rate = Rate,TotalValue = TotalValue,PurchaseRequestId = PurchaseRequestId });
+                new PurchaseRequestItem(){EstimatedCost = Cost,QtyRequired = QtyRequired, QtySupplied = QtySupplied,Rate = Rate,TotalValue = TotalValue,PurchaseRequestId = PurchaseRequestId , ItemId=ItemId });
             _db.SaveChanges();
             return Ok();
         }

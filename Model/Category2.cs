@@ -4,22 +4,24 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
-using static RuhunaSupply.Common.MyEnum;
 
 namespace RuhunaSupply.Model
 {
-    public class Quatation
+    public class Category2
     {
-        public Quatation()
+        public Category2()
         {
         }
+
         [Key]
         public int Id { get; set; }
-        public PurchaseRequest PurchaseRequestId { get; set; }
-        public Supplier SupplierId { get; set; }
-        public QuatationStatus Status { get; set; }
-        public DateTime Date { get; set; }
+        public int PId { get; set; }
 
-
+        [Column(TypeName = "nvarchar(50)")]
+        [Required]
+        public string Name { get; set; }
+        [Column(TypeName = "nvarchar(50)")]
+        [Required]
+        public string Description { get; set; }
     }
 }

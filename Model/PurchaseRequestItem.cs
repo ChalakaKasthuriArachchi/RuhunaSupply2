@@ -16,15 +16,14 @@ namespace RuhunaSupply.Model
         }
         [Key]
         public int Id { get; set; }
-       
 
-        public int QtyRequired { get; set; }
-
-        public int PurchaseRequestId { get; set; }
+        public PurchaseRequest PurchaseRequestId { get; set; }
         
-        public int ItemId { get; set; }
+        public Item ItemId { get; set; }
 
         public int QtySupplied { get; set; }
+
+        public int QtyRequired { get; set; } 
 
         public double Rate { get; set; }
 

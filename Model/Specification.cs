@@ -16,8 +16,8 @@ namespace RuhunaSupply.Model
         [Key]
         public int Id { get; set; }
         [Required]
-        public int SpecificationCategoryId { get; set; }
-        public int ItemId { get; set; }
+        public SpecificationCategory SpecificationCategoryId { get; set; }
+        public Item ItemId { get; set; }
         [Column(TypeName = "nvarchar(50)")]
         [Required]
         public string Name { get; set; }

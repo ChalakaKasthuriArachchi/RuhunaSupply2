@@ -16,7 +16,7 @@ namespace RuhunaSupply.Model
 
         [Key]
         public int Id { get; set; }
-        public int Category2Id { get; set; }
+        public Category2 Category2Id { get; set; }
         public int RegisterNumber { get; set; }
         public DateTime RegisterDate { get; set; }
         [Column(TypeName = "nvarchar(15)")]

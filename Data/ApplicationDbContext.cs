@@ -34,6 +34,10 @@ namespace RuhunaSupply.Data
         public DbSet<QuatationItemSpecification> QuatationItemSpecifications { get; set; }
         public DbSet<User> Users { get; set; }
 
+        public DbSet<Category1> Category1s { get; set; }
+        public DbSet<Category2> Category2s { get; set; }
+        public DbSet<Category3> Category3s { get; set; }
+
     }
 }
 
