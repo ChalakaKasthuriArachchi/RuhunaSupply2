@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using RuhunaSupply.Data;
 using RuhunaSupply.Model;
+using static RuhunaSupply.Common.MyEnum;
 
 namespace RuhunaSupply.Controllers
 {
@@ -17,7 +18,7 @@ namespace RuhunaSupply.Controllers
             this._db = context;
         }
 
-        public IActionResult Add(string admin, string branch, double budgetAllocation, string FunsGoes, string Project, string Vote, string IsInProcumentPlan, string Purpose, int TelephonNumber)
+        public IActionResult Add(Faculties admin, string branch, double budgetAllocation, string FundGoes, string Project, string Vote, string IsInProcumentPlan, string Purpose, string TelephonNumber)
         {
             int max_id = 0;
             try
@@ -33,10 +34,10 @@ namespace RuhunaSupply.Controllers
             {
 
                 Id = max_id,
-                admin = admin,
-                branch = branch,
-                budgetAllocation = budgetAllocation,
-                FunsGoes = FunsGoes,
+                Faculty = admin,
+                Branch = branch,
+                BudgetAllocation = budgetAllocation,
+                FundGoes = FundGoes,
                 Project = Project,
                 Vote = Vote,
                 IsInProcumentPlan = IsInProcumentPlan,
@@ -49,14 +50,14 @@ namespace RuhunaSupply.Controllers
         
         }
         [HttpPost]
-        public IActionResult Edit(int Id, string admin, string branch, double budgetAllocation, string FunsGoes, string Project, string Vote, string IsInProcumentPlan, string Purpose, int TelephonNumber)
+        public IActionResult Edit(int Id, Faculties admin, string branch, double budgetAllocation, string FunsGoes, string Project, string Vote, string IsInProcumentPlan, string Purpose, string TelephonNumber)
         {
             _db.PurchaseRequests.Update(new PurchaseRequest() {
                 Id = Id,
-                admin = admin,
-                branch = branch,
-                budgetAllocation = budgetAllocation,
-                FunsGoes = FunsGoes,
+                Faculty = admin,
+                Branch = branch,
+                BudgetAllocation = budgetAllocation,
+                FundGoes = FunsGoes,
                 Project = Project,
                 Vote = Vote,
                 IsInProcumentPlan = IsInProcumentPlan,

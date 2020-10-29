@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
+using static RuhunaSupply.Common.MyEnum;
 
 namespace RuhunaSupply.Model
 {
@@ -14,9 +15,9 @@ namespace RuhunaSupply.Model
         }
         [Key]
         public int Id { get; set; }
-
-        [Column(TypeName ="nvarchar(50)")]
-        public string Status { get; set; }
+        public int PurchaseRequestId { get; set; }
+        public int SupplyId { get; set; }
+        public QuatationStatus Status { get; set; }
         public DateTime Date { get; set; }
 
 

@@ -4,21 +4,22 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
+using static RuhunaSupply.Common.MyEnum;
 
 namespace RuhunaSupply.Model
 {
-    public class SpecificationCategory
+    public class UserName
     {
-        public SpecificationCategory()
+        public UserName()
         { 
         }
 
         [Key]
         public int Id { get; set; }
-        public int ItemId { get; set; }
-        [Column(TypeName ="nvarchar(100)")]
-        public string Title { get; set; }
-        [Column(TypeName ="nvarchar(150)")]
-        public string Descriptiopn { get; set; }
+        [Column(TypeName ="nvarchar(50)")]
+        public string Name { get; set; }
+        [Column(TypeName = "nvarchar(50)")] 
+        public string Password { get; set; }
+        public Tables Table { get; set; }
     }
 }
