@@ -7,22 +7,25 @@ using System.Threading.Tasks;
 
 namespace RuhunaSupply.Model
 {
-    public class Specification
+    public class UserAccount
     {
-        public Specification()
+        public UserAccount()
         {
 
         }
         [Key]
         public int Id { get; set; }
         [Required]
-        public int SpecificationCategoryId { get; set; }
-        public int ItemId { get; set; }
-        [Column(TypeName = "nvarchar(50)")]
-        [Required]
+        [Column(TypeName = "nvarchar(100)")]
         public string Name { get; set; }
-        [Column(TypeName = "nvarchar(50)")]
         [Required]
-        public string Value { get; set; }
+        [Column(TypeName = "nvarchar(50)")]
+        public string HashedPassword { get; set; }
+        [Required]
+        [Column(TypeName = "nvarchar(50)")]
+        public string Privileges { get; set; }
+        [NotMapped]
+        [Column(TypeName = "nvarchar(50)")]
+        public string Password { get; set; }
     }
 }

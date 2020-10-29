@@ -17,11 +17,12 @@ namespace RuhunaSupply.Model
         [Key]
         public int Id { get; set; }
        
-        public double Cost { get; set; }
 
         public int QtyRequired { get; set; }
 
-        public int QtyAlreadyAvailable { get; set; }
+        public int PurchaseRequestId { get; set; }
+        
+        public int ItemId { get; set; }
 
         public int QtySupplied { get; set; }
 
@@ -29,7 +30,8 @@ namespace RuhunaSupply.Model
 
         public double TotalValue { get; set; }
 
-        public DateTime Date { get; set; }
+        public double EstimatedCost { get; set; }
+
 
 
     }
