@@ -4,6 +4,8 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
+using static RuhunaSupply.Common.LIMIT;
+using static RuhunaSupply.Common.MyEnum;
 
 namespace RuhunaSupply.Model
 {
@@ -16,17 +18,22 @@ namespace RuhunaSupply.Model
 
         [Key]
         public int Id { get; set; }
-        public string admin { get; set; }
-        public string branch { get; set; }
-        public double budgetAllocation { get; set; }
-        public string FunsGoes { get; set; }
+       
+        public Faculties Faculty { get; set; }
+        [Column(TypeName = "nvarchar(50)")]
+        public string Branch { get; set; }
+        public double BudgetAllocation { get; set; }
+        [Column(TypeName = "nvarchar(50)")]
+        public string FundGoes { get; set; }
         [Column(TypeName = "nvarchar(100)")]
         public string Project { get; set; }
+        [Column(TypeName = "nvarchar(50)")]
         public string Vote { get; set; }
+        [Column(TypeName = "nvarchar(50)")]
         public string IsInProcumentPlan { get; set; }
         [Column(TypeName = "nvarchar(100)")]
         public string Purpose { get; set; }
-        public int TelephonNumber { get; set; }
+        public string TelephonNumber { get; set; }
 
 
     }
