@@ -29,7 +29,7 @@ namespace RuhunaSupply.Controllers
             UserAccount userAccount = new UserAccount()
             {
                 Id = max_id,
-                Name = Name,
+                FullName = Name,
                 HashedPassword = HashedPassword,
                 Privileges = Privileges,
                 Password = Password
@@ -45,7 +45,7 @@ namespace RuhunaSupply.Controllers
             _db.UserAccounts.Update(new UserAccount()
             {
                 Id = Id,
-                Name = Name,
+                FullName = Name,
                 HashedPassword = HashedPassword,
                 Privileges = Privileges,
                 Password = Password
