@@ -11,8 +11,8 @@ namespace RuhunaSupply.Model
     {
         public Category2()
         {
-
         }
+        
         [Key]
         public int Id { get; set; }
         [Required]
