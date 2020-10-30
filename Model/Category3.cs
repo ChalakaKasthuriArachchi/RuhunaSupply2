@@ -11,17 +11,23 @@ namespace RuhunaSupply.Model
     {
         public Category3()
         {
-        }
 
+        }
         [Key]
         public int Id { get; set; }
-        public int PId { get; set; }
-        public int GpId { get; set; }
-        [Column(TypeName = "nvarchar(50)")]
         [Required]
-        public string Name { get; set; }
-        [Column(TypeName = "nvarchar(50)")]
+
+        public Category2 ParentCategory { get; set; }
+        [MaxLength(50)]
         [Required]
-        public string Description { get; set; }
+
+        public Category1 GPCategory { get; set; }
+        [Column(TypeName = "nvarchar(50)")]
+        [MaxLength(50)]
+        [Required]
+        public String Name { get; set; }
+        [Column(TypeName = "nvarchar(150)")]
+        [Required]
+        public String Description { get; set; }
     }
 }
