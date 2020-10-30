@@ -22,11 +22,20 @@ namespace RuhunaSupply.Common
         { 
         }
 
-        public enum UserPosition
+        public enum UserPositions
         { 
         }
-        public enum UserType
+        public enum UserTypes
         { 
+        }
+        public enum BusinessCategories
+        {
+            Sole_Proprietorship,
+            Partnership,
+            Limited_Liability_Company,
+            Public_Limited_Company,
+            Overseas_Company,
+            Offshore_Company
         }
     }
 }

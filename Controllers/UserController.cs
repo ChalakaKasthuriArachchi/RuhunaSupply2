@@ -18,7 +18,7 @@ namespace RuhunaSupply.Controllers
             this._db = context;
         }
         [HttpPost]
-        public IActionResult Add(string Admin, string Branch, string FullName, string ShortName, string PermissionList, UserPosition Position, UserType Type, int MergedId)
+        public IActionResult Add(string Admin, string Branch, string FullName, string ShortName, string PermissionList, UserPositions Position, UserTypes Type, int MergedId)
         {
             int max_id = 0;
 
@@ -51,7 +51,7 @@ namespace RuhunaSupply.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(int Id, string Admin, string Branch, string FullName, string ShortName, string PermissionList, UserPosition Position, UserType Type, int MergedId)
+        public IActionResult Edit(int Id, string Admin, string Branch, string FullName, string ShortName, string PermissionList, UserPositions Position, UserTypes Type, int MergedId)
         {
             _db.Users.Update(new User()
             {

@@ -27,8 +27,8 @@ namespace RuhunaSupply.Model
         [Column(TypeName = "nvarchar(50)")]
         public string PermissionList { get; set; }
 
-        public UserPosition Position { get; set; }
-        public UserType Type { get; set; }
+        public UserPositions Position { get; set; }
+        public UserTypes Type { get; set; }
         public int MergedId { get; set; }
     }
 }

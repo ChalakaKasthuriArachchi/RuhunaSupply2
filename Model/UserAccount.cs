@@ -37,7 +37,7 @@ namespace RuhunaSupply.Model
         [MaxLength(50)]
         public string Privileges { get; set; }
         [Required]
-        public UserType Type { get; set; }
+        public UserTypes Type { get; set; }
         [NotMapped]
         [Column(TypeName = "nvarchar(50)")]
         [MaxLength(50)]
