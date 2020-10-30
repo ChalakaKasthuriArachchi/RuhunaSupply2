@@ -27,32 +27,6 @@ namespace RuhunaSupply.Controllers
             return _db.Suppliers.ToArray();
         }
         [HttpPost]
-        //public IActionResult Post(/*int Category2Id,string regNo,string TelephoneNumber,  string BusinessName,  string BusinessMail, string BusinessAddress*/)
-        //{
-        //    int max_id = 0;
-        //    try
-        //    {
-        //        max_id = _db.Suppliers.Max((sup) => sup.Id);
-        //    }
-        //    catch
-        //    { 
-        //    }
-
-        //    Supplier sup = new Supplier()
-        //    {
-        //        Id = max_id,
-        //        //Category2=_db.Category2s.FirstOrDefault((c) => c.Id == Category2Id),
-        //        //RegisterNumber = RegisterNumber,
-        //        //RegisterDate = DateTime.Now,
-        //        //TelephoneNumber = TelephoneNumber,
-        //        //BusinessName = BusinessName,
-        //        //BusinessMail = BusinessMail,
-        //        //BusinessAddress = BusinessAddress
-        //    };
-        //    _db.Suppliers.Add(sup);
-        //    _db.SaveChanges();
-        //    return Ok();
-        //}
         public async Task<ActionResult<Supplier>> PostSupplier(object supplier)
         {
             JsonData jd = JsonMapper.ToObject(supplier.ToString());
@@ -63,7 +37,9 @@ namespace RuhunaSupply.Controllers
                 BusinessMail = jd["BusinessMail"].ToString(),
                 BusinessName = jd["BusinessName"].ToString(),
                 BusinessRegisteredDate = DateTime.Parse(jd["BusinessRegisteredDate"].ToString()),
-                Category2 = new Category2() { Description = "(Testing)", Name = "(Testing)",PId }, // For Testing Only
+                Category2 = new Category2() 
+                { Description = "(Testing)", Name = "(Testing)",
+                    ParentCategory = new Category1() {Description = "(Testing)",Name = "(Testing)" } }, // For Testing Only
                 RegisteredDate = DateTime.Now,
                 RegistrationNumber = jd["RegistrationNumber"].ToString(),
                 ContactNumber = jd["ContactNumber"].ToString()
