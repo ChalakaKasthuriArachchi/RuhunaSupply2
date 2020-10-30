@@ -30,11 +30,11 @@ namespace RuhunaSupply.Controllers
 
             Category3 ct = new Category3()
             {
-                Id = max_id,
-                PId = PId,
-                GpId = GpId,
-                Name = Name,
-                Description = Description
+                //Id = max_id,
+                //PId = PId,
+                //GpId = GpId,
+                //Name = Name,
+                //Description = Description
             };
 
             _db.Category3s.Add(ct);
@@ -47,11 +47,11 @@ namespace RuhunaSupply.Controllers
         {
             _db.Category3s.Update(new Category3()
             {
-                Id = Id,
-                PId = PId,
-                GpId = GpId,
-                Name = Name,
-                Description = Description
+                //Id = Id,
+                //PId = PId,
+                //GpId = GpId,
+                //Name = Name,
+                //Description = Description
             });
             _db.SaveChanges();
             return Ok();

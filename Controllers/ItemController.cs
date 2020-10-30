@@ -27,7 +27,7 @@ namespace RuhunaSupply.Controllers
             catch
             {
             }
-
+            
             Item it = new Item()
             {
                 Id = max_id + 1,

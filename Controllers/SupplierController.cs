@@ -47,7 +47,7 @@ namespace RuhunaSupply.Controllers
             _db.Suppliers.Add(sp);
             await _db.SaveChangesAsync();
 
-            return CreatedAtAction("GetBankAccount", new { id = sp.Id }, sp);
+            return CreatedAtAction("Supplier", new { id = sp.Id }, sp);
         }
         [HttpPut]
         public IActionResult Edit(int Id, Category2 Category2, string RegisterNumber, DateTime RegisterDate, string TelephoneNumber, string BusinessName, string BusinessMail, string BusinessAddress)

@@ -29,10 +29,10 @@ namespace RuhunaSupply.Controllers
 
             Category2 ct = new Category2()
             {
-                Id = max_id,
-                PId=PId,
-                Name = Name,
-                Description = Description
+                //Id = max_id,
+                //PId=PId,
+                //Name = Name,
+                //Description = Description
             };
 
             _db.Category2s.Add(ct);
@@ -45,10 +45,10 @@ namespace RuhunaSupply.Controllers
         {
             _db.Category2s.Update(new Category2()
             {
-                Id = Id,
-                PId = PId,
-                Name = Name,
-                Description = Description
+                //Id = Id,
+                //PId = PId,
+                //Name = Name,
+                //Description = Description
             });
             _db.SaveChanges();
             return Ok();
