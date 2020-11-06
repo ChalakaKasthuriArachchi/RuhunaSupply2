@@ -9,12 +9,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SuppliersComponent } from './suppliers/suppliers.component';
 import { RegisterSupplierComponent } from './register-supplier/register-supplier.component';
+import { UserAccountComponent } from './user-account/user-account.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SuppliersComponent,
-    RegisterSupplierComponent
+    RegisterSupplierComponent,
+    UserAccountComponent
   ],
   imports: [
     BrowserModule,

@@ -32,6 +32,7 @@ export class RegisterSupplierComponent implements OnInit {
   ngOnInit(): void {
     
   }
+
   onSubmit(supplierData){
     this.supplierService.postSupplier(supplierData.value)
       .subscribe(
