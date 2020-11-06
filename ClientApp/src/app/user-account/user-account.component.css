@@ -2,7 +2,7 @@
 	margin:  0;
 }
 button {
-	color: rgb(19, 235, 170);
+	background-color: rgb(19, 235, 170);
   }
   input.ng-touched.ng-invalid {
 	border: 1px solid red;
