@@ -18,8 +18,12 @@ export class SupplierService {
     return this.http.put(environment.apiBaseURI + '/Supplier/' + formData.bankAccountID,
       formData);
   }
-  getSupplierList(){
-    return this.http.get(environment.apiBaseURI + '/Supplier')
+  getSupplierList(category,search){
+    //console.log(environment.apiBaseURI + '/Supplier');
+    console.log(category);
+    console.log(search);
+    return this.http.get(environment.apiBaseURI + '/Supplier?Category=' + category + '&search=' + search);
+    
   }
   deleteSupplier(id){
     return this.http.delete(environment.apiBaseURI + '/Supplier/' + id);

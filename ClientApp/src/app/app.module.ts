@@ -3,8 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-
-
+import { CommonModule } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SuppliersComponent } from './suppliers/suppliers.component';
@@ -13,10 +12,11 @@ import { RegisterSupplierComponent } from './register-supplier/register-supplier
 @NgModule({
   declarations: [
     AppComponent,
-    SuppliersComponent,
-    RegisterSupplierComponent
+    RegisterSupplierComponent,
+    SuppliersComponent
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,

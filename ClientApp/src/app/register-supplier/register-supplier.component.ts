@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Category2Service } from './../shared/category2.service';
+import { Component, OnInit, NgModule } from '@angular/core';
 import { FormBuilder,Validators,FormGroup } from '@angular/forms';
 import { SupplierService } from '../shared/supplier.service';
+
 
 
 @Component({
@@ -11,10 +13,12 @@ import { SupplierService } from '../shared/supplier.service';
 export class RegisterSupplierComponent implements OnInit {
   supplierList;
   checkoutForm;
+  category2List = [];
 
   constructor(
     private supplierService : SupplierService,
-    private formBuilder : FormBuilder
+    private formBuilder : FormBuilder,
+    private category2Service : Category2Service
   ) {
     this.checkoutForm = this.formBuilder.group({
       BusinessCategory: '',
@@ -30,7 +34,10 @@ export class RegisterSupplierComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    
+    this.category2Service.getSupplierList()
+      .subscribe(
+        res => this.category2List = res as []
+      );
   }
   onSubmit(supplierData){
     this.supplierService.postSupplier(supplierData.value)
@@ -38,7 +45,6 @@ export class RegisterSupplierComponent implements OnInit {
         data => console.log('Success!',data),
         error => console.log('Error!',error)
       );
-    //this.checkoutForm.reset();
   }
   recordSubmit(fg:FormGroup){
       
