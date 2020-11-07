@@ -15,6 +15,13 @@ namespace RuhunaSupply.Model
         { 
         
         }
+        #region Dynamic Fields
+        [NotMapped]
+        public string DateTime
+        {
+            get => _DateTime.ToString("yyyy-MM-dd hh:mm tt");
+        }
+        #endregion
 
         [Key]
         public int Id { get; set; }
@@ -29,12 +36,11 @@ namespace RuhunaSupply.Model
         public string Project { get; set; }
         [Column(TypeName = "nvarchar(50)")]
         public string Vote { get; set; }
-        [Column(TypeName = "nvarchar(50)")]
-        public string IsInProcumentPlan { get; set; }
+        public bool IsInProcumentPlan { get; set; }
+        public Purposes Purpose { get; set; }
+        public DateTime _DateTime { get; set; }
         [Column(TypeName = "nvarchar(100)")]
-        public string Purpose { get; set; }
-        public string TelephonNumber { get; set; }
-
-
+        public string Justification { get; set; }
+        //public string TelephonNumber { get; set; }
     }
 }

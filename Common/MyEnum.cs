@@ -23,7 +23,9 @@ namespace RuhunaSupply.Common
         }
 
         public enum UserPositions
-        { 
+        {
+            Dean,
+            Head
         }
         public enum UserTypes
         { 
@@ -37,6 +39,10 @@ namespace RuhunaSupply.Common
             Public_Limited_Company,
             Overseas_Company,
             Offshore_Company
+        }
+        public enum Purposes
+        {
+            Normal, Fast_Track, Urgent
         }
     }
 }

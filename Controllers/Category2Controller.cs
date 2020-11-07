@@ -8,6 +8,8 @@ using RuhunaSupply.Model;
 
 namespace RuhunaSupply.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class Category2Controller : Controller
     {
         private ApplicationDbContext _db;
@@ -16,6 +18,12 @@ namespace RuhunaSupply.Controllers
         {
             this._db = context;
         }
+        [HttpGet]
+        public Category2[] GetCategory2s()
+        {
+            return _db.Category2s.ToArray();
+        }
+
         public IActionResult Add(int PId, string Name, string Description)
         {
             int max_id = 0;
