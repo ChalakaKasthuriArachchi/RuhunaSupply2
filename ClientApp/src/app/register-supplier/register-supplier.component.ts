@@ -39,6 +39,7 @@ export class RegisterSupplierComponent implements OnInit {
         res => this.category2List = res as []
       );
   }
+
   onSubmit(supplierData){
     this.supplierService.postSupplier(supplierData.value)
       .subscribe(

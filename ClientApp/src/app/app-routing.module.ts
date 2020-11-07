@@ -4,10 +4,14 @@ import { Routes, RouterModule } from '@angular/router';
 import { SuppliersComponent } from './suppliers/suppliers.component';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
+import { UserAccountComponent } from './user-account/user-account.component';
+
 
 const routes: Routes = [
   {path: 'supplier/register',component : RegisterSupplierComponent},
   {path: 'supplier',component : SuppliersComponent},
+  {path: 'createaccount',component : UserAccountComponent},
+
 ];
 
 @NgModule({

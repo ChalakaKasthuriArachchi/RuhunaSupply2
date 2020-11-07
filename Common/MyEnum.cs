@@ -28,8 +28,8 @@ namespace RuhunaSupply.Common
             Head
         }
         public enum UserTypes
-        {
-            Internal
+        { 
+            Internal,Supplier
         }
         public enum BusinessCategories
         {
