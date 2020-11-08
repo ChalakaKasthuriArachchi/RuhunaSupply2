@@ -23,7 +23,6 @@ export class SupplierService {
     console.log(category);
     console.log(search);
     return this.http.get(environment.apiBaseURI + '/Supplier?Category=' + category + '&search=' + search);
-    
   }
   deleteSupplier(id){
     return this.http.delete(environment.apiBaseURI + '/Supplier/' + id);
