@@ -19,7 +19,7 @@ export class SupplierService {
       formData);
   }
   getSupplierList(){
-    return this.http.get(environment.apiBaseURI + '/Supplier')
+    return this.http.get(environment.apiBaseURI + '/Supplier');
   }
   deleteSupplier(id){
     return this.http.delete(environment.apiBaseURI + '/Supplier/' + id);
