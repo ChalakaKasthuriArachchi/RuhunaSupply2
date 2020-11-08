@@ -17,9 +17,9 @@ namespace RuhunaSupply.Model
         [Key]
         public int Id { get; set; }
         [Column(TypeName = "nvarchar(30)")]
-        public string Admin { get; set; }
+        public Faculty Faculty { get; set; }
         [Column(TypeName = "nvarchar(30)")]
-        public string Branch { get; set; }
+        public Department Department { get; set; }
         [Column(TypeName = "nvarchar(100)")]
         public string FullName { get; set; }
         [Column(TypeName = "nvarchar(30)")]

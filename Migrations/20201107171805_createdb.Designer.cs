@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RuhunaSupply.Data;
 
 namespace RuhunaSupply.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201107171805_createdb")]
+    partial class createdb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,7 +35,7 @@ namespace RuhunaSupply.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Category1s");
+                    b.ToTable("Category1");
                 });
 
             modelBuilder.Entity("RuhunaSupply.Model.Category2", b =>
@@ -58,7 +60,7 @@ namespace RuhunaSupply.Migrations
 
                     b.HasIndex("ParentCategoryId");
 
-                    b.ToTable("Category2s");
+                    b.ToTable("Category2");
                 });
 
             modelBuilder.Entity("RuhunaSupply.Model.Category3", b =>
@@ -88,7 +90,7 @@ namespace RuhunaSupply.Migrations
 
                     b.HasIndex("ParentCategoryId");
 
-                    b.ToTable("Category3s");
+                    b.ToTable("Category3");
                 });
 
             modelBuilder.Entity("RuhunaSupply.Model.Department", b =>
@@ -500,10 +502,10 @@ namespace RuhunaSupply.Migrations
 
                     b.HasKey("Id");
 
-
                     b.HasIndex("DepartmentId");
 
                     b.HasIndex("FacultyId");
+
                     b.ToTable("Users");
                 });
 
@@ -728,7 +730,6 @@ namespace RuhunaSupply.Migrations
                         .WithMany()
                         .HasForeignKey("Category2Id");
                 });
-
 
             modelBuilder.Entity("RuhunaSupply.Model.User", b =>
                 {

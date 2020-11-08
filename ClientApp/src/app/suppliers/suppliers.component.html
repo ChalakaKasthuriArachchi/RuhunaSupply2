@@ -1,1 +1,49 @@
-<p>suppliers works!</p>
+<blockquote class="blockquote ml-5">
+  <h2>Ruhuna Service & Supply Management System</h2>
+  <footer class="bloquote-footer">
+    Registered Supliers
+  </footer>
+</blockquote>
+<div mdbTable class="grid-table">
+  <div class="thead">
+    <div mdbTableCol class="tr">
+      <div class="td">No</div>
+      <div class="td">ID</div>
+      <div class="td">Business Name</div>
+      <div class="td">Contact Number</div>
+      <div class="td">Address</div>
+      <div class="td"></div>
+    </div>
+  </div>
+  <div class="tbody">
+    <div class="tr" mdbTableCol *ngFor="let sup of supplierList; let i = index;">
+      <div class="td">
+        {{i + 1}}
+      </div>
+      <div class="td">
+        <label class="form-control">{{sup.id}}</label>
+      </div>
+      <div class="td">
+        <label class="form-control">{{sup.businessName}}</label>
+      </div>
+      <div class="td">
+        <label class="form-control">{{sup.contactNumber}}</label>
+      </div>
+      <div class="td">
+        <label class="form-control">{{sup.businessAddress}}</label>
+      </div>
+      <div class="td">
+        <a class="btn btn-outline-success" href="#" role="button">View</a>
+      </div>
+    </div>
+    <div class="tr">
+      <div class="td"></div>
+      <div class="td"></div>
+      <div class="td">
+        <input class="form-control" placeholder="Search Text" [(ngModel)]="searchText">
+        
+      </div>
+      <a class="btn btn-primary" role="button" (click)="getSuppliers()">Search</a>
+    </div>
+  </div>
+</div>
