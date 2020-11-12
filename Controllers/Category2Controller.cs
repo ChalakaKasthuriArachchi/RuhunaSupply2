@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using RuhunaSupply.Data;
 using RuhunaSupply.Model;
+using ThirdParty.Json.LitJson;
+using static RuhunaSupply.Common.MyEnum;
 
 namespace RuhunaSupply.Controllers
 {
@@ -23,32 +25,29 @@ namespace RuhunaSupply.Controllers
         {
             return _db.Category2s.ToArray();
         }
-
-        public IActionResult Add(int PId, string Name, string Description)
+        [HttpPost]
+        public async Task<ActionResult<Category2>> PostCategory2(object category2)
         {
-            int max_id = 0;
-            try
-            {
-                max_id = _db.Category2s.Max((ct) => ct.Id);
-            }
-            catch
-            {
-            }
 
-            Category2 ct = new Category2()
+
+            JsonData jd = JsonMapper.ToObject(category2.ToString());
+            Category2 c2 = new Category2()
             {
-                //Id = max_id,
-                //PId=PId,
-                //Name = Name,
-                //Description = Description
+                Category1 = _db.Category1s
+                    .FirstOrDefault(c => c.Id == int.Parse(jd["Category1"].ToString())),
+                Name = jd["Name"].ToString(),
+                Description = jd["Description"].ToString(),
+                
+
             };
+            _db.Category2s.Add(c2);
+            await _db.SaveChangesAsync();
 
-            _db.Category2s.Add(ct);
-            _db.SaveChanges();
-            return Ok();
+            return CreatedAtAction("Category2", new { id = c2.Id }, c2);
         }
 
-        [HttpPost]
+
+        [HttpPut]
         public IActionResult Edit(int Id, int PId, string Name, string Description)
         {
             _db.Category2s.Update(new Category2()
@@ -62,7 +61,7 @@ namespace RuhunaSupply.Controllers
             return Ok();
         }
 
-        [HttpPost]
+        [HttpDelete]
         public IActionResult Delete(int Id)
         {
             _db.Category2s.Remove(new Category2() { Id = Id });

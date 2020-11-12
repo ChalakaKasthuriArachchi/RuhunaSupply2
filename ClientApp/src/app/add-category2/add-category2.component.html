@@ -1,0 +1,30 @@
+<div class="form-v5">
+    <div class="page-content">
+		<div class="form-v5-content">
+			<form class="form-detail" [formGroup]="checkoutForm" (ngSubmit)="onSubmit(checkoutForm)" novalidate>
+                <h2>Add New Category 02</h2>
+                <div class="form-row">
+					<label for="Category1">Category</label>
+                    <select formControlName="Category1" class="input-text" required>
+						<option value="0" selected hidden>Select The Category</option>
+                        <option *ngFor="let cat of category1List; let i = index;" value="{{cat.id}}">{{cat.name}}</option>
+                      </select>
+					<i class="fas fa-User"></i>
+				</div>
+				<div class="form-row">
+					<label for="Name">Name</label>
+					<input type="text" formControlName="Name" id="Name" class="input-text" placeholder="Name" required>
+					<i class="fas fa-User"></i>
+                </div>
+                <div class="form-row">
+					<label for="Description">Description</label>
+					<input type="text" formControlName="Description" id="Description" class="input-text" placeholder="Description" required>
+					<i class="fas fa-User"></i>
+                </div>
+				<div class="form-row-last">
+					<input type="submit" name="register" class="register" value="Register">
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

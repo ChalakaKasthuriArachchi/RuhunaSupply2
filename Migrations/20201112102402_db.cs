@@ -4,12 +4,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace RuhunaSupply.Migrations
 {
-    public partial class createdb : Migration
+    public partial class db : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Category1",
+                name: "Category1s",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -19,7 +19,7 @@ namespace RuhunaSupply.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Category1", x => x.Id);
+                    table.PrimaryKey("PK_Category1s", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -94,7 +94,7 @@ namespace RuhunaSupply.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Category2",
+                name: "Category2s",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -105,11 +105,11 @@ namespace RuhunaSupply.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Category2", x => x.Id);
+                    table.PrimaryKey("PK_Category2s", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Category2_Category1_ParentCategoryId",
+                        name: "FK_Category2s_Category1s_ParentCategoryId",
                         column: x => x.ParentCategoryId,
-                        principalTable: "Category1",
+                        principalTable: "Category1s",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -138,7 +138,7 @@ namespace RuhunaSupply.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Category3",
+                name: "Category3s",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -150,17 +150,17 @@ namespace RuhunaSupply.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Category3", x => x.Id);
+                    table.PrimaryKey("PK_Category3s", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Category3_Category1_GPCategoryId",
+                        name: "FK_Category3s_Category1s_GPCategoryId",
                         column: x => x.GPCategoryId,
-                        principalTable: "Category1",
+                        principalTable: "Category1s",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Category3_Category2_ParentCategoryId",
+                        name: "FK_Category3s_Category2s_ParentCategoryId",
                         column: x => x.ParentCategoryId,
-                        principalTable: "Category2",
+                        principalTable: "Category2s",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -185,9 +185,9 @@ namespace RuhunaSupply.Migrations
                 {
                     table.PrimaryKey("PK_Suppliers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Suppliers_Category2_Category2Id",
+                        name: "FK_Suppliers_Category2s_Category2Id",
                         column: x => x.Category2Id,
-                        principalTable: "Category2",
+                        principalTable: "Category2s",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -240,21 +240,21 @@ namespace RuhunaSupply.Migrations
                 {
                     table.PrimaryKey("PK_Items", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Items_Category1_Category1Id",
+                        name: "FK_Items_Category1s_Category1Id",
                         column: x => x.Category1Id,
-                        principalTable: "Category1",
+                        principalTable: "Category1s",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Items_Category2_Category2Id",
+                        name: "FK_Items_Category2s_Category2Id",
                         column: x => x.Category2Id,
-                        principalTable: "Category2",
+                        principalTable: "Category2s",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Items_Category3_Category3Id",
+                        name: "FK_Items_Category3s_Category3Id",
                         column: x => x.Category3Id,
-                        principalTable: "Category3",
+                        principalTable: "Category3s",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -483,18 +483,18 @@ namespace RuhunaSupply.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Category2_ParentCategoryId",
-                table: "Category2",
+                name: "IX_Category2s_ParentCategoryId",
+                table: "Category2s",
                 column: "ParentCategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Category3_GPCategoryId",
-                table: "Category3",
+                name: "IX_Category3s_GPCategoryId",
+                table: "Category3s",
                 column: "GPCategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Category3_ParentCategoryId",
-                table: "Category3",
+                name: "IX_Category3s_ParentCategoryId",
+                table: "Category3s",
                 column: "ParentCategoryId");
 
             migrationBuilder.CreateIndex(
@@ -659,13 +659,13 @@ namespace RuhunaSupply.Migrations
                 name: "Faculties");
 
             migrationBuilder.DropTable(
-                name: "Category3");
+                name: "Category3s");
 
             migrationBuilder.DropTable(
-                name: "Category2");
+                name: "Category2s");
 
             migrationBuilder.DropTable(
-                name: "Category1");
+                name: "Category1s");
         }
     }
 }

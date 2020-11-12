@@ -19,7 +19,7 @@ export class AddCategory1Component implements OnInit {
                 this.checkoutForm=this.formBuilder.group({
                   Id:'',
                   Name:'',
-                  Discription:''
+                  Description:''
                 });
               }
 

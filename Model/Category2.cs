@@ -27,5 +27,6 @@ namespace RuhunaSupply.Model
         [Required]
 
         public string Description { get; set; }
+        public Category1 Category1 { get; internal set; }
     }
 }

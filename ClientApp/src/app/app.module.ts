@@ -11,6 +11,8 @@ import { RegisterSupplierComponent } from './register-supplier/register-supplier
 import { AddCategory1Component } from './add-category1/add-category1.component';
 import { Category1Component } from './category1/category1.component';
 import { UserAccountComponent } from './user-account/user-account.component';
+import { AddCategory2Component } from './add-category2/add-category2.component';
+import { Category2Component } from './category2/category2.component';
 
 @NgModule({
   declarations: [
@@ -18,8 +20,10 @@ import { UserAccountComponent } from './user-account/user-account.component';
     SuppliersComponent,
     RegisterSupplierComponent,
     AddCategory1Component,
-    Category1Component
-    UserAccountComponent
+    Category1Component,
+    UserAccountComponent,
+    AddCategory2Component,
+    Category2Component
   ],
   imports: [
     CommonModule,

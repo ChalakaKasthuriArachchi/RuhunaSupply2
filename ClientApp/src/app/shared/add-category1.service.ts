@@ -19,7 +19,7 @@ export class AddCategory1Service {
     return this.http.put(environment.apiBaseURI + '/category1/', + formData.Id);
   }
 
-  getCategory1(formData){
+  getCategory1List(){
     return this.http.get(environment.apiBaseURI + '/category1');
   }
 

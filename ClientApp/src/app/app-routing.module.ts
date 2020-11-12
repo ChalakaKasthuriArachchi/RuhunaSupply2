@@ -7,6 +7,7 @@ import { Category1Component } from './category1/category1.component';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { UserAccountComponent } from './user-account/user-account.component';
+import { AddCategory2Component } from './add-category2/add-category2.component';
 
 const routes: Routes = [
   {path: 'supplier/register',component : RegisterSupplierComponent},
@@ -14,6 +15,8 @@ const routes: Routes = [
   {path: 'category1/add',component : AddCategory1Component},
   {path: 'category1',component : Category1Component},
   {path: 'createaccount',component : UserAccountComponent},
+  {path: 'category2/add',component:AddCategory2Component},
+  {path:'category2',component : Category1Component}
 
 ];
 
