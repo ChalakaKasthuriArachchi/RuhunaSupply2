@@ -14,7 +14,6 @@ export class AddCategory1Component implements OnInit {
   constructor(
               private addCategory1Service: AddCategory1Service,
               private formBuilder : FormBuilder)
-               
               {
                 this.checkoutForm=this.formBuilder.group({
                   Id:'',

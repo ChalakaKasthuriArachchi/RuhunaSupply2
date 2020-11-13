@@ -1,3 +1,5 @@
+import { ItemComponent } from './item/item.component';
+import { AddItemComponent } from './add-item/add-item.component';
 import { RegisterSupplierComponent } from './register-supplier/register-supplier.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -9,11 +11,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { UserAccountComponent } from './user-account/user-account.component';
 
 const routes: Routes = [
-  {path: 'supplier/register',component : RegisterSupplierComponent},
-  {path: 'supplier',component : SuppliersComponent},
-  {path: 'category1/add',component : AddCategory1Component},
-  {path: 'category1',component : Category1Component},
-  {path: 'createaccount',component : UserAccountComponent},
+  {path: 'supplier/register', component : RegisterSupplierComponent},
+  {path: 'supplier', component : SuppliersComponent},
+  {path: 'category1/add', component : AddCategory1Component},
+  {path: 'category1', component : Category1Component},
+  {path: 'createaccount', component : UserAccountComponent},
+  {path: 'item/add', component : AddItemComponent},
+  {path: 'item', component : ItemComponent}
 
 ];
 

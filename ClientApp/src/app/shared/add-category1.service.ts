@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient}from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
 
@@ -10,8 +10,6 @@ export class AddCategory1Service {
 
   constructor(private http:HttpClient) { }
   postCategory1(formData){
-    console.log(formData);
-    console.log(environment.apiBaseURI + '/category1');
     return this.http.post(environment.apiBaseURI + '/category1',formData);
   }
 
@@ -24,6 +22,6 @@ export class AddCategory1Service {
   }
 
   deleteCategory1(formData){
-    return this.http.delete(environment.apiBaseURI +'/category1'+formData.Id);
+    return this.http.delete(environment.apiBaseURI +'/category1'+ formData.Id);
   }
 }
