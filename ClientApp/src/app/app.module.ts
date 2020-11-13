@@ -26,14 +26,14 @@ import { ItemComponent } from './item/item.component';
     SuppliersComponent,
     RegisterSupplierComponent,
     UserAccountComponent,
-    LoginComponent
+    LoginComponent,
     AddCategory1Component,
     Category1Component,
     UserAccountComponent,
     AddCategory2Component,
     Category2Component,
     AddCategory3Component,
-    Category3Component
+    Category3Component,
     Category1Component,
     AddItemComponent,
     ItemComponent

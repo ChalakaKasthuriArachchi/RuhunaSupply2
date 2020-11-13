@@ -1,6 +1,6 @@
+import { Category1Service } from './../shared/category1.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validator, FormGroup } from '@angular/forms';
-import { AddCategory1Service } from '../shared/add-category1.service';
 
 @Component({
   selector: 'app-add-item',
@@ -13,7 +13,7 @@ export class AddItemComponent implements OnInit {
   checkoutForm;
 
   constructor(
-              private addCategory1Service: AddCategory1Service,
+              private addCategory1Service: Category1Service,
               private formBuilder: FormBuilder)
 
               {
