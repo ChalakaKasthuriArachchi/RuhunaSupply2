@@ -18,7 +18,19 @@ import { Category2Component } from './category2/category2.component';
 
 const routes: Routes = [
   {path: 'createaccount',component : UserAccountComponent},
-
+  { path: 'category2/add', component: AddCategory2Component },
+  { path: 'category2', component: Category2Component },
+  { path: 'category3/add', component: AddCategory3Component },
+  { path: 'category3', component: Category3Component },
+  { path: 'createaccount', component: UserAccountComponent },
+  { path: 'user/login', component: LoginComponent }
+  { path: 'supplier/register', component: RegisterSupplierComponent },
+  { path: 'supplier', component: SuppliersComponent },
+  { path: 'category1/add', component: AddCategory1Component },
+  { path: 'category1', component: Category1Component },
+  { path: 'createaccount', component: UserAccountComponent },
+  { path: 'item/add', component: AddItemComponent },
+  { path: 'item', component: ItemComponent }
 ];
 
 @NgModule({
