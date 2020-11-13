@@ -1,3 +1,5 @@
+import { AuthGuard } from './auth/auth.guard';
+import { LoginComponent } from './user-account/login/login.component';
 import { RegisterSupplierComponent } from './register-supplier/register-supplier.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -9,9 +11,9 @@ import { UserAccountComponent } from './user-account/user-account.component';
 
 const routes: Routes = [
   {path: 'supplier/register',component : RegisterSupplierComponent},
-  {path: 'supplier',component : SuppliersComponent},
+  {path: 'supplier',component : SuppliersComponent, canActivate:[AuthGuard]},
   {path: 'createaccount',component : UserAccountComponent},
-
+  {path : 'user/login',component : LoginComponent}
 ];
 
 @NgModule({

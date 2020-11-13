@@ -10,8 +10,6 @@ export class UserAccountService {
   constructor(private http: HttpClient) { }
 
   postUserAccount(formData) {
-    console.log(formData);
-    //console.log(environment.apiBaseURI + '/UserAccount');
     return this.http.post(environment.apiBaseURI + '/UserAccount', formData);
   }
   putUserAccount(formData) {
@@ -22,5 +20,11 @@ export class UserAccountService {
   }
   deleteUserAccount(id) {
     return this.http.delete(environment.apiBaseURI + '/UserAccount/' + id);
+  }
+  login(formData){
+    return this.http.post(environment.apiBaseURI + '/UserAccount/login',formData);
+  }
+  onLogout(){
+    localStorage.removeItem('token');
   }
 }

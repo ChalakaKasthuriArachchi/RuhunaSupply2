@@ -9,13 +9,16 @@ import { AppComponent } from './app.component';
 import { SuppliersComponent } from './suppliers/suppliers.component';
 import { RegisterSupplierComponent } from './register-supplier/register-supplier.component';
 import { UserAccountComponent } from './user-account/user-account.component';
+import { LoginComponent } from './user-account/login/login.component';
+import { UserAccountService } from './shared/user-account.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     SuppliersComponent,
     RegisterSupplierComponent,
-    UserAccountComponent
+    UserAccountComponent,
+    LoginComponent
   ],
   imports: [
     CommonModule,

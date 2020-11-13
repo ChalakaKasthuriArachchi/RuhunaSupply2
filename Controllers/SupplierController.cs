@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
@@ -14,6 +17,7 @@ namespace RuhunaSupply.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class SupplierController : ControllerBase
     {
         private ApplicationDbContext _db;
@@ -40,8 +44,10 @@ namespace RuhunaSupply.Controllers
         public async Task<ActionResult<Supplier>> PostSupplier(object supplier)
         {
             JsonData jd = JsonMapper.ToObject(supplier.ToString());
+            string userId = Request.HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name).Value;
             Supplier sp = new Supplier()
             {
+                Id = int.Parse(userId),
                 BusinessAddress = jd["BusinessAddress"].ToString(),
                 BusinessCategory = (BusinessCategories)int.Parse(jd["Category2"].ToString()),
                 BusinessMail = jd["BusinessMail"].ToString(),

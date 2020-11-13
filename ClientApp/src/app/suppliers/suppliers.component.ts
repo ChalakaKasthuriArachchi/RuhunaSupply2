@@ -27,6 +27,5 @@ export class SuppliersComponent implements OnInit {
   getSuppliers(){
     this.supplierService.getSupplierList(this.category,this.searchText)
      .subscribe(res => this.supplierList = res as []);
-    //console.log(this.searchText);
   }
 }
