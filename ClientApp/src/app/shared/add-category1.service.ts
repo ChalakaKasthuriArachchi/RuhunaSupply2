@@ -8,11 +8,9 @@ import { environment } from 'src/environments/environment';
 })
 export class AddCategory1Service {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http:HttpClient) { }
   postCategory1(formData){
-    console.log(formData);
-    console.log(environment.apiBaseURI + '/category1');
-    return this.http.post(environment.apiBaseURI + '/category1', formData);
+    return this.http.post(environment.apiBaseURI + '/category1',formData);
   }
 
   putCategory1(formData){

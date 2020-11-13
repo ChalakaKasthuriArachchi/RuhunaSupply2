@@ -34,15 +34,15 @@ namespace RuhunaSupply.Controllers
 
             User user = new User()
             {
-                Id = max_id + 1,
-                Admin = Admin,
-                Branch = Branch,
-                FullName = FullName,
-                ShortName = ShortName,
-                PermissionList = PermissionList,
-                Position = Position,
-                Type = Type,
-                MergedId = MergedId
+                //Id = max_id + 1,
+                //Admin = Admin,
+                //Branch = Branch,
+                //FullName = FullName,
+                //ShortName = ShortName,
+                //PermissionList = PermissionList,
+                //Position = Position,
+                //Type = Type,
+                //MergedId = MergedId
             };
 
             _db.Users.Add(user);
@@ -55,15 +55,15 @@ namespace RuhunaSupply.Controllers
         {
             _db.Users.Update(new User()
             {
-                Id = Id,
-                Admin = Admin,
-                Branch = Branch,
-                FullName = FullName,
-                ShortName = ShortName,
-                PermissionList = PermissionList,
-                Position = Position,
-                Type = Type,
-                MergedId = MergedId
+                //Id = Id,
+                //Admin = Admin,
+                //Branch = Branch,
+                //FullName = FullName,
+                //ShortName = ShortName,
+                //PermissionList = PermissionList,
+                //Position = Position,
+                //Type = Type,
+                //MergedId = MergedId
             });
             _db.SaveChanges();
             return Ok();

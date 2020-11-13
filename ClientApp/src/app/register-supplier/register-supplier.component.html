@@ -49,8 +49,8 @@
                 <div class="form-row">
 					<label for="Category2">Category</label>
                     <select formControlName="Category2" class="input-text" required>
-                        <option value="-1" selected hidden>Select the Category of the Business</option>
-                        <option value="0">Computers & Accessories</option>
+						<option value="0" selected hidden>Select The Category</option>
+                        <option *ngFor="let cat of category2List; let i = index;" value="{{cat.id}}">{{cat.name}}</option>
                       </select>
 					<i class="fas fa-user"></i>
 				</div>

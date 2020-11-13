@@ -22,7 +22,7 @@ namespace RuhunaSupply.Controllers
             int max_id = 0;
             try
             {
-                max_id = _db.Item.Max((it) => it.Id);
+                max_id = _db.Items.Max((it) => it.Id);
             }
             catch
             {
@@ -37,7 +37,7 @@ namespace RuhunaSupply.Controllers
                 Category2 = Category2,
                 Category3 = Category3
             };
-            _db.Item.Add(it);
+            _db.Items.Add(it);
             _db.SaveChanges();
             return Ok();
         }
@@ -50,7 +50,7 @@ namespace RuhunaSupply.Controllers
         [HttpPost]
         public IActionResult Edit(int id, string Name, string Description, Category1 Category1, Category2 Category2, Category3 Category3)
         {
-            _db.Item.Update(
+            _db.Items.Update(
                 new Item() { Id = id, Name = Name, Description = Description, Category1 = Category1, Category2 = Category2, Category3 = Category3 });
             _db.SaveChanges();
             return Ok();
@@ -60,7 +60,7 @@ namespace RuhunaSupply.Controllers
 
         public IActionResult Delete(int id)
         {
-            _db.Item.Remove(new Item() { Id = id });
+            _db.Items.Remove(new Item() { Id = id });
             _db.SaveChanges();
             return Ok();
         }

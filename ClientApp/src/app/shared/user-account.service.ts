@@ -15,10 +15,10 @@ export class UserAccountService {
     return this.http.post(environment.apiBaseURI + '/UserAccount', formData);
   }
   putUserAccount(formData) {
-    return this.http.put(environment.apiBaseURI + '/UserAccount/' , formData);
+    return this.http.put(environment.apiBaseURI + '/UserAccount/' ,formData);
   }
   getUserAccountList() {
-    return this.http.get(environment.apiBaseURI + '/UserAccount');
+    return this.http.get(environment.apiBaseURI + '/UserAccount')
   }
   deleteUserAccount(id) {
     return this.http.delete(environment.apiBaseURI + '/UserAccount/' + id);

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using RuhunaSupply.Data;
 using RuhunaSupply.Model;
@@ -22,9 +23,18 @@ namespace RuhunaSupply.Controllers
             this._db = context;
         }
         [HttpGet]
-        public Supplier[] Index()
+        public Supplier[] Index(string Category,string Search)
         {
-            return _db.Suppliers.ToArray();
+            IQueryable<Supplier> query = _db.Suppliers;
+            if (Category != null && Category.Trim().Length > 0 && Category != "undefined")
+                query = query.Where(s => s.Category2.Id.ToString() == Category);
+            if (Search != null && Search.Trim().Length > 0 && Search != "undefined")
+                query = query.Where(s => s.BusinessName.Contains(Search)
+                            || s.BusinessAddress.Contains(Search)
+                            || s.ContactNumber.Contains(Search)
+                            || s.BusinessMail.Contains(Search));
+            Supplier[] suppliers = query.Include(s => s.Category2).ToArray();
+            return suppliers;
         }
         [HttpPost]
         public async Task<ActionResult<Supplier>> PostSupplier(object supplier)
@@ -37,9 +47,8 @@ namespace RuhunaSupply.Controllers
                 BusinessMail = jd["BusinessMail"].ToString(),
                 BusinessName = jd["BusinessName"].ToString(),
                 BusinessRegisteredDate = DateTime.Parse(jd["BusinessRegisteredDate"].ToString()),
-                Category2 = new Category2() 
-                { Description = "(Testing)", Name = "(Testing)",
-                    ParentCategory = new Category1() {Description = "(Testing)",Name = "(Testing)" } }, // For Testing Only
+                Category2 = _db.Category2s
+                    .FirstOrDefault(c => c.Id == int.Parse(jd["Category2"].ToString())),
                 RegisteredDate = DateTime.Now,
                 RegistrationNumber = jd["RegistrationNumber"].ToString(),
                 ContactNumber = jd["ContactNumber"].ToString()
