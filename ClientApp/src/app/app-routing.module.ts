@@ -23,7 +23,7 @@ const routes: Routes = [
   { path: 'category3/add', component: AddCategory3Component },
   { path: 'category3', component: Category3Component },
   { path: 'createaccount', component: UserAccountComponent },
-  { path: 'user/login', component: LoginComponent }
+  { path: 'user/login', component: LoginComponent },
   { path: 'supplier/register', component: RegisterSupplierComponent },
   { path: 'supplier', component: SuppliersComponent },
   { path: 'category1/add', component: AddCategory1Component },
