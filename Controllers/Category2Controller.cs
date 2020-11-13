@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using RuhunaSupply.Data;
 using RuhunaSupply.Model;
+using ThirdParty.Json.LitJson;
+using static RuhunaSupply.Common.MyEnum;
 
 namespace RuhunaSupply.Controllers
 {
@@ -19,36 +22,33 @@ namespace RuhunaSupply.Controllers
             this._db = context;
         }
         [HttpGet]
-        public Category2[] GetCategory2s()
+        public Category2[] GetCategory2s(int Category1)
         {
-            return _db.Category2s.ToArray();
+            if (Category1 == 0)
+                return _db.Category2s.Include(cat => cat.ParentCategory).ToArray();
+            return _db.Category2s.Where(cat => cat.ParentCategory.Id == Category1).Include(cat => cat.ParentCategory).ToArray();
         }
-
-        public IActionResult Add(int PId, string Name, string Description)
-        {
-            int max_id = 0;
-            try
-            {
-                max_id = _db.Category2s.Max((ct) => ct.Id);
-            }
-            catch
-            {
-            }
-
-            Category2 ct = new Category2()
-            {
-                //Id = max_id,
-                //PId=PId,
-                //Name = Name,
-                //Description = Description
-            };
-
-            _db.Category2s.Add(ct);
-            _db.SaveChanges();
-            return Ok();
-        }
-
         [HttpPost]
+        public async Task<ActionResult<Category2>> PostCategory2(object category2)
+        {
+            JsonData jd = JsonMapper.ToObject(category2.ToString());
+            Category2 c2 = new Category2()
+            {
+                ParentCategory = _db.Category1s
+                    .FirstOrDefault(c => c.Id == int.Parse(jd["Category1"].ToString())),
+                Name = jd["Name"].ToString(),
+                Description = jd["Description"].ToString(),
+                
+
+            };
+            _db.Category2s.Add(c2);
+            await _db.SaveChangesAsync();
+
+            return CreatedAtAction("Category2", new { id = c2.Id }, c2);
+        }
+
+
+        [HttpPut]
         public IActionResult Edit(int Id, int PId, string Name, string Description)
         {
             _db.Category2s.Update(new Category2()
@@ -62,7 +62,7 @@ namespace RuhunaSupply.Controllers
             return Ok();
         }
 
-        [HttpPost]
+        [HttpDelete]
         public IActionResult Delete(int Id)
         {
             _db.Category2s.Remove(new Category2() { Id = Id });

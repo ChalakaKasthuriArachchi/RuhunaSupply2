@@ -9,8 +9,8 @@ using RuhunaSupply.Data;
 namespace RuhunaSupply.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201108083246_createDb")]
-    partial class createDb
+    [Migration("20201112102402_db")]
+    partial class db
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -93,6 +93,61 @@ namespace RuhunaSupply.Migrations
                     b.ToTable("Category3s");
                 });
 
+            modelBuilder.Entity("RuhunaSupply.Model.Department", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<double>("BudgetAllocation")
+                        .HasColumnType("double");
+
+                    b.Property<int?>("FacultyId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Location")
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
+
+                    b.Property<double>("UsedAmount")
+                        .HasColumnType("double");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FacultyId");
+
+                    b.ToTable("Departments");
+                });
+
+            modelBuilder.Entity("RuhunaSupply.Model.Faculty", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<double>("BudgetAllocation")
+                        .HasColumnType("double");
+
+                    b.Property<string>("Location")
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
+
+                    b.Property<double>("UsedAmount")
+                        .HasColumnType("double");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Faculties");
+                });
+
             modelBuilder.Entity("RuhunaSupply.Model.Item", b =>
                 {
                     b.Property<int>("Id")
@@ -125,7 +180,7 @@ namespace RuhunaSupply.Migrations
 
                     b.HasIndex("Category3Id");
 
-                    b.ToTable("Item");
+                    b.ToTable("Items");
                 });
 
             modelBuilder.Entity("RuhunaSupply.Model.PurchaseRequest", b =>
@@ -146,20 +201,23 @@ namespace RuhunaSupply.Migrations
                     b.Property<string>("FundGoes")
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("IsInProcumentPlan")
-                        .HasColumnType("nvarchar(50)");
+                    b.Property<bool>("IsInProcumentPlan")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("Justification")
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Project")
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("Purpose")
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("TelephonNumber")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                    b.Property<int>("Purpose")
+                        .HasColumnType("int");
 
                     b.Property<string>("Vote")
                         .HasColumnType("nvarchar(50)");
+
+                    b.Property<DateTime>("_DateTime")
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
@@ -418,11 +476,11 @@ namespace RuhunaSupply.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("Admin")
-                        .HasColumnType("nvarchar(30)");
+                    b.Property<int?>("DepartmentId")
+                        .HasColumnType("int");
 
-                    b.Property<string>("Branch")
-                        .HasColumnType("nvarchar(30)");
+                    b.Property<int?>("FacultyId")
+                        .HasColumnType("int");
 
                     b.Property<string>("FullName")
                         .HasColumnType("nvarchar(100)");
@@ -443,6 +501,10 @@ namespace RuhunaSupply.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("DepartmentId");
+
+                    b.HasIndex("FacultyId");
 
                     b.ToTable("Users");
                 });
@@ -555,6 +617,13 @@ namespace RuhunaSupply.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("RuhunaSupply.Model.Department", b =>
+                {
+                    b.HasOne("RuhunaSupply.Model.Faculty", "Faculty")
+                        .WithMany()
+                        .HasForeignKey("FacultyId");
+                });
+
             modelBuilder.Entity("RuhunaSupply.Model.Item", b =>
                 {
                     b.HasOne("RuhunaSupply.Model.Category1", "Category1")
@@ -660,6 +729,17 @@ namespace RuhunaSupply.Migrations
                     b.HasOne("RuhunaSupply.Model.Category2", "Category2")
                         .WithMany()
                         .HasForeignKey("Category2Id");
+                });
+
+            modelBuilder.Entity("RuhunaSupply.Model.User", b =>
+                {
+                    b.HasOne("RuhunaSupply.Model.Department", "Department")
+                        .WithMany()
+                        .HasForeignKey("DepartmentId");
+
+                    b.HasOne("RuhunaSupply.Model.Faculty", "Faculty")
+                        .WithMany()
+                        .HasForeignKey("FacultyId");
                 });
 
             modelBuilder.Entity("RuhunaSupply.Model.UserPurchaseRequest", b =>

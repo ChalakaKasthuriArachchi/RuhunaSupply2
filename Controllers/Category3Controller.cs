@@ -5,9 +5,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using RuhunaSupply.Data;
 using RuhunaSupply.Model;
+using ThirdParty.Json.LitJson;
 
 namespace RuhunaSupply.Controllers
 {
+    [Route("api/[Controller]")]
+    [ApiController]
     public class Category3Controller : Controller
     {
 
@@ -17,32 +20,33 @@ namespace RuhunaSupply.Controllers
         {
             this._db = context;
         }
-        public IActionResult Add(int PId, int GpId, string Name, string Description)
+        [HttpGet]
+        public Category3[] GetCategory2s()
         {
-            int max_id = 0;
-            try
+            return _db.Category3s.ToArray();
+        }
+        [HttpPost]
+        public async Task<ActionResult<Category3>> PostCategory3(object category3)
+        {
+            JsonData jd = JsonMapper.ToObject(category3.ToString());
+            Category3 c3 = new Category3()
             {
-                max_id = _db.Category3s.Max((ct) => ct.Id);
-            }
-            catch
-            {
-            }
+                GPCategory = _db.Category1s
+                    .FirstOrDefault(c1 => c1.Id == int.Parse(jd["Category1"].ToString())),
+                ParentCategory = _db.Category2s
+                    .FirstOrDefault(c2 => c2.Id == int.Parse(jd["Category2"].ToString())),
+                Name = jd["Name"].ToString(),
+                Description = jd["Description"].ToString(),
 
-            Category3 ct = new Category3()
-            {
-                //Id = max_id,
-                //PId = PId,
-                //GpId = GpId,
-                //Name = Name,
-                //Description = Description
+
             };
+            _db.Category3s.Add(c3);
+            await _db.SaveChangesAsync();
 
-            _db.Category3s.Add(ct);
-            _db.SaveChanges();
-            return Ok();
+            return CreatedAtAction("Category3", new { id = c3.Id }, c3);
         }
 
-        [HttpPost]
+        [HttpPut]
         public IActionResult Edit(int Id, int PId, int GpId, string Name, string Description)
         {
             _db.Category3s.Update(new Category3()
@@ -57,7 +61,7 @@ namespace RuhunaSupply.Controllers
             return Ok();
         }
 
-        [HttpPost]
+        [HttpDelete]
         public IActionResult Delete(int Id)
         {
             _db.Category3s.Remove(new Category3() { Id = Id });

@@ -18,7 +18,7 @@ export class SupplierService {
     }
   }
   putSupplier(formData){
-    return this.http.put(environment.apiBaseURI + '/Supplier/' + formData.bankAccountID,
+    return this.http.put(environment.apiBaseURI + '/Supplier/' + formData.Id,
       formData);
   }
   getSupplierList(category,search){

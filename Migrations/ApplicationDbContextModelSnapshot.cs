@@ -500,10 +500,10 @@ namespace RuhunaSupply.Migrations
 
                     b.HasKey("Id");
 
-
                     b.HasIndex("DepartmentId");
 
                     b.HasIndex("FacultyId");
+
                     b.ToTable("Users");
                 });
 
@@ -728,7 +728,6 @@ namespace RuhunaSupply.Migrations
                         .WithMany()
                         .HasForeignKey("Category2Id");
                 });
-
 
             modelBuilder.Entity("RuhunaSupply.Model.User", b =>
                 {
