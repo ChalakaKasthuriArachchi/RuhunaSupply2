@@ -48,7 +48,6 @@ export class AddCategory3Component implements OnInit {
       this.cat3Service.postCategory3(fg.value);
     }
     onCat1Select(fg:FormGroup){
-      console.log("OK");
       this.cat2Service.getCategory2List(fg.value.Category1).subscribe(
         res => this.Category2List = res as []
       );
