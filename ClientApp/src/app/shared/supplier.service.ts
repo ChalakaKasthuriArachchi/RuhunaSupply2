@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
 })
 export class SupplierService {
 
-  constructor(private http : HttpClient) { }
+  constructor(private http: HttpClient) { }
 
   postSupplier(formData){
     var tok = localStorage.getItem('token');

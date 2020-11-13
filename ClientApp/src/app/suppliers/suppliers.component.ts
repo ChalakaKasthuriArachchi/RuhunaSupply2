@@ -1,6 +1,6 @@
 import { SupplierService } from './../shared/supplier.service';
 import { Component, OnInit } from '@angular/core';
-import{ActivatedRoute} from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 import { FormControl } from '@angular/forms';
 
 @Component({
