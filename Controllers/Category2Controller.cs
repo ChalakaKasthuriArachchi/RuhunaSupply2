@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using RuhunaSupply.Data;
 using RuhunaSupply.Model;
 using ThirdParty.Json.LitJson;
@@ -21,19 +22,19 @@ namespace RuhunaSupply.Controllers
             this._db = context;
         }
         [HttpGet]
-        public Category2[] GetCategory2s()
+        public Category2[] GetCategory2s(int Category1)
         {
-            return _db.Category2s.ToArray();
+            if (Category1 == 0)
+                return _db.Category2s.Include(cat => cat.ParentCategory).ToArray();
+            return _db.Category2s.Where(cat => cat.ParentCategory.Id == Category1).Include(cat => cat.ParentCategory).ToArray();
         }
         [HttpPost]
         public async Task<ActionResult<Category2>> PostCategory2(object category2)
         {
-
-
             JsonData jd = JsonMapper.ToObject(category2.ToString());
             Category2 c2 = new Category2()
             {
-                Category1 = _db.Category1s
+                ParentCategory = _db.Category1s
                     .FirstOrDefault(c => c.Id == int.Parse(jd["Category1"].ToString())),
                 Name = jd["Name"].ToString(),
                 Description = jd["Description"].ToString(),

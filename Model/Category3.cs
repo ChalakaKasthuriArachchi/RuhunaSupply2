@@ -17,17 +17,17 @@ namespace RuhunaSupply.Model
         public int Id { get; set; }
         [Required]
 
-        public Category2 ParentCategory { get; set; }
-        [MaxLength(50)]
-        [Required]
-
         public Category1 GPCategory { get; set; }
         [Column(TypeName = "nvarchar(50)")]
+        [MaxLength(50)]
+        [Required]
+        public Category2 ParentCategory { get; set; }
         [MaxLength(50)]
         [Required]
         public String Name { get; set; }
         [Column(TypeName = "nvarchar(150)")]
         [Required]
         public String Description { get; set; }
+        
     }
 }

@@ -10,18 +10,18 @@ export class Category2Service {
   constructor(private http : HttpClient) { }
   postCategory2(formData){
     console.log(formData);
-    console.log(environment.apiBaseURI + '/category2');
-    return this.http.post(environment.apiBaseURI + '/category2',formData);
+    console.log(environment.apiBaseURI + '/Category2');
+    return this.http.post(environment.apiBaseURI + '/Category2',formData);
   }
   putCategory2(formData){
-    return this.http.put(environment.apiBaseURI + '/category2/' + formData.Id,
+    return this.http.put(environment.apiBaseURI + '/Category2/' + formData.Id,
       formData);
   }
   
   deleteCategory2(id){
-    return this.http.delete(environment.apiBaseURI + '/category2/' + id);
+    return this.http.delete(environment.apiBaseURI + '/Category2/' + id);
   }
-  getCategory2List(){
-    return this.http.get(environment.apiBaseURI + '/Category2');
+  getCategory2List(cat1){
+    return this.http.get(environment.apiBaseURI + '/Category2?Category1=' + cat1);
   }
 }

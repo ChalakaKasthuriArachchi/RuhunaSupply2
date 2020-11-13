@@ -1,7 +1,7 @@
 import { importExpr, importType } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder,Validator,FormGroup } from '@angular/forms';
-import { AddCategory1Service } from '../shared/add-category1.service';
+import { Category1Service } from '../shared/category1.service';
 import { Category2Service } from '../shared/category2.service';
 
 
@@ -15,9 +15,9 @@ export class AddCategory2Component implements OnInit {
   checkoutForm;
   category1List = [];
   constructor(
-    private Category2Service : Category2Service,
+    private cat2Service : Category2Service,
     private formBuilder :FormBuilder,
-    private AddCategory1Service : AddCategory1Service
+    private cat1Service : Category1Service
      
   ) {
       this.checkoutForm = this.formBuilder.group({
@@ -29,12 +29,12 @@ export class AddCategory2Component implements OnInit {
    }
 
   ngOnInit(): void {
-    this.AddCategory1Service.getCategory1List()
+    this.cat1Service.getCategory1List()
     .subscribe(res => this.category1List = res as []
       );
   }
   onSubmit(category2Data){
-    this.Category2Service.postCategory2(category2Data.value).subscribe(
+    this.cat2Service.postCategory2(category2Data.value).subscribe(
       data =>console.log('success',data),
       error =>console.log('error',error)
       );
@@ -42,7 +42,7 @@ export class AddCategory2Component implements OnInit {
   }
   recordSubmit(fg:FormGroup){
       
-    this.Category2Service.postCategory2(fg.value);
+    this.cat2Service.postCategory2(fg.value);
     
 }
 
