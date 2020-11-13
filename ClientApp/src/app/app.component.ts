@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { UserAccountService } from './shared/user-account.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'ClientApp';
+  title = 'Ruhuna Supply';
+
+  constructor(private service:UserAccountService){
+
+  }
+
+  onLogout(){
+    this.service.onLogout();
+  }
 }

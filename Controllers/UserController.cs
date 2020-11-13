@@ -24,7 +24,7 @@ namespace RuhunaSupply.Controllers
 
             try
             {
-                max_id = _db.Users.Max((user) => user.Id);
+                //max_id = _db.Users.Max((user) => user.Id);
             }
             catch
             {
@@ -72,7 +72,7 @@ namespace RuhunaSupply.Controllers
         [HttpPost]
         public IActionResult Delete(int Id)
         {
-            _db.Users.Remove(new User { Id = Id });
+            //_db.Users.Remove(new User { Id = Id });
             _db.SaveChanges();
             return Ok();
         }

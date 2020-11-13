@@ -1,3 +1,5 @@
+import { AuthGuard } from './auth/auth.guard';
+import { LoginComponent } from './user-account/login/login.component';
 import { ItemComponent } from './item/item.component';
 import { AddItemComponent } from './add-item/add-item.component';
 import { RegisterSupplierComponent } from './register-supplier/register-supplier.component';
@@ -11,6 +13,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { UserAccountComponent } from './user-account/user-account.component';
 
 const routes: Routes = [
+  {path: 'createaccount',component : UserAccountComponent},
+  {path : 'user/login',component : LoginComponent}
   {path: 'supplier/register', component : RegisterSupplierComponent},
   {path: 'supplier', component : SuppliersComponent},
   {path: 'category1/add', component : AddCategory1Component},
@@ -18,7 +22,6 @@ const routes: Routes = [
   {path: 'createaccount', component : UserAccountComponent},
   {path: 'item/add', component : AddItemComponent},
   {path: 'item', component : ItemComponent}
-
 ];
 
 @NgModule({

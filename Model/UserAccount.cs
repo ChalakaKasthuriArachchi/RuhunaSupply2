@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -12,7 +13,7 @@ namespace RuhunaSupply.Model
     {
         public UserAccount()
         {
-
+            
         }
         [Key]
         public int Id { get; set; }
@@ -29,8 +30,8 @@ namespace RuhunaSupply.Model
         [MaxLength(100)]
         public string Email { get; set; }
         [Required]
-        [Column(TypeName = "nvarchar(50)")]
-        [MaxLength(50)]
+        [Column(TypeName = "nvarchar(64)")]
+        [MaxLength(64)]
         public string HashedPassword { get; set; }
         [Required]
         [Column(TypeName = "nvarchar(50)")]
@@ -39,8 +40,8 @@ namespace RuhunaSupply.Model
         [Required]
         public UserTypes Type { get; set; }
         [NotMapped]
-        [Column(TypeName = "nvarchar(50)")]
-        [MaxLength(50)]
+        public string Token { get; internal set; }
+        [NotMapped]
         public string Password { get; set; }
     }
 }

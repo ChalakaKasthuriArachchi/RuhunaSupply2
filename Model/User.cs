@@ -15,7 +15,7 @@ namespace RuhunaSupply.Model
         }
 
         [Key]
-        public int Id { get; set; }
+        public string Id { get; set; }
         [Column(TypeName = "nvarchar(30)")]
         public Faculty Faculty { get; set; }
         [Column(TypeName = "nvarchar(30)")]
@@ -29,6 +29,6 @@ namespace RuhunaSupply.Model
 
         public UserPositions Position { get; set; }
         public UserTypes Type { get; set; }
-        public int MergedId { get; set; }
+        public UserAccount MergedId { get; set; }
     }
 }

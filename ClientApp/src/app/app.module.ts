@@ -11,6 +11,8 @@ import { RegisterSupplierComponent } from './register-supplier/register-supplier
 import { AddCategory1Component } from './add-category1/add-category1.component';
 import { Category1Component } from './category1/category1.component';
 import { UserAccountComponent } from './user-account/user-account.component';
+import { LoginComponent } from './user-account/login/login.component';
+import { UserAccountService } from './shared/user-account.service';
 import { AddItemComponent } from './add-item/add-item.component';
 import { ItemComponent } from './item/item.component';
 
@@ -19,9 +21,10 @@ import { ItemComponent } from './item/item.component';
     AppComponent,
     SuppliersComponent,
     RegisterSupplierComponent,
+    UserAccountComponent,
+    LoginComponent
     AddCategory1Component,
     Category1Component,
-    UserAccountComponent,
     AddItemComponent,
     ItemComponent
   ],
