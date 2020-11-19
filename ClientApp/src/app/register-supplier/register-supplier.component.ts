@@ -34,7 +34,7 @@ export class RegisterSupplierComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.category2Service.getSupplierList()
+    this.category2Service.getCategoryList()
       .subscribe(
         res => this.category2List = res as []
       );

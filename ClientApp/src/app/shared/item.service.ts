@@ -5,10 +5,9 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class Category2Service {
-
-  constructor(private http : HttpClient) { }
-  getCategoryList(){
-    return this.http.get(environment.apiBaseURI + '/Category2');
+export class ItemService {
+  constructor(private http: HttpClient) { } 
+  getItemList() {
+    return this.http.get(environment.apiBaseURI + '/Item');
   }
 }
