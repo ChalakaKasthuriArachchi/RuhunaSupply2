@@ -19,10 +19,12 @@ import { LoginComponent } from './user-account/login/login.component';
 import { UserAccountService } from './shared/user-account.service';
 import { AddItemComponent } from './add-item/add-item.component';
 import { ItemComponent } from './item/item.component';
+import { PurchaseRequestComponent } from './purchase-request/purchase-request.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
+     AppComponent,
     SuppliersComponent,
     RegisterSupplierComponent,
     UserAccountComponent,
@@ -36,7 +38,9 @@ import { ItemComponent } from './item/item.component';
     Category3Component,
     Category1Component,
     AddItemComponent,
-    ItemComponent
+    ItemComponent,
+    PurchaseRequestComponent,
+    DashboardComponent
   ],
   imports: [
     CommonModule,

@@ -19,7 +19,7 @@ namespace RuhunaSupply.Controllers
         }
         public IActionResult Add(User User, int PurchaseRequest, DateTime Date, Involvements Involvement)
         {
-            int max_id = 0;
+            /*int max_id = 0;
             try
             {
                 max_id = _db.UserPurchaseRequests.Max((upr) => upr.Id);
@@ -38,14 +38,14 @@ namespace RuhunaSupply.Controllers
             };
 
             _db.UserPurchaseRequests.Add(upr);
-            _db.SaveChanges();
+            _db.SaveChanges();*/
             return Ok();
         }
         [HttpPost]
         public IActionResult Edit(int Id, User User, int PurchaseRequest, DateTime Date, Involvements Involvement)
         {
-            _db.UserPurchaseRequests.Update(new UserPurchaseRequest() { Id = Id, User = User, PurchaseRequest = PurchaseRequest ,Date = Date,Involvement = Involvement});
-            _db.SaveChanges();
+            /*_db.UserPurchaseRequests.Update(new UserPurchaseRequest() { Id = Id, User = User, PurchaseRequest = PurchaseRequest ,Date = Date,Involvement = Involvement});
+            _db.SaveChanges();*/
             return Ok();
         }
         [HttpPost]

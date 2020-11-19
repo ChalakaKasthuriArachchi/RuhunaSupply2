@@ -25,12 +25,9 @@ namespace RuhunaSupply.Model
 
         [Key]
         public int Id { get; set; }
-       
-        public Faculties Faculty { get; set; }
-        [Column(TypeName = "nvarchar(50)")]
-        public string Branch { get; set; }
+        public Faculty Faculty { get; set; }
+        public Department Department { get; set; }
         public double BudgetAllocation { get; set; }
-        [Column(TypeName = "nvarchar(50)")]
         public string FundGoes { get; set; }
         [Column(TypeName = "nvarchar(100)")]
         public string Project { get; set; }
@@ -41,6 +38,10 @@ namespace RuhunaSupply.Model
         public DateTime _DateTime { get; set; }
         [Column(TypeName = "nvarchar(100)")]
         public string Justification { get; set; }
-        //public string TelephonNumber { get; set; }
+        public PurchaseRequestStatus Status { get; set; }
+        public int SubmittedById { get; set; }
+        public User SubmittedBy { get; set; }
+        public int ExaminigId { get; set; }
+        public User Examinig { get; set; }
     }
 }

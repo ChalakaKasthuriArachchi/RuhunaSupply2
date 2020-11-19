@@ -18,8 +18,10 @@ namespace RuhunaSupply.Model
         [Key]
         public int Id { get; set; }
         public User User { get; set; }
-        public int PurchaseRequest { get; set; }
+        public PurchaseRequest PurchaseRequest { get; set; }
         public DateTime Date { get; set; }
+        [MaxLength(200)]
+        public string Remark { get; set; }
         public Involvements Involvement { get; set; }
     }
 }
