@@ -4,7 +4,7 @@
 			<form class="form-detail" [formGroup]="checkoutForm" (ngSubmit)="onSubmit(checkoutForm)" novalidate>
                 <h2>Add New Category 03</h2>
                 <div class="form-row">
-					<label for="Category1">Category 01</label>
+					<label for="Category1">Category 01 </label>
                     <select (ngModelChange)="onCat1Select(checkoutForm)" formControlName="Category1" class="input-text" required>
 						<option value="0" selected hidden>Select The Category</option>
                         <option *ngFor="let cat of Category1List; let i = index;" value="{{cat.id}}">{{cat.name}}</option>
@@ -12,7 +12,7 @@
 					<i class="fas fa-User"></i>
                 </div>
                 <div class="form-row">
-					<label for="Category2">Categor 02</label>
+					<label for="Category2">Category 02 </label>
                     <select formControlName="Category2" class="input-text" required>
 						<option value="0" selected hidden>Select The Category</option>
                         <option *ngFor="let cat of Category2List; let i = index;" value="{{cat.id}}">{{cat.name}}</option>

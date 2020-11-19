@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using RuhunaSupply.Data;
 using RuhunaSupply.Model;
 using ThirdParty.Json.LitJson;
+using static RuhunaSupply.Common.MyEnum;
 
 namespace RuhunaSupply.Controllers
 {
@@ -21,9 +23,14 @@ namespace RuhunaSupply.Controllers
             this._db = context;
         }
         [HttpGet]
-        public Category3[] GetCategory2s()
+        public Category3[] GetCategory3s(int Category2,bool Include)
         {
-            return _db.Category3s.ToArray();
+            IQueryable<Category3> query = _db.Category3s;
+            if (Include)
+                query = query.Include(cat => cat.ParentCategory).Include(cat => cat.GPCategory);
+            if (Category2 == 0)
+                return query.ToArray();
+            return query.Where(cat => cat.ParentCategory.Id == Category2).ToArray();
         }
         [HttpPost]
         public async Task<ActionResult<Category3>> PostCategory3(object category3)

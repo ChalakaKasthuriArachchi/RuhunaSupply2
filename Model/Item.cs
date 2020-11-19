@@ -18,17 +18,19 @@ namespace RuhunaSupply.Model
         public int Id { get; set; }
         [Column(TypeName = "nvarchar(50)")]
         [Required]
-        public string Name { get; set; }
-        [MaxLength (150)]
-        [Column(TypeName = "nvarchar(150)")]
-        [Required]
-        public string Description { get; set; }
-        [Required]
         public Category1 Category1 { get; set; }
         [Required]
         public Category2 Category2 { get; set; }
         [Required]
         public Category3 Category3 { get; set; }
+        [Required]
+        public string Name { get; set; }
+        [MaxLength (150)]
+        [Column(TypeName = "nvarchar(150)")]
+        [Required]
+        public string Description { get; set; }
+       
+       
 
     }
 

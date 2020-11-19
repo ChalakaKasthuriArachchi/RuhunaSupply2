@@ -16,6 +16,7 @@ import { AddCategory3Component } from './add-category3/add-category3.component';
 import { Category3Component } from './category3/category3.component';
 import { Category2Component } from './category2/category2.component';
 
+
 const routes: Routes = [
   {path: 'createaccount',component : UserAccountComponent},
   { path: 'category2/add', component: AddCategory2Component },
