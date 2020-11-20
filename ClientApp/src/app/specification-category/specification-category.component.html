@@ -1,0 +1,39 @@
+<div class="form-v5">
+    <div class="page-content">
+      <div class="form-v5-content">
+        <form class="form-detail" [formGroup]="checkoutForm" (ngSubmit)="onSubmit(checkoutForm)" novalidate>
+          <h2>Add a Specification category</h2>
+  
+          <div class="form-row">
+            <label for="Item">Item</label>
+            <select formControlName="Item" class="input-text" required>
+              <option value="0" selected hidden>Select The Item</option>
+              <option *ngFor="let it of itemList; let i = index;" value="{{it.id}}">{{it.name}}</option>
+            </select>
+            <i class="fas fa-envelope"></i>
+          </div>
+  
+          <div class="form-row">
+            <label for="Title">Title</label>
+            <input type="text" formControlName="Title" id="Title" class="input-text" required>
+            <i class="fas fa-envelope"></i>
+          </div>
+  
+          <div class="form-row">
+            <label for="Description">Description</label>
+            <textarea name="text" formControlName="Description" id="Description" cols="80" rows="5"></textarea>
+            <!-- <input type="text" formControlName="Description" id="Description" class="input-text"  required "> -->
+            <i class="fas fa-envelope"></i>
+          </div>
+  
+  
+          <div class="form-row-last">
+            <input type="submit" name="specificationcategory" class="specificationcategory" value="Submit">
+          </div>
+  
+  
+  
+        </form>
+        </div>
+      </div>
+    </div>

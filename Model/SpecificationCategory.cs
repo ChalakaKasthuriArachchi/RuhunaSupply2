@@ -19,6 +19,8 @@ namespace RuhunaSupply.Model
         [Column(TypeName ="nvarchar(100)")]
         public string Title { get; set; }
         [Column(TypeName ="nvarchar(150)")]
-        public string Descriptiopn { get; set; }
+        public string Description { get; set; }
+
+        
     }
 }

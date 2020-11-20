@@ -15,6 +15,8 @@ import { AddCategory2Component } from './add-category2/add-category2.component';
 import { AddCategory3Component } from './add-category3/add-category3.component';
 import { Category3Component } from './category3/category3.component';
 import { Category2Component } from './category2/category2.component';
+import { SpecificationComponent } from './specification/specification.component';
+import { SpecificationCategoryComponent } from './specification-category/specification-category.component';
 
 const routes: Routes = [
   {path: 'createaccount',component : UserAccountComponent},
@@ -31,6 +33,9 @@ const routes: Routes = [
   { path: 'createaccount', component: UserAccountComponent },
   { path: 'item/add', component: AddItemComponent },
   { path: 'item', component: ItemComponent }
+  {path: 'specification-category',component : SpecificationCategoryComponent},
+  {path: 'specification',component : SpecificationComponent},
+
 ];
 
 @NgModule({

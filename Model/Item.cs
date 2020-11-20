@@ -19,7 +19,7 @@ namespace RuhunaSupply.Model
         [Column(TypeName = "nvarchar(50)")]
         [Required]
         public string Name { get; set; }
-        [MaxLength (150)]
+        [MaxLength(150)]
         [Column(TypeName = "nvarchar(150)")]
         [Required]
         public string Description { get; set; }
@@ -29,7 +29,7 @@ namespace RuhunaSupply.Model
         public Category2 Category2 { get; set; }
         [Required]
         public Category3 Category3 { get; set; }
-
+        
     }
 
 }

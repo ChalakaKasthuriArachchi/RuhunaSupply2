@@ -31,7 +31,6 @@ export class UserAccountComponent implements OnInit {
   ngOnInit():void{
   }
 
-  //get f() { return this.form.controls; }
 
   onSubmit(userAccountData) {
 

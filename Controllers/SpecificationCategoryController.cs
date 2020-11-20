@@ -5,9 +5,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using RuhunaSupply.Data;
 using RuhunaSupply.Model;
+using ThirdParty.Json.LitJson;
 
 namespace RuhunaSupply.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class SpecificationCategoryController : ControllerBase
     {
         private ApplicationDbContext _db;
@@ -16,6 +19,8 @@ namespace RuhunaSupply.Controllers
         {
             this._db = context;
         }
+
+
         public IActionResult Add(Item Item, string Title, string Description)
         {
             int max_id = 0;
@@ -30,24 +35,48 @@ namespace RuhunaSupply.Controllers
             SpecificationCategory sp = new SpecificationCategory()
             {
                 Id = max_id,
-                Item=Item,
-                Title=Title,
-                Descriptiopn=Description
+                Item = Item,
+                Title = Title,
+                Description = Description
             };
 
             _db.SpecificationCategories.Add(sp);
             _db.SaveChanges();
             return Ok();
         }
+
         [HttpPost]
+        public async Task<ActionResult<SpecificationCategory>> PostSpecificationCategory(object specificationcategory)
+        {
+            JsonData jd = JsonMapper.ToObject(specificationcategory.ToString());
+            int itemId = int.Parse(jd["ItemId"].ToString());
+            SpecificationCategory sp = new SpecificationCategory()
+            {
+                Item = _db.Items.FirstOrDefault(it => it.Id == itemId),
+                Title = jd["Title"].ToString(),
+                Description = jd["Description"].ToString()
+            };
+            _db.SpecificationCategories.Add(sp);
+            await _db.SaveChangesAsync();
+
+            return CreatedAtAction("SpecificationCategory", new { id = sp.Id }, sp);
+        }
+
+        [HttpPut]
         public IActionResult Edit(int Id, Item Item, string Title, string Description)
         {
-            _db.SpecificationCategories.Update(new SpecificationCategory() { Id=Id, Item=Item, Title=Title, Descriptiopn=Description});
+            _db.SpecificationCategories.Update(new SpecificationCategory() 
+            { 
+                Id=Id, 
+                Item=Item, 
+                Title=Title, 
+                Description=Description
+            });
             _db.SaveChanges();
             return Ok();
         }
 
-        [HttpPost]
+        [HttpDelete]
         public IActionResult Delete(int Id)
         {
             _db.SpecificationCategories.Remove(new SpecificationCategory() { Id = Id });
