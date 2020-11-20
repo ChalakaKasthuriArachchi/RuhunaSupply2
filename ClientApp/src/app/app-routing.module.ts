@@ -20,6 +20,7 @@ import { SpecificationComponent } from './specification/specification.component'
 import { SpecificationCategoryComponent } from './specification-category/specification-category.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
+
 const routes: Routes = [
   {path: 'createaccount',component : UserAccountComponent},
   { path: 'category1', component: Category1Component },

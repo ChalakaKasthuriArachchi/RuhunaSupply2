@@ -14,10 +14,10 @@ export class Category3Service {
     return this.http.post(environment.apiBaseURI + '/Category3',formData);
   }
   putCategory3(formData){
-    return this.http.put(environment.apiBaseURI + '/Catgory3,',formData.Id);
+    return this.http.put(environment.apiBaseURI + '/Category3,',formData.Id);
   }
-  getCategory3List(){
-    return this.http.get(environment.apiBaseURI + '/Category3');
+  getCategory3List(cat2,inc){
+    return this.http.get(environment.apiBaseURI + '/Category3?category2='+ cat2 + '&Include='+inc);
   }
 
   

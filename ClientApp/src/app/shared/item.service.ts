@@ -15,8 +15,7 @@ export class ItemService {
     return this.http.post(environment.apiBaseURI + '/Item', formData);
   }
   putItem(formData){
-    return this.http.put(environment.apiBaseURI + '/Item/' + formData.bankAccountID,
-      formData);
+    return this.http.put(environment.apiBaseURI + '/Item/',formData.Id);
   }
   getItemList(category, search){
     return this.http.get(environment.apiBaseURI + '/Item?Category=' + category + '&search=' + search);
