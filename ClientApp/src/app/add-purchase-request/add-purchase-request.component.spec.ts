@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PurchaseRequestComponent } from './purchase-request.component';
+import { AddPurchaseRequestComponent } from './add-purchase-request.component';
 
-describe('PurchaseRequestComponent', () => {
-  let component: PurchaseRequestComponent;
-  let fixture: ComponentFixture<PurchaseRequestComponent>;
+describe('AddPurchaseRequestComponent', () => {
+  let component: AddPurchaseRequestComponent;
+  let fixture: ComponentFixture<AddPurchaseRequestComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PurchaseRequestComponent ]
+      declarations: [ AddPurchaseRequestComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PurchaseRequestComponent);
+    fixture = TestBed.createComponent(AddPurchaseRequestComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

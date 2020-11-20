@@ -1,4 +1,4 @@
-import { PurchaseRequestComponent } from './purchase-request/purchase-request.component';
+//import { PurchaseRequestComponent } from './purchase-request/purchase-request.component';
 import { AuthGuard } from './auth/auth.guard';
 import { LoginComponent } from './user-account/login/login.component';
 import { ItemComponent } from './item/item.component';
@@ -17,6 +17,7 @@ import { AddCategory3Component } from './add-category3/add-category3.component';
 import { Category3Component } from './category3/category3.component';
 import { Category2Component } from './category2/category2.component';
 import { TestingComponent } from './testing/testing.component';
+import { AddPurchaseRequestComponent } from './add-purchase-request/add-purchase-request.component';
 
 
 
@@ -35,7 +36,7 @@ const routes: Routes = [
   { path: 'createaccount', component: UserAccountComponent },
   { path: 'item/add', component: AddItemComponent },
   { path: 'item', component: ItemComponent },
-  { path: 'purchaserequest', component: PurchaseRequestComponent},
+  { path: 'addpurchaserequest', component: AddPurchaseRequestComponent },
   { path: 'testing', component: TestingComponent}
 ];
 
