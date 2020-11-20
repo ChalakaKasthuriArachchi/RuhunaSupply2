@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using RuhunaSupply.Data;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -43,5 +45,6 @@ namespace RuhunaSupply.Model
         public string Token { get; internal set; }
         [NotMapped]
         public string Password { get; set; }
+
     }
 }

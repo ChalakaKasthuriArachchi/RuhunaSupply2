@@ -19,7 +19,5 @@ namespace RuhunaSupply.Model
         public Supplier Supplier { get; set; }
         public QuatationStatus Status { get; set; }
         public DateTime Date { get; set; }
-
-
     }
 }

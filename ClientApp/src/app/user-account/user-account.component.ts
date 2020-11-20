@@ -33,7 +33,7 @@ export class UserAccountComponent implements OnInit {
 
 
   onSubmit(userAccountData) {
-
+    console.log(userAccountData.value);
     this.userAccountService.postUserAccount(userAccountData.value)
       .subscribe(
       data => console.log('Success!', data),

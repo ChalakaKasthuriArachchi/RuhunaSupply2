@@ -10,7 +10,7 @@ export class UserAccountService {
   constructor(private http: HttpClient) { }
 
   postUserAccount(formData) {
-    return this.http.post(environment.apiBaseURI + '/UserAccount', formData);
+    return this.http.post(environment.apiBaseURI + '/UserAccount/SignUp', formData);
   }
   putUserAccount(formData) {
     return this.http.put(environment.apiBaseURI + '/UserAccount/' ,formData);

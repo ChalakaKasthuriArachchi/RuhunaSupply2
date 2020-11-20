@@ -40,7 +40,8 @@ namespace RuhunaSupply.Controllers
                 ShortName = jd["ShortName"].ToString(),
                 Email = jd["Email"].ToString(),
                 HashedPassword = ComputeSha256Hash(jd["HashedPassword"].ToString()),
-                Type = (UserTypes)int.Parse(jd["Type"].ToString())
+                Type = (UserTypes)int.Parse(jd["Type"].ToString()),
+                Privileges = ""
             };
             _db.UserAccounts.Add(ua);
             await _db.SaveChangesAsync();

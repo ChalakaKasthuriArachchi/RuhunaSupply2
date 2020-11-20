@@ -21,10 +21,12 @@ import { AddItemComponent } from './add-item/add-item.component';
 import { ItemComponent } from './item/item.component';
 import { SpecificationCategoryComponent } from './specification-category/specification-category.component';
 import { SpecificationComponent } from './specification/specification.component';
+import { PurchaseRequestComponent } from './purchase-request/purchase-request.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
+     AppComponent,
     SuppliersComponent,
     RegisterSupplierComponent,
     UserAccountComponent,
@@ -42,6 +44,8 @@ import { SpecificationComponent } from './specification/specification.component'
     UserAccountComponent,
     SpecificationCategoryComponent,
     SpecificationComponent
+    PurchaseRequestComponent,
+    DashboardComponent
   ],
   imports: [
     CommonModule,
