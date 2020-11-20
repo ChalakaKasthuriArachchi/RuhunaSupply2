@@ -19,9 +19,6 @@ export class ItemService {
       formData);
   }
   getItemList(category, search){
-    //console.log(environment.apiBaseURI + '/Supplier');
-    console.log(category);
-    console.log(search);
     return this.http.get(environment.apiBaseURI + '/Item?Category=' + category + '&search=' + search);
   }
   deleteItem(id){

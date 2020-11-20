@@ -31,12 +31,12 @@ export class SpecificationComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.category2Service.getCategoryList()
+    this.category2Service.getCategory2List(0)
       .subscribe(
         res => this.category2List = res as []
     );
 
-    this.itemService.getItemList()
+    this.itemService.getItemList(null,null)
       .subscribe(
         res => this.itemList=res as[]
       );

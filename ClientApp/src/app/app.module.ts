@@ -40,10 +40,10 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     Category3Component,
     Category1Component,
     AddItemComponent,
-    ItemComponent
+    ItemComponent,
     UserAccountComponent,
     SpecificationCategoryComponent,
-    SpecificationComponent
+    SpecificationComponent,
     PurchaseRequestComponent,
     DashboardComponent
   ],
