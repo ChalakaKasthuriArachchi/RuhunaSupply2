@@ -28,11 +28,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AddPurchaseRequestComponent } from './add-purchase-request/add-purchase-request.component';
 
 
-import { MatCardModule } from '@angular/material/card';
-import { MatButtonModule} from '@angular/material/button';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatIconModule } from '@angular/material/icon';
+// import { MatCardModule } from '@angular/material/card';
+// import { MatButtonModule} from '@angular/material/button';
+// import { MatMenuModule } from '@angular/material/menu';
+// import { MatToolbarModule } from '@angular/material/toolbar';
+// import { MatIconModule } from '@angular/material/icon';
 import { TestingComponent } from './testing/testing.component';
 
 
@@ -59,7 +59,7 @@ import { TestingComponent } from './testing/testing.component';
     SpecificationCategoryComponent,
     SpecificationComponent,
     PurchaseRequestComponent,
-    DashboardComponent
+    DashboardComponent,
     ItemComponent,
     AddPurchaseRequestComponent,
     TestingComponent
@@ -72,18 +72,18 @@ import { TestingComponent } from './testing/testing.component';
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatButtonModule,
-    MatMenuModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatCardModule
+    // MatButtonModule,
+    // MatMenuModule,
+    // MatToolbarModule,
+    // MatIconModule,
+    // MatCardModule
   ],
   exports: [
-    MatButtonModule,
-    MatMenuModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatCardModule
+    // MatButtonModule,
+    // MatMenuModule,
+    // MatToolbarModule,
+    // MatIconModule,
+    // MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,3 +1,4 @@
+import { PurchaseRequestComponent } from './purchase-request/purchase-request.component';
 import { AuthGuard } from './auth/auth.guard';
 import { LoginComponent } from './user-account/login/login.component';
 import { ItemComponent } from './item/item.component';
