@@ -48,27 +48,27 @@ namespace RuhunaSupply.Controllers
         }
 
 
-        [HttpPut]
-        public IActionResult Edit(int Id, int PId, string Name, string Description)
-        {
-            _db.Category2s.Update(new Category2()
-            {
-                //Id = Id,
-                //PId = PId,
-                //Name = Name,
-                //Description = Description
-            });
-            _db.SaveChanges();
-            return Ok();
-        }
+        //[HttpPut]
+        //public IActionResult Edit(int Id, int PId, string Name, string Description)
+        //{
+        //    _db.Category2s.Update(new Category2()
+        //    {
+        //        //Id = Id,
+        //        //PId = PId,
+        //        //Name = Name,
+        //        //Description = Description
+        //    });
+        //    _db.SaveChanges();
+        //    return Ok();
+        //}
 
-        [HttpDelete]
-        public IActionResult Delete(int Id)
-        {
-            _db.Category2s.Remove(new Category2() { Id = Id });
-            _db.SaveChanges();
-            return Ok();
-        }
+        //[HttpDelete]
+        //public IActionResult Delete(int Id)
+        //{
+        //    _db.Category2s.Remove(new Category2() { Id = Id });
+        //    _db.SaveChanges();
+        //    return Ok();
+        //}
 
     }
 }

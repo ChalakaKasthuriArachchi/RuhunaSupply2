@@ -28,8 +28,6 @@ namespace RuhunaSupply.Controllers
         [HttpPost]
         public async Task<ActionResult<Category1>> PostCategory1(object category1)
         {
-
-
             JsonData jd = JsonMapper.ToObject(category1.ToString());
             Category1 c1 = new Category1()
             {
@@ -43,26 +41,26 @@ namespace RuhunaSupply.Controllers
             return CreatedAtAction("Category1", new { id = c1.Id }, c1);
         }
 
-        [HttpPut]
-        public IActionResult Edit(int Id, string Name, string Description)
-        {
-            _db.Category1s.Update(new Category1()
-            {
-                Id = Id,
-                Name = Name,
-                Description = Description
-            });
-            _db.SaveChanges();
-            return Ok();
-        }
+        //[HttpPut]
+        //public IActionResult Edit(int Id, string Name, string Description)
+        //{
+        //    _db.Category1s.Update(new Category1()
+        //    {
+        //        Id = Id,
+        //        Name = Name,
+        //        Description = Description
+        //    });
+        //    _db.SaveChanges();
+        //    return Ok();
+        //}
 
-        [HttpDelete]
-        public IActionResult Delete(int Id)
-        {
-            _db.Category1s .Remove(new Category1() { Id = Id });
-            _db.SaveChanges();
-            return Ok();
-        }
+        //[HttpDelete]
+        //public IActionResult Delete(int Id)
+        //{
+        //    _db.Category1s .Remove(new Category1() { Id = Id });
+        //    _db.SaveChanges();
+        //    return Ok();
+        //}
 
     }
 }

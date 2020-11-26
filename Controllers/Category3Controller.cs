@@ -53,28 +53,28 @@ namespace RuhunaSupply.Controllers
             return CreatedAtAction("Category3", new { id = c3.Id }, c3);
         }
 
-        [HttpPut]
-        public IActionResult Edit(int Id, int PId, int GpId, string Name, string Description)
-        {
-            _db.Category3s.Update(new Category3()
-            {
-                //Id = Id,
-                //PId = PId,
-                //GpId = GpId,
-                //Name = Name,
-                //Description = Description
-            });
-            _db.SaveChanges();
-            return Ok();
-        }
+        //[HttpPut]
+        //public IActionResult Edit(int Id, int PId, int GpId, string Name, string Description)
+        //{
+        //    _db.Category3s.Update(new Category3()
+        //    {
+        //        //Id = Id,
+        //        //PId = PId,
+        //        //GpId = GpId,
+        //        //Name = Name,
+        //        //Description = Description
+        //    });
+        //    _db.SaveChanges();
+        //    return Ok();
+        //}
 
-        [HttpDelete]
-        public IActionResult Delete(int Id)
-        {
-            _db.Category3s.Remove(new Category3() { Id = Id });
-            _db.SaveChanges();
-            return Ok();
-        }
+        //[HttpDelete]
+        //public IActionResult Delete(int Id)
+        //{
+        //    _db.Category3s.Remove(new Category3() { Id = Id });
+        //    _db.SaveChanges();
+        //    return Ok();
+        //}
 
     }
 }

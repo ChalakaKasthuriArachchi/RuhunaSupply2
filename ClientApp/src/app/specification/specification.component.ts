@@ -36,7 +36,7 @@ export class SpecificationComponent implements OnInit {
         res => this.category2List = res as []
     );
 
-    this.itemService.getItemList(null,null)
+    this.itemService.getItemList(0,null,false)
       .subscribe(
         res => this.itemList=res as[]
       );

@@ -68,22 +68,23 @@
               <th style="text-align: center; padding-bottom: 20px;" scope="col">Name</th>
               <th style="text-align: center; padding-bottom: 20px;"scope="col">Category 2</th>
               <th  scope="col">
-                 <button style="margin: 5px;" type="button" class="btn btn-primary btn">+Add New </button><br>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Add New</button><br>
               </th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td style="text-align: center; padding-top: 30px;"></td>
+            <tr *ngFor="let si of selectedItems; let i = index;">
+              <td style="text-align: center; padding-top: 30px;">{{i + 1}}</td>
+              <td style="text-align: center; padding-top: 30px;">{{si.Id}}</td>
               <td style="text-align: center; padding-top: 30px;">
                 <div class="form-row">
-                  <select formControlName="ItemId" id="ItemId" class="input-text" required>
-                    <option value="-1" selected hidden>Select the ItemId</option>
+                  <select (change)="setItemDetails()" class="input-text">
+                    <option value="-1" selected hidden>Item Name</option>
+                    <option *ngFor="let item of itemList; let ii = index;" value="{{item.id}}">{{item.name}}</option>
                   </select>
                   <i class="fas fa-user"></i>
                 </div>
               </td>
-              <td style="text-align: center; padding-top: 30px;"></td>
               <td style="text-align: center; padding-top: 30px;"></td>
               <td style="text-align: center; padding-top: 30px;">
                 <button style="margin: 5px;" type="button" class="btn btn-success btn">Edit</button>
@@ -92,7 +93,68 @@
             </tr>
           </tbody>
         </table>
+        <!-- Modal Items-->
+        <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <table class="table table-bordered table-dark">
+                <thead>
+                  <tr >
+                    <th style="text-align: center; padding-top: 30px;">No</th>
+                    <th style="text-align: center; padding-bottom: 20px;" scope="col"> Item ID</th>
+                    <th style="text-align: center; padding-bottom: 20px;" scope="col">Name</th>
+                    <th style="text-align: center; padding-bottom: 20px;"scope="col">Category 2</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of itemList; let i = index;">
+                    <td style="text-align: center; padding-top: 30px;">{{i + 1}}</td>
+                    <td style="text-align: center; padding-top: 30px;">{{item.id}}</td>
+                    <td style="text-align: center; padding-top: 30px;">{{item.name}}</td>
+                    <td style="text-align: center; padding-top: 30px;">{{item.category2.name}}</td>
+                    <td style="text-align: center; padding-top: 30px;">
+                      <button id="{{i}}" type="button" class="btn btn-primary" data-toggle="modal" (click)="setItemDetails($event)" data-target=".bd-example-modal-sm">Add New</button><br>
+                      <!-- <button  style="margin: 5px;" type="button" class="btn btn-success btn" ">Add</button> -->
+                      <button style="margin: 5px;" type="button" class="btn btn-danger btn">Delete</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
 
+        <!-- Modal Spec Categories-->
+        <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+              Specification Category
+              <table class="table table-bordered table-dark">
+                <thead>
+                  <tr >
+                    <th style="text-align: center; padding-top: 30px;">No</th>
+                    <th style="text-align: center; padding-bottom: 20px;" scope="col">ID</th>
+                    <th style="text-align: center; padding-bottom: 20px;" scope="col">Name</th>
+                    <th style="text-align: center; padding-bottom: 20px;"scope="col">Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let cat of specificationCategories; let i = index;">
+                    <td style="text-align: center; padding-top: 30px;">{{i + 1}}</td>
+                    <td style="text-align: center; padding-top: 30px;">{{cat.id}}</td>
+                    <td style="text-align: center; padding-top: 30px;">{{cat.name}}</td>
+                    <td style="text-align: center; padding-top: 30px;">{{cat.description}}</td>
+                    <td style="text-align: center; padding-top: 30px;">
+                      <button id="{{i}}" type="button" class="btn btn-primary" data-toggle="modal" (click)="setItemDetails($event)" data-target=".bd-example-modal-sm">Add New</button><br>
+                      <!-- <button  style="margin: 5px;" type="button" class="btn btn-success btn" ">Add</button> -->
+                      <button style="margin: 5px;" type="button" class="btn btn-danger btn">Delete</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
         <br>
         <div class="form-row-last">
 					<input style="padding-right: 40px;padding-left: 40px;" type="submit" name="Submit" class="btn btn-primary" value="Submit">

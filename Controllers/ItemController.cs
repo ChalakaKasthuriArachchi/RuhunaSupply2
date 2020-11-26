@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using RuhunaSupply.Data;
 using RuhunaSupply.Model;
 using ThirdParty.Json.LitJson;
@@ -20,9 +21,25 @@ namespace RuhunaSupply.Controllers
             this._db = context;
         }
         [HttpGet]
-        public Item[] GetItems()
+        public Item[] GetItems(int category,string search,bool fullView)
         {
-            return _db.Items.ToArray();
+            if (search != null)
+                search = search.Trim().ToLower();
+            IQueryable<Item> query = _db.Items;
+            if (fullView)
+                query = query.Include(i => i.Category1).Include(i => i.Category2).Include(i => i.Category3);
+            if (search != null && search.Trim().Length > 0 && search != "undefined" && category > 0)
+                query = query.Where(it => it.Name.ToLower().Contains(search) || it.Description.ToLower().Contains(search));
+            Item[] items = query.ToArray();
+            return items;
+        }
+        [HttpGet("{id}")]
+        public Item GetItem(int id,bool fullView)
+        {
+            IQueryable<Item> query = _db.Items;
+            if (fullView)
+                query = query.Include(i => i.Category1).Include(i => i.Category2).Include(i => i.Category3);
+            return query.FirstOrDefault(i => i.Id == id);
         }
         [HttpPost]
         public async Task<ActionResult<Item>> PostItem(object item)
@@ -57,13 +74,13 @@ namespace RuhunaSupply.Controllers
             return Ok();
         }*/
 
-        [HttpDelete]
+        //[HttpDelete]
 
-        public IActionResult Delete(int id)
-        {
-            _db.Items.Remove(new Item() { Id = id });
-            _db.SaveChanges();
-            return Ok();
-        }
+        //public IActionResult Delete(int id)
+        //{
+        //    _db.Items.Remove(new Item() { Id = id });
+        //    _db.SaveChanges();
+        //    return Ok();
+        //}
     }
 }

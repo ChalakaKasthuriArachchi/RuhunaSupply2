@@ -27,7 +27,7 @@ export class SpecificationCategoryComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.itemService.getItemList(null,null)
+    this.itemService.getItemList(0,null,false)
       .subscribe(
         res => this.itemList = res as []
       );

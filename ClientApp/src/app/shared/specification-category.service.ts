@@ -14,4 +14,7 @@ export class SpecificationCategoryService {
     console.log(environment.apiBaseURI + '/SpecificationCategory');
     return this.http.post(environment.apiBaseURI + '/SpecificationCategory', formData);
   }
+  getSpecificationCategories(itemId){
+    return this.http.get(environment.apiBaseURI + '/SpecificationCategory?ItemId=' + itemId);
+  }
 }
