@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using RuhunaSupply.Common;
 using RuhunaSupply.Data;
 using RuhunaSupply.Model;
 using ThirdParty.Json.LitJson;
@@ -30,46 +31,35 @@ namespace RuhunaSupply.Controllers
             SpecificationCategory[] specificationCategories = query.ToArray();
             return specificationCategories;
         }
-        [HttpPost]
-        public IActionResult Add(Item Item, string Title, string Description)
+        [HttpGet("{id}")]
+        public SpecificationCategory GetSpecificationCategory(int id)
         {
-            int max_id = 0;
-            try
-            {
-                max_id = _db.SpecificationCategories.Max((sp) => sp.Id);
-            }
-            catch
-            {
-            }
-
-            SpecificationCategory sp = new SpecificationCategory()
-            {
-                Id = max_id,
-                Item = Item,
-                Title = Title,
-                Description = Description
-            };
-
-            _db.SpecificationCategories.Add(sp);
-            _db.SaveChanges();
-            return Ok();
+            IQueryable<SpecificationCategory> query = _db.SpecificationCategories
+                .Include(cat => cat.Item);
+            return query.FirstOrDefault(cat => cat.Id == id);
         }
-
         [HttpPost]
         public async Task<ActionResult<SpecificationCategory>> PostSpecificationCategory(object specificationcategory)
         {
-            JsonData jd = JsonMapper.ToObject(specificationcategory.ToString());
-            int itemId = int.Parse(jd["ItemId"].ToString());
-            SpecificationCategory sp = new SpecificationCategory()
+            try 
+            { 
+                JsonData jd = JsonMapper.ToObject(specificationcategory.ToString());
+                int itemId = int.Parse(jd["Item"].ToString());
+                SpecificationCategory sp = new SpecificationCategory()
+                {
+                    Item = _db.Items.FirstOrDefault(it => it.Id == itemId),
+                    Title = jd["Title"].ToString(),
+                    Description = jd["Description"].ToString()
+                };
+                _db.SpecificationCategories.Add(sp);
+                await _db.SaveChangesAsync();
+                return CreatedAtAction("SpecificationCategory", new { id = sp.Id }, sp);
+            }
+            catch(Exception ex)
             {
-                Item = _db.Items.FirstOrDefault(it => it.Id == itemId),
-                Title = jd["Title"].ToString(),
-                Description = jd["Description"].ToString()
-            };
-            _db.SpecificationCategories.Add(sp);
-            await _db.SaveChangesAsync();
-
-            return CreatedAtAction("SpecificationCategory", new { id = sp.Id }, sp);
+                Functions.UpdateErrorLog("Unable to Add Specification Category", ex);
+            }
+            return BadRequest();
         }
 
         [HttpPut]

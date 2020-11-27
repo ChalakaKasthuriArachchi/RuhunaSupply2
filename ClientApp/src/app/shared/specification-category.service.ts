@@ -17,4 +17,7 @@ export class SpecificationCategoryService {
   getSpecificationCategories(itemId){
     return this.http.get(environment.apiBaseURI + '/SpecificationCategory?ItemId=' + itemId);
   }
+  getSpecificationCategoryById(id){
+    return this.http.get(environment.apiBaseURI + '/SpecificationCategory/'+ id);
+  }
 }

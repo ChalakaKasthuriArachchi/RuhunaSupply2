@@ -1,8 +1,9 @@
 import { SpecificationCategoryService } from './../shared/specification-category.service';
 import { ItemService } from './../shared/item.service';
 import { PurchaseRequestService } from '../shared/purchase-request.service';
-import { Component, OnInit, NgModule } from '@angular/core';
+import { Component, OnInit, NgModule,Inject } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'add-app-purchase-request',
@@ -11,7 +12,7 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 })
 
 export class AddPurchaseRequestComponent implements OnInit {
-
+  
     PurchaseRequestList;
     checkoutForm;
     itemList = [];
@@ -21,8 +22,8 @@ export class AddPurchaseRequestComponent implements OnInit {
   constructor(
     private AddPurchaseRequestService: PurchaseRequestService,
     private formBuilder: FormBuilder,private itemService : ItemService,
-    private specCatService : SpecificationCategoryService
-
+    private specCatService : SpecificationCategoryService,
+    @Inject(DOCUMENT) document
   ) {
     this.checkoutForm = this.formBuilder.group({
       InputFaculty: '',
@@ -49,7 +50,10 @@ export class AddPurchaseRequestComponent implements OnInit {
     )
   }
   onSubmit(AddPurchaseRequestData){
-    this.AddPurchaseRequestService.postPurchaseRequest(AddPurchaseRequestData.value)
+    var purchaseRequest;
+    purchaseRequest.form = AddPurchaseRequestData.value;
+    purchaseRequest.items = this.selectedItems;
+    this.AddPurchaseRequestService.postPurchaseRequest()
       .subscribe(
         data => console.log('Success!', data),
         error => console.log('Error!', error)
@@ -58,12 +62,31 @@ export class AddPurchaseRequestComponent implements OnInit {
   recordSubmit(fg: FormGroup){
       this.AddPurchaseRequestService.postPurchaseRequest(fg.value);
   }
-  setItemDetails(event){
+  addItem(event){
+    document.getElementById('itemModal').hidden = true;
     this.specCatService.getSpecificationCategories(event.target.id).subscribe(
-      res => this.specificationCategories = res as []
+      res => {
+        this.specificationCategories = res as [];
+      }
     );
     // var id = this.selectedItems[index].id;
     // this.itemService.getItem(id,false).
     //   subscribe(res => this.selectedItems[index] = res);
+  }
+  addSpec(event){
+    var spec;
+    var item;
+    this.specCatService.getSpecificationCategoryById(event.target.id).subscribe(
+      res =>{ spec = res;
+        this.itemService.getItem(spec.item.id,true).subscribe(
+          res => {
+            item = res;
+            item.quantity = (<HTMLInputElement>document.getElementById('qty')).value;
+            item.specificationCategoryId = spec.Id;
+            this.selectedItems.push(item);
+          }
+        )
+      }
+    );
   }
 }
