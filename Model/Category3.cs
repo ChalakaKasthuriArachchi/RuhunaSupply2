@@ -16,7 +16,6 @@ namespace RuhunaSupply.Model
         [Key]
         public int Id { get; set; }
         [Required]
-
         public Category1 GPCategory { get; set; }
         [Column(TypeName = "nvarchar(50)")]
         [MaxLength(50)]

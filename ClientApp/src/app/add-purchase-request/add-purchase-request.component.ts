@@ -20,7 +20,7 @@ export class AddPurchaseRequestComponent implements OnInit {
     specificationCategories = [];
 
   constructor(
-    private AddPurchaseRequestService: PurchaseRequestService,
+    private PurchaseRequestService: PurchaseRequestService,
     private formBuilder: FormBuilder,private itemService : ItemService,
     private specCatService : SpecificationCategoryService,
     @Inject(DOCUMENT) document
@@ -53,14 +53,14 @@ export class AddPurchaseRequestComponent implements OnInit {
     var purchaseRequest;
     purchaseRequest.form = AddPurchaseRequestData.value;
     purchaseRequest.items = this.selectedItems;
-    this.AddPurchaseRequestService.postPurchaseRequest()
+    this.PurchaseRequestService.postPurchaseRequest(purchaseRequest)
       .subscribe(
         data => console.log('Success!', data),
         error => console.log('Error!', error)
       );
   }
   recordSubmit(fg: FormGroup){
-      this.AddPurchaseRequestService.postPurchaseRequest(fg.value);
+      this.PurchaseRequestService.postPurchaseRequest(fg.value);
   }
   addItem(event){
     document.getElementById('itemModal').hidden = true;

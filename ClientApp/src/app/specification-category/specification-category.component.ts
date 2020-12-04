@@ -45,4 +45,5 @@ export class SpecificationCategoryComponent implements OnInit {
   recordSubmit(fg: FormGroup) {
     this.specificationCategoryService.postSpecificationCategory(fg.value);
   }
+  
 }
