@@ -23,7 +23,7 @@ namespace RuhunaSupply.Controllers
         [HttpGet]
         public Category1[] GetCategory1s()
         {
-            return _db.Category1s.ToArray();
+            return _db.Category1s.Where(cat => !cat.IsDeleted).ToArray();
         }
         [HttpPost]
         public async Task<ActionResult<Category1>> PostCategory1(object category1)

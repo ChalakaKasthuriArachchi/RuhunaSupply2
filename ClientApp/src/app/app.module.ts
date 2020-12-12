@@ -19,6 +19,8 @@ import { LoginComponent } from './user-account/login/login.component';
 import { UserAccountService } from './shared/user-account.service';
 import { AddItemComponent } from './add-item/add-item.component';
 import { ItemComponent } from './item/item.component';
+import { AddUserComponent } from './add-user/add-user.component';
+import { UserComponent } from './user/user.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import { ItemComponent } from './item/item.component';
     Category3Component,
     Category1Component,
     AddItemComponent,
-    ItemComponent
+    ItemComponent,
+    AddUserComponent,
+    UserComponent
   ],
   imports: [
     CommonModule,

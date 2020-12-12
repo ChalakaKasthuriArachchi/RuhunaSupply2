@@ -17,15 +17,28 @@ namespace RuhunaSupply.Common
         }
         public enum Tables
         { 
+
         }
         public enum Involvements
         { 
+
         }
 
         public enum UserPositions
         {
             Dean,
-            Head
+            Head,
+            Lecturer,
+            Senior_Lecturer,
+            Probationary_Lecturer,
+            Instructor,
+            Clerk,
+            TO,
+            VC,
+            DVC,
+            Bursar,
+            Assistant_Bursar,
+            Store_Keeper
         }
         public enum UserTypes
         { 

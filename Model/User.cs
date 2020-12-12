@@ -30,5 +30,7 @@ namespace RuhunaSupply.Model
         public UserPositions Position { get; set; }
         public UserTypes Type { get; set; }
         public UserAccount MergedId { get; set; }
+
+        public bool IsDeleted { get; set; }
     }
 }

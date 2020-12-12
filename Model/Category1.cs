@@ -21,6 +21,7 @@ namespace RuhunaSupply.Model
         [Column(TypeName = "nvarchar(150)")]
         [Required]
         public string Description { get; set; }
+        public bool IsDeleted { get; set; }
     }
     
 }
