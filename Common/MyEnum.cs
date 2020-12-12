@@ -33,6 +33,7 @@ namespace RuhunaSupply.Common
         }
         public enum Tables
         { 
+
         }
         public enum Involvements
         {

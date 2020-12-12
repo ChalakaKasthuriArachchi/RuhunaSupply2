@@ -19,6 +19,8 @@ import { LoginComponent } from './user-account/login/login.component';
 import { UserAccountService } from './shared/user-account.service';
 import { AddItemComponent } from './add-item/add-item.component';
 import { ItemComponent } from './item/item.component';
+import { AddUserComponent } from './add-user/add-user.component';
+import { UserComponent } from './user/user.component';
 import { SpecificationCategoryComponent } from './specification-category/specification-category.component';
 import { SpecificationComponent } from './specification/specification.component';
 import { PurchaseRequestComponent } from './purchase-request/purchase-request.component';
@@ -63,6 +65,9 @@ import { TestingComponent } from './testing/testing.component';
     ItemComponent,
     AddPurchaseRequestComponent,
     TestingComponent
+    ItemComponent,
+    AddUserComponent,
+    UserComponent
   ],
   imports: [
     CommonModule,
