@@ -1,3 +1,4 @@
+import { PurchaseRequestComponent } from './purchase-request/purchase-request.component';
 import { AuthGuard } from './auth/auth.guard';
 import { LoginComponent } from './user-account/login/login.component';
 import { ItemComponent } from './item/item.component';
@@ -15,27 +16,34 @@ import { AddCategory2Component } from './add-category2/add-category2.component';
 import { AddCategory3Component } from './add-category3/add-category3.component';
 import { Category3Component } from './category3/category3.component';
 import { Category2Component } from './category2/category2.component';
-import { AddUserComponent } from './add-user/add-user.component';
-import { UserComponent } from './user/user.component';
+import { SpecificationComponent } from './specification/specification.component';
+import { SpecificationCategoryComponent } from './specification-category/specification-category.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 const routes: Routes = [
   {path: 'createaccount',component : UserAccountComponent},
+  { path: 'category1', component: Category1Component },
+  { path: 'category1/add', component: AddCategory1Component },
+  { path: '', component: DashboardComponent },
+  { path: 'user/login', component: LoginComponent },
+  { path: 'user/signup',component : UserAccountComponent},
   { path: 'category2/add', component: AddCategory2Component },
   { path: 'category2', component: Category2Component },
-  { path: 'category3/add', component: AddCategory3Component },
+  { path: 'category2/add', component: AddCategory2Component },
   { path: 'category3', component: Category3Component },
+  { path: 'category3/add', component: AddCategory3Component },
   { path: 'createaccount', component: UserAccountComponent },
   { path: 'user/login', component: LoginComponent },
+  { path: 'supplier', component: SuppliersComponent },
   { path: 'supplier/register', component: RegisterSupplierComponent },
+  { path: 'createaccount', component: UserAccountComponent },
+  { path: 'item', component: ItemComponent },
   { path: 'supplier', component: SuppliersComponent },
   { path: 'category1/add', component: AddCategory1Component },
   { path: 'category1', component: Category1Component },
-  { path: 'createaccount', component: UserAccountComponent },
   { path: 'item/add', component: AddItemComponent },
-  { path: 'item', component: ItemComponent },
-  { path: 'user/add', component: AddUserComponent},
-  { path: 'user', component: UserComponent}
+  { path: 'item', component: ItemComponent }
 ];
 
 @NgModule({

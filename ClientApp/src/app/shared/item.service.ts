@@ -18,9 +18,6 @@ export class ItemService {
     return this.http.put(environment.apiBaseURI + '/Item/',formData.Id);
   }
   getItemList(category, search){
-    //console.log(environment.apiBaseURI + '/Supplier');
-    console.log(category);
-    console.log(search);
     return this.http.get(environment.apiBaseURI + '/Item?Category=' + category + '&search=' + search);
   }
   deleteItem(id){

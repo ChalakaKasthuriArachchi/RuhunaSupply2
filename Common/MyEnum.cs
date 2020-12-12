@@ -57,5 +57,9 @@ namespace RuhunaSupply.Common
         {
             Normal, Fast_Track, Urgent
         }
+        public enum PurchaseRequestStatus
+        {
+            On_Approval, Rejected, 
+        }
     }
 }
