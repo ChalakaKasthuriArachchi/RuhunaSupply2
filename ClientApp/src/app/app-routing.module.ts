@@ -1,4 +1,4 @@
-import { PurchaseRequestComponent } from './purchase-request/purchase-request.component';
+//import { PurchaseRequestComponent } from './purchase-request/purchase-request.component';
 import { AuthGuard } from './auth/auth.guard';
 import { LoginComponent } from './user-account/login/login.component';
 import { ItemComponent } from './item/item.component';
@@ -22,6 +22,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { TestingComponent } from './testing/testing.component';
 import { AddPurchaseRequestComponent } from './add-purchase-request/add-purchase-request.component';
 
+
+
 const routes: Routes = [
   { path: '', component : DashboardComponent },
   {path: 'createaccount',component : UserAccountComponent},
@@ -44,7 +46,8 @@ const routes: Routes = [
   {path: 'specification-category',component : SpecificationCategoryComponent},
   { path: 'item', component: ItemComponent },
   { path: 'purchaserequest/add', component: AddPurchaseRequestComponent },
-  { path: 'testing', component: TestingComponent}
+  { path: 'testing', component: TestingComponent},
+  { path: 'quatation', component: QuatationComponent}
 ];
 
 @NgModule({
