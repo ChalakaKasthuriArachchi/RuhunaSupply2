@@ -1,3 +1,4 @@
+import { QuatationComponent } from './quatation/quatation.component';
 //import { PurchaseRequestComponent } from './purchase-request/purchase-request.component';
 import { AuthGuard } from './auth/auth.guard';
 import { LoginComponent } from './user-account/login/login.component';
@@ -20,7 +21,6 @@ import { TestingComponent } from './testing/testing.component';
 import { AddPurchaseRequestComponent } from './add-purchase-request/add-purchase-request.component';
 
 
-
 const routes: Routes = [
   {path: 'createaccount', component : UserAccountComponent},
   { path: 'category2/add', component: AddCategory2Component },
@@ -37,7 +37,8 @@ const routes: Routes = [
   { path: 'item/add', component: AddItemComponent },
   { path: 'item', component: ItemComponent },
   { path: 'addpurchaserequest', component: AddPurchaseRequestComponent },
-  { path: 'testing', component: TestingComponent}
+  { path: 'testing', component: TestingComponent},
+  { path: 'quatation', component: QuatationComponent}
 ];
 
 @NgModule({

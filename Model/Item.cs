@@ -12,7 +12,7 @@ namespace RuhunaSupply.Model
         public Item()
         {
 
-        }
+        } 
 
         [Key]
         public int Id { get; set; }

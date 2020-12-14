@@ -30,6 +30,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { TestingComponent } from './testing/testing.component';
+import { QuatationComponent } from './quatation/quatation.component';
 
 
 
@@ -52,7 +53,8 @@ import { TestingComponent } from './testing/testing.component';
     AddItemComponent,
     ItemComponent,
     AddPurchaseRequestComponent,
-    TestingComponent
+    TestingComponent,
+    QuatationComponent,
   ],
   imports: [
     CommonModule,

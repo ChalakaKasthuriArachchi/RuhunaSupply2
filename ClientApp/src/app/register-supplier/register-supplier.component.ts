@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Category2Service } from './../shared/category2.service';
 import { Component, OnInit, NgModule } from '@angular/core';
 import { FormBuilder,Validators,FormGroup } from '@angular/forms';
@@ -52,4 +53,6 @@ export class RegisterSupplierComponent implements OnInit {
       this.supplierService.postSupplier(fg.value);
       
   }
+  
+  
 }

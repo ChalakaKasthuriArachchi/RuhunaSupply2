@@ -40,6 +40,12 @@ namespace RuhunaSupply.Controllers
             Supplier[] suppliers = query.Include(s => s.Category2).ToArray();
             return suppliers;
         }
+        [HttpGet("{id}")] // api/supplier/1
+        public Supplier GetSupplier(int id)
+        {
+            return _db.Suppliers.Find(id);
+        }
+
         [HttpPost]
         public async Task<ActionResult<Supplier>> PostSupplier(object supplier)
         {
