@@ -1,4 +1,5 @@
-//import { PurchaseRequestComponent } from './purchase-request/purchase-request.component';
+import { QuatationComponent } from './quatation/quatation.component';
+import { PurchaseRequestComponent } from './purchase-request/purchase-request.component';
 import { AuthGuard } from './auth/auth.guard';
 import { LoginComponent } from './user-account/login/login.component';
 import { ItemComponent } from './item/item.component';
