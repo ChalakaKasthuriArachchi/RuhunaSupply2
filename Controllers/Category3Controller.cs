@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using RuhunaSupply.Common;
 using RuhunaSupply.Data;
 using RuhunaSupply.Model;
 using ThirdParty.Json.LitJson;
@@ -23,14 +24,12 @@ namespace RuhunaSupply.Controllers
             this._db = context;
         }
         [HttpGet]
-        public Category3[] GetCategory3s(int Category2,bool Include)
+        public Category3[] GetCategory3s(int Category2)
         {
             IQueryable<Category3> query = _db.Category3s;
-            if (Include)
-                query = query.Include(cat => cat.ParentCategory).Include(cat => cat.GPCategory);
             if (Category2 == 0)
-                return query.ToArray();
-            return query.Where(cat => cat.ParentCategory.Id == Category2).ToArray();
+                return query.OrderBy(cat => cat.Name).ToArray();
+            return query.Where(cat => cat.ParentCategoryId == Category2).OrderBy(cat => cat.Name).ToArray();
         }
         [HttpPost]
         public async Task<ActionResult<Category3>> PostCategory3(object category3)
@@ -38,18 +37,14 @@ namespace RuhunaSupply.Controllers
             JsonData jd = JsonMapper.ToObject(category3.ToString());
             Category3 c3 = new Category3()
             {
-                GPCategory = _db.Category1s
-                    .FirstOrDefault(c1 => c1.Id == int.Parse(jd["Category1"].ToString())),
-                ParentCategory = _db.Category2s
-                    .FirstOrDefault(c2 => c2.Id == int.Parse(jd["Category2"].ToString())),
+                GPCategoryId = int.Parse(jd["Category1"].ToString()),
+                ParentCategoryId = int.Parse(jd["Category2"].ToString()),
                 Name = jd["Name"].ToString(),
                 Description = jd["Description"].ToString(),
-
-
             };
             _db.Category3s.Add(c3);
             await _db.SaveChangesAsync();
-
+            await Task.Run(() => { Cache.RefreshCategory3(_db); });
             return CreatedAtAction("Category3", new { id = c3.Id }, c3);
         }
 

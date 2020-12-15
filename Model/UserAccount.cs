@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using cmlMySqlStandard;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using RuhunaSupply.Data;
 using System;
@@ -11,7 +12,7 @@ using static RuhunaSupply.Common.MyEnum;
 
 namespace RuhunaSupply.Model
 {
-    public class UserAccount
+    public class UserAccount : IndexedObject
     {
         public UserAccount()
         {
@@ -45,6 +46,8 @@ namespace RuhunaSupply.Model
         public string Token { get; internal set; }
         [NotMapped]
         public string Password { get; set; }
+        public bool IsDeleted { get; set; }
 
+        public int Index => Id;
     }
 }

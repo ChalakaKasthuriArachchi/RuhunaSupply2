@@ -53,8 +53,7 @@ namespace RuhunaSupply.Controllers
                 BusinessMail = jd["BusinessMail"].ToString(),
                 BusinessName = jd["BusinessName"].ToString(),
                 BusinessRegisteredDate = DateTime.Parse(jd["BusinessRegisteredDate"].ToString()),
-                Category2 = _db.Category2s
-                    .FirstOrDefault(c => c.Id == int.Parse(jd["Category2"].ToString())),
+                Category2Id = int.Parse(jd["Category2"].ToString()),
                 RegisteredDate = DateTime.Now,
                 RegistrationNumber = jd["RegistrationNumber"].ToString(),
                 ContactNumber = jd["ContactNumber"].ToString()
@@ -70,7 +69,7 @@ namespace RuhunaSupply.Controllers
             _db.Suppliers.Update(new Supplier()
             {
                 Id = Id,
-                Category2=Category2,
+                //Category2=Category2,
                 RegistrationNumber = RegisterNumber,
                 RegisteredDate = RegisterDate,
                 ContactNumber = TelephoneNumber,

@@ -13,6 +13,9 @@ using System.Net;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Text.Json;
+using ThirdParty.Json.LitJson;
+using System.Data.Common;
+using System.Data;
 
 namespace RuhunaSupply.Controllers
 {
@@ -38,12 +41,12 @@ namespace RuhunaSupply.Controllers
                     upr => upr.User.Id,
                     (user, upr) => new
                     {
-                        PurchaseRequestId = upr.PurchaseRequest.Id
+                        PurchaseRequestId = upr.PurchaseRequestId
                     }
                 ).
                 Join(
-                    _db.PurchaseRequests.Include(pr => pr.Department)
-                        .Include(pr => pr.Faculty),
+                    _db.PurchaseRequests/*.Include(pr => pr.Department)
+                        .Include(pr => pr.Faculty)*/,
                     upr => upr.PurchaseRequestId,
                     pr => pr.Id,
                     (upr, pr) => new ViewPurchaseRequest
@@ -64,11 +67,48 @@ namespace RuhunaSupply.Controllers
             var res = data.ToArray();
             for (int i = 0; i < res.Length; i++)
             {
-                res[i].Examining = Model.User.Get(_db, res[i]._ExaminigId).FullName;
-                res[i].SubmittedBy = Model.User.Get(_db, res[i]._SubmittedById).FullName;
+                res[i].Examining = Cache.GetUser(res[i]._ExaminigId,true).FullName;
+                res[i].SubmittedBy = Cache.GetUser(res[i]._SubmittedById, true).FullName;
             }
             //string json = JsonSerializer.Serialize(res[0]);
             return res;
+        }
+        [HttpPost]
+        public IActionResult PostPurchaseRequest(object req)
+        {
+            try
+            {
+                using (DbTransaction trans = _db.Database.BeginTransaction() as DbTransaction)
+                {
+                    JsonData jd = JsonMapper.ToObject(req.ToString());
+                    JsonData jform = jd["form"];
+                    PurchaseRequest pr = new PurchaseRequest()
+                    {
+                        Id = PurchaseRequest.GetNextId(_db),
+                        FundGoes = jform["Funds"].ToString(),
+                        Project = jform["Project"].ToString(),
+                        //_DateTime = DateTime.Parse(jform["DateTime"].ToString()),
+                        
+                    };
+                    _db.PurchaseRequests.Add(pr);
+                    foreach (JsonData ji in jd["items"])
+                    {
+                        _db.PurchaseRequestItems.Add(
+                            new PurchaseRequestItem()
+                            {
+                                ItemId = int.Parse(ji["id"].ToString()),
+                                QtyRequired = double.Parse(ji["quantity"].ToString()),
+                            }
+                            );
+                    }
+                }
+                return Ok();
+            }
+            catch(Exception ex)
+            {
+                Functions.UpdateErrorLog("Unable to Save Purchase Request", ex);
+                return BadRequest();
+            }
         }
     }
     public class ViewPurchaseRequest

@@ -24,12 +24,19 @@ namespace RuhunaSupply.Controllers
         [HttpGet]
         public SpecificationCategory[] GetSpecificationCategories(int itemId)
         {
-            IQueryable<SpecificationCategory> query = _db.SpecificationCategories
-                .Include(cat => cat.Item);
-            if (itemId != 0)
-                query = query.Where(cat => cat.Item.Id == itemId);
-            SpecificationCategory[] specificationCategories = query.ToArray();
-            return specificationCategories;
+            try
+            {
+                IQueryable<SpecificationCategory> query = _db.SpecificationCategories.OrderBy(cat => cat.Title);
+                if (itemId != 0)
+                    query = query.Where(cat => cat.ItemId == itemId);
+                SpecificationCategory[] specificationCategories = query.ToArray();
+                return specificationCategories;
+            }
+            catch (Exception ex)
+            {
+                Functions.UpdateErrorLog("Unable to Load Specification Categories", ex);
+                return null;
+            }
         }
         [HttpGet("{id}")]
         public SpecificationCategory GetSpecificationCategory(int id)
@@ -47,12 +54,13 @@ namespace RuhunaSupply.Controllers
                 int itemId = int.Parse(jd["Item"].ToString());
                 SpecificationCategory sp = new SpecificationCategory()
                 {
-                    Item = _db.Items.FirstOrDefault(it => it.Id == itemId),
+                    ItemId = itemId,
                     Title = jd["Title"].ToString(),
                     Description = jd["Description"].ToString()
                 };
                 _db.SpecificationCategories.Add(sp);
                 await _db.SaveChangesAsync();
+                await Task.Run(() => { Cache.RefreshSpecificationCategories(_db); });
                 return CreatedAtAction("SpecificationCategory", new { id = sp.Id }, sp);
             }
             catch(Exception ex)
@@ -68,7 +76,7 @@ namespace RuhunaSupply.Controllers
             _db.SpecificationCategories.Update(new SpecificationCategory() 
             { 
                 Id=Id, 
-                Item=Item, 
+                //Item=Item, 
                 Title=Title, 
                 Description=Description
             });

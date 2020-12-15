@@ -21,7 +21,7 @@ export class PurchaseRequestService {
     var tok = localStorage.getItem('token');
     if(tok != null){
       var tokenHeader = new HttpHeaders({'Authorization':'Bearer ' + tok});
-      return this.http.put(environment.apiBaseURI + '/PurchaseRequest', pr, {headers : tokenHeader});
+      return this.http.post(environment.apiBaseURI + '/PurchaseRequest', pr, {headers : tokenHeader});
     }
   }
   getPurchaseRequestList(status){

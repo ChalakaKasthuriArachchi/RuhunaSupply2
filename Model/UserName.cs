@@ -1,4 +1,5 @@
-﻿using System;
+﻿using cmlMySqlStandard;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -8,7 +9,7 @@ using static RuhunaSupply.Common.MyEnum;
 
 namespace RuhunaSupply.Model
 {
-    public class UserName
+    public class UserName : IndexedObject
     {
         public UserName()
         { 
@@ -21,5 +22,8 @@ namespace RuhunaSupply.Model
         [Column(TypeName = "nvarchar(50)")] 
         public string Password { get; set; }
         public Tables Table { get; set; }
+        public bool IsDeleted { get; set; }
+
+        public int Index => Id;
     }
 }

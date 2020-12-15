@@ -12,7 +12,8 @@ import { DOCUMENT } from '@angular/common';
 })
 
 export class AddPurchaseRequestComponent implements OnInit {
-  
+    faculty = 'Science';
+    department = 'Computer Science';
     PurchaseRequestList;
     checkoutForm;
     itemList = [];
@@ -26,13 +27,12 @@ export class AddPurchaseRequestComponent implements OnInit {
     @Inject(DOCUMENT) document
   ) {
     this.checkoutForm = this.formBuilder.group({
-      InputFaculty: '',
       Funds: '',
       Project: '',
       Vote: '',
-      Procument: '',
+      IsInProcumentPlan: '',
       Purpose: '',
-      date: ''
+      DateTime: ''
     });
    }
    ngOnInit(): void {
@@ -50,7 +50,7 @@ export class AddPurchaseRequestComponent implements OnInit {
     )
   }
   onSubmit(AddPurchaseRequestData){
-    var purchaseRequest;
+    let purchaseRequest = { form : '', items : []};
     purchaseRequest.form = AddPurchaseRequestData.value;
     purchaseRequest.items = this.selectedItems;
     this.PurchaseRequestService.postPurchaseRequest(purchaseRequest)
@@ -63,7 +63,7 @@ export class AddPurchaseRequestComponent implements OnInit {
       this.PurchaseRequestService.postPurchaseRequest(fg.value);
   }
   addItem(event){
-    document.getElementById('itemModal').hidden = true;
+    console.log(event.target);
     this.specCatService.getSpecificationCategories(event.target.id).subscribe(
       res => {
         this.specificationCategories = res as [];

@@ -23,7 +23,7 @@ import { TestingComponent } from './testing/testing.component';
 import { AddPurchaseRequestComponent } from './add-purchase-request/add-purchase-request.component';
 
 const routes: Routes = [
-  { path: '', component: AddItemComponent/*DashboardComponent*/ },
+  { path: '', component : DashboardComponent },
   {path: 'createaccount',component : UserAccountComponent},
   { path: 'category1', component: Category1Component },
   { path: 'category1/add', component: AddCategory1Component },

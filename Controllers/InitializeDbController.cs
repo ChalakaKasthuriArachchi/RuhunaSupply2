@@ -45,20 +45,20 @@ namespace RuhunaSupply.Controllers
                     //Science
                     new Department()
                     {
-                        Faculty = faculties[0],
+                        FacultyId = faculties[0].Id,
                         Location = faculties[0].Location,
                         Name = "Department of Computer Science"
                     },
                     new Department()
                     {
-                        Faculty = faculties[0],
+                        FacultyId = faculties[0].Id,
                         Location = faculties[0].Location,
                         Name = "Department of Mathematics"
                     },
                     //Art
                     new Department()
                     {
-                        Faculty = faculties[1],
+                        FacultyId = faculties[1].Id,
                         Location = faculties[1].Location,
                         Name = "Department of IT"
                     }
@@ -71,7 +71,7 @@ namespace RuhunaSupply.Controllers
                 foreach (var fac in faculties)
                     db.Users.Add(new User()
                     {
-                        Faculty = fac,
+                        FacultyId = fac.Id,
                         FullName = "Dean , " + fac.Name,
                         PermissionList = "11111111",
                         Position = UserPositions.Dean,
@@ -83,7 +83,7 @@ namespace RuhunaSupply.Controllers
                 foreach (var dep in departments)
                     db.Users.Add(new User()
                     {
-                        Faculty = dep.Faculty,
+                        FacultyId = dep.FacultyId,
                         FullName = "Head , " + dep.Name,
                         PermissionList = "11111111",
                         Position = UserPositions.Head,

@@ -9,7 +9,6 @@ export class Category3Service {
 
   constructor(private http : HttpClient){}
   postCategory3(formData){
-    console.log(formData);
     console.log(environment.apiBaseURI + '/Category3');
     return this.http.post(environment.apiBaseURI + '/Category3',formData);
   }

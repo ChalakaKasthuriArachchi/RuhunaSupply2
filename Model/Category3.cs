@@ -1,4 +1,6 @@
-﻿using System;
+﻿using cmlMySqlStandard;
+using RuhunaSupply.Common;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -7,26 +9,43 @@ using System.Threading.Tasks;
 
 namespace RuhunaSupply.Model
 {
-    public class Category3
+    public class Category3 : IndexedObject
     {
         public Category3()
         {
 
         }
+        #region Dynamic
+        public Category1 GPCategory
+        {
+            get
+            {
+                return Cache.GetCategory1(GPCategoryId, true);
+            }
+        }
+        public Category2 ParentCategory
+        {
+            get
+            {
+                return Cache.GetCategory2(ParentCategoryId, true);
+            }
+        }
+        #endregion
+        #region Saved
         [Key]
         public int Id { get; set; }
         [Required]
-        public Category1 GPCategory { get; set; }
-        [Column(TypeName = "nvarchar(50)")]
+        public int GPCategoryId { get; set; }
         [MaxLength(50)]
         [Required]
-        public Category2 ParentCategory { get; set; }
+        public int ParentCategoryId { get; set; }
         [MaxLength(50)]
         [Required]
-        public String Name { get; set; }
-        [Column(TypeName = "nvarchar(150)")]
-        [Required]
-        public String Description { get; set; }
-        
+        public string Name { get; set; }
+        [MaxLength(150)]
+        public string Description { get; set; }
+        public bool IsDeleted { get; set; }
+        public int Index => Id;
+        #endregion
     }
 }
