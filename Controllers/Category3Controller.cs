@@ -9,8 +9,7 @@ using ThirdParty.Json.LitJson;
 
 namespace RuhunaSupply.Controllers
 {
-    [Route("api/[Controller]")]
-    [ApiController]
+    
     public class Category3Controller : Controller
     {
 

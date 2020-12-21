@@ -46,7 +46,7 @@ export class RegisterSupplierComponent implements OnInit {
       .subscribe(
         data => console.log('Success!',data),
         error => console.log('Error!',error)
-      );
+      ); 
   }
   recordSubmit(fg:FormGroup){
       

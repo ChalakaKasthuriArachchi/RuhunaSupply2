@@ -54,7 +54,7 @@ import { QuatationComponent } from './quatation/quatation.component';
     ItemComponent,
     AddPurchaseRequestComponent,
     TestingComponent,
-    QuatationComponent,
+    QuatationComponent
   ],
   imports: [
     CommonModule,
