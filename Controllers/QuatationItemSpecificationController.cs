@@ -27,7 +27,7 @@ namespace RuhunaSupply.Controllers
             {
             }
 
-            QuatationItemSpecification qis = new QuatationItemSpecification()
+            _QuatationItemSpecification qis = new _QuatationItemSpecification()
             {
                 Id = max_id,
                 QuatationItem = QuatationItem,
@@ -42,7 +42,7 @@ namespace RuhunaSupply.Controllers
         [HttpPost]
         public IActionResult Edit(int Id, QuatationItem QuatationItem, Specification Specification, string Satisfied, string Description)
         {
-            _db.QuatationItemSpecifications.Update(new QuatationItemSpecification()
+            _db.QuatationItemSpecifications.Update(new _QuatationItemSpecification()
             {
                 Id = Id,
                 QuatationItem = QuatationItem,
@@ -57,7 +57,7 @@ namespace RuhunaSupply.Controllers
         [HttpPost]
         public IActionResult Delete(int Id)
         {
-            _db.QuatationItemSpecifications.Remove(new QuatationItemSpecification() { Id = Id });
+            _db.QuatationItemSpecifications.Remove(new _QuatationItemSpecification() { Id = Id });
             _db.SaveChanges();
             return Ok();
         }

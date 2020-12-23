@@ -38,8 +38,8 @@ namespace RuhunaSupply.Controllers
                 QtySupplied =QtySupplied,
                 Rate=Rate,
                 TotalValue=TotalValue,
-                PurchaseRequest=PurchaseRequest,
-                Item=Item
+                PurchaseRequestId=PurchaseRequest.Id,
+                ItemId=Item.Id
 
             };
 
@@ -54,9 +54,9 @@ namespace RuhunaSupply.Controllers
         public IActionResult Edit(double Cost, int QtyRequired, int QtyAlreadyAvailable, int QtySupplied, double Rate, double TotalValue, PurchaseRequest PurchaseRequest, Item Item)
         {
             
-            _db.PurchaseRequestItems.Update(
+            /*_db.PurchaseRequestItems.Update(
                 new PurchaseRequestItem(){EstimatedCost = Cost,QtyRequired = QtyRequired, QtySupplied = QtySupplied,Rate = Rate,TotalValue = TotalValue,PurchaseRequest = PurchaseRequest , Item=Item });
-            _db.SaveChanges();
+            _db.SaveChanges();*/
             return Ok();
         }
 

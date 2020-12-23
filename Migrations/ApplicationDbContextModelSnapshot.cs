@@ -14,7 +14,7 @@ namespace RuhunaSupply.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.9")
+                .HasAnnotation("ProductVersion", "3.1.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("RuhunaSupply.Model.Category1", b =>
@@ -26,6 +26,9 @@ namespace RuhunaSupply.Migrations
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(150)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -43,20 +46,20 @@ namespace RuhunaSupply.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(150)");
+                        .HasColumnType("varchar(150) CHARACTER SET utf8mb4")
+                        .HasMaxLength(150);
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(50)")
+                        .HasColumnType("varchar(50) CHARACTER SET utf8mb4")
                         .HasMaxLength(50);
 
                     b.Property<int>("ParentCategoryId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ParentCategoryId");
 
                     b.ToTable("Category2s");
                 });
@@ -68,25 +71,25 @@ namespace RuhunaSupply.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(150)");
+                        .HasColumnType("varchar(150) CHARACTER SET utf8mb4")
+                        .HasMaxLength(150);
 
                     b.Property<int>("GPCategoryId")
                         .HasColumnType("int");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(50)")
+                        .HasColumnType("varchar(50) CHARACTER SET utf8mb4")
                         .HasMaxLength(50);
 
                     b.Property<int>("ParentCategoryId")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasMaxLength(50);
 
                     b.HasKey("Id");
-
-                    b.HasIndex("GPCategoryId");
-
-                    b.HasIndex("ParentCategoryId");
 
                     b.ToTable("Category3s");
                 });
@@ -100,23 +103,24 @@ namespace RuhunaSupply.Migrations
                     b.Property<double>("BudgetAllocation")
                         .HasColumnType("double");
 
-                    b.Property<int?>("FacultyId")
+                    b.Property<int>("FacultyId")
                         .HasColumnType("int");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<string>("Location")
-                        .HasColumnType("nvarchar(100)")
+                        .HasColumnType("varchar(100) CHARACTER SET utf8mb4")
                         .HasMaxLength(100);
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(100)")
+                        .HasColumnType("varchar(100) CHARACTER SET utf8mb4")
                         .HasMaxLength(100);
 
                     b.Property<double>("UsedAmount")
                         .HasColumnType("double");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("FacultyId");
 
                     b.ToTable("Departments");
                 });
@@ -130,12 +134,15 @@ namespace RuhunaSupply.Migrations
                     b.Property<double>("BudgetAllocation")
                         .HasColumnType("double");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<string>("Location")
-                        .HasColumnType("nvarchar(100)")
+                        .HasColumnType("varchar(100) CHARACTER SET utf8mb4")
                         .HasMaxLength(100);
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(100)")
+                        .HasColumnType("varchar(100) CHARACTER SET utf8mb4")
                         .HasMaxLength(100);
 
                     b.Property<double>("UsedAmount")
@@ -162,21 +169,17 @@ namespace RuhunaSupply.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(150)")
+                        .HasColumnType("varchar(150) CHARACTER SET utf8mb4")
                         .HasMaxLength(150);
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("Category1Id");
-
-                    b.HasIndex("Category2Id");
-
-                    b.HasIndex("Category3Id");
 
                     b.ToTable("Items");
                 });
@@ -184,20 +187,25 @@ namespace RuhunaSupply.Migrations
             modelBuilder.Entity("RuhunaSupply.Model.PurchaseRequest", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    b.Property<string>("Branch")
-                        .HasColumnType("nvarchar(50)");
 
                     b.Property<double>("BudgetAllocation")
                         .HasColumnType("double");
 
-                    b.Property<int>("Faculty")
+                    b.Property<int>("DepartmentId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ExaminigId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FacultyId")
                         .HasColumnType("int");
 
                     b.Property<string>("FundGoes")
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<bool>("IsInProcumentPlan")
                         .HasColumnType("tinyint(1)");
@@ -209,6 +217,12 @@ namespace RuhunaSupply.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<int>("Purpose")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SubmittedById")
                         .HasColumnType("int");
 
                     b.Property<string>("Vote")
@@ -231,17 +245,20 @@ namespace RuhunaSupply.Migrations
                     b.Property<double>("EstimatedCost")
                         .HasColumnType("double");
 
-                    b.Property<int?>("ItemId")
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<int>("ItemId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("PurchaseRequestId")
+                    b.Property<int>("PurchaseRequestId")
                         .HasColumnType("int");
 
-                    b.Property<int>("QtyRequired")
-                        .HasColumnType("int");
+                    b.Property<double>("QtyRequired")
+                        .HasColumnType("double");
 
-                    b.Property<int>("QtySupplied")
-                        .HasColumnType("int");
+                    b.Property<double>("QtySupplied")
+                        .HasColumnType("double");
 
                     b.Property<double>("Rate")
                         .HasColumnType("double");
@@ -250,8 +267,6 @@ namespace RuhunaSupply.Migrations
                         .HasColumnType("double");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ItemId");
 
                     b.HasIndex("PurchaseRequestId");
 
@@ -264,46 +279,28 @@ namespace RuhunaSupply.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int?>("PurchaseRequestItemId")
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<int>("ItemId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("SpecificationId")
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int>("PurchaseRequestItemId")
                         .HasColumnType("int");
+
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("PurchaseRequestItemId");
 
-                    b.HasIndex("SpecificationId");
-
                     b.ToTable("PurchaseRequestItemSpecifications");
-                });
-
-            modelBuilder.Entity("RuhunaSupply.Model.Quatation", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<int?>("PurchaseRequestId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("SupplierId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PurchaseRequestId");
-
-                    b.HasIndex("SupplierId");
-
-                    b.ToTable("Quatations");
                 });
 
             modelBuilder.Entity("RuhunaSupply.Model.QuatationItem", b =>
@@ -313,68 +310,65 @@ namespace RuhunaSupply.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("varchar(100) CHARACTER SET utf8mb4")
+                        .HasMaxLength(100);
 
-                    b.Property<string>("IsSupply")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<int?>("ItemId")
+                    b.Property<bool>("IsSupplied")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<int>("ItemId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("PurchaseRequestItemId")
+                    b.Property<int>("PurchaseRequestItemId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Qty")
+                    b.Property<double>("Qty")
+                        .HasColumnType("double");
+
+                    b.Property<int>("QuotationId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("QuatationId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Rate")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                    b.Property<double>("Rate")
+                        .HasColumnType("double");
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
-                    b.Property<int>("Total")
-                        .HasColumnType("int");
+                    b.Property<double>("Total")
+                        .HasColumnType("double");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ItemId");
-
-                    b.HasIndex("PurchaseRequestItemId");
-
-                    b.HasIndex("QuatationId");
 
                     b.ToTable("QuatationItems");
                 });
 
-            modelBuilder.Entity("RuhunaSupply.Model.QuatationItemSpecification", b =>
+            modelBuilder.Entity("RuhunaSupply.Model.Quotation", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(100)");
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<int?>("QuatationItemId")
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<int>("PurchaseRequestId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Satisfied")
-                        .HasColumnType("nvarchar(20)");
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
 
-                    b.Property<int?>("SpecificationId")
+                    b.Property<int>("SupplierId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("QuatationItemId");
-
-                    b.HasIndex("SpecificationId");
-
-                    b.ToTable("QuatationItemSpecifications");
+                    b.ToTable("Quotations");
                 });
 
             modelBuilder.Entity("RuhunaSupply.Model.Specification", b =>
@@ -383,12 +377,21 @@ namespace RuhunaSupply.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int?>("ItemId")
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<int>("ItemId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(50)");
+
+                    b.Property<int>("PurchaseRequestItemId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("QuatationItemId")
+                        .HasColumnType("int");
 
                     b.Property<int>("SpecificationCategoryId")
                         .HasColumnType("int");
@@ -399,9 +402,7 @@ namespace RuhunaSupply.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ItemId");
-
-                    b.HasIndex("SpecificationCategoryId");
+                    b.HasIndex("QuatationItemId");
 
                     b.ToTable("Specification");
                 });
@@ -412,18 +413,19 @@ namespace RuhunaSupply.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("Descriptiopn")
+                    b.Property<string>("Description")
                         .HasColumnType("nvarchar(150)");
 
-                    b.Property<int?>("ItemId")
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<int>("ItemId")
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ItemId");
 
                     b.ToTable("SpecificationCategories");
                 });
@@ -449,11 +451,14 @@ namespace RuhunaSupply.Migrations
                     b.Property<DateTime>("BusinessRegisteredDate")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int?>("Category2Id")
+                    b.Property<int>("Category2Id")
                         .HasColumnType("int");
 
                     b.Property<string>("ContactNumber")
                         .HasColumnType("nvarchar(15)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<DateTime>("RegisteredDate")
                         .HasColumnType("datetime(6)");
@@ -462,8 +467,6 @@ namespace RuhunaSupply.Migrations
                         .HasColumnType("nvarchar(20)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("Category2Id");
 
                     b.ToTable("Suppliers");
                 });
@@ -474,14 +477,17 @@ namespace RuhunaSupply.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int?>("DepartmentId")
+                    b.Property<int>("DepartmentId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("FacultyId")
+                    b.Property<int>("FacultyId")
                         .HasColumnType("int");
 
                     b.Property<string>("FullName")
                         .HasColumnType("nvarchar(100)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<int>("MergedId")
                         .HasColumnType("int");
@@ -499,10 +505,6 @@ namespace RuhunaSupply.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("DepartmentId");
-
-                    b.HasIndex("FacultyId");
 
                     b.ToTable("Users");
                 });
@@ -525,8 +527,11 @@ namespace RuhunaSupply.Migrations
 
                     b.Property<string>("HashedPassword")
                         .IsRequired()
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
+                        .HasColumnType("nvarchar(64)")
+                        .HasMaxLength(64);
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("Privileges")
                         .IsRequired()
@@ -551,6 +556,9 @@ namespace RuhunaSupply.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(50)");
@@ -578,173 +586,89 @@ namespace RuhunaSupply.Migrations
                     b.Property<int>("Involvement")
                         .HasColumnType("int");
 
-                    b.Property<int>("PurchaseRequest")
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<int>("PurchaseRequestId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("UserId")
+                    b.Property<string>("Remark")
+                        .HasColumnType("varchar(200) CHARACTER SET utf8mb4")
+                        .HasMaxLength(200);
+
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
-
                     b.ToTable("UserPurchaseRequests");
                 });
 
-            modelBuilder.Entity("RuhunaSupply.Model.Category2", b =>
+            modelBuilder.Entity("RuhunaSupply.Model._QuatationItemSpecification", b =>
                 {
-                    b.HasOne("RuhunaSupply.Model.Category1", "ParentCategory")
-                        .WithMany()
-                        .HasForeignKey("ParentCategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-            modelBuilder.Entity("RuhunaSupply.Model.Category3", b =>
-                {
-                    b.HasOne("RuhunaSupply.Model.Category1", "GPCategory")
-                        .WithMany()
-                        .HasForeignKey("GPCategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(100)");
 
-                    b.HasOne("RuhunaSupply.Model.Category2", "ParentCategory")
-                        .WithMany()
-                        .HasForeignKey("ParentCategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
+                    b.Property<int>("QuatationItemId")
+                        .HasColumnType("int");
 
-            modelBuilder.Entity("RuhunaSupply.Model.Department", b =>
-                {
-                    b.HasOne("RuhunaSupply.Model.Faculty", "Faculty")
-                        .WithMany()
-                        .HasForeignKey("FacultyId");
-                });
+                    b.Property<string>("Satisfied")
+                        .HasColumnType("nvarchar(20)");
 
-            modelBuilder.Entity("RuhunaSupply.Model.Item", b =>
-                {
-                    b.HasOne("RuhunaSupply.Model.Category1", "Category1")
-                        .WithMany()
-                        .HasForeignKey("Category1Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<int>("SpecificationId")
+                        .HasColumnType("int");
 
-                    b.HasOne("RuhunaSupply.Model.Category2", "Category2")
-                        .WithMany()
-                        .HasForeignKey("Category2Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasKey("Id");
 
-                    b.HasOne("RuhunaSupply.Model.Category3", "Category3")
-                        .WithMany()
-                        .HasForeignKey("Category3Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasIndex("QuatationItemId");
+
+                    b.HasIndex("SpecificationId");
+
+                    b.ToTable("QuatationItemSpecifications");
                 });
 
             modelBuilder.Entity("RuhunaSupply.Model.PurchaseRequestItem", b =>
                 {
-                    b.HasOne("RuhunaSupply.Model.Item", "Item")
-                        .WithMany()
-                        .HasForeignKey("ItemId");
-
-                    b.HasOne("RuhunaSupply.Model.PurchaseRequest", "PurchaseRequest")
-                        .WithMany()
-                        .HasForeignKey("PurchaseRequestId");
-                });
-
-            modelBuilder.Entity("RuhunaSupply.Model.PurchaseRequestItemSpecification", b =>
-                {
-                    b.HasOne("RuhunaSupply.Model.PurchaseRequestItem", "PurchaseRequestItem")
-                        .WithMany()
-                        .HasForeignKey("PurchaseRequestItemId");
-
-                    b.HasOne("RuhunaSupply.Model.Specification", "Specification")
-                        .WithMany()
-                        .HasForeignKey("SpecificationId");
-                });
-
-            modelBuilder.Entity("RuhunaSupply.Model.Quatation", b =>
-                {
-                    b.HasOne("RuhunaSupply.Model.PurchaseRequest", "PurchaseRequest")
-                        .WithMany()
-                        .HasForeignKey("PurchaseRequestId");
-
-                    b.HasOne("RuhunaSupply.Model.Supplier", "Supplier")
-                        .WithMany()
-                        .HasForeignKey("SupplierId");
-                });
-
-            modelBuilder.Entity("RuhunaSupply.Model.QuatationItem", b =>
-                {
-                    b.HasOne("RuhunaSupply.Model.Item", "Item")
-                        .WithMany()
-                        .HasForeignKey("ItemId");
-
-                    b.HasOne("RuhunaSupply.Model.PurchaseRequestItem", "PurchaseRequestItem")
-                        .WithMany()
-                        .HasForeignKey("PurchaseRequestItemId");
-
-                    b.HasOne("RuhunaSupply.Model.Quatation", "Quatation")
-                        .WithMany()
-                        .HasForeignKey("QuatationId");
-                });
-
-            modelBuilder.Entity("RuhunaSupply.Model.QuatationItemSpecification", b =>
-                {
-                    b.HasOne("RuhunaSupply.Model.QuatationItem", "QuatationItem")
-                        .WithMany()
-                        .HasForeignKey("QuatationItemId");
-
-                    b.HasOne("RuhunaSupply.Model.Specification", "Specification")
-                        .WithMany()
-                        .HasForeignKey("SpecificationId");
-                });
-
-            modelBuilder.Entity("RuhunaSupply.Model.Specification", b =>
-                {
-                    b.HasOne("RuhunaSupply.Model.Item", "Item")
-                        .WithMany()
-                        .HasForeignKey("ItemId");
-
-                    b.HasOne("RuhunaSupply.Model.SpecificationCategory", "SpecificationCategory")
-                        .WithMany()
-                        .HasForeignKey("SpecificationCategoryId")
+                    b.HasOne("RuhunaSupply.Model.PurchaseRequest", null)
+                        .WithMany("Items")
+                        .HasForeignKey("PurchaseRequestId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("RuhunaSupply.Model.SpecificationCategory", b =>
+            modelBuilder.Entity("RuhunaSupply.Model.PurchaseRequestItemSpecification", b =>
                 {
-                    b.HasOne("RuhunaSupply.Model.Item", "Item")
-                        .WithMany()
-                        .HasForeignKey("ItemId");
+                    b.HasOne("RuhunaSupply.Model.PurchaseRequestItem", null)
+                        .WithMany("Specifications")
+                        .HasForeignKey("PurchaseRequestItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
-            modelBuilder.Entity("RuhunaSupply.Model.Supplier", b =>
+            modelBuilder.Entity("RuhunaSupply.Model.Specification", b =>
                 {
-                    b.HasOne("RuhunaSupply.Model.Category2", "Category2")
-                        .WithMany()
-                        .HasForeignKey("Category2Id");
+                    b.HasOne("RuhunaSupply.Model.QuatationItem", null)
+                        .WithMany("Specifications")
+                        .HasForeignKey("QuatationItemId");
                 });
 
-            modelBuilder.Entity("RuhunaSupply.Model.User", b =>
+            modelBuilder.Entity("RuhunaSupply.Model._QuatationItemSpecification", b =>
                 {
-                    b.HasOne("RuhunaSupply.Model.Department", "Department")
+                    b.HasOne("RuhunaSupply.Model.QuatationItem", "QuatationItem")
                         .WithMany()
-                        .HasForeignKey("DepartmentId");
+                        .HasForeignKey("QuatationItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("RuhunaSupply.Model.Faculty", "Faculty")
+                    b.HasOne("RuhunaSupply.Model.Specification", "Specification")
                         .WithMany()
-                        .HasForeignKey("FacultyId");
-                });
-
-            modelBuilder.Entity("RuhunaSupply.Model.UserPurchaseRequest", b =>
-                {
-                    b.HasOne("RuhunaSupply.Model.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("SpecificationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

@@ -72,13 +72,13 @@ namespace RuhunaSupply.Controllers
     [HttpPut]
         public IActionResult Edit(int Id, PurchaseRequest PurchaseRequest, Supplier Supplier, QuatationStatus Status, DateTime Date)
         {
-            _db.Quatations.Update(new Quotation()
+            _db.Quotations.Update(new Quotation()
             {
                 Id = Id,
-                //PurchaseRequest = PurchaseRequest,
-                //Supplier = Supplier,
-                //Status = Status,
-                //Date = Date
+                /*PurchaseRequest = PurchaseRequest,
+                Supplier1 = Supplier,*/
+                Status = Status,
+                Date = Date
             });
             _db.SaveChanges();
             return Ok();
@@ -86,7 +86,7 @@ namespace RuhunaSupply.Controllers
         [HttpDelete]
         public IActionResult Delete(int Id)
         {
-            _db.Quatations.Remove(new Quotation() { Id = Id });
+            _db.Quotations.Remove(new Quotation() { Id = Id });
             _db.SaveChanges();
             return Ok();
         }

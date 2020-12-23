@@ -37,6 +37,7 @@ export class AddCategory3Component implements OnInit {
   }
     onSubmit(category3Data)
     {
+      console.log(category3Data.value);
       this.cat3Service.postCategory3(category3Data.value).subscribe(
         data =>console.log('success',data),
         error =>console.log('error',error)

@@ -4,25 +4,39 @@
 			<form class="form-detail" [formGroup]="checkoutForm" (ngSubmit)="onSubmit(checkoutForm)" novalidate>
                 <h2>Add New Item</h2>
                 <div class="form-row">
+					<label for="Category1">Category 01</label>
+                    <select (ngModelChange)="onCategory1Select(checkoutForm)" formControlName="Category1" class="input-text" required>
+						<option value="0" selected hidden>Select The Category</option>
+                        <option *ngFor="let cat of Category1List; let i = index;" value="{{cat.id}}">{{cat.name}}</option>
+                      </select>
+					<i class="fas fa-User"></i>
+                </div>
+                <div class="form-row">
+					<label for="Category2">Category 02</label>
+                    <select (ngModelChange)="onCategory2Select(checkoutForm)" formControlName="Category2" class="input-text" required>
+						<option value="0" selected hidden>Select The Category</option>
+                        <option *ngFor="let cat of Category2List; let i = index;" value="{{cat.id}}">{{cat.name}}</option>
+                      </select>
+					<i class="fas fa-User"></i>
+                </div>
+                <div class="form-row">
+					<label for="Category2">Category 03 </label>
+                    <select formControlName="Category3" class="input-text" required>
+						<option value="0" selected hidden>Select The Category</option>
+                        <option *ngFor="let cat of Category3List; let i = index;" value="{{cat.id}}">{{cat.name}}</option>
+                      </select>
+					<i class="fas fa-User"></i>
+				</div>
+                <div class="form-row">
                     <label for="Name">Name</label>
                     <input type="text" formControlName="Name" id="Name" class="input-text" placeholder="Name" required>
                     <i class="fas fa-envelope"></i>
 				</div>
 				<div class="form-row">
-                    <label for="Discription">Discription</label>
-                    <input type="text" formControlName="Discription" id="Discription" class="input-text" placeholder="Discription">
+                    <label for="Description">Description</label>
+                    <input type="text" formControlName="Description" id="Discription" class="input-text" placeholder="Description">
                     <i clas="fas fa-envelope"></i>
 				</div>
-
-                
-                <div class="list-group">
-                    <a href="#" class="list-group-item list-group-item-action list-group-item-primary">Category 1</a>
-                    <br>
-                    <a href="#" class="list-group-item list-group-item-action list-group-item-secondary">Category 2</a>
-                    <br>
-                    <a href="#" class="list-group-item list-group-item-action list-group-item-success">Category 3</a>
-                </div>
-                <br>
                 <div class="form-row-last">
 					<input type="submit" name="Add" class="btn btn-primary" value="Add">
                 </div>

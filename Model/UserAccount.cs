@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using cmlMySqlStandard;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using RuhunaSupply.Data;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -9,13 +12,27 @@ using static RuhunaSupply.Common.MyEnum;
 
 namespace RuhunaSupply.Model
 {
-    public class UserAccount
+    public class UserAccount : IndexedObject
     {
         public UserAccount()
         {
             
         }
+        #region Static 
+        public static int GetNextId(ApplicationDbContext db)
+        {
+            int uID1 = 1,uID2 = 1;
+            try
+            {
+                uID1 = db.Users.Max(u => u.Id);
+                uID2 = db.UserAccounts.Max(u => u.Id);
+            }
+            catch { }
+            return Math.Max(1, Math.Max(uID1, uID2));
+        }
+        #endregion
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
         [Required]
         [MaxLength(150)]
@@ -43,5 +60,8 @@ namespace RuhunaSupply.Model
         public string Token { get; internal set; }
         [NotMapped]
         public string Password { get; set; }
+        public bool IsDeleted { get; set; }
+
+        public int Index => Id;
     }
 }

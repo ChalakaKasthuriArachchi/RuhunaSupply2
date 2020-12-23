@@ -36,11 +36,13 @@ namespace RuhunaSupply.Controllers
             JsonData jd = JsonMapper.ToObject(useraccount.ToString());
             UserAccount ua = new UserAccount()
             {
+                Id = UserAccount.GetNextId(_db),
                 FullName = jd["FullName"].ToString(),
                 ShortName = jd["ShortName"].ToString(),
                 Email = jd["Email"].ToString(),
                 HashedPassword = ComputeSha256Hash(jd["HashedPassword"].ToString()),
-                Type = (UserTypes)int.Parse(jd["Type"].ToString())
+                Type = (UserTypes)int.Parse(jd["Type"].ToString()),
+                Privileges = ""
             };
             _db.UserAccounts.Add(ua);
             await _db.SaveChangesAsync();

@@ -1,0 +1,48 @@
+<div class="form-v5">
+  <div class="page-content">
+    <div class="form-v5-content">
+      <form class="form-detail" [formGroup]="checkoutForm" (ngSubmit)="onSubmit(checkoutForm)" novalidate>
+        <h2>Create a Specification</h2>
+
+        <div class="form-row">
+          <label for="Item">Item</label>
+          <select (ngModelChange)="onItemSelect(checkoutForm)" formControlName="Item" class="input-text" required>
+            <option value="0" selected hidden>Select The Item</option>
+            <option *ngFor="let it of itemList; let i = index;" value="{{it.id}}">{{it.name}}</option>
+          </select>
+          <i class="fas fa-envelope"></i>
+        </div>
+        
+        <div class="form-row">
+          <label for="SpecCategory">Category</label>
+          <select formControlName="SpecCategory" class="input-text" required>
+            <option value="0" selected hidden>Select The Category</option>
+            <option *ngFor="let cat of specCategories; let i = index;" value="{{cat.id}}">{{cat.title}}</option>
+          </select>
+          <i class="fas fa-user"></i>
+        </div>
+
+      <div class="form-row">
+        <label for="Name">Specification Name</label>
+        <input type="text" formControlName="Name" id="Name" class="input-text" required>
+        <i class="fas fa-envelope"></i>
+      </div>
+
+      <div class="form-row">
+        <label for="Value">Specification Value</label>
+        <input type="text" formControlName="Value" id="Value" class="input-text" required>
+        <i class="fas fa-envelope"></i>
+      </div>
+
+
+      <div class="form-row-last">
+        <button class="button" type="submit">Submit</button>
+        <i class="fas fa-envelope"></i>
+      </div>
+
+
+
+    </form>
+  </div>
+      </div>
+    </div>

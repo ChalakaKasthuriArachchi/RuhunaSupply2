@@ -24,6 +24,7 @@ export class UserAccountComponent implements OnInit {
       ShortName: '',
       Email: '',
       HashedPassword: '',
+      ConfirmPassword:'',
       Type: '',
     });
   }
@@ -31,10 +32,8 @@ export class UserAccountComponent implements OnInit {
   ngOnInit():void{
   }
 
-  //get f() { return this.form.controls; }
 
   onSubmit(userAccountData) {
-
     this.userAccountService.postUserAccount(userAccountData.value)
       .subscribe(
       data => console.log('Success!', data),

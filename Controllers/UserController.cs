@@ -20,7 +20,7 @@ namespace RuhunaSupply.Controllers
         [HttpPost]
         public IActionResult Add(string Admin, string Branch, string FullName, string ShortName, string PermissionList, UserPositions Position, UserTypes Type, int MergedId)
         {
-            int max_id = 0;
+           
 
             try
             {
