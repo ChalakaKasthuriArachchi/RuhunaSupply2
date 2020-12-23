@@ -21,16 +21,21 @@ namespace RuhunaSupply.Controllers
             this._db = context;
         }
         [HttpGet]
-        public Quatation[] GetQuataion()
+        public Quotation[] GetQuataions()
         {
             return _db.Quatations.ToArray();
         }
-
+        [HttpGet("api/[Controller]/{id}")]
+        public Quotation GetQuotation(int id)
+        {
+            Quotation q = _db.Quatations.Find(id);
+            return q;
+        }
         [HttpPost]
-        public async Task<ActionResult<Quatation>> PostQautaion(object quatation)
+        public async Task<ActionResult<Quotation>> PostQautaion(object quatation)
         { 
             JsonData jd = JsonMapper.ToObject(quatation.ToString());
-             Quatation qt = new Quatation()
+             Quotation qt = new Quotation()
              {
                 
              };
@@ -67,13 +72,13 @@ namespace RuhunaSupply.Controllers
     [HttpPut]
         public IActionResult Edit(int Id, PurchaseRequest PurchaseRequest, Supplier Supplier, QuatationStatus Status, DateTime Date)
         {
-            _db.Quatations.Update(new Quatation()
+            _db.Quatations.Update(new Quotation()
             {
                 Id = Id,
-                PurchaseRequest = PurchaseRequest,
-                Supplier = Supplier,
-                Status = Status,
-                Date = Date
+                //PurchaseRequest = PurchaseRequest,
+                //Supplier = Supplier,
+                //Status = Status,
+                //Date = Date
             });
             _db.SaveChanges();
             return Ok();
@@ -81,7 +86,7 @@ namespace RuhunaSupply.Controllers
         [HttpDelete]
         public IActionResult Delete(int Id)
         {
-            _db.Quatations.Remove(new Quatation() { Id = Id });
+            _db.Quatations.Remove(new Quotation() { Id = Id });
             _db.SaveChanges();
             return Ok();
         }
