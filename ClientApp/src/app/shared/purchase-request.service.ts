@@ -30,5 +30,12 @@ export class PurchaseRequestService {
       var tokenHeader = new HttpHeaders({'Authorization':'Bearer ' + tok});
       return this.http.get(environment.apiBaseURI + '/PurchaseRequest?status=' + status,{headers : tokenHeader});
     }
+  } 
+  getAllowedForwardsList(){
+    var tok = localStorage.getItem('token');
+    if(tok != null){
+      var tokenHeader = new HttpHeaders({'Authorization':'Bearer ' + tok});
+      return this.http.get(environment.apiBaseURI + '/PurchaseRequest/allowedforwards',{headers : tokenHeader});
+    }
   }
 }

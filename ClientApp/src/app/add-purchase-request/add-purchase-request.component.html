@@ -37,7 +37,7 @@
 
         <br><br><br>
         <div class="form-group row">
-          <label class="col-sm-4 col-form-label" formControlName="IsInProcumentPlan">In Procurement Plan</label>
+          <label class="col-sm-4 col-form-label">In Procurement Plan</label>
           <div class="col-sm-8">
             <span style="margin-right: 15px;">Yes</span> 
             <input type="radio"  name="Procument" id="Procument1" checked value="Yes">
@@ -151,9 +151,38 @@
             </div>
           </div>
         </div>
+        <!-- Modal Forward-->
+        <div id="forwardModal" class="modal fade bd-forward-modal-lg" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <h2>Select Specification Category</h2>
+              <table class="table table-bordered table-dark">
+                <thead>
+                  <tr >
+                    <th style="text-align: center; padding-top: 30px;">Name</th>
+                    <th style="text-align: center; padding-bottom: 20px;" scope="col">Position</th>
+                    <th style="text-align: center; padding-bottom: 20px;" scope="col">Faculty</th>
+                    <th style="text-align: center; padding-bottom: 20px;"scope="col">Department</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let cat of allowedForwards; let i = index;">
+                    <td style="text-align: center; padding-top: 30px;">{{cat.fullName}}</td>
+                    <td style="text-align: center; padding-top: 30px;">{{cat.positionText}}</td>
+                    <td style="text-align: center; padding-top: 30px;">{{cat.faculty.name}}</td>
+                    <td style="text-align: center; padding-top: 30px;">{{cat.department.name}}</td>
+                    <td style="text-align: center; padding-top: 30px;">
+                      <button id="{{cat.id}}" type="button" class="btn btn-primary" data-toggle="modal" data-dismiss="modal" (click)="onSubmit($event)" data-target=".bd-example-modal-sm">Forward</button><br>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
         <br>
         <div class="form-row-last">
-					<input id="testing" style="padding-right: 40px;padding-left: 40px;" type="submit" name="Submit" class="btn btn-primary" value="Submit">
+					<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-forward-modal-lg" (click)="getAllowedForwards()">Forward</button>
         </div>
       </form>
     </div>

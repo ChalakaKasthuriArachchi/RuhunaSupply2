@@ -1,4 +1,6 @@
 ﻿using cmlMySqlStandard;
+using RuhunaSupply.Common;
+using RuhunaSupply.Data;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -10,6 +12,11 @@ namespace RuhunaSupply.Model
 {
     public class Faculty : IndexedObject
     {
+        public User GetDean(ApplicationDbContext db)
+        {
+            return db.Users.FirstOrDefault(u => u.FacultyId == Id &&
+                            u.Position == MyEnum.UserPositions.Dean);
+        }
         [Key]
         public int Id { get; set; }
         [MaxLength(100)]

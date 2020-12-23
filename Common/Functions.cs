@@ -14,6 +14,13 @@ namespace RuhunaSupply.Common
     public static class Functions
     {
         #region Object
+        public static DateTime DateTime
+        {
+            get
+            {
+                return DateTime.UtcNow.AddHours(5.5);
+            }
+        }
         public static UserAccount GetCurrentUser(HttpContext httpContext,ApplicationDbContext _db)
         {
             int userId = int.Parse(httpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name).Value);

@@ -41,9 +41,7 @@ namespace RuhunaSupply.Controllers
         [HttpGet("{id}")]
         public SpecificationCategory GetSpecificationCategory(int id)
         {
-            IQueryable<SpecificationCategory> query = _db.SpecificationCategories
-                .Include(cat => cat.Item);
-            return query.FirstOrDefault(cat => cat.Id == id);
+            return _db.SpecificationCategories.Find(id);
         }
         [HttpPost]
         public async Task<ActionResult<SpecificationCategory>> PostSpecificationCategory(object specificationcategory)

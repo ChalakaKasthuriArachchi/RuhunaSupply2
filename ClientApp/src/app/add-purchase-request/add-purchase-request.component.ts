@@ -19,6 +19,7 @@ export class AddPurchaseRequestComponent implements OnInit {
     itemList = [];
     selectedItems = [];
     specificationCategories = [];
+    allowedForwards = [];
 
   constructor(
     private PurchaseRequestService: PurchaseRequestService,
@@ -27,12 +28,16 @@ export class AddPurchaseRequestComponent implements OnInit {
     @Inject(DOCUMENT) document
   ) {
     this.checkoutForm = this.formBuilder.group({
+      Id : 0,
       Funds: '',
       Project: '',
+      Justification: '',
       Vote: '',
       IsInProcumentPlan: '',
       Purpose: '',
-      DateTime: ''
+      DateTime: '',
+      BudgetAllocation : '',
+      IsSaved : false,
     });
    }
    ngOnInit(): void {
@@ -49,10 +54,8 @@ export class AddPurchaseRequestComponent implements OnInit {
       }
     )
   }
-  onSubmit(AddPurchaseRequestData){
-    let purchaseRequest = { form : '', items : []};
-    purchaseRequest.form = AddPurchaseRequestData.value;
-    purchaseRequest.items = this.selectedItems;
+  onSubmit(event){
+    let purchaseRequest = { form : this.checkoutForm.value, items : this.selectedItems, forwardTo : event.target.id};
     this.PurchaseRequestService.postPurchaseRequest(purchaseRequest)
       .subscribe(
         data => console.log('Success!', data),
@@ -88,5 +91,9 @@ export class AddPurchaseRequestComponent implements OnInit {
         )
       }
     );
+  }
+  getAllowedForwards(){
+    this.PurchaseRequestService.getAllowedForwardsList()
+      .subscribe(res => this.allowedForwards = res as []);
   }
 }

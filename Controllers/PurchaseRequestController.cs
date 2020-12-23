@@ -78,37 +78,92 @@ namespace RuhunaSupply.Controllers
         {
             try
             {
+                UserAccount useraccount = Functions.GetCurrentUser(Request.HttpContext, _db);
+                User user = Cache.GetUser(useraccount.Id, false);
+                if (user == null)
+                    throw new Exception("User Not Found");
                 using (DbTransaction trans = _db.Database.BeginTransaction() as DbTransaction)
                 {
                     JsonData jd = JsonMapper.ToObject(req.ToString());
                     JsonData jform = jd["form"];
+                    JsonData forwardTo = jd["forwardTo"];
                     PurchaseRequest pr = new PurchaseRequest()
                     {
-                        Id = PurchaseRequest.GetNextId(_db),
                         FundGoes = jform["Funds"].ToString(),
                         Project = jform["Project"].ToString(),
-                        //_DateTime = DateTime.Parse(jform["DateTime"].ToString()),
-                        
+                        DepartmentId = user.DepartmentId,
+                        FacultyId = user.FacultyId,
+                        IsInProcumentPlan = jform["IsInProcumentPlan"].ToString() == "Yes",
+                        Purpose = (Purposes)int.Parse(jform["Purpose"].ToString()),
+                        Justification = jform["Justification"].ToString(),
                     };
-                    _db.PurchaseRequests.Add(pr);
-                    foreach (JsonData ji in jd["items"])
+                    if (jform["Id"].ToString() == "0")
                     {
-                        _db.PurchaseRequestItems.Add(
-                            new PurchaseRequestItem()
+                        pr.Id = PurchaseRequest.GetNextId(_db);
+                        pr.Status = PurchaseRequestStatus.On_Approval;
+                        pr.SubmittedById = user.Id;
+                        pr.ExaminigId = int.Parse(forwardTo.ToString());
+                        foreach (JsonData ji in jd["items"])
+                        {
+                            _db.PurchaseRequestItems.Add(
+                                new PurchaseRequestItem()
+                                {
+                                    ItemId = int.Parse(ji["id"].ToString()),
+                                    QtyRequired = double.Parse(ji["quantity"].ToString()),
+                                }
+                                );
+                        }
+                        _db.UserPurchaseRequests.AddRange(new UserPurchaseRequest[]
+                        {
+                            new UserPurchaseRequest()
                             {
-                                ItemId = int.Parse(ji["id"].ToString()),
-                                QtyRequired = double.Parse(ji["quantity"].ToString()),
+                              Date = Functions.DateTime,
+                              Involvement = Involvements.Submitted,
+                              
+                            },
+                            new UserPurchaseRequest()
+                            {
+
                             }
-                            );
+                        });
+                        _db.PurchaseRequests.Add(pr);
                     }
+                    else
+                    {
+                        pr.Id = int.Parse(jform["Id"].ToString());
+                        _db.PurchaseRequests.Update(pr);
+                    }
+                    
                 }
                 return Ok();
             }
             catch(Exception ex)
             {
                 Functions.UpdateErrorLog("Unable to Save Purchase Request", ex);
-                return BadRequest();
+                return BadRequest("Unable to Save Purchase Request now");
             }
+        }
+        [HttpGet("allowedforwards")]
+        public List<User> GetAllowedForwards()
+        {
+            List<User> lst = new List<User>(); 
+            int userId = Functions.GetCurrentUserId(Request.HttpContext, _db);
+            User user = Cache.GetUser(userId, true);
+            int headId = user.Department.GetHead(_db).Id;
+            int deanId = user.Faculty.GetDean(_db).Id;
+            if (user.Id != headId && user.MergedId != user.Id)
+                lst.Add(user.Department.GetHead(_db));
+            if (user.TestPrivileges(Model.User.UserPrivileges.PurchaseRequest_Forward_Outside_Department) 
+                && user.Id != headId && user.MergedId != user.Id)
+                lst.Add(user.Faculty.GetDean(_db));
+            if (user.TestPrivileges(Model.User.UserPrivileges.PurchaseRequest_Forward_Outside_Faculty))
+            {
+                lst.Add(Cache.Users.FirstOrDefault(u => u.Position == UserPositions.VC));
+                lst.Add(Cache.Users.FirstOrDefault(u => 
+                    u.Position == UserPositions.SAB 
+                    && u.Department.Name == DepartmentsAdmin.Supply_Branch.ToString().Replace("_", " ")));
+            }
+            return lst;
         }
     }
     public class ViewPurchaseRequest

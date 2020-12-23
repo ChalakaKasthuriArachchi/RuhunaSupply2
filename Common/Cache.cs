@@ -131,7 +131,7 @@ namespace RuhunaSupply.Common
                 if (cat != null)
                     return cat;
                 if (notNull)
-                    return new Faculty() { Id = -1, Name = "(Not Found)" };
+                    return new Faculty() { Id = -1, Name = "-" };
                 return cat;
             }
         }
@@ -160,7 +160,7 @@ namespace RuhunaSupply.Common
                 if (cat != null)
                     return cat;
                 if (notNull)
-                    return new Department() { Id = -1, Name = "(Not Found)" };
+                    return new Department() { Id = -1, Name = "-" };
                 return cat;
             }
         }
@@ -181,6 +181,14 @@ namespace RuhunaSupply.Common
         #region User
         public static IndexedList<User> Users { get; set; }
             = new IndexedList<User>(1);
+        public static User[] GetUsers(ApplicationDbContext db, Department department, MyEnum.UserPositions position)
+        {
+            return db.Users.Where(u => u.DepartmentId == department.Id && u.Position == position).ToArray();
+        }
+        public static User[] GetUsers(ApplicationDbContext db, Faculty department, MyEnum.UserPositions position)
+        {
+            return db.Users.Where(u => u.DepartmentId == department.Id && u.Position == position).ToArray();
+        }
         public static User GetUser(int id, bool notNull)
         {
             lock (Users)
@@ -213,6 +221,36 @@ namespace RuhunaSupply.Common
                 {
                     int limit = ary[ary.Length - 1].Id + 1;
                     Users = IndexedList.Parse(ary, limit);
+                }
+            }
+        }
+        #endregion
+
+        #region UserAccount
+        public static IndexedList<UserAccount> UserAccounts { get; set; }
+            = new IndexedList<UserAccount>(1);
+        public static UserAccount GetUserUserAccount(int id, bool notNull)
+        {
+            lock (UserAccounts)
+            {
+                UserAccount user = UserAccounts[id];
+                if (user == null)
+                    if (notNull)
+                        return new UserAccount() { ShortName = "(Not Found)", Id = -1 };
+                    else
+                        return null;
+                return user;
+            }
+        }
+        public static void RefreshUserAccounts(ApplicationDbContext db)
+        {
+            lock (UserAccounts)
+            {
+                UserAccount[] ary = db.UserAccounts.ToArray();
+                if (ary.Length > 0)
+                {
+                    int limit = ary[ary.Length - 1].Id + 1;
+                    UserAccounts = IndexedList.Parse(ary, limit);
                 }
             }
         }

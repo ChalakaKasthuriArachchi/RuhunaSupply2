@@ -1,5 +1,6 @@
 ﻿using cmlMySqlStandard;
 using RuhunaSupply.Common;
+using RuhunaSupply.Data;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -18,6 +19,11 @@ namespace RuhunaSupply.Model
             {
                 return Cache.GetFaculty(FacultyId, true);
             }
+        }
+        public User GetHead(ApplicationDbContext db)
+        {
+            return db.Users.FirstOrDefault(u => u.DepartmentId == Id &&
+                            u.Position == MyEnum.UserPositions.Head);
         }
         #endregion
         #region Saved

@@ -35,10 +35,9 @@ namespace RuhunaSupply.Controllers
         [HttpGet("{id}")]
         public Item GetItem(int id,bool fullView)
         {
-            IQueryable<Item> query = _db.Items;
-            if (fullView)
-                query = query.Include(i => i.Category1).Include(i => i.Category2).Include(i => i.Category3);
-            return query.FirstOrDefault(i => i.Id == id);
+            //if (fullView)
+            //    query = query.Include(i => i.Category1).Include(i => i.Category2).Include(i => i.Category3);
+            return _db.Items.Find(id);
         }
         [HttpPost]
         public async Task<ActionResult<Item>> PostItem(object item)
@@ -51,8 +50,6 @@ namespace RuhunaSupply.Controllers
                 Category3Id = int.Parse(jd["Category3"].ToString()),
                 Name = jd["Name"].ToString(),
                 Description = jd["Description"].ToString(),
-
-
             };
             _db.Items.Add(I1);
             await _db.SaveChangesAsync();
