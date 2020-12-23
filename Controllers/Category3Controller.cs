@@ -12,8 +12,7 @@ using static RuhunaSupply.Common.MyEnum;
 
 namespace RuhunaSupply.Controllers
 {
-    [Route("api/[Controller]")]
-    [ApiController]
+    
     public class Category3Controller : Controller
     {
 
