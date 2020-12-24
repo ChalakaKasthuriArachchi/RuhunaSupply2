@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient } from "@angular/common/http";
 import { environment } from "src/environments/environment";
+
 @Injectable({
   providedIn: 'root'
 })
-export class FacultyService {
+export class DepartmentService {
 
   constructor(private http : HttpClient) { }
-  getFacultyList(){
-    return this.http.get(environment.apiBaseURI + '/Faculty/');
+  getDepartmentList(fac1){
+    return this.http.get(environment.apiBaseURI + '/Department?Faculty=/' +fac1);
   }
 }

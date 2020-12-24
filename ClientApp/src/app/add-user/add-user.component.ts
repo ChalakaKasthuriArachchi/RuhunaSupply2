@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder,Validator,FormGroup} from '@angular/forms';
 import { UserService } from '../shared/user.service';
+import { FacultyService } from '../shared/faculty.service';
+import { DepartmentService } from '../shared/department.service';
 
 @Component({
   selector: 'app-add-user',
@@ -38,6 +40,9 @@ export class AddUserComponent implements OnInit {
         data => console.log('Success!',data),
         error => console.log('Error!',error)
       );
+  }
+  onFacultySelect(fg:FormGroup){
+
   }
   
 
