@@ -10,7 +10,7 @@ using ThirdParty.Json.LitJson;
 namespace RuhunaSupply.Controllers
 {
     [Route("api/[controller]")]
-    //[ApiController]
+    [ApiController]
     public class SpecificationController : ControllerBase
     {
         private ApplicationDbContext _db;
@@ -19,43 +19,16 @@ namespace RuhunaSupply.Controllers
         {
             this._db = context;
         }
-
-
-
-        public IActionResult Add(int Id, Item Item, SpecificationCategory SpecificationCategory, string Name, string Value)
-        {
-            int max_id = 0;
-            try
-            {
-                max_id = _db.Specification.Max((sp) => sp.Id);
-            }
-            catch
-            {
-            }
-
-            Specification sp = new Specification()
-            {
-                Id = max_id + 1,
-                SpecificationCategory = SpecificationCategory,
-                Item = Item,
-                Name = Name,
-                Value = Value
-            };
-            _db.Specification.Add(sp);
-            _db.SaveChanges();
-            return Ok();
-        }
-
         [HttpPost]
         public async Task<ActionResult<Specification>> PostSpecification(object specification)
         {
             JsonData jd = JsonMapper.ToObject(specification.ToString());
-            int specId = int.Parse(jd["SpecificationCategoryId"].ToString());
-            int itemId = int.Parse(jd["ItemId"].ToString());
+            int specId = int.Parse(jd["SpecCategory"].ToString());
+            int itemId = int.Parse(jd["Item"].ToString());
             Specification sp = new Specification()
             {
-                SpecificationCategory = _db.SpecificationCategories.FirstOrDefault(cat => cat.Id == specId),
-                Item = _db.Items.FirstOrDefault(it => it.Id == itemId),
+                SpecificationCategoryId = specId,
+                ItemId = itemId,
                 Name = jd["Name"].ToString(),
                 Value = jd["Value"].ToString()
 
@@ -67,15 +40,11 @@ namespace RuhunaSupply.Controllers
         }
 
         [HttpPut]
-        public IActionResult Edit(int Id, SpecificationCategory SpecificationCategory, Item Item, string Name, string Value)
+        public IActionResult Edit(object specification)
         {
             _db.Specification.Update(new Specification()
             {
-                Id = Id, 
-                SpecificationCategory= SpecificationCategory, 
-                Item = Item, 
-                Name = Name, 
-                Value = Value 
+                
             });
             _db.SaveChanges();
             return Ok();

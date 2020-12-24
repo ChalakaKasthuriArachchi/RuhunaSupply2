@@ -1,4 +1,8 @@
-﻿using System;
+﻿using cmlMySqlStandard;
+using Microsoft.EntityFrameworkCore;
+using RuhunaSupply.Common;
+using RuhunaSupply.Data;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -9,11 +13,19 @@ using static RuhunaSupply.Common.MyEnum;
 
 namespace RuhunaSupply.Model
 {
-    public class PurchaseRequest
+    public class PurchaseRequest : IndexedObject
     {
         public PurchaseRequest()
         { 
         
+        }
+        internal static int GetNextId(ApplicationDbContext db)
+        {
+            PurchaseRequest pr = 
+                db.PurchaseRequests.FromSqlRaw("SELECT * FROM PurchaseRequests ORDER BY Id DESC").FirstOrDefault();
+            if (pr == null)
+               return 1;
+            return pr.Id + 1;
         }
         #region Dynamic Fields
         [NotMapped]
@@ -21,12 +33,42 @@ namespace RuhunaSupply.Model
         {
             get => _DateTime.ToString("yyyy-MM-dd hh:mm tt");
         }
+        public User SubmittedBy 
+        {
+            get
+            {
+                return Cache.GetUser(SubmittedById, true);
+            }
+        }
+        public User Examinig 
+        {
+            get
+            {
+                return Cache.GetUser(ExaminigId, true);
+            } 
+        }
+        public Faculty Faculty
+        {
+            get
+            {
+                return Cache.GetFaculty(FacultyId, true);
+            }
+        }
+        public Department Department
+        {
+            get
+            {
+                return Cache.GetDepartment(DepartmentId,true);
+            }
+        }
         #endregion
 
+        #region Saved
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
-        public Faculty Faculty { get; set; }
-        public Department Department { get; set; }
+        public int FacultyId { get; set; }
+        public int DepartmentId { get; set; }
         public double BudgetAllocation { get; set; }
         public string FundGoes { get; set; }
         [Column(TypeName = "nvarchar(100)")]
@@ -40,8 +82,11 @@ namespace RuhunaSupply.Model
         public string Justification { get; set; }
         public PurchaseRequestStatus Status { get; set; }
         public int SubmittedById { get; set; }
-        public User SubmittedBy { get; set; }
         public int ExaminigId { get; set; }
-        public User Examinig { get; set; }
+        public List<PurchaseRequestItem> Items { get; set; } = new List<PurchaseRequestItem>();
+        public bool IsDeleted { get; set; }
+
+        public int Index => Id;
+        #endregion
     }
 }

@@ -25,7 +25,7 @@ namespace RuhunaSupply.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Faculty>>> GetFaculty()
         {
-            return await _context.Faculties.ToListAsync();
+            return await _context.Faculties.OrderBy(fac => fac.Name).ToListAsync();
         }
 
         // GET: api/Faculties/5

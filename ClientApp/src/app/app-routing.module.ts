@@ -19,31 +19,32 @@ import { Category2Component } from './category2/category2.component';
 import { SpecificationComponent } from './specification/specification.component';
 import { SpecificationCategoryComponent } from './specification-category/specification-category.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-
+import { TestingComponent } from './testing/testing.component';
+import { AddPurchaseRequestComponent } from './add-purchase-request/add-purchase-request.component';
 
 const routes: Routes = [
+  { path: '', component : DashboardComponent },
   {path: 'createaccount',component : UserAccountComponent},
   { path: 'category1', component: Category1Component },
   { path: 'category1/add', component: AddCategory1Component },
-  { path: '', component: DashboardComponent },
-  { path: 'user/login', component: LoginComponent },
-  { path: 'user/signup',component : UserAccountComponent},
-  { path: 'category2/add', component: AddCategory2Component },
   { path: 'category2', component: Category2Component },
   { path: 'category2/add', component: AddCategory2Component },
   { path: 'category3', component: Category3Component },
   { path: 'category3/add', component: AddCategory3Component },
-  { path: 'createaccount', component: UserAccountComponent },
   { path: 'user/login', component: LoginComponent },
+  { path: 'user/signup',component : UserAccountComponent},
   { path: 'supplier', component: SuppliersComponent },
   { path: 'supplier/register', component: RegisterSupplierComponent },
   { path: 'createaccount', component: UserAccountComponent },
   { path: 'item', component: ItemComponent },
+  { path: 'item/new', component: AddItemComponent },
   { path: 'supplier', component: SuppliersComponent },
-  { path: 'category1/add', component: AddCategory1Component },
-  { path: 'category1', component: Category1Component },
-  { path: 'item/add', component: AddItemComponent },
-  { path: 'item', component: ItemComponent }
+  { path: 'purchaserequest', component: PurchaseRequestComponent },
+  {path: 'specification',component : SpecificationComponent},
+  {path: 'specification-category',component : SpecificationCategoryComponent},
+  { path: 'item', component: ItemComponent },
+  { path: 'purchaserequest/add', component: AddPurchaseRequestComponent },
+  { path: 'testing', component: TestingComponent}
 ];
 
 @NgModule({

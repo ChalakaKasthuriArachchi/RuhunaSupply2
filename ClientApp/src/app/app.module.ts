@@ -19,10 +19,26 @@ import { LoginComponent } from './user-account/login/login.component';
 import { UserAccountService } from './shared/user-account.service';
 import { AddItemComponent } from './add-item/add-item.component';
 import { ItemComponent } from './item/item.component';
+import { AddUserComponent } from './add-user/add-user.component';
+import { UserComponent } from './user/user.component';
 import { SpecificationCategoryComponent } from './specification-category/specification-category.component';
 import { SpecificationComponent } from './specification/specification.component';
 import { PurchaseRequestComponent } from './purchase-request/purchase-request.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+//import { PurchaseRequestComponent } from './purchase-request/purchase-request.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AddPurchaseRequestComponent } from './add-purchase-request/add-purchase-request.component';
+
+
+// import { MatCardModule } from '@angular/material/card';
+// import { MatButtonModule} from '@angular/material/button';
+// import { MatMenuModule } from '@angular/material/menu';
+// import { MatToolbarModule } from '@angular/material/toolbar';
+// import { MatIconModule } from '@angular/material/icon';
+import { TestingComponent } from './testing/testing.component';
+
+
+
 
 @NgModule({
   declarations: [
@@ -40,7 +56,18 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     Category3Component,
     Category1Component,
     AddItemComponent,
-    ItemComponent
+    ItemComponent,
+    UserAccountComponent,
+    SpecificationCategoryComponent,
+    SpecificationComponent,
+    PurchaseRequestComponent,
+    DashboardComponent,
+    ItemComponent,
+    AddPurchaseRequestComponent,
+    TestingComponent
+    ItemComponent,
+    AddUserComponent,
+    UserComponent
   ],
   imports: [
     CommonModule,
@@ -48,7 +75,20 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    // MatButtonModule,
+    // MatMenuModule,
+    // MatToolbarModule,
+    // MatIconModule,
+    // MatCardModule
+  ],
+  exports: [
+    // MatButtonModule,
+    // MatMenuModule,
+    // MatToolbarModule,
+    // MatIconModule,
+    // MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
