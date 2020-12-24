@@ -64,7 +64,7 @@ import { TestingComponent } from './testing/testing.component';
     DashboardComponent,
     ItemComponent,
     AddPurchaseRequestComponent,
-    TestingComponent
+    TestingComponent,
     ItemComponent,
     AddUserComponent,
     UserComponent

@@ -13,10 +13,14 @@ export class AddUserComponent implements OnInit {
   checkoutForm;
   userList;
   FacultyList: [];
+  userPositions : [];
+  DepartmentList : [];
 
   constructor(
     private formBuilder : FormBuilder,
     private userService : UserService,
+    private FacultyService : FacultyService,
+    private DepartmentService : DepartmentService
     ) { 
         this.checkoutForm=this.formBuilder.group({
           Faculty:'',
@@ -42,7 +46,9 @@ export class AddUserComponent implements OnInit {
       );
   }
   onFacultySelect(fg:FormGroup){
-
+    this.DepartmentService.getDepartmentList(fg.value.Faculty).subscribe(
+      res => this.DepartmentList = res as []
+    );
   }
   
 
