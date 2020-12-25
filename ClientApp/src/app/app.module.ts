@@ -23,6 +23,8 @@ import { SpecificationCategoryComponent } from './specification-category/specifi
 import { SpecificationComponent } from './specification/specification.component';
 import { PurchaseRequestComponent } from './purchase-request/purchase-request.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { ViewSpecificationCategoryComponent } from './view-specification-category/view-specification-category.component';
+import { ViewSpecificationComponent } from './view-specification/view-specification.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     SpecificationCategoryComponent,
     SpecificationComponent,
     PurchaseRequestComponent,
-    DashboardComponent
+    DashboardComponent,
+    ViewSpecificationCategoryComponent,
+    ViewSpecificationComponent
   ],
   imports: [
     CommonModule,

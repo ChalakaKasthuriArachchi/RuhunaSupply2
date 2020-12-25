@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using RuhunaSupply.Data;
 using RuhunaSupply.Model;
 using ThirdParty.Json.LitJson;
@@ -43,6 +44,20 @@ namespace RuhunaSupply.Controllers
             _db.SpecificationCategories.Add(sp);
             _db.SaveChanges();
             return Ok();
+        }
+
+        [HttpGet]
+        public SpecificationCategory[] Index(string Item, string Search)
+        {
+            IQueryable<SpecificationCategory> query = _db.SpecificationCategories;
+            if (Item != null && Item.Trim().Length > 0 && Item != "undefined")
+                query = query.Where(s => s.Item.Id.ToString() == Item);
+            if (Search != null && Search.Trim().Length > 0 && Search != "undefined")
+                query = query.Where(s => s.Id.ToString().Contains(Search)
+                            || s.Title.Contains(Search)
+                            || s.Description.Contains(Search));
+            SpecificationCategory[] specificationcategories = query.Include(s => s.Item).ToArray();
+            return specificationcategories;
         }
 
         [HttpPost]

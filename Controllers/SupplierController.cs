@@ -31,7 +31,7 @@ namespace RuhunaSupply.Controllers
         {
             IQueryable<Supplier> query = _db.Suppliers;
             if (Category != null && Category.Trim().Length > 0 && Category != "undefined")
-                query = query.Where(s => s.Category2.Id.ToString() == Category);
+                query = query.Where(s => s.Category2.Id.ToString() == Category); 
             if (Search != null && Search.Trim().Length > 0 && Search != "undefined")
                 query = query.Where(s => s.BusinessName.Contains(Search)
                             || s.BusinessAddress.Contains(Search)

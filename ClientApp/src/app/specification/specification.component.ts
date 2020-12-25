@@ -11,6 +11,7 @@ import { SpecificationService } from '../shared/specification.service';
 })
 export class SpecificationComponent implements OnInit {
   checkoutForm;
+  specificationList;
   form: FormGroup;
   category2List = [];
   itemList = [];
@@ -34,7 +35,7 @@ export class SpecificationComponent implements OnInit {
     this.category2Service.getCategory2List(0)
       .subscribe(
         res => this.category2List = res as []
-    );
+      );
 
     this.itemService.getItemList(null,null)
       .subscribe(

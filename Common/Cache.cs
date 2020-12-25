@@ -1,4 +1,4 @@
-﻿using cmlMySqlStandard;
+﻿//using cmlMySqlStandard;
 using Microsoft.EntityFrameworkCore;
 using RuhunaSupply.Data;
 using RuhunaSupply.Model;
@@ -11,14 +11,14 @@ namespace RuhunaSupply.Common
 {
     public static class Cache
     {
-        public static IndexedList<Category1> Category1s { get; set; }
-        public static IndexedList<Category2> Category2s { get; set; }
-        public static IndexedList<Category3> Category3s { get; set; }
-        public static IndexedList<Department> Department { get; set; }
-        public static IndexedList<Faculty> Faculty { get; set; }
-        public static IndexedList<Item> Item { get; set; }
-        public static IndexedList<Specification> Specification { get; set; }
-        public static IndexedList<SpecificationCategory> SpecificationCategory { get; set; }
+        //public static IndexedList<Category1> Category1s { get; set; }
+        //public static IndexedList<Category2> Category2s { get; set; }
+        //public static IndexedList<Category3> Category3s { get; set; }
+        //public static IndexedList<Department> Department { get; set; }
+        //public static IndexedList<Faculty> Faculty { get; set; }
+        //public static IndexedList<Item> Item { get; set; }
+        //public static IndexedList<Specification> Specification { get; set; }
+        //public static IndexedList<SpecificationCategory> SpecificationCategory { get; set; }
 
         public static bool RefreshCache(ApplicationDbContext db)
         {

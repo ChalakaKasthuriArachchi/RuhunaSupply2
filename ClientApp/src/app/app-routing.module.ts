@@ -19,6 +19,8 @@ import { Category2Component } from './category2/category2.component';
 import { SpecificationComponent } from './specification/specification.component';
 import { SpecificationCategoryComponent } from './specification-category/specification-category.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { ViewSpecificationComponent } from './view-specification/view-specification.component';
+import { ViewSpecificationCategoryComponent } from './view-specification-category/view-specification-category.component'
 
 
 const routes: Routes = [
@@ -46,7 +48,11 @@ const routes: Routes = [
   { path: 'item', component: ItemComponent },
   { path: 'purchaserequest', component: PurchaseRequestComponent },
   {path: 'specification',component : SpecificationComponent},
-  {path: 'specification-category',component : SpecificationCategoryComponent},
+  { path: 'specification-category', component: SpecificationCategoryComponent },
+  { path: 'specification/view', component: ViewSpecificationComponent },
+  { path: 'specification-category/view', component: ViewSpecificationCategoryComponent },
+
+
 ];
 
 @NgModule({

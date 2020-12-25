@@ -14,14 +14,14 @@ export class SuppliersComponent implements OnInit {
   searchText : string;
   category : number;
   constructor(private supplierService : SupplierService,private route : ActivatedRoute) { 
-    this.route.queryParams.subscribe((params) => {
-     //this.params = params;
-    })
+   // this.route.queryParams.subscribe((params) => {
+      //this.params = params;
+  //  })
   }
 
   ngOnInit(): void {
-    //this.supplierService.getSupplierList()
-    //.subscribe(res => this.supplierList = res as []);
+   // this.supplierService.getSupplierList(this.category, this.searchText)
+   // .subscribe(res => this.supplierList = res as []);
     this.getSuppliers();
   }
   getSuppliers(){

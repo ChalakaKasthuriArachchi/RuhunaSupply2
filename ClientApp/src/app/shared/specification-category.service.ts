@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -13,5 +13,21 @@ export class SpecificationCategoryService {
     console.log(formData);
     console.log(environment.apiBaseURI + '/SpecificationCategory');
     return this.http.post(environment.apiBaseURI + '/SpecificationCategory', formData);
+  }
+
+  putSpecificationCategory(formData) {
+    return this.http.put(environment.apiBaseURI + '/SpecificationCategory/' + formData.Id,
+      formData);
+  }
+  getSpecificationCategoryList(item, search) {
+    var tok = localStorage.getItem('token');
+    if (tok != null) {
+      var tokenHeader = new HttpHeaders({ 'Authorization': 'Bearer ' + tok });
+      return this.http.get(environment.apiBaseURI + '/SpecificationCategory?Item=' + item + '&search=' + search,
+        { headers: tokenHeader });
+    }
+  }
+  deletespecificationcategoryList(id) {
+    return this.http.delete(environment.apiBaseURI + '/SpecificationCategory/' + id);
   }
 }
