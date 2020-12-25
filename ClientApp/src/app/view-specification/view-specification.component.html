@@ -1,0 +1,50 @@
+<blockquote class="blockquote ml-5">
+  <footer class="bloquote-footer">
+    Specifications List
+  </footer>
+</blockquote>
+<div mdbTable class="grid-table">
+  <div class="thead">
+    <div mdbTableCol class="tr">
+      <div class="td">No</div>
+      <div class="td">ID</div>
+      <div class="td">Item Id</div>
+      <div class="td">Name</div>
+      <div class="td">Value</div>
+    </div>
+  </div>
+  <div class="tbody">
+    <div class="tr" mdbTableCol *ngFor="let sp of specificationList; let i = index;">
+      <div class="td">
+        {{i + 1}}
+      </div>
+      <div class="td">
+        <label class="form-control">{{sp.id}}</label>
+      </div>
+      <div class="td">
+        <label class="form-control">{{sp.itemId}}</label>
+      </div>
+      <div class="td">
+        <label class="form-control">{{sp.name}}</label>
+      </div>
+      <div class="td">
+        <label class="form-control">{{sp.value}}</label>
+      </div>
+      <!--<div class="td">
+        <a class="btn btn-outline-success" href="#" role="button">View</a>
+      </div>-->
+    </div>
+    <div class="tr">
+      <div class="td"></div>
+      <div class="td"></div>
+      <div class="td">
+        <label for="Category2">Select Specification Category</label>
+        <select id="Category2" class="input-text" [(ngModel)]="searchText">
+          <option value="0" selected hidden>Select The Category</option>
+          <option *ngFor="let cat of category2List; let i = index;" value="{{cat.id}}">{{cat.name}}</option>
+        </select>
+      </div>
+      <a class="btn btn-primary" role="button" (click)="getSpecification()">Search</a>
+    </div>
+  </div>
+</div>

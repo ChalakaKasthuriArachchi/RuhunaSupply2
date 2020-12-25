@@ -12,6 +12,7 @@ import { SpecificationService } from '../shared/specification.service';
 })
 export class SpecificationComponent implements OnInit {
   checkoutForm;
+  specificationList;
   form: FormGroup;
   specCategories = [];
   itemList = [];
@@ -32,8 +33,12 @@ export class SpecificationComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
-    this.itemService.getItemList(0,null,false)
+    this.category2Service.getCategory2List(0)
+      .subscribe(
+        res => this.category2List = res as []
+      );
+
+    this.itemService.getItemList(null,null)
       .subscribe(
         res => this.itemList=res as[]
       );

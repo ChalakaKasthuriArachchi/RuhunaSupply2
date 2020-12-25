@@ -21,6 +21,8 @@ import { SpecificationCategoryComponent } from './specification-category/specifi
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { TestingComponent } from './testing/testing.component';
 import { AddPurchaseRequestComponent } from './add-purchase-request/add-purchase-request.component';
+import { ViewSpecificationComponent } from './view-specification/view-specification.component';
+import { ViewSpecificationCategoryComponent } from './view-specification-category/view-specification-category.component'
 
 const routes: Routes = [
   { path: '', component : DashboardComponent },
@@ -46,6 +48,11 @@ const routes: Routes = [
   { path: 'purchaserequest/add', component: AddPurchaseRequestComponent },
   { path: 'purchaserequest/view', component: AddPurchaseRequestComponent },
   { path: 'testing', component: TestingComponent}
+  { path: 'specification-category', component: SpecificationCategoryComponent },
+  { path: 'specification/view', component: ViewSpecificationComponent },
+  { path: 'specification-category/view', component: ViewSpecificationCategoryComponent },
+
+
 ];
 
 @NgModule({

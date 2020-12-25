@@ -25,6 +25,8 @@ import { SpecificationCategoryComponent } from './specification-category/specifi
 import { SpecificationComponent } from './specification/specification.component';
 import { PurchaseRequestComponent } from './purchase-request/purchase-request.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { ViewSpecificationCategoryComponent } from './view-specification-category/view-specification-category.component';
+import { ViewSpecificationComponent } from './view-specification/view-specification.component';
 //import { PurchaseRequestComponent } from './purchase-request/purchase-request.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AddPurchaseRequestComponent } from './add-purchase-request/add-purchase-request.component';
@@ -67,7 +69,10 @@ import { TestingComponent } from './testing/testing.component';
     TestingComponent,
     ItemComponent,
     AddUserComponent,
-    UserComponent
+    UserComponent,
+    DashboardComponent,
+    ViewSpecificationCategoryComponent,
+    ViewSpecificationComponent
   ],
   imports: [
     CommonModule,
