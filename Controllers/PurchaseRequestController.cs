@@ -16,6 +16,7 @@ using System.Text.Json;
 using ThirdParty.Json.LitJson;
 using System.Data.Common;
 using System.Data;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace RuhunaSupply.Controllers
 {
@@ -82,7 +83,7 @@ namespace RuhunaSupply.Controllers
                 User user = Cache.GetUser(useraccount.Id, false);
                 if (user == null)
                     throw new Exception("User Not Found");
-                using (DbTransaction trans = _db.Database.BeginTransaction() as DbTransaction)
+                using (IDbContextTransaction trans = _db.Database.BeginTransaction())
                 {
                     JsonData jd = JsonMapper.ToObject(req.ToString());
                     JsonData jform = jd["form"];
@@ -97,43 +98,65 @@ namespace RuhunaSupply.Controllers
                         Purpose = (Purposes)int.Parse(jform["Purpose"].ToString()),
                         Justification = jform["Justification"].ToString(),
                     };
-                    if (jform["Id"].ToString() == "0")
+                    if (jform["Id"].ToString() == "0") //New Purchase Request
                     {
                         pr.Id = PurchaseRequest.GetNextId(_db);
                         pr.Status = PurchaseRequestStatus.On_Approval;
                         pr.SubmittedById = user.Id;
                         pr.ExaminigId = int.Parse(forwardTo.ToString());
+                        pr._DateTime = Functions.DateTime;
+                        _db.PurchaseRequests.Add(pr);
+                        //int pri_Id = PurchaseRequestItem.GetNextId(_db);
                         foreach (JsonData ji in jd["items"])
                         {
-                            _db.PurchaseRequestItems.Add(
-                                new PurchaseRequestItem()
+                            PurchaseRequestItem pri = new PurchaseRequestItem()
+                            {
+                                //Id = pri_Id++,
+                                PurchaseRequestId = pr.Id,
+                                ItemId = int.Parse(ji["id"].ToString()),
+                                QtyRequired = double.Parse(ji["quantity"].ToString()),
+                            };
+                            _db.PurchaseRequestItems.Add(pri);
+                            int specCat = int.Parse(ji["specificationCategoryId"].ToString());
+                            Specification[] specs = _db.Specification.Where(spec => spec.SpecificationCategoryId == specCat).ToArray();
+                            foreach (var spec in specs)
+                            {
+                                pri.Specifications.Add(new PurchaseRequestItemSpecification()
                                 {
-                                    ItemId = int.Parse(ji["id"].ToString()),
-                                    QtyRequired = double.Parse(ji["quantity"].ToString()),
-                                }
-                                );
+                                    ItemId = pri.ItemId,
+                                    Name = spec.Name,
+                                    Value = spec.Value
+                                });
+                            }
                         }
-                        _db.UserPurchaseRequests.AddRange(new UserPurchaseRequest[]
-                        {
+                        _db.UserPurchaseRequests.Add(
                             new UserPurchaseRequest()
                             {
                               Date = Functions.DateTime,
-                              Involvement = Involvements.Submitted,
-                              
-                            },
+                              Involvement = Involvements.Submitted
+                            });
+                    }
+                    else // Existing Purchase Request
+                    { 
+                        pr.Id = int.Parse(jform["Id"].ToString());
+                        _db.UserPurchaseRequests.Add(
                             new UserPurchaseRequest()
                             {
-
-                            }
-                        });
-                        _db.PurchaseRequests.Add(pr);
-                    }
-                    else
-                    {
-                        pr.Id = int.Parse(jform["Id"].ToString());
+                                Date = Functions.DateTime,
+                                Involvement = Involvements.Approved_and_Forwarded
+                            });
                         _db.PurchaseRequests.Update(pr);
                     }
-                    
+                    try
+                    {
+                        _db.SaveChanges();
+                        trans.Commit();
+                    }
+                    catch(Exception ex)
+                    {
+                        trans.Rollback();
+                        throw ex;
+                    }
                 }
                 return Ok();
             }

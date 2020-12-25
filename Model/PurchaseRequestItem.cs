@@ -1,4 +1,5 @@
 ﻿using cmlMySqlStandard;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using RuhunaSupply.Common;
 using RuhunaSupply.Data;
@@ -17,6 +18,16 @@ namespace RuhunaSupply.Model
         {
 
         }
+        #region Static 
+        internal static int GetNextId(ApplicationDbContext db)
+        {
+            PurchaseRequestItem pri =
+                db.PurchaseRequestItems.FromSqlRaw("SELECT * FROM PurchaseRequests ORDER BY Id DESC").FirstOrDefault();
+            if (pri == null)
+                return 1;
+            return pri.Id + 1;
+        }
+        #endregion
         #region Dynamic
         public Item GetItem(int id,bool notNull)
         {
@@ -32,6 +43,7 @@ namespace RuhunaSupply.Model
         #endregion
         #region Saved
         [Key]
+        //[DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
         public int PurchaseRequestId { get; set; }
         public int ItemId { get; set; }

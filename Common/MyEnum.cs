@@ -37,7 +37,8 @@ namespace RuhunaSupply.Common
         }
         public enum Involvements
         {
-            Submitted
+            Submitted,
+            Approved_and_Forwarded
         }
 
         public enum UserPositions

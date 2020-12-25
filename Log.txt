@@ -64,3 +64,55 @@ Object reference not set to an instance of an object.
 Stack Trace:
    at RuhunaSupply.Controllers.SpecificationCategoryController.PostSpecificationCategory(Object specificationcategory) in D:\Programming\Asp.Net\Systems\RuhunaSupply\Controllers\SpecificationCategoryController.cs:line 55
 --------------------------------------------------------------------------
+Date : 12/25/2020 | Time : 2:09 AM
+Error Text:
+Unable to Save Purchase Request
+Message:
+Input string was not in a correct format.
+Stack Trace:
+   at System.Number.ThrowOverflowOrFormatException(ParsingStatus status, TypeCode type)
+   at System.Number.ParseInt32(ReadOnlySpan`1 value, NumberStyles styles, NumberFormatInfo info)
+   at System.Int32.Parse(String s)
+   at RuhunaSupply.Controllers.PurchaseRequestController.PostPurchaseRequest(Object req) in D:\Programming\Asp.Net\Systems\RuhunaSupply\Controllers\PurchaseRequestController.cs:line 90
+--------------------------------------------------------------------------
+Date : 12/25/2020 | Time : 2:14 AM
+Error Text:
+Unable to Save Purchase Request
+Message:
+Input string was not in a correct format.
+Stack Trace:
+   at System.Number.ThrowOverflowOrFormatException(ParsingStatus status, TypeCode type)
+   at System.Number.ParseInt32(ReadOnlySpan`1 value, NumberStyles styles, NumberFormatInfo info)
+   at System.Int32.Parse(String s)
+   at RuhunaSupply.Controllers.PurchaseRequestController.PostPurchaseRequest(Object req) in D:\Programming\Asp.Net\Systems\RuhunaSupply\Controllers\PurchaseRequestController.cs:line 90
+--------------------------------------------------------------------------
+Date : 12/25/2020 | Time : 2:15 AM
+Error Text:
+Unable to Save Purchase Request
+Message:
+Input string was not in a correct format.
+Stack Trace:
+   at System.Number.ThrowOverflowOrFormatException(ParsingStatus status, TypeCode type)
+   at System.Number.ParseInt32(ReadOnlySpan`1 value, NumberStyles styles, NumberFormatInfo info)
+   at System.Int32.Parse(String s)
+   at RuhunaSupply.Controllers.PurchaseRequestController.PostPurchaseRequest(Object req) in D:\Programming\Asp.Net\Systems\RuhunaSupply\Controllers\PurchaseRequestController.cs:line 90
+--------------------------------------------------------------------------
+Date : 12/25/2020 | Time : 2:18 AM
+Error Text:
+Unable to Save Purchase Request
+Message:
+Input string was not in a correct format.
+Stack Trace:
+   at System.Number.ThrowOverflowOrFormatException(ParsingStatus status, TypeCode type)
+   at System.Number.ParseInt32(ReadOnlySpan`1 value, NumberStyles styles, NumberFormatInfo info)
+   at System.Int32.Parse(String s)
+   at RuhunaSupply.Controllers.PurchaseRequestController.PostPurchaseRequest(Object req) in D:\Programming\Asp.Net\Systems\RuhunaSupply\Controllers\PurchaseRequestController.cs:line 90
+--------------------------------------------------------------------------
+Date : 12/25/2020 | Time : 2:54 AM
+Error Text:
+Unable to Save Purchase Request
+Message:
+Object reference not set to an instance of an object.
+Stack Trace:
+   at RuhunaSupply.Controllers.PurchaseRequestController.PostPurchaseRequest(Object req) in D:\Programming\Asp.Net\Systems\RuhunaSupply\Controllers\PurchaseRequestController.cs:line 119
+--------------------------------------------------------------------------

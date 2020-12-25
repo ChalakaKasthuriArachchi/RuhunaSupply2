@@ -39,6 +39,9 @@ export class AddUserComponent implements OnInit {
         error => console.log('Error!',error)
       );
   }
+  onFacultySelect(checkoutForm){
+    
+  }
   
 
 }

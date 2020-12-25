@@ -34,7 +34,7 @@ export class AddPurchaseRequestComponent implements OnInit {
       Justification: '',
       Vote: '',
       IsInProcumentPlan: '',
-      Purpose: '',
+      Purpose: 0,
       DateTime: '',
       BudgetAllocation : '',
       IsSaved : false,
@@ -56,6 +56,7 @@ export class AddPurchaseRequestComponent implements OnInit {
   }
   onSubmit(event){
     let purchaseRequest = { form : this.checkoutForm.value, items : this.selectedItems, forwardTo : event.target.id};
+    console.log(purchaseRequest);
     this.PurchaseRequestService.postPurchaseRequest(purchaseRequest)
       .subscribe(
         data => console.log('Success!', data),
@@ -85,7 +86,7 @@ export class AddPurchaseRequestComponent implements OnInit {
           res => {
             item = res;
             item.quantity = (<HTMLInputElement>document.getElementById('qty')).value;
-            item.specificationCategoryId = spec.Id;
+            item.specificationCategoryId = spec.id;
             this.selectedItems.push(item);
           }
         )
