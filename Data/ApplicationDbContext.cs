@@ -17,7 +17,7 @@ namespace RuhunaSupply.Data
         public DbSet<User> Users { get; set; }
         public DbSet<UserAccount> UserAccounts { get; set; }
         public DbSet<PurchaseRequestItem> PurchaseRequestItems { get; set; }
-        public DbSet<Quatation> Quatations { get; set; }
+        public DbSet<Quotation> Quotations { get; set; }
         public DbSet<SpecificationCategory> SpecificationCategories { get; set; }
         public DbSet<Item> Items { get; set; }
         public DbSet<Specification> Specification { get; set; }
@@ -32,7 +32,7 @@ namespace RuhunaSupply.Data
 
         public DbSet<PurchaseRequestItemSpecification> PurchaseRequestItemSpecifications { get; set; }
 
-        public DbSet<QuatationItemSpecification> QuatationItemSpecifications { get; set; }
+        public DbSet<_QuatationItemSpecification> QuatationItemSpecifications { get; set; }
        
 
         public DbSet<Category1> Category1s { get; set; }

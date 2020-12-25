@@ -33,7 +33,7 @@ namespace RuhunaSupply.Controllers
             int max_id = 0;
             try
             {
-                max_id = _context.Specification.Max((sp) => sp.Id);
+                max_id = _db.Specification.Max((sp) => sp.Id);
             }
             catch
             {
@@ -47,74 +47,37 @@ namespace RuhunaSupply.Controllers
                 Name = Name,
                 Value = Value
             };
-            _context.Specification.Add(sp);
-            _context.SaveChanges();
+            _db.Specification.Add(sp);
+            _db.SaveChanges();
             return Ok();
-        }
-
-       [HttpGet]
-       public Specification[] Index(string Category,string Search)
-        {
-            IQueryable<Specification> query = _context.Specification;
-            if (Category != null && Category.Trim().Length > 0 && Category != "undefined")
-                query = query.Where(s => s.SpecificationCategory.Id.ToString() == Category);
-            if (Search != null && Search.Trim().Length > 0 && Search != "undefined")
-                query = query.Where(s => s.SpecificationCategory.ToString().Contains(Search));
-            Specification[] specification = query.Include(s => s.SpecificationCategory).ToArray();
-            return specification;
-        } 
-
-        // GET: api/Specification/
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Specification>>> GetSpecification()
-        {
-            return await _context.Specification.ToListAsync();
-        }
-
-        // GET: api/Specification/6
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Specification>> GetSpecification(int id)
-        {
-            var specification = await _context.Specification.FindAsync(id);
-
-            if (specification == null)
-            {
-                return NotFound();
-            }
-
-            return specification;
         }
 
         [HttpPost]
         public async Task<ActionResult<Specification>> PostSpecification(object specification)
         {
             JsonData jd = JsonMapper.ToObject(specification.ToString());
-            int specId = int.Parse(jd["SpecificationCategoryId"].ToString());
-            int itemId = int.Parse(jd["ItemId"].ToString());
+            int specId = int.Parse(jd["SpecCategory"].ToString());
+            int itemId = int.Parse(jd["Item"].ToString());
             Specification sp = new Specification()
             {
-                SpecificationCategory = _context.SpecificationCategories.FirstOrDefault(cat => cat.Id == specId),
-                Item = _context.Items.FirstOrDefault(it => it.Id == itemId),
+                SpecificationCategoryId = specId,
+                ItemId = itemId,
                 Name = jd["Name"].ToString(),
                 Value = jd["Value"].ToString()
 
             };
-            _context.Specification.Add(sp);
-            await _context.SaveChangesAsync();
+            _db.Specification.Add(sp);
+            await _db.SaveChangesAsync();
 
             return CreatedAtAction("Specification", new { id = sp.Id }, sp);
         }
 
         [HttpPut]
-        public IActionResult Edit(int Id, SpecificationCategory SpecificationCategory, Item Item, string Name, string Value)
+        public IActionResult Edit(object specification)
         {
             _context.Specification.Update(new Specification()
             {
-                Id = Id, 
-                SpecificationCategory= SpecificationCategory, 
-                Item = Item, 
-                Name = Name, 
-                Value = Value 
+                
             });
             _context.SaveChanges();
             return Ok();

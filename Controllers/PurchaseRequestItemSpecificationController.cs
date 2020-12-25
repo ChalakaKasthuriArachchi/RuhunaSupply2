@@ -17,7 +17,7 @@ namespace RuhunaSupply.Controllers
         }
         public IActionResult Add(PurchaseRequestItem PurchaseRequestItem, Specification Specification)
         {
-            int max_id = 0;
+            /*int max_id = 0;
             try
             {
                 max_id = _db.PurchaseRequestItemSpecifications.Max((pris) => pris.Id);
@@ -32,21 +32,21 @@ namespace RuhunaSupply.Controllers
                 Specification = Specification
             };
             _db.PurchaseRequestItemSpecifications.Add(pris);
-            _db.SaveChanges();
-            return Ok();
+            _db.SaveChanges();*/
+            return BadRequest();
         }
 
         [HttpPost]
         public IActionResult Edit(int Id, PurchaseRequestItem PurchaseRequestItem, Specification Specification)
         {
-            _db.PurchaseRequestItemSpecifications.Update(new PurchaseRequestItemSpecification()
+            /*_db.PurchaseRequestItemSpecifications.Update(new PurchaseRequestItemSpecification()
             {
 
                 Id = Id,
                 PurchaseRequestItem = PurchaseRequestItem,
                 Specification = Specification
             });
-            _db.SaveChanges();
+            _db.SaveChanges();*/
             return Ok();
         }
 

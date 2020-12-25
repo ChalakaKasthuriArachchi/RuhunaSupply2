@@ -18,7 +18,7 @@ namespace RuhunaSupply.Controllers
             this._db = context;
         }
         [HttpPost]
-        public IActionResult Add(Quatation Quatation, PurchaseRequestItem PurchaseRequestItem, Item Item, QuatationStatus Status, string IsSupply, string Description, int Qty, int Total, string Rate)
+        public IActionResult Add(Quotation Quatation, PurchaseRequestItem PurchaseRequestItem, Item Item, QuatationStatus Status, string IsSupply, string Description, int Qty, int Total, string Rate)
         {
             int max_id = 0;
 
@@ -35,15 +35,15 @@ namespace RuhunaSupply.Controllers
             QuatationItem qt = new QuatationItem()
             {
                 Id = max_id + 1,
-                Quatation=Quatation,
-                PurchaseRequestItem=PurchaseRequestItem,
-                Item=Item,
+                //Quatation=Quatation,
+                //PurchaseRequestItem=PurchaseRequestItem,
+                //Item=Item,
                 Status =Status,
-                IsSupply=IsSupply,
+                //IsSupply=IsSupply,
                 Description=Description,
                 Qty = Qty,
                 Total = Total,
-                Rate = Rate
+                //Rate = Rate
             };
 
             _db.QuatationItems.Add(qt);
@@ -52,9 +52,9 @@ namespace RuhunaSupply.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(int Id, Quatation Quatation, PurchaseRequestItem PurchaseRequestItem, Item Item, QuatationStatus Status, string IsSupply, string Description, int Qty, int Total, string Rate)
+        public IActionResult Edit(int Id, Quotation Quatation, PurchaseRequestItem PurchaseRequestItem, Item Item, QuatationStatus Status, string IsSupply, string Description, int Qty, int Total, string Rate)
         {
-            _db.QuatationItems.Update(new QuatationItem { Id = Id, Quatation = Quatation, PurchaseRequestItem = PurchaseRequestItem, Item = Item, Status = Status, IsSupply = IsSupply, Description = Description,Qty=Qty, Total=Total, Rate=Rate});
+            //_db.QuatationItems.Update(new QuatationItem { Id = Id, Quatation = Quatation, PurchaseRequestItem = PurchaseRequestItem, Item = Item, Status = Status, IsSupply = IsSupply, Description = Description,Qty=Qty, Total=Total, Rate=Rate});
             _db.SaveChanges();
             return Ok();
         }

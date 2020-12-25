@@ -22,22 +22,22 @@ namespace RuhunaSupply.Controllers
             int max_id = 0;
             try
             {
-                max_id = _db.Quatations.Max((qt) => qt.Id);
+                max_id = _db.Quotations.Max((qt) => qt.Id);
             }
             catch
             {
 
             }
-            Quatation qt = new Quatation()
+            Quotation qt = new Quotation()
             {
                 Id = max_id + 1,
-                PurchaseRequest=PurchaseRequest,
-                Supplier=Supplier,
+                //PurchaseRequest=PurchaseRequest,
+                //Supplier1=Supplier,
                 Status = Status,
                 Date = Date
 
             };
-            _db.Quatations.Add(qt);
+            _db.Quotations.Add(qt);
             _db.SaveChanges();
             return Ok();
         }
@@ -45,11 +45,11 @@ namespace RuhunaSupply.Controllers
         [HttpPost]
         public IActionResult Edit(int Id, PurchaseRequest PurchaseRequest, Supplier Supplier, QuatationStatus Status, DateTime Date)
         {
-            _db.Quatations.Update(new Quatation()
+            _db.Quotations.Update(new Quotation()
             {
                 Id = Id,
-                PurchaseRequest = PurchaseRequest,
-                Supplier = Supplier,
+                /*PurchaseRequest = PurchaseRequest,
+                Supplier1 = Supplier,*/
                 Status = Status,
                 Date = Date
             });
@@ -59,7 +59,7 @@ namespace RuhunaSupply.Controllers
         [HttpPost]
         public IActionResult Delete(int Id)
         {
-            _db.Quatations.Remove(new Quatation() { Id = Id });
+            _db.Quotations.Remove(new Quotation() { Id = Id });
             _db.SaveChanges();
             return Ok();
         }

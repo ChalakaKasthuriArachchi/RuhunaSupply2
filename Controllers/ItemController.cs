@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using RuhunaSupply.Data;
 using RuhunaSupply.Model;
 using ThirdParty.Json.LitJson;
@@ -20,9 +21,23 @@ namespace RuhunaSupply.Controllers
             this._db = context;
         }
         [HttpGet]
-        public Item[] GetItems()
+        public Item[] GetItems(int category,string search,bool fullView)
         {
-            return _db.Items.ToArray();
+            if (search != null)
+                search = search.Trim().ToLower();
+            IQueryable<Item> query = _db.Items;
+            query = query.OrderBy(it => it.Name);
+            if (search != null && search.Trim().Length > 0 && search != "undefined" && category > 0)
+                query = query.Where(it => it.Name.ToLower().Contains(search) || it.Description.ToLower().Contains(search));
+            Item[] items = query.ToArray();
+            return items;
+        }
+        [HttpGet("{id}")]
+        public Item GetItem(int id,bool fullView)
+        {
+            //if (fullView)
+            //    query = query.Include(i => i.Category1).Include(i => i.Category2).Include(i => i.Category3);
+            return _db.Items.Find(id);
         }
         [HttpPost]
         public async Task<ActionResult<Item>> PostItem(object item)
@@ -30,16 +45,11 @@ namespace RuhunaSupply.Controllers
             JsonData jd = JsonMapper.ToObject(item.ToString());
             Item I1 = new Item()
             {
-                Category1 = _db.Category1s
-                    .FirstOrDefault(c1 => c1.Id == int.Parse(jd["Category1"].ToString())),
-                Category2 = _db.Category2s
-                    .FirstOrDefault(c2 => c2.Id == int.Parse(jd["Category2"].ToString())),
-                Category3 = _db.Category3s
-                    .FirstOrDefault(c3 => c3.Id == int.Parse(jd["Category3"].ToString())),
+                Category1Id = int.Parse(jd["Category1"].ToString()),
+                Category2Id = int.Parse(jd["Category2"].ToString()),
+                Category3Id = int.Parse(jd["Category3"].ToString()),
                 Name = jd["Name"].ToString(),
                 Description = jd["Description"].ToString(),
-
-
             };
             _db.Items.Add(I1);
             await _db.SaveChangesAsync();
@@ -57,13 +67,13 @@ namespace RuhunaSupply.Controllers
             return Ok();
         }*/
 
-        [HttpDelete]
+        //[HttpDelete]
 
-        public IActionResult Delete(int id)
-        {
-            _db.Items.Remove(new Item() { Id = id });
-            _db.SaveChanges();
-            return Ok();
-        }
+        //public IActionResult Delete(int id)
+        //{
+        //    _db.Items.Remove(new Item() { Id = id });
+        //    _db.SaveChanges();
+        //    return Ok();
+        //}
     }
 }

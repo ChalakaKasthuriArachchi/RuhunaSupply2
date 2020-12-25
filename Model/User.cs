@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using cmlMySqlStandard;
+using Microsoft.EntityFrameworkCore;
+using RuhunaSupply.Common;
 using RuhunaSupply.Data;
 using System;
 using System.Collections.Generic;
@@ -11,45 +13,79 @@ using static RuhunaSupply.Common.MyEnum;
 
 namespace RuhunaSupply.Model
 {
-    public class User
+    public class User : IndexedObject
     {
         public User()
         { 
         }
-
+        #region Dynamic
+        public string PositionText => Position.ToString();
+        public Faculty Faculty
+        {
+            get
+            {
+                return Cache.GetFaculty(FacultyId, true);
+            }
+        }
+        public Department Department
+        {
+            get
+            {
+                return Cache.GetDepartment(DepartmentId, true);
+            }
+        }
+        public User Merged
+        {
+            get
+            {
+                return Cache.GetUser(MergedId, false);
+            }
+        }
+        public bool TestPrivileges(UserPrivileges privilege)
+        {
+            try
+            {
+                return PermissionList[(int)privilege] == '1';
+            }
+            catch { return false; }
+        }
+        public static int GetNext(ApplicationDbContext db)
+        {
+            int uID1 = 0, uID2 = 0;
+            try
+            {
+                uID1 = db.Users.Max(u => u.Id);
+                uID2 = db.UserAccounts.Max(u => u.Id);
+            }
+            catch { }
+            return Math.Max(1, Math.Max(uID1, uID2)) + 1;
+        }
+        #endregion
+        #region Saved
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
-        [Column(TypeName = "nvarchar(30)")]
-        public Faculty Faculty { get; set; }
-        [Column(TypeName = "nvarchar(30)")]
-        public Department Department { get; set; }
+        public int FacultyId { get; set; }
+        public int DepartmentId { get; set; }
         [Column(TypeName = "nvarchar(100)")]
         public string FullName { get; set; }
         [Column(TypeName = "nvarchar(30)")]
         public string ShortName { get; set; }
         [Column(TypeName = "nvarchar(50)")]
         public string PermissionList { get; set; }
-
         public UserPositions Position { get; set; }
         public UserTypes Type { get; set; }
-        public User Merged { get; set; }
-        #region static
-        public static User Get(ApplicationDbContext db, int userId)
-        {
-            User user =
-                db.Users.Include(user => user.Merged).FirstOrDefault(user => user.Id == userId);
-            if (user.Merged == null)
-                return user;
-            User mUser = user.Merged;
-            StringBuilder permissionList = new StringBuilder(user.PermissionList.Length);
-            for (int i = 0; i < user.PermissionList.Length; i++)
-            {
-                permissionList.Append(
-                    (user.PermissionList[i] == '1' || mUser.PermissionList[i] == '1')
-                     ? "1" : "0");
-            }
-            return mUser;
-        }
+        public int MergedId { get; set; }
+        public bool IsDeleted { get; set; }
+
+        public int Index => Id;
         #endregion
+        public enum UserPrivileges
+        {
+            //PurchaseRequest
+            PurchaseRequest_Add,
+            PurchaseRequest_Forward_Outside_Department,
+            PurchaseRequest_Forward_Outside_Faculty,
+        }
     }
 }

@@ -5,21 +5,21 @@
         <h2>Create a Specification</h2>
 
         <div class="form-row">
-          <label for="Category2">Category</label>
-          <select formControlName="Category2" class="input-text" required>
-            <option value="0" selected hidden>Select The Category</option>
-            <option *ngFor="let cat of category2List; let i = index;" value="{{cat.id}}">{{cat.name}}</option>
-          </select>
-          <i class="fas fa-user"></i>
-        </div>
-    
-        <div class="form-row">
           <label for="Item">Item</label>
-          <select formControlName="Item" class="input-text" required>
+          <select (ngModelChange)="onItemSelect(checkoutForm)" formControlName="Item" class="input-text" required>
             <option value="0" selected hidden>Select The Item</option>
             <option *ngFor="let it of itemList; let i = index;" value="{{it.id}}">{{it.name}}</option>
           </select>
           <i class="fas fa-envelope"></i>
+        </div>
+        
+        <div class="form-row">
+          <label for="SpecCategory">Category</label>
+          <select formControlName="SpecCategory" class="input-text" required>
+            <option value="0" selected hidden>Select The Category</option>
+            <option *ngFor="let cat of specCategories; let i = index;" value="{{cat.id}}">{{cat.title}}</option>
+          </select>
+          <i class="fas fa-user"></i>
         </div>
 
       <div class="form-row">

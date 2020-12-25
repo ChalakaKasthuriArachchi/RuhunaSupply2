@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Storage;
+using RuhunaSupply.Common;
 using RuhunaSupply.Data;
 using RuhunaSupply.Model;
 using static RuhunaSupply.Common.MyEnum;
@@ -30,12 +33,17 @@ namespace RuhunaSupply.Controllers
                     new Faculty()
                     {
                         Location = "Wellamadama Complex",
-                        Name = "Faculty of Science",
+                        Name = Faculties.Faculty_Of_Science.ToString().Replace("_"," "),
                     },
                     new Faculty()
                     {
                         Location = "Wellamadama Complex",
-                        Name = "Faculty of Humanities & Social Sciences"
+                        Name = Faculties.Faculty_Of_Humanities_and_Social_Sciences.ToString().Replace("_", " ")
+                    },
+                    new Faculty()
+                    {
+                        Location = "Wellamadama Complex",
+                        Name = Faculties.Administration.ToString().Replace("_", " ")
                     });
                 db.SaveChanges();
                 Faculty[] faculties = db.Faculties.ToArray();
@@ -45,22 +53,29 @@ namespace RuhunaSupply.Controllers
                     //Science
                     new Department()
                     {
-                        Faculty = faculties[0],
+                        FacultyId = faculties[0].Id,
                         Location = faculties[0].Location,
-                        Name = "Department of Computer Science"
+                        Name = DepartmentsSC.Department_Of_Computer_Science.ToString().Replace("_", " ")
                     },
                     new Department()
                     {
-                        Faculty = faculties[0],
+                        FacultyId = faculties[0].Id,
                         Location = faculties[0].Location,
-                        Name = "Department of Mathematics"
+                        Name = DepartmentsSC.Department_Of_Mathematics.ToString().Replace("_", " ")
                     },
                     //Art
                     new Department()
                     {
-                        Faculty = faculties[1],
+                        FacultyId = faculties[1].Id,
                         Location = faculties[1].Location,
-                        Name = "Department of IT"
+                        Name = DepartmentsHSS.Department_Of_IT.ToString().Replace("_", " ")
+                    },
+                    //Admin
+                    new Department()
+                    {
+                        FacultyId = faculties[2].Id,
+                        Location = faculties[1].Location,
+                        Name = DepartmentsAdmin.Supply_Branch.ToString().Replace("_", " ")
                     }
                  );
                 db.SaveChanges();
@@ -68,30 +83,84 @@ namespace RuhunaSupply.Controllers
                 #endregion
                 #region Add Users
                 #region Deans
+                int uId = UserAccount.GetNextId(db);
                 foreach (var fac in faculties)
-                    db.Users.Add(new User()
+                {
+                    if (fac.Name == "Administration")
                     {
-                        Faculty = fac,
-                        FullName = "Dean , " + fac.Name,
-                        PermissionList = "11111111",
-                        Position = UserPositions.Dean,
-                        ShortName = "Dean",
-                        Type = UserTypes.Internal
-                    });
+                        db.Users.Add(new User()
+                        {
+                            Id = uId++,
+                            FacultyId = fac.Id,
+                            FullName = "Vice Chancellor",
+                            PermissionList = "11111111",
+                            Position = UserPositions.VC,
+                            ShortName = "VC",
+                            Type = UserTypes.Internal
+                        });
+                    }
+                    else
+                    {
+                        db.Users.Add(new User()
+                        {
+                            Id = uId++,
+                            FacultyId = fac.Id,
+                            FullName = "Dean , " + fac.Name,
+                            PermissionList = "11111111",
+                            Position = UserPositions.Dean,
+                            ShortName = "Dean",
+                            Type = UserTypes.Internal
+                        });
+                    }
+                }
                 #endregion
                 #region Heads
                 foreach (var dep in departments)
+                {
+                    if(dep.Name == "Supply Branch")
+                    {
+                        db.Users.Add(new User()
+                        {
+                            Id = uId++,
+                            FacultyId = dep.FacultyId,
+                            DepartmentId = dep.Id,
+                            FullName = "Senior Assistant Bursar , " + dep.Name,
+                            PermissionList = "11111111",
+                            Position = UserPositions.SAB,
+                            ShortName = "SAB",
+                            Type = UserTypes.Internal
+                        });
+                    }
                     db.Users.Add(new User()
                     {
-                        Faculty = dep.Faculty,
+                        Id = uId++,
+                        FacultyId = dep.FacultyId,
+                        DepartmentId = dep.Id,
                         FullName = "Head , " + dep.Name,
                         PermissionList = "11111111",
                         Position = UserPositions.Head,
                         ShortName = "Head",
                         Type = UserTypes.Internal
                     });
+                }
                 #endregion
-                db.SaveChanges();
+                #region VC
+                
+                #endregion
+                using(IDbContextTransaction trans = db.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        db.SaveChanges();
+                        trans.Commit();
+                    }
+                    catch(Exception ex)
+                    {
+                        trans.Rollback();
+                        throw ex;
+                    }
+                }
+                
                 #endregion
                 return Ok("Job Done");
             }

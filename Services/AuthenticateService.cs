@@ -31,6 +31,8 @@ namespace RuhunaSupply.Services
             var user = Db.UserAccounts.FirstOrDefault(
                 u => u.Email.ToLower() == email.ToLower()
                     && u.HashedPassword == passwordHash);
+            if (user == null)
+                return null;
 
             //If user is Found
             var tokenHandler = new JwtSecurityTokenHandler();

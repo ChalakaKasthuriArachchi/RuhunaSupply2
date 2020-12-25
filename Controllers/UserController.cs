@@ -5,52 +5,55 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using RuhunaSupply.Data;
 using RuhunaSupply.Model;
+using ThirdParty.Json.LitJson;
 using static RuhunaSupply.Common.MyEnum;
 
 namespace RuhunaSupply.Controllers
 {
+    [Route("api/[Controller]")]
+    [ApiController]
     public class UserController : Controller
     {
+
         private ApplicationDbContext _db;
 
         public UserController(ApplicationDbContext context)
         {
             this._db = context;
         }
-        [HttpPost]
-        public IActionResult Add(string Admin, string Branch, string FullName, string ShortName, string PermissionList, UserPositions Position, UserTypes Type, int MergedId)
+        [HttpGet]
+        public User[] GetUsers()
         {
-            int max_id = 0;
-
-            try
-            {
-                //max_id = _db.Users.Max((user) => user.Id);
-            }
-            catch
-            {
-
-
-            }
-
-            User user = new User()
-            {
-                //Id = max_id + 1,
-                //Admin = Admin,
-                //Branch = Branch,
-                //FullName = FullName,
-                //ShortName = ShortName,
-                //PermissionList = PermissionList,
-                //Position = Position,
-                //Type = Type,
-                //MergedId = MergedId
-            };
-
-            _db.Users.Add(user);
-            _db.SaveChanges();
-            return Ok();
-        }
-
+            return _db.Users.Where(cat => !cat.IsDeleted).ToArray();
+        } 
         [HttpPost]
+        public async Task<ActionResult<User>> PostUser(object user)
+        {
+            JsonData jd = JsonMapper.ToObject(user.ToString());
+            User u = new User()
+            {
+                Faculty = _db.Faculties
+                    .FirstOrDefault(f1 => f1.Id == int.Parse(jd["Faculty"].ToString())),
+                Department = _db.Departments
+                    .FirstOrDefault(d1 =>d1.Id==int.Parse (jd["Department"].ToString())),
+                FullName = jd["FullName"].ToString(),
+                ShortName = jd["ShortName"].ToString(),
+                PermissionList = jd["PermissionList"].ToString(),
+                Position = (UserPositions)int.Parse(jd["Position"].ToString()),
+                Type = (UserTypes)int.Parse(jd["Type"].ToString()),
+                MergedId = _db.UserAccounts
+                    .FirstOrDefault(ua => ua.Id == int.Parse(jd["UserAccount"].ToString()))
+
+            };
+            _db.Users.Add(u);
+            await _db.SaveChangesAsync();
+
+            return CreatedAtAction("User", new { id = u.Id }, u);
+        }
+            
+            
+
+        [HttpPut]
         public IActionResult Edit(int Id, string Admin, string Branch, string FullName, string ShortName, string PermissionList, UserPositions Position, UserTypes Type, int MergedId)
         {
             _db.Users.Update(new User()

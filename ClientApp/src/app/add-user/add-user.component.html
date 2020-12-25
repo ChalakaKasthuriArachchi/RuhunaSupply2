@@ -1,0 +1,72 @@
+<div class="form-v5">
+    <div class="page-content">
+		<div class="form-v5-content">
+			<form class="form-detail" [formGroup]="checkoutForm" (ngSubmit)="onSubmit(checkoutForm)" novalidate>
+                <h2>Add New User</h2>
+				<div class="form-row">
+					<label for="Faculty">Faculty</label>
+                    <select (ngModelChange)="onFacultySelect(checkoutForm)" formControlName="Faculty" class="input-text" required>
+						<option value="0" selected hidden>Select The Faculty</option>
+                        <option *ngFor="let cat of FacultyList; let i = index;" value="{{cat.id}}">{{cat.name}}</option>
+                      </select>
+					<i class="fas fa-User"></i>
+                </div>
+                <div class="form-row">
+					<label for="Department">Department</label>
+					<input type="text" formControlName="Department" id="Department" class="input-text" placeholder="Department" required>
+					<i class="fas fa-envelope"></i>
+                </div>
+                <div class="form-row">
+					<label for="FullName">Full Name</label>
+					<input type="text" formControlName="FullName" id="FullName" class="input-text" required>
+					<i class="fas fa-envelope"></i>
+				</div>
+				<div class="form-row">
+					<label for="ShortName">Short Name</label>
+					<input type="text" formControlName="ShortName" id="ShortName" class="input-text" placeholder="ShortName" required>
+					<i class="fas fa-envelope"></i>
+				</div>
+				<div class="form-row">
+					<label for="PermissionList">Permission List</label>
+					<input type="text" formControlName="PermissionList" id="PermissionList" class="input-text" placeholder="PermissionList" required>
+					<i class="fas fa-envelope"></i>
+				</div>
+				<div class="form-row">
+					<label for="Possition">Possition</label>
+					<select formControlName="Possition" id="Possition" class="input-text" required>
+						<option value="-1" selected hidden>Select the Possiton</option>
+						<option value="0">Dean</option>
+						<option value="1">Head</option>
+						<option value="2">Lecturer</option>
+						<option value="3">Senior Lecturer</option>
+						<option value="4">Probationary Lecturer</option>
+						<option value="5">Instructor</option>
+						<option value="6">Clerk</option>
+						<option value="7">TO</option>
+						<option value="8">VC</option>
+						<option value="9">DVC</option>
+						<option value="10">Bursar</option>
+						<option value="11">Assistent Bursar</option>
+						<option value="12">Store Keeper</option>
+					</select>
+					<i class="fas fa-envelope"></i>
+				</div>
+				<div class="form-row">
+					<label for="Type">User Type</label>
+					<select formControlName="Type" id="Type" class="input-text" required>
+						<option value="-1" selected hidden>Select the User Type</option>
+						<option value="0">Internal</option>
+						<option value="1">Supplier</option>
+					</select>
+				</div>
+				<div class="form-row">
+					<label for="MergedId">Merged Id</label>
+					<input type="text" formControlName="MergedId" id="MergedId" class="MergedId" placeholder="MergedId" required>
+				</div>
+				<div class="form-row-last">
+					<input type="submit" name="Add" class="Add" value="Add">
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

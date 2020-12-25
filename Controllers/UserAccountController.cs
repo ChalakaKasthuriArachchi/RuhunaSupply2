@@ -36,6 +36,7 @@ namespace RuhunaSupply.Controllers
             JsonData jd = JsonMapper.ToObject(useraccount.ToString());
             UserAccount ua = new UserAccount()
             {
+                Id = UserAccount.GetNextId(_db),
                 FullName = jd["FullName"].ToString(),
                 ShortName = jd["ShortName"].ToString(),
                 Email = jd["Email"].ToString(),

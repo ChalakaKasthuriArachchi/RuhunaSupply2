@@ -1,3 +1,4 @@
+import { SpecificationCategoryService } from './../shared/specification-category.service';
 import { Category2Service } from './../shared/category2.service';
 import { ItemService } from './../shared/item.service';
 import { Component, OnInit } from '@angular/core';
@@ -13,19 +14,19 @@ export class SpecificationComponent implements OnInit {
   checkoutForm;
   specificationList;
   form: FormGroup;
-  category2List = [];
+  specCategories = [];
   itemList = [];
 
   constructor(
     private specificationService: SpecificationService,
     private formBuilder: FormBuilder,
-    private category2Service: Category2Service,
+    private specCatService: SpecificationCategoryService,
     private itemService: ItemService
     )
   {
     this.checkoutForm = this.formBuilder.group({
-      Category2: [],
-      Item: [],
+      SpecCategory: '',
+      Item: '',
       Name: '',
       Value: '',
     });
@@ -38,22 +39,31 @@ export class SpecificationComponent implements OnInit {
       );
 
     this.itemService.getItemList(null,null)
+    
+    this.itemService.getItemList(0,null,false)
       .subscribe(
         res => this.itemList=res as[]
       );
   }
 
-  onSubmit(specificationData) {
-    this.specificationService.postSpecification(specificationData.value)
+  onSubmit(fg: FormGroup) {
+    console.log(fg.value);
+    this.specificationService.postSpecification(fg.value)
       .subscribe(
         data => console.log('Success!', data),
         error => console.log('Error', error)
       );
-    //console.log('Submitted Successfully', specificationData);
-    this.checkoutForm.reset();
+    (<HTMLInputElement>document.getElementById('Name')).value = '';
+    (<HTMLInputElement>document.getElementById('Value')).value = '';
   }
 
   recordSubmit(fg: FormGroup) {
     this.specificationService.postSpecification(fg.value);
+  }
+  onItemSelect(fg: FormGroup){
+    this.specCatService.getSpecificationCategories(fg.value.Item)
+    .subscribe(
+      res => this.specCategories = res as []
+  );
   }
 }

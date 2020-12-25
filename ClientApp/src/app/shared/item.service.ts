@@ -17,8 +17,11 @@ export class ItemService {
   putItem(formData){
     return this.http.put(environment.apiBaseURI + '/Item/',formData.Id);
   }
-  getItemList(category, search){
-    return this.http.get(environment.apiBaseURI + '/Item?Category=' + category + '&search=' + search);
+  getItemList(category, search, fullView){
+    return this.http.get(environment.apiBaseURI + '/Item?category=' + category + '&search=' + search + '&fullView=' + fullView);
+  }
+  getItem(id, fullView){
+    return this.http.get(environment.apiBaseURI + '/Item/' + id + '?fullView=' + fullView);
   }
   deleteItem(id){
     return this.http.delete(environment.apiBaseURI + '/Item/' + id);
