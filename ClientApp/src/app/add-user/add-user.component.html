@@ -13,7 +13,10 @@
                 </div>
                 <div class="form-row">
 					<label for="Department">Department</label>
-					<input type="text" formControlName="Department" id="Department" class="input-text" placeholder="Department" required>
+					<select formControlName="Department" class="input-text" required>
+						<option value="0" selected hidden>Select The Department</option>
+                        <option *ngFor="let cat of DepartmentList; let i = index;" value="{{cat.id}}">{{cat.name}}</option>
+                      </select>
 					<i class="fas fa-envelope"></i>
                 </div>
                 <div class="form-row">
@@ -27,23 +30,23 @@
 					<i class="fas fa-envelope"></i>
 				</div>
 				<div class="form-row">
-					<label for="PermissionList">Permission List</label>
+					<label for="PermissionList">Permision List</label>
 					<input type="text" formControlName="PermissionList" id="PermissionList" class="input-text" placeholder="PermissionList" required>
 					<i class="fas fa-envelope"></i>
 				</div>
 				<div class="form-row">
-					<label for="Possition">Possition</label>
-					<select formControlName="Possition" id="Possition" class="input-text" required>
-						
+					<label for="Position">Position</label>
+					<select formControlName="Position" id="Position" class="input-text" required>
+						<option value="0" selected hidden>Select The Position</option>
+						<option *ngFor="let cat of userPositions; let i = index;" value="{{cat.id}}">{{cat.name}}</option>
 					</select>
 					<i class="fas fa-envelope"></i>
 				</div>
 				<div class="form-row">
 					<label for="Type">User Type</label>
 					<select formControlName="Type" id="Type" class="input-text" required>
-						<option value="-1" selected hidden>Select the User Type</option>
-						<option value="0">Internal</option>
-						<option value="1">Supplier</option>
+						<option value="0" selected hidden>Select the User Type</option>
+						<option *ngFor="let cat of UserType; let i = index;" value="{{cat.id}}">{{cat.name}}</option>
 					</select>
 				</div>
 				<div class="form-row">

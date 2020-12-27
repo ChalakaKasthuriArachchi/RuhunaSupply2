@@ -66,7 +66,8 @@ namespace RuhunaSupply
             {
                 configuration.RootPath = "ClientApp/dist";
             });
-            var con = new DbContextOptionsBuilder<ApplicationDbContext>().UseMySql(Configuration.GetConnectionString("DefaultConnection"));
+            var con = new DbContextOptionsBuilder<ApplicationDbContext>().UseMySql(
+                Configuration.GetConnectionString("DefaultConnection"));
             Cache.RefreshCache(new ApplicationDbContext(con.Options));
         }
 

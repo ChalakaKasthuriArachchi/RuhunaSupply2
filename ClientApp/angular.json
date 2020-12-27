@@ -92,11 +92,7 @@
               "./node_modules/@angular/material/prebuilt-themes/purple-green.css",
               "src/styles.css"
             ],
-            "scripts": [
-              "./node_modules/jquery/dist/jquery.min.js",
-              "./node_modules/popper.js/dist/popper.min.js",
-              "./node_modules/bootstrap/dist/js/bootstrap.min.js"
-            ]
+            "scripts": []
           }
         },
         "lint": {
@@ -131,4 +127,5 @@
   "cli": {
     "analytics": "de99af2e-7295-4ee1-8ee9-b296a362d388"
   }
+  
 }

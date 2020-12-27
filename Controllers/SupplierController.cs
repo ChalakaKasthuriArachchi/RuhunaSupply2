@@ -37,7 +37,7 @@ namespace RuhunaSupply.Controllers
                             || s.BusinessAddress.Contains(Search)
                             || s.ContactNumber.Contains(Search)
                             || s.BusinessMail.Contains(Search));
-            Supplier[] suppliers = query.Include(s => s.Category2).ToArray();
+            Supplier[] suppliers = query.ToArray();
             return suppliers;
         }
         [HttpPost]

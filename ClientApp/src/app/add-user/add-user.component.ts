@@ -15,10 +15,11 @@ export class AddUserComponent implements OnInit {
   FacultyList: [];
   userPositions : [];
   DepartmentList : [];
+  UserType : [];
 
   constructor(
     private formBuilder : FormBuilder,
-    private userService : UserService,
+    private addUserService : UserService,
     private FacultyService : FacultyService,
     private DepartmentService : DepartmentService
     ) { 
@@ -28,22 +29,27 @@ export class AddUserComponent implements OnInit {
           FullName:'',
           ShortName:'',
           PermissionList:'',
-          Possition:'',
+          Position:'',
+          UserType:'',
+          MergedId:''
 
         });
       }
 
   ngOnInit(): void {
-    this.userService.getUserList().subscribe(
-      res => this.userList = res as []
+    this.FacultyService.getFacultyList().subscribe(
+      res => this.FacultyList = res as []
     );
   }
   onSubmit(userData){
-    this.userService.postUser(userData.value)
+    this.addUserService.postUser(userData.value)
       .subscribe(
         data => console.log('Success!',data),
         error => console.log('Error!',error)
       );
+  }
+  recordSubmit(fg: FormGroup){
+    this.addUserService.postUser(fg.value);
   }
   onFacultySelect(fg:FormGroup){
     this.DepartmentService.getDepartmentList(fg.value.Faculty).subscribe(

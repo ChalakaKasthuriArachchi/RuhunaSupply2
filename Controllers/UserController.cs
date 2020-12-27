@@ -42,9 +42,9 @@ namespace RuhunaSupply.Controllers
                 DepartmentId = int.Parse (jd["Department"].ToString()),
                 FullName = jd["FullName"].ToString(),
                 ShortName = jd["ShortName"].ToString(),
-                PermissionList = jd["PermissionList"].ToString(),
+                PermissionList = jd["PermisionList"].ToString(),
                 Position = (UserPositions)int.Parse(jd["Position"].ToString()),
-                Type = (UserTypes)int.Parse(jd["Type"].ToString()),
+                Type = (UserTypes)int.Parse(jd["UserType"].ToString()),
                 MergedId = int.Parse(jd["UserAccount"].ToString())
 
             };
