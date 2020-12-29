@@ -25,33 +25,6 @@ namespace RuhunaSupply.Controllers
         {
             _context = context;
         }
-
-
-
-        public IActionResult Add(int Id, Item Item, SpecificationCategory SpecificationCategory, string Name, string Value)
-        {
-            int max_id = 0;
-            try
-            {
-                max_id = _db.Specification.Max((sp) => sp.Id);
-            }
-            catch
-            {
-            }
-
-            Specification sp = new Specification()
-            {
-                Id = max_id + 1,
-                SpecificationCategory = SpecificationCategory,
-                Item = Item,
-                Name = Name,
-                Value = Value
-            };
-            _db.Specification.Add(sp);
-            _db.SaveChanges();
-            return Ok();
-        }
-
         [HttpPost]
         public async Task<ActionResult<Specification>> PostSpecification(object specification)
         {
