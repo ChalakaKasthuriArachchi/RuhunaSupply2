@@ -19,7 +19,9 @@ import { Category2Component } from './category2/category2.component';
 import { SpecificationComponent } from './specification/specification.component';
 import { SpecificationCategoryComponent } from './specification-category/specification-category.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { TestingComponent } from './testing/testing.component';
+import { ViewSpecificationComponent } from './view-specification/view-specification.component';
+import { ViewSpecificationCategoryComponent } from './view-specification-category/view-specification-category.component'
+//import { TestingComponent } from './testing/testing.component';
 import { AddPurchaseRequestComponent } from './add-purchase-request/add-purchase-request.component';
 import { ViewSpecificationComponent } from './view-specification/view-specification.component';
 import { ViewSpecificationCategoryComponent } from './view-specification-category/view-specification-category.component'
@@ -48,6 +50,11 @@ const routes: Routes = [
   { path: 'purchaserequest/add', component: AddPurchaseRequestComponent },
   { path: 'purchaserequest/view', component: AddPurchaseRequestComponent },
   { path: 'testing', component: TestingComponent}
+  { path: 'specification-category', component: SpecificationCategoryComponent },
+  { path: 'specification/view/:id', component: ViewSpecificationComponent },
+  { path: 'specification-category/view', component: ViewSpecificationCategoryComponent },
+
+
   { path: 'specification-category', component: SpecificationCategoryComponent },
   { path: 'specification/view/:id', component: ViewSpecificationComponent },
   { path: 'specification-category/view', component: ViewSpecificationCategoryComponent },

@@ -63,6 +63,8 @@ import { TestingComponent } from './testing/testing.component';
     SpecificationCategoryComponent,
     SpecificationComponent,
     PurchaseRequestComponent,
+    ViewSpecificationCategoryComponent,
+    ViewSpecificationComponent,
     DashboardComponent,
     ItemComponent,
     AddPurchaseRequestComponent,
