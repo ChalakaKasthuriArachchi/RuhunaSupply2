@@ -13,24 +13,24 @@
         <div class="td">On</div>
         <div class="td">Purpose</div>
         <div class="td">Status</div>
-        <div class="td">Examining</div>
         <div class="td">Submitted By</div>
+        <div class="td">Examining</div>
         <div class="td"><a class="btn btn-primary" href="/purchaserequest/add">New</a></div>
       </div>
     </div>
     <div class="tbody">
         <div class="tr" mdbTableCol *ngFor="let pr of purchaseRequests; let i = index;">
-            <div class="td">{{i + 1}}</div>
-            <div class="td">{{pr.id}}</div>
-            <div class="td">{{pr.department}}</div>
-            <div class="td">{{pr.faculty}}</div>
-            <div class="td">{{pr.dateTime}}</div>
-            <div class="td">{{pr.purpose}}</div>
-            <div class="td">{{pr.status}}</div>
-            <div class="td">{{pr.submittedBy}}</div>
-            <div class="td">{{pr.examining}}</div>
+            <label class="td">{{i + 1}}</label>
+            <label class="td">{{pr.id}}</label>
+            <label class="td">{{pr.department}}</label>
+            <label class="td">{{pr.faculty}}</label>
+            <label class="td">{{pr.dateTime}}</label>
+            <label class="td">{{pr.purpose}}</label>
+            <label class="td">{{pr.status}}</label>
+            <label class="td">{{pr.submittedBy}}</label>
+            <label class="td">{{pr.examining}}</label>
             <div class="td">
-              <a class="btn btn-outline-success" href="#" role="button">View</a>
+              <a class="btn btn-outline-success" href="/purchaserequest/view?id={{pr.id}}" role="button">View</a>
             </div>
           </div>
     </div>

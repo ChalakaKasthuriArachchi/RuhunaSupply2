@@ -86,6 +86,11 @@ namespace RuhunaSupply.Model
             PurchaseRequest_Add,
             PurchaseRequest_Forward_Outside_Department,
             PurchaseRequest_Forward_Outside_Faculty,
+            Call_Quotations,
+            View_All_Quotations,
+            Manage_Suppliers,
+            Manage_Items,
+            Manage_Specifications
         }
     }
 }

@@ -13,7 +13,7 @@ namespace RuhunaSupply.Common
         }
         public enum Faculties
         { 
-            Administration,
+            Admin,
             Faculty_Of_Science,
             Faculty_Of_Humanities_and_Social_Sciences
         }
@@ -38,7 +38,8 @@ namespace RuhunaSupply.Common
         public enum Involvements
         {
             Submitted,
-            Approved_and_Forwarded
+            Approved_and_Forwarded,
+            On_Approval
         }
 
         public enum UserPositions
@@ -50,7 +51,8 @@ namespace RuhunaSupply.Common
             SAB,
             Lecturer,
             Instructor,
-            TO
+            TO,
+            Cleark
         }
         public enum UserTypes
         { 
@@ -72,6 +74,12 @@ namespace RuhunaSupply.Common
         public enum PurchaseRequestStatus
         {
             On_Approval, Rejected, 
+        }
+        public enum SupplierStatus
+        {
+            Not_Approved,
+            Approved,
+            Rejected
         }
     }
 }

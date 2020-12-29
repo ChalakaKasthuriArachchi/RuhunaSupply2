@@ -21,10 +21,15 @@ namespace RuhunaSupply.Common
                 return DateTime.UtcNow.AddHours(5.5);
             }
         }
-        public static UserAccount GetCurrentUser(HttpContext httpContext,ApplicationDbContext _db)
+        public static UserAccount GetCurrentUserAccount(HttpContext httpContext,ApplicationDbContext _db)
         {
             int userId = int.Parse(httpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name).Value);
             return _db.UserAccounts.FirstOrDefault(u => u.Id == userId);
+        }
+        public static User GetCurrentUser(HttpContext httpContext, ApplicationDbContext _db)
+        {
+            int userId = int.Parse(httpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name).Value);
+            return _db.Users.FirstOrDefault(u => u.Id == userId);
         }
         public static int GetCurrentUserId(HttpContext httpContext, ApplicationDbContext _db)
         {

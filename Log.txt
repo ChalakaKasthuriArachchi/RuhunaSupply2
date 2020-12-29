@@ -116,3 +116,56 @@ Object reference not set to an instance of an object.
 Stack Trace:
    at RuhunaSupply.Controllers.PurchaseRequestController.PostPurchaseRequest(Object req) in D:\Programming\Asp.Net\Systems\RuhunaSupply\Controllers\PurchaseRequestController.cs:line 119
 --------------------------------------------------------------------------
+Date : 12/26/2020 | Time : 1:34 AM
+Error Text:
+Unable to Save Account
+Message:
+An error occurred while updating the entries. See the inner exception for details.
+Stack Trace:
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(DbContext _, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Pomelo.EntityFrameworkCore.MySql.Storage.Internal.MySqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at RuhunaSupply.Controllers.UserAccountController.PostUserAccount(Object useraccount)
+--------------------------------------------------------------------------
+Date : 12/27/2020 | Time : 3:13 AM
+Error Text:
+Unable to Save Purchase Request
+Message:
+Object reference not set to an instance of an object.
+Stack Trace:
+   at RuhunaSupply.Controllers.PurchaseRequestController.PostPurchaseRequest(Object req)
+--------------------------------------------------------------------------
+Date : 12/29/2020 | Time : 5:34 AM
+Error Text:
+Unable to Save Purchase Request
+Message:
+The instance of entity type 'PurchaseRequest' cannot be tracked because another instance with the same key value for {'Id'} is already being tracked. When attaching existing entities, ensure that only one entity instance with a given key value is attached. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see the conflicting key values.
+Stack Trace:
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.IdentityMap`1.ThrowIdentityConflict(InternalEntityEntry entry)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.IdentityMap`1.Add(TKey key, InternalEntityEntry entry, Boolean updateDuplicate)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.IdentityMap`1.Add(TKey key, InternalEntityEntry entry)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.IdentityMap`1.Add(InternalEntityEntry entry)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.StartTracking(InternalEntityEntry entry)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.InternalEntityEntry.SetEntityState(EntityState oldState, EntityState newState, Boolean acceptChanges, Boolean modifyProperties)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.InternalEntityEntry.SetEntityState(EntityState entityState, Boolean acceptChanges, Boolean modifyProperties, Nullable`1 forceStateWhenUnknownKey)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.EntityGraphAttacher.PaintAction(EntityEntryGraphNode`1 node)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.EntityEntryGraphIterator.TraverseGraph[TState](EntityEntryGraphNode`1 node, Func`2 handleNode)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.EntityGraphAttacher.AttachGraph(InternalEntityEntry rootEntry, EntityState targetState, EntityState storeGeneratedWithKeySetTargetState, Boolean forceStateWhenUnknownKey)
+   at Microsoft.EntityFrameworkCore.DbContext.SetEntityState(InternalEntityEntry entry, EntityState entityState)
+   at Microsoft.EntityFrameworkCore.DbContext.SetEntityState[TEntity](TEntity entity, EntityState entityState)
+   at Microsoft.EntityFrameworkCore.DbContext.Update[TEntity](TEntity entity)
+   at Microsoft.EntityFrameworkCore.Internal.InternalDbSet`1.Update(TEntity entity)
+   at RuhunaSupply.Controllers.PurchaseRequestController.PostPurchaseRequest(Object req) in D:\Programming\Asp.Net\Systems\RuhunaSupply\Controllers\PurchaseRequestController.cs:line 157
+--------------------------------------------------------------------------
+Date : 12/29/2020 | Time : 5:43 AM
+Error Text:
+Unable to Save Purchase Request
+Message:
+Object reference not set to an instance of an object.
+Stack Trace:
+   at RuhunaSupply.Controllers.PurchaseRequestController.PostPurchaseRequest(Object req) in D:\Programming\Asp.Net\Systems\RuhunaSupply\Controllers\PurchaseRequestController.cs:line 91
+--------------------------------------------------------------------------

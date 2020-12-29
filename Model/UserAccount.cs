@@ -21,14 +21,14 @@ namespace RuhunaSupply.Model
         #region Static 
         public static int GetNextId(ApplicationDbContext db)
         {
-            int uID1 = 1,uID2 = 1;
+            int uID1 = 0,uID2 = 0;
             try
             {
                 uID1 = db.Users.Max(u => u.Id);
                 uID2 = db.UserAccounts.Max(u => u.Id);
             }
             catch { }
-            return Math.Max(1, Math.Max(uID1, uID2));
+            return Math.Max(0, Math.Max(uID1, uID2)) + 1;
         }
         #endregion
         [Key]

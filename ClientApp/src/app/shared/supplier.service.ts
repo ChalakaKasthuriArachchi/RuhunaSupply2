@@ -25,7 +25,15 @@ export class SupplierService {
     var tok = localStorage.getItem('token');
     if(tok != null){
       var tokenHeader = new HttpHeaders({'Authorization':'Bearer ' + tok});
-      return this.http.get(environment.apiBaseURI + '/Supplier?Category=' + category + '&search=' + search,
+      return this.http.get(environment.apiBaseURI + '/Supplier?Category=' + category + '&Search=' + search,
+      {headers : tokenHeader});
+    }
+  }
+  getActiveSupplierList(category){
+    var tok = localStorage.getItem('token');
+    if(tok != null){
+      var tokenHeader = new HttpHeaders({'Authorization':'Bearer ' + tok});
+      return this.http.get(environment.apiBaseURI + '/Supplier/activeSuppliers?Category=' + category,
       {headers : tokenHeader});
     }
   }

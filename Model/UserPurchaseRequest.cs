@@ -24,6 +24,8 @@ namespace RuhunaSupply.Model
                 return Cache.GetUser(UserId, true);
             }
         }
+        public string DateText => Date.ToString("yyyy-MM-dd");
+        public string InvolvementText => Involvement.ToString().Replace("_", " ");
         private PurchaseRequest purchaseRequest = null;
         public PurchaseRequest GetPurchaseRequest(ApplicationDbContext db)
         {

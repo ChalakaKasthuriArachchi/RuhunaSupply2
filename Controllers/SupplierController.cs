@@ -27,18 +27,42 @@ namespace RuhunaSupply.Controllers
             this._db = context;
         }
         [HttpGet]
-        public Supplier[] Index(string Category,string Search)
+        public Supplier[] Index(int Category,string Search)
         {
-            IQueryable<Supplier> query = _db.Suppliers;
-            if (Category != null && Category.Trim().Length > 0 && Category != "undefined")
-                query = query.Where(s => s.Category2.Id.ToString() == Category);
-            if (Search != null && Search.Trim().Length > 0 && Search != "undefined")
-                query = query.Where(s => s.BusinessName.Contains(Search)
-                            || s.BusinessAddress.Contains(Search)
-                            || s.ContactNumber.Contains(Search)
-                            || s.BusinessMail.Contains(Search));
-            Supplier[] suppliers = query.Include(s => s.Category2).ToArray();
-            return suppliers;
+            try
+            {
+                IQueryable<Supplier> query = _db.Suppliers;
+                if (Category != 0)
+                    query = query.Where(s => s.Category2Id == Category);
+                if (Search != null && Search.Trim().Length > 0 && Search != "undefined")
+                    query = query.Where(s => s.BusinessName.Contains(Search)
+                                || s.BusinessAddress.Contains(Search)
+                                || s.ContactNumber.Contains(Search)
+                                || s.BusinessMail.Contains(Search));
+                Supplier[] suppliers = query.ToArray();
+                return suppliers;
+            }
+            catch(Exception ex)
+            {
+                return null;
+            }
+        }
+        [HttpGet("activeSuppliers")]
+        public Supplier[] GetSuppliers(int Category)
+        {
+            try
+            {
+                IQueryable<Supplier> query = _db.Suppliers;
+                if (Category != 0)
+                    query = query.Where(s => s.Category2Id == Category
+                        && s.Status == SupplierStatus.Approved);
+                Supplier[] suppliers = query.ToArray();
+                return suppliers;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
         [HttpPost]
         public async Task<ActionResult<Supplier>> PostSupplier(object supplier)

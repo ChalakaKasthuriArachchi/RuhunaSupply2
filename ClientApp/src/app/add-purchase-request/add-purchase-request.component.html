@@ -12,7 +12,7 @@
           <div class="col-sm-8">{{department}}</div>
         </div> 
         <div class="form-group row">
-          <label class="col-sm-4 col-form-label">Funds Gose</label>
+          <label class="col-sm-4 col-form-label">Funds GOSL</label>
           <div class="col-sm-8">
             <span style="margin-right: 15px;">Yes</span> 
             <input type="radio"  name="Funds" id="Funds1" value="Yes" checked>
@@ -65,14 +65,28 @@
         <div class="form-group row">
           <label class="col-sm-4 col-form-label">Date Time </label>
           <div class="col-sm-8">
-            <input type="datetime-local" id="date" name="date" style="color: black;" formControlName="DateTime">
+            <input id="date" name="date" style="color: black;" formControlName="DateTime" readonly>
+            <!-- <input type="time" id="time" name="time"> -->
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label">Budget Allocation </label>
+          <div class="col-sm-8">
+            <input type="text" id="date" name="date" style="color: black;" formControlName="BudgetAllocation">
+            <!-- <input type="time" id="time" name="time"> -->
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label">Used Amount </label>
+          <div class="col-sm-8">
+            <input type="text" id="date" name="date" style="color: black;" formControlName="UsedAmount">
             <!-- <input type="time" id="time" name="time"> -->
           </div>
         </div>
 
         
-        <br><br>
-
+        <br>
+        <label class="col-sm-4 col-form-label">Items</label>
         <table class="table table-bordered table-dark">
           <thead>
             <tr >
@@ -80,8 +94,9 @@
               <th style="text-align: center; padding-bottom: 20px;" scope="col"> Item ID</th>
               <th style="text-align: center; padding-bottom: 20px;" scope="col">Name</th>
               <th style="text-align: center; padding-bottom: 20px;"scope="col">Category 2</th>
+              <th style="text-align: center; padding-bottom: 20px;"scope="col">Specifications</th>
               <th style="text-align: center; padding-bottom: 20px;"scope="col">Quantity</th>
-              <th  scope="col">
+              <th *ngIf="purchaseRequsetId == 0" scope="col">
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Add New</button><br>
               </th>
             </tr>
@@ -89,17 +104,44 @@
           <tbody>
             <tr *ngFor="let si of selectedItems; let i = index;">
               <td style="text-align: center; padding-top: 30px;">{{i + 1}}</td>
-              <td style="text-align: center; padding-top: 30px;">{{si.id}}</td>
+              <td style="text-align: center; padding-top: 30px;">{{si.item.id}}</td>
               <td style="text-align: center; padding-top: 30px;">{{si.name}}</td>
               <td style="text-align: center; padding-top: 30px;">{{si.category2.name}}</td>
+              <td style="text-align: center; padding-top: 30px;">{{si.specificationCategoryName}}</td>
               <td style="text-align: center; padding-top: 30px;">{{si.quantity}}</td>
-              <td style="text-align: center; padding-top: 30px;">
+              <td *ngIf="purchaseRequsetId == 0" style="text-align: center; padding-top: 30px;">
                 <button style="margin: 5px;" type="button" class="btn btn-success btn">Edit</button>
                 <button style="margin: 5px;" type="button" class="btn btn-danger btn">Delete</button>
               </td>
             </tr>
           </tbody>
         </table>
+
+        <br>
+        <label class="col-sm-4 col-form-label">Users Involvement</label>
+        <table class="table table-bordered table-dark">
+          <thead>
+            <tr >
+              <th style="text-align: center; padding-bottom: 20px;" scope="col">User</th>
+              <th style="text-align: center; padding-bottom: 20px;" scope="col">Position</th>
+              <th style="text-align: center; padding-bottom: 20px;" scope="col">Department</th>
+              <th style="text-align: center; padding-bottom: 20px;" scope="col">Faculty</th>
+              <th style="text-align: center; padding-bottom: 20px;" scope="col">Involvement</th>
+              <th style="text-align: center; padding-bottom: 20px;"scope="col">Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let ui of userInvolvements; let i = index;">
+              <td style="text-align: center; padding-top: 30px;">{{ui.user.shortName}}</td>
+              <td style="text-align: center; padding-top: 30px;">{{ui.user.positionText}}</td>
+              <td style="text-align: center; padding-top: 30px;">{{ui.user.department.name}}</td>
+              <td style="text-align: center; padding-top: 30px;">{{ui.user.faculty.name}}</td>
+              <td style="text-align: center; padding-top: 30px;">{{ui.involvementText}}</td>
+              <td style="text-align: center; padding-top: 30px;">{{ui.dateText}}</td>
+            </tr>
+          </tbody>
+        </table>
+
         <!-- Modal Items-->
         <div id="itemModal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-lg">
@@ -124,7 +166,6 @@
                     <td style="text-align: center; padding-top: 30px;"><input type="number" id="qty" value="1" min="1"></td>
                     <td style="text-align: center; padding-top: 30px;">
                       <button id="{{item.id}}" type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" (click)="addItem($event)" data-target=".bd-speccat-modal-lg">Select</button><br>
-                      <!-- <button  style="margin: 5px;" type="button" class="btn btn-success btn" ">Add</button> -->
                     </td>
                   </tr>
                 </tbody>
@@ -166,7 +207,6 @@
         <div id="forwardModal" class="modal fade bd-forward-modal-lg" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-lg">
             <div class="modal-content">
-              <h2>Select Specification Category</h2>
               <table class="table table-bordered table-dark">
                 <thead>
                   <tr >
@@ -191,9 +231,53 @@
             </div>
           </div>
         </div>
+        <!-- Modal Forward-->
+        <div id="supplierModal" class="modal fade bd-supplier-modal-lg" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <table class="table table-bordered table-dark">
+                <thead>
+                  <tr >
+                    <th style="text-align: center; padding-bottom: 20px;">No</th>
+                    <th style="text-align: center; padding-bottom: 20px;" scope="col">Business</th>
+                    <th style="text-align: center; padding-bottom: 20px;" scope="col">Contact</th>
+                    <th style="text-align: center; padding-bottom: 20px;"scope="col">Contact No</th>
+                    <th style="text-align: center; padding-bottom: 20px;"scope="col">Address</th>
+                    <th style="text-align: center; padding-bottom: 20px;"scope="col"># Completed Orders</th>
+                    <th style="text-align: center; padding-bottom: 20px;"scope="col">Last Order</th>
+                    <th style="text-align: center; padding-bottom: 20px;"scope="col">Rating</th>
+                    <th style="text-align: center; padding-bottom: 20px;"scope="col">Select</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let sup of suppliers; let i = index;">
+                    <td style="text-align: center; padding-top: 20px;">{{i + 1}}</td>
+                    <td style="text-align: center; padding-top: 30px;">{{sup.businessName}}</td>
+                    <td style="text-align: center; padding-top: 30px;">{{sup.userAccount.shortName}}</td>
+                    <td style="text-align: center; padding-top: 30px;">{{sup.contactNumber}}</td>
+                    <td style="text-align: center; padding-top: 30px;">{{sup.businessAddress}}</td>
+                    <td style="text-align: center; padding-top: 30px;">0</td>
+                    <td style="text-align: center; padding-top: 30px;">(No Completed Orders)</td>
+                    <td style="text-align: center; padding-top: 30px;">Not Rated</td>
+                    <td style="text-align: center; padding-top: 30px;">
+                      <input class="form-check-input" type="checkbox" value="" [checked]="selectSupplier($event)" id="{{sup.id}}"><br>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <button type="button" class="btn btn-primary" data-toggle="modal" (click)="callQuotations()">Call Quotations</button>
+            </div>
+          </div>
+        </div>
         <br>
         <div class="form-row-last">
-					<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-forward-modal-lg" (click)="getAllowedForwards()">Forward</button>
+          <table style="margin-left: auto; margin-right: auto;">
+            <tr>
+              <td *ngIf="user && user.position == 4"><button type="button" class="btn btn-success" data-toggle="modal" data-target=".bd-supplier-modal-lg" (click)="getSuppliers()">Call Quotations</button></td>
+              <td *ngIf="user && user.position != 4"><button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-forward-modal-lg" (click)="getAllowedForwards()">Forward</button></td>
+              <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target=".bd-forward-modal-lg">Reject</button></td>
+            </tr>
+          </table>
         </div>
       </form>
     </div>

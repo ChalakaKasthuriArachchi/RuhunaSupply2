@@ -44,6 +44,7 @@ const routes: Routes = [
   {path: 'specification-category',component : SpecificationCategoryComponent},
   { path: 'item', component: ItemComponent },
   { path: 'purchaserequest/add', component: AddPurchaseRequestComponent },
+  { path: 'purchaserequest/view', component: AddPurchaseRequestComponent },
   { path: 'testing', component: TestingComponent}
 ];
 

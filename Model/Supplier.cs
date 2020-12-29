@@ -1,11 +1,8 @@
 ﻿using cmlMySqlStandard;
 using RuhunaSupply.Common;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 using static RuhunaSupply.Common.MyEnum;
 
 namespace RuhunaSupply.Model
@@ -17,6 +14,8 @@ namespace RuhunaSupply.Model
         
         }
         #region Dynamic
+        [NotMapped]
+        public bool Selected { get; set; }
         public Category2 Category2
         {
             get
@@ -24,6 +23,16 @@ namespace RuhunaSupply.Model
                 return Cache.GetCategory2(Category2Id, true);
             }
         }
+        public UserAccount UserAccount
+        {
+            get
+            {
+                return Cache.GetUserAccount(Id, true);
+            }
+        }
+        public string RegisteredDateText => RegisteredDate.ToString("yyyy-MM-dd");
+        public string BusinessRegisteredDateText => BusinessRegisteredDate.ToString("yyyy-MM-dd");
+        public string StatusText => Status.ToString();
         #endregion
         #region Saved
         [Key]
@@ -43,7 +52,7 @@ namespace RuhunaSupply.Model
         public string BusinessAddress { get; set; }
         public BusinessCategories BusinessCategory { get; set; }
         public bool IsDeleted { get; set; }
-
+        public SupplierStatus Status { get; set; }
         public int Index => Id;
         #endregion
     }

@@ -29,10 +29,7 @@ namespace RuhunaSupply.Model
         }
         #endregion
         #region Dynamic
-        public Item GetItem(int id,bool notNull)
-        {
-            return Cache.GetItem(ItemId, true);
-        }
+        public Item Item => Cache.GetItem(ItemId, true);
         private PurchaseRequest purchaseRequest = null;
         public PurchaseRequest GetPurchaseRequest(ApplicationDbContext db)
         {
@@ -40,6 +37,8 @@ namespace RuhunaSupply.Model
                 purchaseRequest = db.PurchaseRequests.Find(PurchaseRequestId);
             return purchaseRequest;
         }
+        public SpecificationCategory SpecificationCategory =>
+            Cache.GetSpecificationCategory(SpecificationCategoryId, true);
         #endregion
         #region Saved
         [Key]
@@ -52,6 +51,7 @@ namespace RuhunaSupply.Model
         public double Rate { get; set; }
         public double TotalValue { get; set; }
         public double EstimatedCost { get; set; }
+        public int SpecificationCategoryId { get; set; }
         public List<PurchaseRequestItemSpecification> Specifications { get; set; }
             = new List<PurchaseRequestItemSpecification>();
         public bool IsDeleted { get; set; }

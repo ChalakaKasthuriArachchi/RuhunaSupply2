@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using RuhunaSupply.Common;
 using RuhunaSupply.Data;
 using RuhunaSupply.Model;
 using ThirdParty.Json.LitJson;
@@ -25,7 +26,12 @@ namespace RuhunaSupply.Controllers
         public User[] GetUsers()
         {
             return _db.Users.Where(cat => !cat.IsDeleted).ToArray();
-        } 
+        }
+        [HttpGet("getcurrentuser")]
+        public User GetUser()
+        {
+            return Functions.GetCurrentUser(HttpContext, _db);
+        }
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(object user)
         {
@@ -47,28 +53,6 @@ namespace RuhunaSupply.Controllers
 
             return CreatedAtAction("User", new { id = u.Id }, u);
         }
-            
-            
-
-        [HttpPut]
-        public IActionResult Edit(int Id, string Admin, string Branch, string FullName, string ShortName, string PermissionList, UserPositions Position, UserTypes Type, int MergedId)
-        {
-            _db.Users.Update(new User()
-            {
-                //Id = Id,
-                //Admin = Admin,
-                //Branch = Branch,
-                //FullName = FullName,
-                //ShortName = ShortName,
-                //PermissionList = PermissionList,
-                //Position = Position,
-                //Type = Type,
-                //MergedId = MergedId
-            });
-            _db.SaveChanges();
-            return Ok();
-        }
-
         [HttpPost]
         public IActionResult Delete(int Id)
         {

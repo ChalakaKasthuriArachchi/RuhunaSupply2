@@ -24,6 +24,8 @@ formModel = {
     this.service.login(form.value).subscribe(
       (res : any) =>{
         localStorage.setItem('token',res.token);
+        //localStorage.setItem('token',res + '');
+        console.log(res.token);
         this.router.navigateByUrl('');
       },
       err =>{

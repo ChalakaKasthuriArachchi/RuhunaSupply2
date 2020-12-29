@@ -17,4 +17,11 @@ export class UserService {
   getUserList(){
     return this.http.get(environment.apiBaseURI + '/User');
   }
+  getUser(){
+    var tok = localStorage.getItem('token');
+    if(tok != null){
+      var tokenHeader = new HttpHeaders({'Authorization':'Bearer ' + tok});
+      return this.http.get(environment.apiBaseURI + '/User/getcurrentuser', {headers : tokenHeader});
+    }
+  }
 }
