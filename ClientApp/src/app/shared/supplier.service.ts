@@ -40,4 +40,7 @@ export class SupplierService {
   deleteSupplier(id){
     return this.http.delete(environment.apiBaseURI + '/Supplier/' + id);
   }
+  getActiveSupplierList(){
+
+  }
 }
