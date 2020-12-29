@@ -81,6 +81,7 @@ namespace RuhunaSupply.Common
         {
             lock (Category2s)
             {
+                
                 Category2[] ary = db.Category2s.ToArray();
                 if (ary.Length > 0)
                 {

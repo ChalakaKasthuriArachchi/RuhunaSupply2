@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { QuatationService } from './quatation.service';
+import { QuotationService } from './quotation.service';
 
-describe('QuatationService', () => {
-  let service: QuatationService;
+describe('QuotationService', () => {
+  let service: QuotationService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(QuatationService);
+    service = TestBed.inject(QuotationService);
   });
 
   it('should be created', () => {

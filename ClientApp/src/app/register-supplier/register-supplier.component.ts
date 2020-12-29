@@ -1,8 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Category2Service } from './../shared/category2.service';
-import { Component, OnInit, NgModule } from '@angular/core';
-import { FormBuilder,Validators,FormGroup } from '@angular/forms';
+import { Input, Component, OnInit, NgModule } from '@angular/core';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { SupplierService } from '../shared/supplier.service';
+import {FormControl } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -19,7 +21,7 @@ export class RegisterSupplierComponent implements OnInit {
   constructor(
     private supplierService : SupplierService,
     private formBuilder : FormBuilder,
-    private category2Service : Category2Service
+    private category2Service : Category2Service,
   ) {
     this.checkoutForm = this.formBuilder.group({
       BusinessCategory: '',
@@ -34,25 +36,51 @@ export class RegisterSupplierComponent implements OnInit {
     });
    }
 
+
   ngOnInit(): void {
     this.category2Service.getCategory2List(0)
         .subscribe(
         res => this.category2List = res as []
+       //data => console.log('Success!', data)
+      );
+
+  //     this.checkoutForm=this.formBuilder.group({
+  //       BusinessName:  ['', Validators.compose([Validators.required, Validators.minLength(3),Validators.maxLength(50)])],
+  //       RegistrationNumber:  ['', Validators.compose([Validators.required])],
+  //       BusinessAddress:  ['', Validators.compose([Validators.required])],
+  //       ContactNumber:  ['', Validators.compose([Validators.required])],
+  //       // Password:['',Validators.compose([Validators.required, Validators.minLength(3),Validators.maxLength(50)])],
+  //       BusinessMail:['',Validators.compose([Validators.required,Validators.email])],
+  //     });
+   }
+
+  // onSubmit(supplierData){
+  //   this.supplierService.postSupplier(supplierData.value)
+  //     .subscribe(
+  //       data => console.log('Success!',data),
+  //       error => console.log('Error!',error)
+  //     ); 
+  // }
+
+  onSubmit(fg: FormGroup) {
+    console.log(fg.value);
+    this.supplierService.postSupplier(fg.value)
+      .subscribe(
+        data => { 
+          console.log('Success!', data);
+          const el: HTMLElement = document.getElementById('success_alert');
+          el.style.display = 'block';
+          const timer: ReturnType<typeof setTimeout> = setTimeout(() =>   el.style.display = 'none', 3000);  
+         const resetForm: HTMLFormElement = document.getElementById('checkform');
+          resetForm.reset();
+        },
+
+        error => { 
+          console.log('error!', error);
+          const el: HTMLElement = document.getElementById('error_alert');
+          el.style.display = 'block';
+          const timer: ReturnType<typeof setTimeout> = setTimeout(() =>   el.style.display = 'none', 3000);  
+      }
       );
   }
-
-  onSubmit(supplierData){
-    this.supplierService.postSupplier(supplierData.value)
-      .subscribe(
-        data => console.log('Success!',data),
-        error => console.log('Error!',error)
-      ); 
-  }
-  recordSubmit(fg:FormGroup){
-      
-      this.supplierService.postSupplier(fg.value);
-      
-  }
-  
-  
 }

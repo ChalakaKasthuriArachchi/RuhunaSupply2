@@ -1,4 +1,5 @@
 ﻿using cmlMySqlStandard;
+using RuhunaSupply.Common;
 using RuhunaSupply.Data;
 using System;
 using System.Collections.Generic;
@@ -10,9 +11,9 @@ using static RuhunaSupply.Common.MyEnum;
 
 namespace RuhunaSupply.Model
 {
-    public class QuatationItem : IndexedObject
+    public class QuotationItem : IndexedObject
     {
-        public QuatationItem() 
+        public QuotationItem() 
         {
         }
         #region Dynamic
@@ -30,15 +31,22 @@ namespace RuhunaSupply.Model
                 purchaseRequestItem = db.PurchaseRequestItems.Find(PurchaseRequestItemId);
             return purchaseRequestItem;
         }
+        public Item Item
+        {
+            get
+            {
+                return Cache.GetItem(ItemId, true);
+            }
+        }
         #endregion
 
         #region Saved
         [Key]
         public int Id { get; set; }
 
-        public Quotation Quatation { get; set; }
-        public PurchaseRequestItem PurchaseRequestItem { get; set; }
-        public Item Item { get; set; }
+        public int QuotationId { get; set; }
+        public int PurchaseRequestItemId { get; set; }
+        public int ItemId { get; set; }
 
         public QuatationStatus Status { get; set; }
         public bool IsSupplied { get; set; }

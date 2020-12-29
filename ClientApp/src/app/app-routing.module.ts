@@ -1,4 +1,4 @@
-import { QuatationComponent } from './quatation/quatation.component';
+import { QuotationComponent } from './quotation/quotation.component';
 import { PurchaseRequestComponent } from './purchase-request/purchase-request.component';
 import { AuthGuard } from './auth/auth.guard';
 import { LoginComponent } from './user-account/login/login.component';
@@ -47,7 +47,7 @@ const routes: Routes = [
   { path: 'item', component: ItemComponent },
   { path: 'purchaserequest/add', component: AddPurchaseRequestComponent },
   { path: 'testing', component: TestingComponent},
-  { path: 'quatation', component: QuatationComponent}
+  { path: 'quotation', component: QuotationComponent}
 ];
 
 @NgModule({

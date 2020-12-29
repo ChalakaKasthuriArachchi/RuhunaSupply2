@@ -50,7 +50,7 @@ namespace RuhunaSupply.Controllers
         public async Task<ActionResult<Supplier>> PostSupplier(object supplier)
         {
             JsonData jd = JsonMapper.ToObject(supplier.ToString());
-            string userId = Request.HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name).Value;
+            string userId = Request.HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)==null?"0": Request.HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name).Value;
             Supplier sp = new Supplier()
             {
                 Id = int.Parse(userId),

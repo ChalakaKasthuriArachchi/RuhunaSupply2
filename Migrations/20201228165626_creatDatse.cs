@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace RuhunaSupply.Migrations
 {
-    public partial class jj : Migration
+    public partial class creatDatse : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -15,7 +15,8 @@ namespace RuhunaSupply.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(type: "nvarchar(50)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(150)", nullable: false)
+                    Description = table.Column<string>(type: "nvarchar(150)", nullable: false),
+                    IsDeleted = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -30,7 +31,8 @@ namespace RuhunaSupply.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     ParentCategoryId = table.Column<int>(nullable: false),
                     Name = table.Column<string>(maxLength: 50, nullable: true),
-                    Description = table.Column<string>(maxLength: 150, nullable: true)
+                    Description = table.Column<string>(maxLength: 150, nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -46,7 +48,8 @@ namespace RuhunaSupply.Migrations
                     GPCategoryId = table.Column<int>(nullable: false),
                     ParentCategoryId = table.Column<int>(maxLength: 50, nullable: false),
                     Name = table.Column<string>(maxLength: 50, nullable: false),
-                    Description = table.Column<string>(maxLength: 150, nullable: true)
+                    Description = table.Column<string>(maxLength: 150, nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -63,7 +66,8 @@ namespace RuhunaSupply.Migrations
                     Location = table.Column<string>(maxLength: 100, nullable: true),
                     BudgetAllocation = table.Column<double>(nullable: false),
                     UsedAmount = table.Column<double>(nullable: false),
-                    FacultyId = table.Column<int>(nullable: false)
+                    FacultyId = table.Column<int>(nullable: false),
+                    IsDeleted = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -79,7 +83,8 @@ namespace RuhunaSupply.Migrations
                     Name = table.Column<string>(maxLength: 100, nullable: true),
                     Location = table.Column<string>(maxLength: 100, nullable: true),
                     BudgetAllocation = table.Column<double>(nullable: false),
-                    UsedAmount = table.Column<double>(nullable: false)
+                    UsedAmount = table.Column<double>(nullable: false),
+                    IsDeleted = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -96,7 +101,8 @@ namespace RuhunaSupply.Migrations
                     Category2Id = table.Column<int>(nullable: false),
                     Category3Id = table.Column<int>(nullable: false),
                     Name = table.Column<string>(nullable: false),
-                    Description = table.Column<string>(maxLength: 150, nullable: true)
+                    Description = table.Column<string>(maxLength: 150, nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -120,32 +126,12 @@ namespace RuhunaSupply.Migrations
                     Justification = table.Column<string>(type: "nvarchar(100)", nullable: true),
                     Status = table.Column<int>(nullable: false),
                     SubmittedById = table.Column<int>(nullable: false),
-                    ExaminigId = table.Column<int>(nullable: false)
+                    ExaminigId = table.Column<int>(nullable: false),
+                    IsDeleted = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_PurchaseRequests", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "QuatationItems",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    QuotationId = table.Column<int>(nullable: false),
-                    PurchaseRequestItemId = table.Column<int>(nullable: false),
-                    ItemId = table.Column<int>(nullable: false),
-                    Status = table.Column<int>(nullable: false),
-                    IsSupplied = table.Column<bool>(nullable: false),
-                    Description = table.Column<string>(maxLength: 100, nullable: true),
-                    Qty = table.Column<double>(nullable: false),
-                    Total = table.Column<double>(nullable: false),
-                    Rate = table.Column<double>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_QuatationItems", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -157,7 +143,8 @@ namespace RuhunaSupply.Migrations
                     PurchaseRequestId = table.Column<int>(nullable: false),
                     SupplierId = table.Column<int>(nullable: false),
                     Status = table.Column<int>(nullable: false),
-                    Date = table.Column<DateTime>(nullable: false)
+                    Date = table.Column<DateTime>(nullable: false),
+                    IsDeleted = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -172,7 +159,8 @@ namespace RuhunaSupply.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     ItemId = table.Column<int>(nullable: false),
                     Title = table.Column<string>(type: "nvarchar(100)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(150)", nullable: true)
+                    Description = table.Column<string>(type: "nvarchar(150)", nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -193,7 +181,8 @@ namespace RuhunaSupply.Migrations
                     BusinessName = table.Column<string>(type: "nvarchar(50)", nullable: true),
                     BusinessMail = table.Column<string>(type: "nvarchar(30)", nullable: true),
                     BusinessAddress = table.Column<string>(type: "nvarchar(100)", nullable: true),
-                    BusinessCategory = table.Column<int>(nullable: false)
+                    BusinessCategory = table.Column<int>(nullable: false),
+                    IsDeleted = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -204,14 +193,14 @@ namespace RuhunaSupply.Migrations
                 name: "UserAccounts",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Id = table.Column<int>(nullable: false),
                     FullName = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
                     ShortName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Email = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     HashedPassword = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: false),
                     Privileges = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Type = table.Column<int>(nullable: false)
+                    Type = table.Column<int>(nullable: false),
+                    IsDeleted = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -226,7 +215,8 @@ namespace RuhunaSupply.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(type: "nvarchar(50)", nullable: true),
                     Password = table.Column<string>(type: "nvarchar(50)", nullable: true),
-                    Table = table.Column<int>(nullable: false)
+                    Table = table.Column<int>(nullable: false),
+                    IsDeleted = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -243,7 +233,8 @@ namespace RuhunaSupply.Migrations
                     PurchaseRequestId = table.Column<int>(nullable: false),
                     Date = table.Column<DateTime>(nullable: false),
                     Remark = table.Column<string>(maxLength: 200, nullable: true),
-                    Involvement = table.Column<int>(nullable: false)
+                    Involvement = table.Column<int>(nullable: false),
+                    IsDeleted = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -254,8 +245,7 @@ namespace RuhunaSupply.Migrations
                 name: "Users",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Id = table.Column<int>(nullable: false),
                     FacultyId = table.Column<int>(nullable: false),
                     DepartmentId = table.Column<int>(nullable: false),
                     FullName = table.Column<string>(type: "nvarchar(100)", nullable: true),
@@ -263,7 +253,8 @@ namespace RuhunaSupply.Migrations
                     PermissionList = table.Column<string>(type: "nvarchar(50)", nullable: true),
                     Position = table.Column<int>(nullable: false),
                     Type = table.Column<int>(nullable: false),
-                    MergedId = table.Column<int>(nullable: false)
+                    MergedId = table.Column<int>(nullable: false),
+                    IsDeleted = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -282,7 +273,8 @@ namespace RuhunaSupply.Migrations
                     QtyRequired = table.Column<double>(nullable: false),
                     Rate = table.Column<double>(nullable: false),
                     TotalValue = table.Column<double>(nullable: false),
-                    EstimatedCost = table.Column<double>(nullable: false)
+                    EstimatedCost = table.Column<double>(nullable: false),
+                    IsDeleted = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -291,6 +283,57 @@ namespace RuhunaSupply.Migrations
                         name: "FK_PurchaseRequestItems_PurchaseRequests_PurchaseRequestId",
                         column: x => x.PurchaseRequestId,
                         principalTable: "PurchaseRequests",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "QuatationItems",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    QuotationId = table.Column<int>(nullable: false),
+                    PurchaseRequestItemId = table.Column<int>(nullable: false),
+                    ItemId = table.Column<int>(nullable: false),
+                    Status = table.Column<int>(nullable: false),
+                    IsSupplied = table.Column<bool>(nullable: false),
+                    Description = table.Column<string>(maxLength: 100, nullable: true),
+                    Qty = table.Column<double>(nullable: false),
+                    Total = table.Column<double>(nullable: false),
+                    Rate = table.Column<double>(nullable: false),
+                    IsDeleted = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_QuatationItems", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_QuatationItems_Quotations_QuotationId",
+                        column: x => x.QuotationId,
+                        principalTable: "Quotations",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PurchaseRequestItemSpecifications",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    PurchaseRequestItemId = table.Column<int>(nullable: false),
+                    ItemId = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(50)", nullable: false),
+                    Value = table.Column<string>(type: "nvarchar(50)", nullable: false),
+                    IsDeleted = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PurchaseRequestItemSpecifications", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_PurchaseRequestItemSpecifications_PurchaseRequestItems_Purch~",
+                        column: x => x.PurchaseRequestItemId,
+                        principalTable: "PurchaseRequestItems",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -306,43 +349,22 @@ namespace RuhunaSupply.Migrations
                     ItemId = table.Column<int>(nullable: false),
                     Name = table.Column<string>(type: "nvarchar(50)", nullable: false),
                     Value = table.Column<string>(type: "nvarchar(50)", nullable: false),
-                    QuatationItemId = table.Column<int>(nullable: true)
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    QuotationItemId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Specification", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Specification_QuatationItems_QuatationItemId",
-                        column: x => x.QuatationItemId,
+                        name: "FK_Specification_QuatationItems_QuotationItemId",
+                        column: x => x.QuotationItemId,
                         principalTable: "QuatationItems",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "PurchaseRequestItemSpecifications",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    PurchaseRequestItemId = table.Column<int>(nullable: false),
-                    ItemId = table.Column<int>(nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(50)", nullable: false),
-                    Value = table.Column<string>(type: "nvarchar(50)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_PurchaseRequestItemSpecifications", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_PurchaseRequestItemSpecifications_PurchaseRequestItems_Purch~",
-                        column: x => x.PurchaseRequestItemId,
-                        principalTable: "PurchaseRequestItems",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "QuatationItemSpecifications",
+                name: "QuotationItemSpecifications",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -354,15 +376,15 @@ namespace RuhunaSupply.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_QuatationItemSpecifications", x => x.Id);
+                    table.PrimaryKey("PK_QuotationItemSpecifications", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_QuatationItemSpecifications_QuatationItems_QuatationItemId",
+                        name: "FK_QuotationItemSpecifications_QuatationItems_QuatationItemId",
                         column: x => x.QuatationItemId,
                         principalTable: "QuatationItems",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_QuatationItemSpecifications_Specification_SpecificationId",
+                        name: "FK_QuotationItemSpecifications_Specification_SpecificationId",
                         column: x => x.SpecificationId,
                         principalTable: "Specification",
                         principalColumn: "Id",
@@ -380,19 +402,24 @@ namespace RuhunaSupply.Migrations
                 column: "PurchaseRequestItemId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_QuatationItemSpecifications_QuatationItemId",
-                table: "QuatationItemSpecifications",
+                name: "IX_QuatationItems_QuotationId",
+                table: "QuatationItems",
+                column: "QuotationId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_QuotationItemSpecifications_QuatationItemId",
+                table: "QuotationItemSpecifications",
                 column: "QuatationItemId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_QuatationItemSpecifications_SpecificationId",
-                table: "QuatationItemSpecifications",
+                name: "IX_QuotationItemSpecifications_SpecificationId",
+                table: "QuotationItemSpecifications",
                 column: "SpecificationId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Specification_QuatationItemId",
+                name: "IX_Specification_QuotationItemId",
                 table: "Specification",
-                column: "QuatationItemId");
+                column: "QuotationItemId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -419,10 +446,7 @@ namespace RuhunaSupply.Migrations
                 name: "PurchaseRequestItemSpecifications");
 
             migrationBuilder.DropTable(
-                name: "QuatationItemSpecifications");
-
-            migrationBuilder.DropTable(
-                name: "Quotations");
+                name: "QuotationItemSpecifications");
 
             migrationBuilder.DropTable(
                 name: "SpecificationCategories");
@@ -453,6 +477,9 @@ namespace RuhunaSupply.Migrations
 
             migrationBuilder.DropTable(
                 name: "QuatationItems");
+
+            migrationBuilder.DropTable(
+                name: "Quotations");
         }
     }
 }

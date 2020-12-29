@@ -240,3 +240,14 @@ input:-moz-placeholder { /* Firefox 18- */
     font-weight: 300;
     font-style: normal;
 }
+
+.error_message{
+	margin-bottom: 20px;
+	background: #fe8b8e;
+	padding: 0px;
+	text-align: center;
+	font-size: 14px;
+	transition: all 0.5s ease;
+  }
+
+  

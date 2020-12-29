@@ -9,38 +9,38 @@
       $(".panel-group").on("shown.bs.collapse", toggleIcon);
 </script>
 
-<div class="form-v5">
+<div iv class="form-v5">
     <div class="page-content">
 		<div class="form-v5-content">
-			<form class="form-detail" [formGroup]="checkoutForm" (ngSubmit)="onSubmit(checkoutForm)" novalidate>
+			<form class="form-detail"  (ngSubmit)="onSubmit(checkoutForm)" novalidate>
       
           <h2>Quatation</h2>
-          <!-- <div *ngFor="let qt of quataionList;"> -->
+          <!-- <div *ngFor="let qt of quataion;"> -->
           <div>  
             <div class="form-row">
-              <label for="QuatationNumber">Quatation Number</label>
-              <!-- <input type="text" value="{{qt.id}}" formControlName="QuatationNumber" id="QuatationNumber" class="input-text" placeholder="Quatation Number"  readonly> -->
+              <label for="QuotationNumber">Quatation Number</label>
+              <input type="text" value="{{quotation.id}}" formControlName="QuotationNumber" id="QuotationNumber" class="input-text" placeholder="Quotation Number"  readonly> 
               <i class="fas fa-user"></i>
             </div>
             <div class="form-row">
               <label for="SubmitedDate">Submited Date</label>
-              <input type="date" formControlName="SubmitedDate" id="SubmitedDate" class="input-text" readonly >
+              <input type="date" value="{{quotation.date}}" id="SubmitedDate" class="input-text" readonly >
               <i class="fas fa-envelope"></i>
             </div>
             <div class="form-row">
               <label for="Deadline">Deadline</label>
-              <input type="text" formControlName="Deadline" id="Deadline" class="input-text" placeholder="Deadline" readonly>
+              <input type="text" value="{{quotation.date}}" formControlName="Deadline" id="Deadline" class="input-text" placeholder="Deadline" readonly>
               <i class="fas fa-envelope"></i>
             </div>
             <div class="form-row">
               <label for="Status">Status</label>
-              <input type="text" formControlName="Status" id="Status" class="input-text" placeholder="Status" readonly>
+              <input type="text" value="{{quotation.Status}}" formControlName="Status" id="Status" class="input-text" placeholder="Status" readonly>
               <i class="fas fa-envelope"></i>
             </div>
 
             <div class="form-row">
               <label for="AcceptedDate">Accepted Date</label>
-              <input type="date" formControlName="AcceptedDate" id="AcceptedDate" class="input-text" readonly >
+              <input type="date" value="{{quotation.date}}" formControlName="AcceptedDate" id="AcceptedDate" class="input-text" readonly >
               <i class="fas fa-envelope"></i>
             </div>
           </div>
@@ -62,30 +62,33 @@
                                 <div class="form-group  mb-2">
                                   <div class="form-row">
                                       <div class="form-group">
-                                        <label for="" style="padding-right: 30px;padding-left: 30px;">name</label>
+                                        <label for="" style="padding-right: 30px;padding-left: 30px;">{{specification.name}}</label>
+                                        <label for="" style="padding-right: 30px;padding-left: 30px;">{{category3.name}}</label>
                                       </div>
-                                <input type="text" class="form-control" style="margin-right: 10px;margin-left: 15px;width: 50px;">
-                                <h1 style="margin-right: 10px;margin-left: 10px;">* </h1>
-                                <input type="text" class="form-control" style="margin-right: 10px;margin-left: 15px;width: 50px;">
-                                <h1 style="margin-right: 10px;margin-left: 10px;">= </h1>
-                                <input type="text" class="form-control" style="margin-right: 10px;margin-left: 15px;width: 90px;">
-
+                                        <input type="text" class="form-control" style="margin-right: 10px;margin-left: 15px;width: 50px;" readonly>
+                                        <h1 style="margin-right: 10px;margin-left: 10px;">* </h1>
+                                        <input type="text" class="form-control" style="margin-right: 10px;margin-left: 15px;width: 50px;">
+                                        <h1 style="margin-right: 10px;margin-left: 10px;">= </h1>
+                                        <input type="text" class="form-control" style="margin-right: 10px;margin-left: 15px;width: 90px;" readonly>
+                                  
                                   </div>    
                                 </div>
-                              <div class="form-group  mb-2">
-                                  <label for="value1" class="sr-only">value1</label>
-                                  <input type="value1" class="form-control" id="value1"  style="width: 70px;" placeholder="value 1">
-                              </div>
-                              <h1 style="margin-right: 10px;margin-left: 10px;">* </h1>
-                              <div class="form-group  mb-2">
-                                  <label for="value2" class="sr-only">value2</label>
-                                  <input type="value2" class="form-control" id="value2" style="width: 70px;" placeholder="value 2">
-                              </div>
-                              <h1 style="margin-right: 10px;margin-left: 10px;">=</h1>
-                              <div class="form-group  mb-2">
-                                  <label for="total" class="sr-only">total</label>
-                                  <input type="total" class="form-control" id="total" style="width: 100px;"placeholder="total">
-                              </div>
+                               <!-- <div>
+                                      <div class="form-group  mb-2">
+                                          <label for="value1" class="sr-only">value1</label>
+                                          <input type="value1" class="form-control" id="value1"  style="width: 70px;" placeholder="value 1">
+                                      </div>
+                                          <h1 style="margin-right: 10px;margin-left: 10px;">* </h1>
+                                      <div class="form-group  mb-2">
+                                          <label for="value2" class="sr-only">value2</label>
+                                          <input type="value2" class="form-control" id="value2" style="width: 70px;" placeholder="value 2">
+                                      </div>
+                                          <h1 style="margin-right: 10px;margin-left: 10px;">=</h1>
+                                      <div class="form-group  mb-2">
+                                          <label for="total" class="sr-only">total</label>
+                                          <input type="total" class="form-control" id="total" style="width: 100px;"placeholder="total">
+                                      </div>
+                               </div> -->
                               </div> 
                             </a>
                         </div>
@@ -132,8 +135,8 @@
 	</div>
 </div>
 
-
-            <div class="dropdown">
+<!-- 
+            <div class="dropdown"> -->
 
 
 
@@ -207,6 +210,4 @@
                 </div>
               </div> -->
 
-		</div>
-	</div>
-</div>
+		<!-- </div> -->
