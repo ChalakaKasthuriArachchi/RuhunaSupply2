@@ -14,8 +14,7 @@ export class ViewSpecificationCategoryComponent implements OnInit {
   searchText: string;
   item: number;
 
-  constructor(private specificationcategoryService: SpecificationCategoryService, private route: ActivatedRoute)
-  {
+  constructor(private specificationcategoryService: SpecificationCategoryService, private route: ActivatedRoute) {
 
   }
 
