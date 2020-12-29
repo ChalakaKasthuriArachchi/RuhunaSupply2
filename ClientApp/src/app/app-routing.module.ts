@@ -28,6 +28,7 @@ const routes: Routes = [
   {path: 'createaccount',component : UserAccountComponent},
   { path: 'category1', component: Category1Component },
   { path: 'category1/add', component: AddCategory1Component },
+  { path: 'category1/view', component: AddCategory1Component },
   { path: 'category2', component: Category2Component },
   { path: 'category2/add', component: AddCategory2Component },
   { path: 'category3', component: Category3Component },

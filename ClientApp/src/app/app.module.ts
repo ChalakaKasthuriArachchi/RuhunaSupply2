@@ -36,14 +36,14 @@ import { AddPurchaseRequestComponent } from './add-purchase-request/add-purchase
 // import { MatToolbarModule } from '@angular/material/toolbar';
 // import { MatIconModule } from '@angular/material/icon';
 import { TestingComponent } from './testing/testing.component';
-import { HomeComponent } from './home/home.component';
+import { QuatationComponent } from './quatation/quatation.component';
 
 
 
 
 @NgModule({
   declarations: [
-     AppComponent,
+    AppComponent,
     SuppliersComponent,
     RegisterSupplierComponent,
     UserAccountComponent,
@@ -69,7 +69,7 @@ import { HomeComponent } from './home/home.component';
     ItemComponent,
     AddUserComponent,
     UserComponent,
-    HomeComponent
+    QuatationComponent
   ],
   imports: [
     CommonModule,
