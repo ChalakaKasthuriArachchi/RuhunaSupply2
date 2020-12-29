@@ -8,9 +8,9 @@ describe('ViewSpecificationCategoryComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ViewSpecificationCategoryComponent ]
+      declarations: [ViewSpecificationCategoryComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

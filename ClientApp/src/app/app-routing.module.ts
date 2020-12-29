@@ -49,7 +49,7 @@ const routes: Routes = [
   { path: 'purchaserequest/view', component: AddPurchaseRequestComponent },
   { path: 'testing', component: TestingComponent}
   { path: 'specification-category', component: SpecificationCategoryComponent },
-  { path: 'specification/view', component: ViewSpecificationComponent },
+  { path: 'specification/view/:id', component: ViewSpecificationComponent },
   { path: 'specification-category/view', component: ViewSpecificationCategoryComponent },
 
 

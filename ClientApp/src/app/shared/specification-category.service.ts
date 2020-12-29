@@ -30,10 +30,10 @@ export class SpecificationCategoryService {
   deletespecificationcategoryList(id) {
     return this.http.delete(environment.apiBaseURI + '/SpecificationCategory/' + id);
   }
-  getSpecificationCategories(itemId){
+  getSpecificationCategories(itemId) {
     return this.http.get(environment.apiBaseURI + '/SpecificationCategory?ItemId=' + itemId);
   }
-  getSpecificationCategoryById(id){
-    return this.http.get(environment.apiBaseURI + '/SpecificationCategory/'+ id);
+  getSpecificationCategoryById(id) {
+    return this.http.get(environment.apiBaseURI + '/SpecificationCategory/' + id);
   }
 }

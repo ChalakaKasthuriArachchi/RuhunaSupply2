@@ -22,41 +22,45 @@ namespace RuhunaSupply.Controllers
         {
             this._db = context;
         }
+        //[HttpGet]
+        //public SpecificationCategory[] GetSpecificationCategories(int itemId)
+        //{
+        //    try
+        //    {
+        //        IQueryable<SpecificationCategory> query = _db.SpecificationCategories.OrderBy(cat => cat.Title);
+        //        if (itemId != 0)
+        //            query = query.Where(cat => cat.ItemId == itemId);
+        //        SpecificationCategory[] specificationCategories = query.ToArray();
+        //        return specificationCategories;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Functions.UpdateErrorLog("Unable to Load Specification Categories", ex);
+        //        return null;
+        //    }
+        //}
+
+        
+
         [HttpGet]
-        public SpecificationCategory[] GetSpecificationCategories(int itemId)
+        public SpecificationCategory[] Index(string Category, string Search)
         {
-            try
-            {
-                IQueryable<SpecificationCategory> query = _db.SpecificationCategories.OrderBy(cat => cat.Title);
-                if (itemId != 0)
-                    query = query.Where(cat => cat.ItemId == itemId);
-                SpecificationCategory[] specificationCategories = query.ToArray();
-                return specificationCategories;
-            }
-            catch (Exception ex)
-            {
-                Functions.UpdateErrorLog("Unable to Load Specification Categories", ex);
-                return null;
-            }
+            IQueryable<SpecificationCategory> query = _db.SpecificationCategories;
+            if (Category != null && Category.Trim().Length > 0 && Category != "undefined")
+                query = query.Where(s => s.Item.Name == Category);
+            if (Search != null && Search.Trim().Length > 0 && Search != "undefined")
+                query = query.Where(s => s.Id.ToString().Contains(Search)
+                            || s.Title.Contains(Search)
+                            || s.Item.Name.Contains(Search)
+                            || s.Description.Contains(Search));
+            SpecificationCategory[] specificationcategories = query.ToArray();
+            return specificationcategories;
         }
+
         [HttpGet("{id}")]
         public SpecificationCategory GetSpecificationCategory(int id)
         {
             return _db.SpecificationCategories.Find(id);
-        }
-
-        [HttpGet]
-        public SpecificationCategory[] Index(string Item, string Search)
-        {
-            IQueryable<SpecificationCategory> query = _db.SpecificationCategories;
-            if (Item != null && Item.Trim().Length > 0 && Item != "undefined")
-                query = query.Where(s => s.Item.Id.ToString() == Item);
-            if (Search != null && Search.Trim().Length > 0 && Search != "undefined")
-                query = query.Where(s => s.Id.ToString().Contains(Search)
-                            || s.Title.Contains(Search)
-                            || s.Description.Contains(Search));
-            SpecificationCategory[] specificationcategories = query.Include(s => s.Item).ToArray();
-            return specificationcategories;
         }
 
         [HttpPost]
