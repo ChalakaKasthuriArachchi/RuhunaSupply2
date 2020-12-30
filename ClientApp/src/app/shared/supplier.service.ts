@@ -34,7 +34,7 @@ export class SupplierService {
       return this.http.post(environment.apiBaseURI + '/Supplier', formData,
       {headers : tokenHeader});
     }
-    // return this.http.post(environment.apiBaseURI + '/Supplier', formData);
+    //return this.http.post(environment.apiBaseURI + '/Supplier', formData);
 
   }
   

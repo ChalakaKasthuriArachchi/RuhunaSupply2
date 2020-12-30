@@ -1,8 +1,11 @@
 import { UserAccountService } from './../../shared/user-account.service';
-import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { NgForm,FormGroup,FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { combineLatest } from 'rxjs';
+import {FormControl } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { Input, Component, OnInit, NgModule } from '@angular/core';
+
 
 @Component({
   selector: 'app-login',
@@ -14,26 +17,52 @@ formModel = {
   Email : '',
   Password : ''
 }
-  constructor(private service:UserAccountService,private router: Router) { }
+  constructor(
+    private service : UserAccountService,
+    private formBuilder : FormBuilder,
+    private router: Router,
+    ) {   }
 
   ngOnInit(): void {
     if(localStorage.getItem('token') != null)
     this.router.navigateByUrl('');
   }
-  onSubmit(form:NgForm){
-    this.service.login(form.value).subscribe(
-      (res : any) =>{
-        localStorage.setItem('token',res.token);
-        this.router.navigateByUrl('');
-      },
-      err =>{
-        if(err.status == 400){
+  // onSubmit(form:NgForm){
+  //   this.service.login(form.value).subscribe(
+  //     (res : any) =>{
+  //       localStorage.setItem('token',res.token);
+  //       this.router.navigateByUrl('');
+  //     },
+  //     err =>{
+  //       if(err.status == 400){
 
-        }
-        else{
-          console.log(err);
-        }
+  //       }
+  //       else{
+  //         console.log(err);
+  //       }
+  //     }
+  //   );
+  // }
+
+  onSubmit(fg: FormGroup) {
+    console.log(fg.value);
+    this.service.login(fg.value)
+      .subscribe(
+        data => { 
+          console.log('Success!', data);
+          const el: HTMLElement = document.getElementById('success_alert');
+          el.style.display = 'block';
+          const timer: ReturnType<typeof setTimeout> = setTimeout(() =>   el.style.display = 'none', 3000);  
+          const resetForm: HTMLFormElement = document.getElementById('checkform');
+          resetForm.reset();
+        },
+
+        error => { 
+          console.log('error!', error);
+          const el: HTMLElement = document.getElementById('error_alert');
+          el.style.display = 'block';
+          const timer: ReturnType<typeof setTimeout> = setTimeout(() =>   el.style.display = 'none', 3000);  
       }
-    );
+      );
   }
 }

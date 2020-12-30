@@ -25,16 +25,16 @@ export class QuotationComponent implements OnInit {
     private SpecificationService: SpecificationService,
 
   ) {
-      QuotationService.getQuotation().subscribe(
-        res => this.quotation = res
-      );
+      //QuotationService.getQuotation().subscribe(
+      //   res => this.quotation = res
+      // );
 
    }
    
 
 
   ngOnInit(): void {
-    this.QuotationService.getQuotation()
+    this.QuotationService.getQuotation(0)
     .subscribe(res => this.quotation = res as []);
     this.getQuotation();
   }
@@ -45,8 +45,15 @@ export class QuotationComponent implements OnInit {
       error => console.log('Error!', error)
     );
   }
+
+
+
+
+
+
+
   getQuotation(){
-    this.QuotationService.getQuotation()
+    this.QuotationService.getQuotation(0)
      .subscribe(res => this.quotation = res as []);
   }
 }

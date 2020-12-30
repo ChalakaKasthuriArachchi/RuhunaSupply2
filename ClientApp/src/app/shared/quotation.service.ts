@@ -14,7 +14,7 @@ export class QuotationService {
   postQuotation(formData) {
     return this.http.post(environment.apiBaseURI + '/Quotation', formData);
   }
-  // getQuotation(id) {
-  //   return this.http.get(environment.apiBaseURI + '/Quotation/' + id);
-  // }
+  getQuotation(id) {
+    return this.http.get(environment.apiBaseURI + '/Quotation/' + id);
+  }
 }
