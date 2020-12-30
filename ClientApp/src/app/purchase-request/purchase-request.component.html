@@ -1,6 +1,6 @@
 <blockquote class="blockquote ml-5">
   <footer class="bloquote-footer">
-    Current Purchase Requests
+    <h2>Current Purchase Requests</h2>
   </footer>
 </blockquote>
 <div mdbTable class="grid-table">
@@ -20,15 +20,33 @@
     </div>
     <div class="tbody">
         <div class="tr" mdbTableCol *ngFor="let pr of purchaseRequests; let i = index;">
-            <div class="td">{{i + 1}}</div>
-            <div class="td">{{pr.id}}</div>
-            <div class="td">{{pr.department}}</div>
-            <div class="td">{{pr.faculty}}</div>
-            <div class="td">{{pr.dateTime}}</div>
-            <div class="td">{{pr.purpose}}</div>
-            <div class="td">{{pr.status}}</div>
-            <div class="td">{{pr.submittedBy}}</div>
-            <div class="td">{{pr.examining}}</div>
+          <div class="td">
+            {{i + 1}}
+          </div>
+          <div class="td">
+            <label class="form-control">{{pr.id}}</label>
+          </div>
+          <div class="td">
+            <label class="form-control">{{pr.department}}</label>
+          </div>
+          <div class="td">
+            <label class="form-control">{{pr.faculty}}</label>
+          </div>
+          <div class="td">
+            <label class="form-control">{{sup.dateTime}}</label>
+          </div>
+          <div class="td">
+            <label class="form-control">{{sup.purpose}}</label>
+          </div>
+          <div class="td">
+            <label class="form-control">{{sup.status}}</label>
+          </div>
+          <div class="td">
+            <label class="form-control">{{sup.submittedBy}}</label>
+          </div>
+          <div class="td">
+            <label class="form-control">{{sup.examining}}</label>
+          </div>
             <div class="td">
               <a class="btn btn-outline-success" href="#" role="button">View</a>
             </div>
