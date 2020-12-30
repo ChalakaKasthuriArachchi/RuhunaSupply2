@@ -27,23 +27,25 @@
         <label class="form-control">{{spcat.item}}</label>
       </div>
       <div class="td">
-        <label class="form-control">{{spcat.title}}</label>
+        <fieldset>
+          <label class="form-control">{{spcat.title}}</label>
+        </fieldset>
       </div>
       <div class="td">
-        <label class="form-control">{{spcat.description}}</label>
+        <fieldset>
+          <label class="form-control">{{spcat.description}}</label>
+        </fieldset>
       </div>
       <div class="td">
         <a class="btn btn-outline-success" href="#" role="button">View</a>
       </div>
     </div>
-    <div class="tr">
-      <div class="td"></div>
-      <div class="td"></div>
-      <div class="td">
-        <input class="form-control" placeholder="Search Text" [(ngModel)]="searchText">
-
-      </div>
-      <a class="btn btn-primary" role="button" (click)="getSpecificationcategories()">Search</a>
+    <div class="td"></div>
+    <div class="td">
+      <input class="form-control" placeholder="Search Text" [(ngModel)]="searchText">
     </div>
+    <div class="td"></div>
+    <a class="btn btn-primary" role="button" (click)="getSpecificationcategories()">Search</a>
+
   </div>
 </div>

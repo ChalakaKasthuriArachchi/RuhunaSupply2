@@ -14,11 +14,25 @@
   .tbody {
     display: table-row-group;
   }
+
+  label {
+    display: block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 100%;
+  }
   
   .tr {
     display: table-row;
   }
-  
+
+  .tr:nth-child(even) {
+    background-color :darkolivegreen;
+  } 
+  .tr:nth-child(odd) {
+    background-color: darkkhaki;
+  }  
   .td {
     display: table-cell;
     padding: 10px 1px 1px 5px;

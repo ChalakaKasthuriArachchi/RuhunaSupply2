@@ -13,16 +13,30 @@
 
 .tbody {
   display: table-row-group;
-  background-color: bisque;
 }
 
 .tr {
   display: table-row;
 }
+.tr:nth-child(even) {
+  background-color :rgb(187, 231, 110);
+} 
+
+.tr:nth-child(odd) {
+  background-color :rgb(140, 167, 95);
+} 
 
 .td {
   display: table-cell;
   padding: 10px 1px 1px 5px;
+}
+
+label{
+    display:block;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+    overflow:hidden;
+    width:100%;
 }
 
 .thead div.tr div.td:last-child {

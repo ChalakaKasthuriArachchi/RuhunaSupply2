@@ -1,6 +1,6 @@
 <blockquote class="blockquote ml-5">
   <footer class="bloquote-footer">
-    Registered Supliers
+    Registered Suppliers
   </footer>
 </blockquote>
 <div mdbTable class="grid-table">
@@ -16,32 +16,34 @@
   </div>
   <div class="tbody">
     <div class="tr" mdbTableCol *ngFor="let sup of supplierList; let i = index;">
-      <div class="td">
+      <div class="td" style="text-align:center">
         {{i + 1}}
       </div>
       <div class="td">
         <label class="form-control">{{sup.id}}</label>
       </div>
       <div class="td">
-        <label class="form-control">{{sup.businessName}}</label>
+        <fieldset>
+          <label class="form-control">{{sup.businessName}}</label>
+         </fieldset>
       </div>
       <div class="td">
         <label class="form-control">{{sup.contactNumber}}</label>
       </div>
       <div class="td">
-        <label class="form-control">{{sup.businessAddress}}</label>
+        <fieldset>
+          <label class="form-control">{{sup.businessAddress}}</label>
+        </fieldset>
       </div>
       <div class="td">
         <a class="btn btn-outline-success" href="#" role="button">View</a>
       </div>
     </div>
-    <div class="tr">
+    <div>
       <div class="td"></div>
+      <input class="form-control" placeholder="Search Text" [(ngModel)]="searchText">
       <div class="td"></div>
-      <div class="td">
-        <input class="form-control" placeholder="Search Text" [(ngModel)]="searchText">
-        
-      </div>
+
       <a class="btn btn-primary" role="button" (click)="getSuppliers()">Search</a>
     </div>
   </div>
