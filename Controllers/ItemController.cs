@@ -21,7 +21,7 @@ namespace RuhunaSupply.Controllers
             this._db = context;
         }
         [HttpGet]
-        public Item[] GetItems(int category,string search,bool fullView)
+        public Item[] GetItems(int category,string search)
         {
             if (search != null)
                 search = search.Trim().ToLower();

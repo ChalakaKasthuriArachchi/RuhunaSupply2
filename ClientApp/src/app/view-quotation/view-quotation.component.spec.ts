@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { QuatationComponent } from './quatation.component';
+import { QuotationComponent } from './view-quotation.component';
 
 describe('QuatationComponent', () => {
-  let component: QuatationComponent;
-  let fixture: ComponentFixture<QuatationComponent>;
+  let component: QuotationComponent;
+  let fixture: ComponentFixture<QuotationComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ QuatationComponent ]
+      declarations: [ QuotationComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(QuatationComponent);
+    fixture = TestBed.createComponent(QuotationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

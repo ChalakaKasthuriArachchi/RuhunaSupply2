@@ -11,15 +11,14 @@ import { DepartmentService } from '../shared/department.service';
 })
 export class AddUserComponent implements OnInit {
   checkoutForm;
-  userList;
+  UserList: [];
   FacultyList: [];
   userPositions : [];
   DepartmentList : [];
-  UserType : [];
 
   constructor(
     private formBuilder : FormBuilder,
-    private addUserService : UserService,
+    private UserService : UserService,
     private FacultyService : FacultyService,
     private DepartmentService : DepartmentService
     ) { 
@@ -28,9 +27,7 @@ export class AddUserComponent implements OnInit {
           Department:'',
           FullName:'',
           ShortName:'',
-          PermissionList:'',
           Position:'',
-          UserType:'',
           MergedId:''
 
         });
@@ -40,16 +37,20 @@ export class AddUserComponent implements OnInit {
     this.FacultyService.getFacultyList().subscribe(
       res => this.FacultyList = res as []
     );
+    this.UserService.getUserList().subscribe(
+      res => this.UserList = res as []
+    );
   }
   onSubmit(userData){
-    this.addUserService.postUser(userData.value)
+    console.log("OK" + userData);
+    this.UserService.postUser(userData.value)
       .subscribe(
         data => console.log('Success!',data),
         error => console.log('Error!',error)
       );
   }
   recordSubmit(fg: FormGroup){
-    this.addUserService.postUser(fg.value);
+    this.UserService.postUser(fg.value);
   }
   onFacultySelect(fg:FormGroup){
     this.DepartmentService.getDepartmentList(fg.value.Faculty).subscribe(

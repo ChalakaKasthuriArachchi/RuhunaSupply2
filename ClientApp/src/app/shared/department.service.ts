@@ -9,6 +9,6 @@ export class DepartmentService {
 
   constructor(private http : HttpClient) { }
   getDepartmentList(fac1){
-    return this.http.get(environment.apiBaseURI + '/Department?Faculty=' +fac1);
+    return this.http.get(environment.apiBaseURI + '/Departments?Faculty=' +fac1);
   }
 }

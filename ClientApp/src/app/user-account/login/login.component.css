@@ -1,10 +1,17 @@
 .body {
 	margin:  0;
 }
+button {
+	background-color: rgb(19, 235, 170);
+  }
+  input.ng-touched.ng-invalid {
+	border: 1px solid red;
+  }
+  
 .page-content {
 	width: 100%;
 	margin:  0 auto;
-	background: #5eb2b3;
+	background: #75209700;
 	display: flex;
 	display: -webkit-flex;
 	justify-content: center;

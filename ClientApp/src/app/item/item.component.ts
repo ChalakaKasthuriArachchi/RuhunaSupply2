@@ -18,7 +18,7 @@ export class ItemComponent implements OnInit {
   }
 
   getItemList(){
-    this.ItemService.getItemList(0,0,0)
+    this.ItemService.getItemList(0,0)
       .subscribe(res => this.Item = res as []);
   }
 

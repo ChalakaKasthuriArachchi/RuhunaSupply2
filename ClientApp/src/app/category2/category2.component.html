@@ -1,6 +1,6 @@
 <blockquote class="blockquote ml-5">
     <footer class="bloquote-footer">
-      Current category 02
+      <h2 style="color: #6d0505;">Current category 02</h2>
     </footer>
   </blockquote>
   <div mdbTable class="grid-table">
@@ -15,10 +15,16 @@
       </div>
       <div class="tbody">
           <div class="tr" mdbTableCol *ngFor="let pr of Category2; let i = index;">
-              <div class="td">{{i + 1}}</div>
-              <div class="td">{{pr.id}}</div>
-              <div class="td">{{pr.name}}</div>
-              <div class="td">{{pr.description}}</div>
+            <div class="td" style="text-align: center">{{i + 1}}</div>
+            <div class="td">
+              <label class="form-control">{{pr.id}}</label>
+            </div>
+            <div class="td">
+              <label class="form-control">{{pr.name}}</label>
+            </div>
+            <div class="td">
+              <label class="form-control">{{pr.description}}</label>
+            </div>
               <div class="td">
                 <a class="btn btn-outline-success" href="category2/view?id={{pr.id}}" role="button">View</a>
               </div>

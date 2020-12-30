@@ -1,20 +1,30 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-
+  UserList= [];
   constructor(private http: HttpClient) { }
 
   postUser(formData){
-    console.log(formData);
-    console.log(environment.apiBaseURI + '/User');
-    return this.http.post(environment.apiBaseURI + '/User', formData);
+    var tok = localStorage.getItem('token');
+    if(tok != null){
+      var tokenHeader = new HttpHeaders({'Authorization':'Bearer ' + tok});
+    return this.http.post(environment.apiBaseURI + '/User', formData,
+    {headers : tokenHeader});
   }
+}
   getUserList(){
-    return this.http.get(environment.apiBaseURI + '/User');
+    var tok = localStorage.getItem('token');
+    if(tok != null){
+      var tokenHeader = new HttpHeaders({'Authorization':'Bearer ' + tok});
+    return this.http.get(environment.apiBaseURI + '/User',
+    {headers : tokenHeader});
+    
   }
+}
+
 }

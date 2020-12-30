@@ -36,7 +36,7 @@ import { AddPurchaseRequestComponent } from './add-purchase-request/add-purchase
 // import { MatToolbarModule } from '@angular/material/toolbar';
 // import { MatIconModule } from '@angular/material/icon';
 import { TestingComponent } from './testing/testing.component';
-import { QuatationComponent } from './quatation/quatation.component';
+import { QuotationComponent } from './view-quotation/view-quotation.component';
 
 
 
@@ -69,7 +69,7 @@ import { QuatationComponent } from './quatation/quatation.component';
     ItemComponent,
     AddUserComponent,
     UserComponent,
-    QuatationComponent
+    QuotationComponent
   ],
   imports: [
     CommonModule,

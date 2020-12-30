@@ -28,7 +28,7 @@ namespace RuhunaSupply.Model
                 uID2 = db.UserAccounts.Max(u => u.Id);
             }
             catch { }
-            return Math.Max(1, Math.Max(uID1, uID2));
+            return Math.Max(1, Math.Max(uID1, uID2)) + 1;
         }
         #endregion
         [Key]

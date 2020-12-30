@@ -22,6 +22,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { TestingComponent } from './testing/testing.component';
 import { AddPurchaseRequestComponent } from './add-purchase-request/add-purchase-request.component';
 import { AddUserComponent } from './add-user/add-user.component';
+import { UserComponent } from './user/user.component';
+import { QuotationComponent } from './view-quotation/view-quotation.component';
 
 const routes: Routes = [
   { path: '', component : DashboardComponent },
@@ -31,8 +33,10 @@ const routes: Routes = [
   { path: 'category1/view', component: AddCategory1Component },
   { path: 'category2', component: Category2Component },
   { path: 'category2/add', component: AddCategory2Component },
+  { path: 'category2/view', component: AddCategory2Component },
   { path: 'category3', component: Category3Component },
   { path: 'category3/add', component: AddCategory3Component },
+  { path: 'category3/view', component: AddCategory3Component },
   { path: 'user/login', component: LoginComponent },
   { path: 'user/signup',component : UserAccountComponent},
   { path: 'supplier', component: SuppliersComponent },
@@ -40,6 +44,7 @@ const routes: Routes = [
   { path: 'createaccount', component: UserAccountComponent },
   { path: 'item', component: ItemComponent },
   { path: 'item/new', component: AddItemComponent },
+  { path: 'item/add', component: AddItemComponent },
   { path: 'supplier', component: SuppliersComponent },
   { path: 'purchaserequest', component: PurchaseRequestComponent },
   { path: 'specification',component : SpecificationComponent},
@@ -47,7 +52,10 @@ const routes: Routes = [
   { path: 'item', component: ItemComponent },
   { path: 'purchaserequest/add', component: AddPurchaseRequestComponent },
   { path: 'testing', component: TestingComponent},
-  { path: 'user/register',component : AddUserComponent}
+  { path: 'user/register',component : AddUserComponent},
+  { path: 'user/view',component : AddUserComponent},
+  { path: 'user',component : UserComponent},
+  { path: 'quotation/view',component:QuotationComponent}
 ];
 
 @NgModule({

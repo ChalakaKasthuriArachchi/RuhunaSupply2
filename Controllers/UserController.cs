@@ -11,7 +11,7 @@ using static RuhunaSupply.Common.MyEnum;
 
 namespace RuhunaSupply.Controllers
 {
-    [Route("api/[Controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class UserController : Controller
     {
@@ -33,25 +33,29 @@ namespace RuhunaSupply.Controllers
             return Enum.GetNames(typeof(MyEnum.UserPositions));
         }
         [HttpPost]
-        public async Task<ActionResult<User>> PostUser(object user)
+        public IActionResult PostUser(object user)
         {
-            JsonData jd = JsonMapper.ToObject(user.ToString());
-            User u = new User()
+            try
             {
-                FacultyId = int.Parse(jd["Faculty"].ToString()),
-                DepartmentId = int.Parse (jd["Department"].ToString()),
-                FullName = jd["FullName"].ToString(),
-                ShortName = jd["ShortName"].ToString(),
-                PermissionList = jd["PermisionList"].ToString(),
-                Position = (UserPositions)int.Parse(jd["Position"].ToString()),
-                Type = (UserTypes)int.Parse(jd["UserType"].ToString()),
-                MergedId = int.Parse(jd["UserAccount"].ToString())
+                Functions.GetCurrentUserId(HttpContext, _db);
+                JsonData jd = JsonMapper.ToObject(user.ToString());
+                User u = new User()
+                {
+                    Id = Functions.GetCurrentUserId(HttpContext, _db),
+                    FacultyId = int.Parse(jd["Faculty"].ToString()),
+                    DepartmentId = int.Parse(jd["Department"].ToString()),
+                    FullName = jd["FullName"].ToString(),
+                    ShortName = jd["ShortName"].ToString(),
+                    Position = (UserPositions)int.Parse(jd["Position"].ToString()),
+                    MergedId = int.Parse(jd["MergedId"].ToString())
 
-            };
-            _db.Users.Add(u);
-            await _db.SaveChangesAsync();
+                };
+                _db.Users.Add(u);
+                _db.SaveChanges();
 
-            return CreatedAtAction("User", new { id = u.Id }, u);
+                return Ok();
+            }
+            catch(Exception e) { return BadRequest(); }
         }
             
             
@@ -75,7 +79,7 @@ namespace RuhunaSupply.Controllers
             return Ok();
         }
 
-        [HttpPost]
+        [HttpDelete]
         public IActionResult Delete(int Id)
         {
             //_db.Users.Remove(new User { Id = Id });

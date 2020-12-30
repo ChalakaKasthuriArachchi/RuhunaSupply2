@@ -49,7 +49,8 @@ namespace RuhunaSupply.Common
             SAB,
             Lecturer,
             Instructor,
-            TO
+            TO,
+            Cleark
         }
         public enum UserTypes
         { 

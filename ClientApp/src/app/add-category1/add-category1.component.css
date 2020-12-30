@@ -4,7 +4,7 @@
 .page-content {
 	width: 100%;
 	margin:  0 auto;
-	background: rgba(238, 238, 238, 0)00;
+	background: #5eb2b300;
 	display: flex;
 	display: -webkit-flex;
 	justify-content: center;
@@ -99,7 +99,7 @@
 .form-detail input:focus {
 	border: 1px solid #b3b3b3;
 }
-.form-detail .Add {
+.form-detail .register {
 	font-size: 18px;
 	color: #fff;
 	background: #3786bd;
@@ -149,6 +149,9 @@ input:-moz-placeholder { /* Firefox 18- */
   font-size: 16px;
 }
 
+.form-row-last{
+    color: #3786bd;
+}
 /* Responsive */
 @media screen and (max-width: 767px) {
 	.form-v5-content {
@@ -240,3 +243,4 @@ input:-moz-placeholder { /* Firefox 18- */
     font-weight: 300;
     font-style: normal;
 }
+

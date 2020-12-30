@@ -8,6 +8,6 @@ export class FacultyService {
 
   constructor(private http : HttpClient) { }
   getFacultyList(){
-    return this.http.get(environment.apiBaseURI + '/Faculty/');
+    return this.http.get(environment.apiBaseURI + '/Faculties/');
   }
 }

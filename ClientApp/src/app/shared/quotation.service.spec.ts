@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { QuationService } from './quation.service';
+import { QuationService } from './quotation.service';
 
 describe('QuationService', () => {
   let service: QuationService;

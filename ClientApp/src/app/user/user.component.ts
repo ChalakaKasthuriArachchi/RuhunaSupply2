@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from '@angular/router';
+import { UserService } from './../shared/user.service';
 
 @Component({
   selector: 'app-user',
@@ -6,10 +8,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
-
-  constructor() { }
+  User= [];
+  constructor(private UserService : UserService, private router : Router) { }
 
   ngOnInit(): void {
+    if(localStorage.getItem('token') == null)
+    this.router.navigateByUrl('user/login');
+    this.getUserList();
+  }
+  getUserList(){
+    this.UserService.getUserList()
+      .subscribe(res => this.User = res as []);
   }
 
 }

@@ -30,28 +30,27 @@
 					<i class="fas fa-envelope"></i>
 				</div>
 				<div class="form-row">
-					<label for="PermissionList">Permision List</label>
-					<input type="text" formControlName="PermissionList" id="PermissionList" class="input-text" placeholder="PermissionList" required>
-					<i class="fas fa-envelope"></i>
-				</div>
-				<div class="form-row">
 					<label for="Position">Position</label>
 					<select formControlName="Position" id="Position" class="input-text" required>
-						<option value="0" selected hidden>Select The Position</option>
-						<option *ngFor="let cat of userPositions; let i = index;" value="{{cat.id}}">{{cat.name}}</option>
+						<option value="-1" selected hidden>Select The Position</option>
+						<option value="1">Dean</option>
+						<option value="2">Head</option>
+						<option value="3">VC</option>
+						<option value="4">DVC</option>
+						<option value="5">SAB</option>
+						<option value="6">Lecturer</option>
+						<option value="7">Instructor</option>
+						<option value="8">TO</option>
+						<option value="9">Clerk</option>						
 					</select>
 					<i class="fas fa-envelope"></i>
 				</div>
 				<div class="form-row">
-					<label for="Type">User Type</label>
-					<select formControlName="Type" id="Type" class="input-text" required>
-						<option value="0" selected hidden>Select the User Type</option>
-						<option *ngFor="let cat of UserType; let i = index;" value="{{cat.id}}">{{cat.name}}</option>
+					<label for="MergedId">Merged User</label>
+					<select formControlName="MergedId" id="MergedId" class="input-text" required>
+						<option value="0" selected hidden>Merged User</option>
+						<option *ngFor="let cat of UserList; let i = index;" value="{{cat.id}}">{{cat.fullName}}</option>
 					</select>
-				</div>
-				<div class="form-row">
-					<label for="MergedId">Merged Id</label>
-					<input type="text" formControlName="MergedId" id="MergedId" class="MergedId" placeholder="MergedId" required>
 				</div>
 				<div class="form-row-last">
 					<input type="submit" name="Add" class="Add" value="Add">
