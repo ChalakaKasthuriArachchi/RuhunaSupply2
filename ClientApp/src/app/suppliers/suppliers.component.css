@@ -27,12 +27,14 @@
     display: table-row;
   }
 
-  .tr:nth-child(even) {
-    background-color :darkolivegreen;
-  } 
-  .tr:nth-child(odd) {
-    background-color: darkkhaki;
-  }  
+    .tr:nth-child(even) {
+      background-color: darkolivegreen;
+    }
+
+    .tr:nth-child(odd) {
+      background-color: darkkhaki;
+    }
+
   .td {
     display: table-cell;
     padding: 10px 1px 1px 5px;
