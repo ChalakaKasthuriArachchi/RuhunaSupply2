@@ -25,13 +25,13 @@ namespace RuhunaSupply.Data
         public DbSet<Supplier> Suppliers { get; set; }
         public DbSet<UserPurchaseRequest> UserPurchaseRequests { get; set; }
 
-        public DbSet<QuatationItem> QuatationItems { get; set; }
+        public DbSet<QuotationItem> QuatationItems { get; set; }
 
         public DbSet<UserName> UserNames { get; set; }
 
         public DbSet<PurchaseRequestItemSpecification> PurchaseRequestItemSpecifications { get; set; }
 
-        public DbSet<_QuatationItemSpecification> QuatationItemSpecifications { get; set; }
+        public DbSet<QuotationItemSpecification> QuotationItemSpecification { get; set; }
        
 
         public DbSet<Category1> Category1s { get; set; }

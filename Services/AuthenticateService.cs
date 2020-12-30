@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using RuhunaSupply.Common;
 using RuhunaSupply.Data;
 using RuhunaSupply.Model;
 using System;
@@ -25,15 +26,25 @@ namespace RuhunaSupply.Services
             Db = db;
             this.appSettings = appSettings.Value;
         }
-        public UserAccount Authenticate(string email, string password)
+        public string Authenticate(string email, string password)
         {
             string passwordHash = CommonFunctions.ComputeSha256Hash(password);
+            int userId = 0,userType = 0;
+            string shortName = "-";
             var user = Db.UserAccounts.FirstOrDefault(
                 u => u.Email.ToLower() == email.ToLower()
                     && u.HashedPassword == passwordHash);
             if (user == null)
                 return null;
-
+            userId = user.Id;
+            userType = (int)user.Type;
+            shortName = user.ShortName;
+            var temp = Cache.GetUser(userId, false);
+            if (temp != null)
+            {
+                userId = temp.Id;
+                shortName = temp.ShortName;
+            }
             //If user is Found
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(appSettings.Key);
@@ -41,19 +52,17 @@ namespace RuhunaSupply.Services
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.Name, user.Id.ToString()),
-                    new Claim(ClaimTypes.Role, ((int)user.Type).ToString()),
-                    new Claim(ClaimTypes.GivenName , user.ShortName)
+                    new Claim(ClaimTypes.Name, userId.ToString()),
+                    new Claim(ClaimTypes.Role, ((int)userType).ToString()),
+                    new Claim(ClaimTypes.GivenName , shortName)
                 }),
                 Expires = DateTime.UtcNow.AddDays(2),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key),
                     SecurityAlgorithms.HmacSha256Signature)
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
-            user.Token = tokenHandler.WriteToken(token);
-
-            user.HashedPassword = null;
-            return user;
+            //user.Token = tokenHandler.WriteToken(token);
+            return tokenHandler.WriteToken(token);
         }
     }
 }

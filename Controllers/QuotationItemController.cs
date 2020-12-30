@@ -9,53 +9,26 @@ using static RuhunaSupply.Common.MyEnum;
 
 namespace RuhunaSupply.Controllers
 {
-    public class QuatationItemController : ControllerBase
+    public class QuotationItemController : ControllerBase
     {
         private ApplicationDbContext _db;
 
-        public QuatationItemController(ApplicationDbContext context)
+        public QuotationItemController(ApplicationDbContext context)
         {
             this._db = context;
         }
         [HttpPost]
         public IActionResult Add(Quotation Quatation, PurchaseRequestItem PurchaseRequestItem, Item Item, QuatationStatus Status, string IsSupply, string Description, int Qty, int Total, string Rate)
         {
-            int max_id = 0;
-
-            try
-            {
-                max_id = _db.QuatationItems.Max((qt) => qt.Id);
-            }
-            catch
-            {
-
-                
-            }
-
-            QuotationItem qt = new QuotationItem()
-            {
-                Id = max_id + 1,
-                //Quatation=Quatation,
-                //PurchaseRequestItem=PurchaseRequestItem,
-                //Item=Item,
-                Status =Status,
-                //IsSupply=IsSupply,
-                Description=Description,
-                Qty = Qty,
-                Total = Total,
-                //Rate = Rate
-            };
-
-            _db.QuatationItems.Add(qt);
-            _db.SaveChanges();
+            
             return Ok();
         }
 
         [HttpPost]
         public IActionResult Edit(int Id, Quotation Quatation, PurchaseRequestItem PurchaseRequestItem, Item Item, QuatationStatus Status, string IsSupply, string Description, int Qty, int Total, string Rate)
         {
-            //_db.QuatationItems.Update(new QuatationItem { Id = Id, Quatation = Quatation, PurchaseRequestItem = PurchaseRequestItem, Item = Item, Status = Status, IsSupply = IsSupply, Description = Description,Qty=Qty, Total=Total, Rate=Rate});
-            _db.SaveChanges();
+           
+
             return Ok();
         }
 

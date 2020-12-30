@@ -33,6 +33,10 @@ namespace RuhunaSupply.Model
         {
             get => _DateTime.ToString("yyyy-MM-dd hh:mm tt");
         }
+        public string Date
+        {
+            get => _DateTime.ToString("yyyy-MM-dd");
+        }
         public User SubmittedBy 
         {
             get
@@ -61,6 +65,7 @@ namespace RuhunaSupply.Model
                 return Cache.GetDepartment(DepartmentId,true);
             }
         }
+        public double AvailbleAmount => BudgetAllocation - UsedAmount;
         #endregion
 
         #region Saved
@@ -70,7 +75,8 @@ namespace RuhunaSupply.Model
         public int FacultyId { get; set; }
         public int DepartmentId { get; set; }
         public double BudgetAllocation { get; set; }
-        public string FundGoes { get; set; }
+        public double UsedAmount { get; set; }
+        public string FundGOSL { get; set; }
         [Column(TypeName = "nvarchar(100)")]
         public string Project { get; set; }
         [Column(TypeName = "nvarchar(50)")]

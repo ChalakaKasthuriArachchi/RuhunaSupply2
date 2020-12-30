@@ -16,6 +16,7 @@ using System.Text.Json;
 using ThirdParty.Json.LitJson;
 using System.Data.Common;
 using System.Data;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace RuhunaSupply.Controllers
 {
@@ -33,107 +34,212 @@ namespace RuhunaSupply.Controllers
         [HttpGet]
         public ViewPurchaseRequest[] GetPurchaseRequests(int status)
         {
-            int userId = Functions.GetCurrentUserId(Request.HttpContext, _db);
-            var data = _db.UserAccounts.Where(u => u.Id == userId)
-                .Join(
-                    _db.UserPurchaseRequests,
-                    user => user.Id,
-                    upr => upr.User.Id,
-                    (user, upr) => new
-                    {
-                        PurchaseRequestId = upr.PurchaseRequestId
-                    }
-                ).
-                Join(
-                    _db.PurchaseRequests/*.Include(pr => pr.Department)
-                        .Include(pr => pr.Faculty)*/,
-                    upr => upr.PurchaseRequestId,
-                    pr => pr.Id,
-                    (upr, pr) => new ViewPurchaseRequest
-                    {
-                        DateTime = pr.DateTime,
-                        Department = pr.Department.Name,
-                        Faculty = pr.Faculty.Name,
-                        Id = pr.Id,
-                        Purpose = pr.Purpose.ToString(),
-                        _Status = (int)pr.Status,
-                        Status = pr.Status.ToString().Replace("_", " "),
-                        _ExaminigId = pr.ExaminigId,
-                        _SubmittedById = pr.SubmittedById
-                    }
-                );
-            if (status >= 0)
-                data = data.Where(a => a._Status == status);
-            var res = data.ToArray();
-            for (int i = 0; i < res.Length; i++)
+            try
             {
-                res[i].Examining = Cache.GetUser(res[i]._ExaminigId,true).FullName;
-                res[i].SubmittedBy = Cache.GetUser(res[i]._SubmittedById, true).FullName;
+                int userId = Functions.GetCurrentUserId(Request.HttpContext, _db);
+                var data = _db.UserPurchaseRequests.Where(upr => upr.UserId == userId);
+                UserPurchaseRequest[] uprs = data.ToArray();
+                ViewPurchaseRequest[] vprS = new ViewPurchaseRequest[uprs.Length];
+                for(int x = 0; x < uprs.Length; x++)
+                {
+                    PurchaseRequest pr = _db.PurchaseRequests.Find(uprs[x].PurchaseRequestId);
+                    if(pr != null && (status == -1 || (int)pr.Status == status))
+                    {
+                        vprS[x] = new ViewPurchaseRequest()
+                        {
+                            DateTime = pr.DateTime,
+                            Department = pr.Department.Name,
+                            Faculty = pr.Faculty.Name,
+                            Id = pr.Id,
+                            Purpose = pr.Purpose.ToString(),
+                            _Status = (int)pr.Status,
+                            Status = pr.Status.ToString().Replace("_", " "),
+                            _ExaminigId = pr.ExaminigId,
+                            _SubmittedById = pr.SubmittedById,
+                            Examining = Cache.GetUser(pr.ExaminigId, true).FullName,
+                            SubmittedBy = Cache.GetUser(pr.SubmittedById, true).FullName
+                        };
+                    }
+                     
+                }
+                return vprS;
             }
-            //string json = JsonSerializer.Serialize(res[0]);
-            return res;
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        [HttpGet("callquotations/{id}")]
+        public IActionResult CallQuotations(int id)
+        {
+            try
+            {
+                Supplier[] suppliers = _db.Suppliers./*Where(sup => sup.Category2Id)*/
+                    ToArray();
+                PurchaseRequest pr = _db.PurchaseRequests.Include(pr => pr.Items).FirstOrDefault(pr => pr.Id == id);
+                pr.Status = PurchaseRequestStatus.Done;
+                _db.PurchaseRequests.Update(pr);
+                foreach (var sup in suppliers)
+                {
+                    Quotation quotation = new Quotation()
+                    {
+                        Id = Quotation.GetNextId(_db),
+                        Date = Functions.DateTime,
+                        PurchaseRequestId = id,
+                        Status = QuatationStatus.Pending,
+                        SupplierId = sup.Id
+                    };
+                    foreach (var item in pr.Items)
+                    {
+                        PurchaseRequestItemSpecification[] specifications = 
+                            _db.PurchaseRequestItemSpecifications.
+                                Where(spec => spec.PurchaseRequestItemId == item.Id).ToArray();
+                        List<QuotationItemSpecification> qis = new List<QuotationItemSpecification>(specifications.Length);
+                        foreach (var spec in specifications)
+                        {
+                            qis.Add(new QuotationItemSpecification()
+                            {
+                                ItemId = item.Id,
+                                PurchaseRequestItemSpecificationId = spec.Id,
+                            });
+                        }
+                        quotation.QuotationItems.Add(new QuotationItem()
+                        {
+                             ItemId = item.ItemId,
+                             PurchaseRequestItemId = item.Id,
+                             Qty = item.QtyRequired,
+                             QuotationId = quotation.Id,
+                             Specifications = qis
+                        });
+                        _db.Quotations.Add(quotation);
+                    }
+                }
+                using(var trans = _db.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        _db.SaveChanges();
+                        trans.Commit();
+                    }
+                    catch(Exception ex)
+                    {
+                        trans.Rollback();
+                        throw ex;
+                    }
+                }
+                return Ok();
+            }
+            catch(Exception ex)
+            {
+                return BadRequest();
+            }
         }
         [HttpPost]
         public IActionResult PostPurchaseRequest(object req)
         {
             try
             {
-                UserAccount useraccount = Functions.GetCurrentUser(Request.HttpContext, _db);
-                User user = Cache.GetUser(useraccount.Id, false);
+                User user = Functions.GetCurrentUser(Request.HttpContext, _db);
+                //User user = Cache.GetUser(useraccount.Id, false);
                 if (user == null)
                     throw new Exception("User Not Found");
-                using (DbTransaction trans = _db.Database.BeginTransaction() as DbTransaction)
+                using (IDbContextTransaction trans = _db.Database.BeginTransaction())
                 {
                     JsonData jd = JsonMapper.ToObject(req.ToString());
                     JsonData jform = jd["form"];
                     JsonData forwardTo = jd["forwardTo"];
-                    PurchaseRequest pr = new PurchaseRequest()
-                    {
-                        FundGoes = jform["Funds"].ToString(),
-                        Project = jform["Project"].ToString(),
-                        DepartmentId = user.DepartmentId,
-                        FacultyId = user.FacultyId,
-                        IsInProcumentPlan = jform["IsInProcumentPlan"].ToString() == "Yes",
-                        Purpose = (Purposes)int.Parse(jform["Purpose"].ToString()),
-                        Justification = jform["Justification"].ToString(),
-                    };
+                    
+                    PurchaseRequest pr = null;
                     if (jform["Id"].ToString() == "0")
+                        pr = new PurchaseRequest();
+                    else
+                        pr = _db.PurchaseRequests.Find(int.Parse(jform["Id"].ToString()));
+                    
+                    pr.FundGOSL = jform["Funds"].ToString();
+                    pr.Project = jform["Project"].ToString();
+                    pr.DepartmentId = user.DepartmentId;
+                    pr.FacultyId = user.FacultyId;
+                    pr.IsInProcumentPlan = jform["IsInProcumentPlan"].ToString() == "Yes";
+                    pr.Purpose = (Purposes)int.Parse(jform["Purpose"].ToString());
+                    pr.Justification = jform["Justification"].ToString();
+                    pr.ExaminigId = int.Parse(forwardTo.ToString());
+
+                    if (jform["Id"].ToString() == "0") //New Purchase Request
                     {
                         pr.Id = PurchaseRequest.GetNextId(_db);
                         pr.Status = PurchaseRequestStatus.On_Approval;
                         pr.SubmittedById = user.Id;
                         pr.ExaminigId = int.Parse(forwardTo.ToString());
+                        pr._DateTime = Functions.DateTime;
+                        _db.PurchaseRequests.Add(pr);
+                        //int pri_Id = PurchaseRequestItem.GetNextId(_db);
                         foreach (JsonData ji in jd["items"])
                         {
-                            _db.PurchaseRequestItems.Add(
-                                new PurchaseRequestItem()
+                            int specCat = int.Parse(ji["specificationCategoryId"].ToString());
+                            PurchaseRequestItem pri = new PurchaseRequestItem()
+                            {
+                                //Id = pri_Id++,
+                                PurchaseRequestId = pr.Id,
+                                ItemId = int.Parse(ji["id"].ToString()),
+                                QtyRequired = double.Parse(ji["quantity"].ToString()),
+                                SpecificationCategoryId = specCat
+                            };
+                            _db.PurchaseRequestItems.Add(pri);
+                            Specification[] specs = _db.Specification.Where(spec => spec.SpecificationCategoryId == specCat).ToArray();
+                            foreach (var spec in specs)
+                            {
+                                pri.Specifications.Add(new PurchaseRequestItemSpecification()
                                 {
-                                    ItemId = int.Parse(ji["id"].ToString()),
-                                    QtyRequired = double.Parse(ji["quantity"].ToString()),
-                                }
-                                );
+                                    ItemId = pri.ItemId,
+                                    Name = spec.Name,
+                                    Value = spec.Value
+                                });
+                            }
                         }
-                        _db.UserPurchaseRequests.AddRange(new UserPurchaseRequest[]
-                        {
+                        _db.UserPurchaseRequests.AddRange(
                             new UserPurchaseRequest()
                             {
-                              Date = Functions.DateTime,
-                              Involvement = Involvements.Submitted,
-                              
+                                PurchaseRequestId = pr.Id,
+                                UserId = user.Id,
+                                Date = Functions.DateTime,
+                                Involvement = Involvements.Submitted
                             },
                             new UserPurchaseRequest()
                             {
-
-                            }
-                        });
-                        _db.PurchaseRequests.Add(pr);
+                                PurchaseRequestId = pr.Id,
+                                UserId = pr.ExaminigId,
+                                Date = Functions.DateTime,
+                                Involvement = Involvements.On_Approval
+                            });
                     }
                     else
                     {
-                        pr.Id = int.Parse(jform["Id"].ToString());
+                        UserPurchaseRequest upr =
+                            _db.UserPurchaseRequests.FirstOrDefault(
+                                upr => upr.PurchaseRequestId == pr.Id
+                                   && upr.UserId == user.Id);
+                        upr.Date = Functions.DateTime;
+                        upr.Involvement = Involvements.Approved_and_Forwarded;
+                        _db.UserPurchaseRequests.Update(upr);
                         _db.PurchaseRequests.Update(pr);
+                        _db.UserPurchaseRequests.Add(new UserPurchaseRequest()
+                        {
+                            PurchaseRequestId = pr.Id,
+                            UserId = pr.ExaminigId,
+                            Date = Functions.DateTime,
+                            Involvement = Involvements.On_Approval
+                        });
                     }
-                    
+                    try
+                    {
+                        _db.SaveChanges();
+                        trans.Commit();
+                    }
+                    catch(Exception ex)
+                    {
+                        trans.Rollback();
+                        throw ex;
+                    }
                 }
                 return Ok();
             }
@@ -146,24 +252,87 @@ namespace RuhunaSupply.Controllers
         [HttpGet("allowedforwards")]
         public List<User> GetAllowedForwards()
         {
+            int headId = 0, deanId = 0;
             List<User> lst = new List<User>(); 
             int userId = Functions.GetCurrentUserId(Request.HttpContext, _db);
             User user = Cache.GetUser(userId, true);
-            int headId = user.Department.GetHead(_db).Id;
-            int deanId = user.Faculty.GetDean(_db).Id;
-            if (user.Id != headId && user.MergedId != user.Id)
-                lst.Add(user.Department.GetHead(_db));
-            if (user.TestPrivileges(Model.User.UserPrivileges.PurchaseRequest_Forward_Outside_Department) 
-                && user.Id != headId && user.MergedId != user.Id)
-                lst.Add(user.Faculty.GetDean(_db));
+            var head = user.Department.GetHead(_db);
+            var dean = user.Faculty.GetDean(_db);
+            if (head != null)
+                headId = head.Id;
+            if (dean != null)
+                deanId = dean.Id;
             if (user.TestPrivileges(Model.User.UserPrivileges.PurchaseRequest_Forward_Outside_Faculty))
             {
                 lst.Add(Cache.Users.FirstOrDefault(u => u.Position == UserPositions.VC));
-                lst.Add(Cache.Users.FirstOrDefault(u => 
-                    u.Position == UserPositions.SAB 
+                lst.Add(Cache.Users.FirstOrDefault(u =>
+                    u.Position == UserPositions.SAB
                     && u.Department.Name == DepartmentsAdmin.Supply_Branch.ToString().Replace("_", " ")));
             }
+            else
+            {
+                if (user.TestPrivileges(Model.User.UserPrivileges.PurchaseRequest_Forward_Outside_Department))
+                {
+                    lst.Add(user.Faculty.GetDean(_db));
+                }
+                else
+                {
+                    lst.Add(user.Department.GetHead(_db));
+                }
+            }
+            foreach (var item in lst)
+                if (item.Id == user.Id)
+                    lst.Remove(item);
+            //if (user.Id != headId && user.MergedId != user.Id)
+            //    lst.Add(user.Department.GetHead(_db));
+            //if (user.TestPrivileges(Model.User.UserPrivileges.PurchaseRequest_Forward_Outside_Department) 
+            //    && user.Id != deanId && user.MergedId != user.Id)
+            //    lst.Add(user.Faculty.GetDean(_db));
+            //if (user.TestPrivileges(Model.User.UserPrivileges.PurchaseRequest_Forward_Outside_Faculty))
+            //{
+            //    lst.Add(Cache.Users.FirstOrDefault(u => u.Position == UserPositions.VC));
+            //    lst.Add(Cache.Users.FirstOrDefault(u => 
+            //        u.Position == UserPositions.SAB 
+            //        && u.Department.Name == DepartmentsAdmin.Supply_Branch.ToString().Replace("_", " ")));
+            //}
             return lst;
+        }
+        [HttpGet("{id}")]
+        public object GetPurchaseRequest(int id)
+        {
+            try
+            {
+                int userId = Functions.GetCurrentUserId(Request.HttpContext, _db);
+                var data = _db.UserPurchaseRequests.Where(upr => upr.UserId == userId
+                    && upr.PurchaseRequestId == id);
+                UserPurchaseRequest upr = data.FirstOrDefault();
+                if (upr == null)
+                    throw new UnauthorizedAccessException();
+                var pr = _db.PurchaseRequests
+                        .Include(pr => pr.Items).FirstOrDefault(pr => pr.Id == id);
+                object[] items = new object[pr.Items.Count];
+                for (int i = 0; i < items.Length; i++)
+                {
+                    items[i] = new
+                    {
+                        item = pr.Items[i].Item,
+                        name = pr.Items[i].Item.Name,
+                        category2 = pr.Items[i].Item.Category2,
+                        specificationCategoryName = pr.Items[i].SpecificationCategory.Title,
+                        quantity = pr.Items[i].QtyRequired
+                    };
+                }
+                return new { 
+                    purchaseRequest = pr,
+                    route = _db.UserPurchaseRequests.Where(
+                        upr => upr.PurchaseRequestId == id),
+                    items = items
+                };
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
     }
     public class ViewPurchaseRequest

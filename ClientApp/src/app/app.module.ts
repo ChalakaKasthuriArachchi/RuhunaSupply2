@@ -65,7 +65,6 @@ import { QuotationComponent } from './view-quotation/view-quotation.component';
     DashboardComponent,
     ItemComponent,
     AddPurchaseRequestComponent,
-    TestingComponent,
     ItemComponent,
     AddUserComponent,
     UserComponent,

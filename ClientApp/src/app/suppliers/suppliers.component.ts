@@ -11,8 +11,8 @@ import { FormControl } from '@angular/forms';
 export class SuppliersComponent implements OnInit {
 
   supplierList = [];
-  searchText : string;
-  category : number;
+  searchText = "";
+  category = 0;
   constructor(private supplierService : SupplierService,private route : ActivatedRoute) { 
     this.route.queryParams.subscribe((params) => {
      //this.params = params;

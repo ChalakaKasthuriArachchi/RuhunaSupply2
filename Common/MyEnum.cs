@@ -8,12 +8,13 @@ namespace RuhunaSupply.Common
     public static class MyEnum
     {
         public enum QuatationStatus
-        { 
+        {
             //pending done wge eawa   
+            Pending
         }
         public enum Faculties
         { 
-            Administration,
+            Admin,
             Faculty_Of_Science,
             Faculty_Of_Humanities_and_Social_Sciences
         }
@@ -37,7 +38,9 @@ namespace RuhunaSupply.Common
         }
         public enum Involvements
         {
-            Submitted
+            Submitted,
+            Approved_and_Forwarded,
+            On_Approval
         }
 
         public enum UserPositions
@@ -53,8 +56,8 @@ namespace RuhunaSupply.Common
             Cleark
         }
         public enum UserTypes
-        { 
-            Internal,Supplier
+        {
+            Internal, Supplier
         }
         public enum BusinessCategories
         {
@@ -71,7 +74,14 @@ namespace RuhunaSupply.Common
         }
         public enum PurchaseRequestStatus
         {
-            On_Approval, Rejected, 
+            On_Approval, Rejected,
+            Done,
+        }
+        public enum SupplierStatus
+        {
+            Not_Approved,
+            Approved,
+            Rejected
         }
     }
 }

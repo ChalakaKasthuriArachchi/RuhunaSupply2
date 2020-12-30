@@ -8,6 +8,6 @@ namespace RuhunaSupply.Services
 {
     public interface IAuthenticateService
     {
-        UserAccount Authenticate(string userName, string password);
+        string Authenticate(string userName, string password);
     }
 }

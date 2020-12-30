@@ -81,6 +81,7 @@ namespace RuhunaSupply.Common
         {
             lock (Category2s)
             {
+                
                 Category2[] ary = db.Category2s.ToArray();
                 if (ary.Length > 0)
                 {
@@ -194,6 +195,10 @@ namespace RuhunaSupply.Common
             lock (Users)
             {
                 User user = Users[id];
+                /* Combined Name */
+                var loggedUser = Users.ToList().FirstOrDefault(u => u.MergedId == id);
+                if (loggedUser != null && user != null)
+                    user.ShortName = loggedUser.ShortName;
                 if (user == null)
                     if (notNull)
                         return new User() { ShortName = "(Not Found)", Id = -1 };
@@ -229,7 +234,7 @@ namespace RuhunaSupply.Common
         #region UserAccount
         public static IndexedList<UserAccount> UserAccounts { get; set; }
             = new IndexedList<UserAccount>(1);
-        public static UserAccount GetUserUserAccount(int id, bool notNull)
+        public static UserAccount GetUserAccount(int id, bool notNull)
         {
             lock (UserAccounts)
             {

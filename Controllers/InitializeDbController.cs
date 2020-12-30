@@ -43,7 +43,7 @@ namespace RuhunaSupply.Controllers
                     new Faculty()
                     {
                         Location = "Wellamadama Complex",
-                        Name = Faculties.Administration.ToString().Replace("_", " ")
+                        Name = Faculties.Admin.ToString().Replace("_", " ")
                     });
                 db.SaveChanges();
                 Faculty[] faculties = db.Faculties.ToArray();
@@ -86,7 +86,7 @@ namespace RuhunaSupply.Controllers
                 int uId = UserAccount.GetNextId(db);
                 foreach (var fac in faculties)
                 {
-                    if (fac.Name == "Administration")
+                    if (fac.Name == Faculties.Admin.ToString())
                     {
                         db.Users.Add(new User()
                         {
@@ -117,7 +117,7 @@ namespace RuhunaSupply.Controllers
                 #region Heads
                 foreach (var dep in departments)
                 {
-                    if(dep.Name == "Supply Branch")
+                    if (dep.Name == "Supply Branch")
                     {
                         db.Users.Add(new User()
                         {
@@ -131,17 +131,20 @@ namespace RuhunaSupply.Controllers
                             Type = UserTypes.Internal
                         });
                     }
-                    db.Users.Add(new User()
+                    else
                     {
-                        Id = uId++,
-                        FacultyId = dep.FacultyId,
-                        DepartmentId = dep.Id,
-                        FullName = "Head , " + dep.Name,
-                        PermissionList = "11111111",
-                        Position = UserPositions.Head,
-                        ShortName = "Head",
-                        Type = UserTypes.Internal
-                    });
+                        db.Users.Add(new User()
+                        {
+                            Id = uId++,
+                            FacultyId = dep.FacultyId,
+                            DepartmentId = dep.Id,
+                            FullName = "Head , " + dep.Name,
+                            PermissionList = "11111111",
+                            Position = UserPositions.Head,
+                            ShortName = "Head",
+                            Type = UserTypes.Internal
+                        });
+                    }
                 }
                 #endregion
                 #region VC

@@ -11,6 +11,7 @@ export class UserAccountService {
 
   postUserAccount(formData) {
     return this.http.post(environment.apiBaseURI + '/UserAccount/SignUp', formData);
+    
   }
   putUserAccount(formData) {
     return this.http.put(environment.apiBaseURI + '/UserAccount/' ,formData);

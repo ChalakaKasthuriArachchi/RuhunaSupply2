@@ -1,9 +1,13 @@
+import { ActivatedRoute, Router } from '@angular/router';
 import { SpecificationCategoryService } from './../shared/specification-category.service';
 import { ItemService } from './../shared/item.service';
 import { PurchaseRequestService } from '../shared/purchase-request.service';
 import { Component, OnInit, NgModule,Inject } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
-import { DOCUMENT } from '@angular/common';
+import { DatePipe, DOCUMENT } from '@angular/common';
+import { isDefined } from '@angular/compiler/src/util';
+import { UserService } from '../shared/user.service';
+import { SupplierService } from '../shared/supplier.service';
 
 @Component({
   selector: 'add-app-purchase-request',
@@ -20,13 +24,29 @@ export class AddPurchaseRequestComponent implements OnInit {
     selectedItems = [];
     specificationCategories = [];
     allowedForwards = [];
+    purchaseRequsetId = 0;
+    myDate = new Date();
+    userInvolvements = [];
+    user : any;
+    suppliers : [];
 
   constructor(
     private PurchaseRequestService: PurchaseRequestService,
-    private formBuilder: FormBuilder,private itemService : ItemService,
+    private formBuilder: FormBuilder,
+    private itemService : ItemService,
     private specCatService : SpecificationCategoryService,
+    private activeRoute : ActivatedRoute,
+    private route : Router,
+    private userService : UserService,
+    private supplierService : SupplierService,
     @Inject(DOCUMENT) document
   ) {
+    this.user = this.userService.getUser().subscribe(
+      res => { 
+        this.user = res;
+        console.log(this.user);
+      }
+    );
     this.checkoutForm = this.formBuilder.group({
       Id : 0,
       Funds: '',
@@ -34,11 +54,36 @@ export class AddPurchaseRequestComponent implements OnInit {
       Justification: '',
       Vote: '',
       IsInProcumentPlan: '',
-      Purpose: '',
-      DateTime: '',
-      BudgetAllocation : '',
+      Purpose: 0,
+      DateTime: this.myDate,
+      BudgetAllocation : 0,
+      UsedAmount : 0,
+      AvailableAmount : 0,
       IsSaved : false,
     });
+    this.activeRoute.queryParams.subscribe(params => {
+      if(isDefined(params['id'])){
+        this.purchaseRequsetId = params['id'];
+        this.PurchaseRequestService.getPurchaseRequest(this.purchaseRequsetId).subscribe(res => {
+          this.checkoutForm = this.formBuilder.group({
+            Id : res['purchaseRequest']['id'],
+            Funds: '',
+            Project: res['purchaseRequest']['project'],
+            Justification: res['purchaseRequest']['justification'],
+            Vote: res['purchaseRequest']['vote'],
+            IsInProcumentPlan: '',
+            Purpose: res['purchaseRequest']['purpose'],
+            DateTime: res['purchaseRequest']['date'],
+            BudgetAllocation : res['purchaseRequest']['budgetAllocation'],
+            UsedAmount : res['purchaseRequest']['usedAmount'],
+            IsSaved : false,
+          });
+          this.selectedItems = res['items'] as [];
+          this.userInvolvements = res['route'] as [];
+        });
+      }
+    });
+    
    }
    ngOnInit(): void {
       this.itemService.getItemList(0,null).subscribe(
@@ -56,9 +101,12 @@ export class AddPurchaseRequestComponent implements OnInit {
   }
   onSubmit(event){
     let purchaseRequest = { form : this.checkoutForm.value, items : this.selectedItems, forwardTo : event.target.id};
+    console.log(purchaseRequest);
     this.PurchaseRequestService.postPurchaseRequest(purchaseRequest)
       .subscribe(
-        data => console.log('Success!', data),
+        data => {
+          this.route.navigateByUrl('/purchaserequest')
+        },
         error => console.log('Error!', error)
       );
   }
@@ -72,20 +120,19 @@ export class AddPurchaseRequestComponent implements OnInit {
         this.specificationCategories = res as [];
       }
     );
-    // var id = this.selectedItems[index].id;
-    // this.itemService.getItem(id,false).
-    //   subscribe(res => this.selectedItems[index] = res);
   }
   addSpec(event){
     var spec;
     var item;
     this.specCatService.getSpecificationCategoryById(event.target.id).subscribe(
-      res =>{ spec = res;
+      res =>{ 
+        spec = res;
         this.itemService.getItem(spec.item.id,true).subscribe(
           res => {
             item = res;
             item.quantity = (<HTMLInputElement>document.getElementById('qty')).value;
-            item.specificationCategoryId = spec.Id;
+            item.specificationCategoryId = spec.id;
+            item.specificationCategoryName = spec.title;
             this.selectedItems.push(item);
           }
         )
@@ -95,5 +142,18 @@ export class AddPurchaseRequestComponent implements OnInit {
   getAllowedForwards(){
     this.PurchaseRequestService.getAllowedForwardsList()
       .subscribe(res => this.allowedForwards = res as []);
+  }
+  callQuotations(){
+    this.PurchaseRequestService.callQuotations(this.checkoutForm.value.Id).subscribe(
+      res => this.route.navigateByUrl('/purchaserequest')
+    );
+  }
+  getSuppliers(){
+    this.supplierService.getActiveSupplierList(0).subscribe(
+      res => this.suppliers = res as []
+    )
+  }
+  selectSupplier(){
+   
   }
 }

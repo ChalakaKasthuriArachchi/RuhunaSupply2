@@ -27,41 +27,79 @@ namespace RuhunaSupply.Controllers
             this._db = context;
         }
         [HttpGet]
-        public Supplier[] Index(string Category,string Search)
+        public Supplier[] Index(int Category,string Search)
         {
-            IQueryable<Supplier> query = _db.Suppliers;
-            if (Category != null && Category.Trim().Length > 0 && Category != "undefined")
-                query = query.Where(s => s.Category2.Id.ToString() == Category);
-            if (Search != null && Search.Trim().Length > 0 && Search != "undefined")
-                query = query.Where(s => s.BusinessName.Contains(Search)
-                            || s.BusinessAddress.Contains(Search)
-                            || s.ContactNumber.Contains(Search)
-                            || s.BusinessMail.Contains(Search));
-            Supplier[] suppliers = query.ToArray();
-            return suppliers;
+            try
+            {
+                IQueryable<Supplier> query = _db.Suppliers;
+                if (Category != 0)
+                    query = query.Where(s => s.Category2Id == Category);
+                if (Search != null && Search.Trim().Length > 0 && Search != "undefined")
+                    query = query.Where(s => s.BusinessName.Contains(Search)
+                                || s.BusinessAddress.Contains(Search)
+                                || s.ContactNumber.Contains(Search)
+                                || s.BusinessMail.Contains(Search));
+                Supplier[] suppliers = query.ToArray();
+                return suppliers;
+            }
+            catch(Exception ex)
+            {
+                return null;
+            }
         }
+        [HttpGet("activeSuppliers")]
+        public Supplier[] GetSuppliers(int Category)
+        {
+            try
+            {
+                IQueryable<Supplier> query = _db.Suppliers;
+                if (Category != 0)
+                    query = query.Where(s => s.Category2Id == Category
+                        && s.Status == SupplierStatus.Approved);
+                Supplier[] suppliers = query.ToArray();
+                return suppliers;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        [HttpGet("{id}")] // api/supplier/1
+        public Supplier GetSupplier(int id)
+        {
+            return _db.Suppliers.Find(id);
+        }
+
         [HttpPost]
         public async Task<ActionResult<Supplier>> PostSupplier(object supplier)
         {
-            JsonData jd = JsonMapper.ToObject(supplier.ToString());
-            string userId = Request.HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name).Value;
-            Supplier sp = new Supplier()
+            try
             {
-                Id = int.Parse(userId),
-                BusinessAddress = jd["BusinessAddress"].ToString(),
-                BusinessCategory = (BusinessCategories)int.Parse(jd["Category2"].ToString()),
-                BusinessMail = jd["BusinessMail"].ToString(),
-                BusinessName = jd["BusinessName"].ToString(),
-                BusinessRegisteredDate = DateTime.Parse(jd["BusinessRegisteredDate"].ToString()),
-                Category2Id = int.Parse(jd["Category2"].ToString()),
-                RegisteredDate = DateTime.Now,
-                RegistrationNumber = jd["RegistrationNumber"].ToString(),
-                ContactNumber = jd["ContactNumber"].ToString()
-            };
-            _db.Suppliers.Add(sp);
-            await _db.SaveChangesAsync();
+                JsonData jd = JsonMapper.ToObject(supplier.ToString());
+                string userId = Request.HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name) == null ? "0" : Request.HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name).Value;
+                Supplier sp = new Supplier()
+                {
+                    Id = int.Parse(userId),
+                    BusinessAddress = jd["BusinessAddress"].ToString(),
+                    //BusinessCategory = (BusinessCategories)int.Parse(jd["Category2"].ToString()),
+                    BusinessMail = jd["BusinessMail"].ToString(),
+                    BusinessName = jd["BusinessName"].ToString(),
+                    BusinessRegisteredDate = DateTime.Parse(jd["BusinessRegisteredDate"].ToString()),
+                    //Category2Id = int.Parse(jd["Category2"].ToString()),
+                    RegisteredDate = DateTime.Now,
+                    RegistrationNumber = jd["RegistrationNumber"].ToString(),
+                    ContactNumber = jd["ContactNumber"].ToString()
+                };
+                _db.Suppliers.Add(sp);
+                await _db.SaveChangesAsync();
+                return CreatedAtAction("Supplier", new { id = sp.Id }, sp);
+            }
+            catch (Exception ex)
+            {
 
-            return CreatedAtAction("Supplier", new { id = sp.Id }, sp);
+                throw;
+            }
+           
         }
         [HttpPut]
         public IActionResult Edit(int Id, Category2 Category2, string RegisterNumber, DateTime RegisterDate, string TelephoneNumber, string BusinessName, string BusinessMail, string BusinessAddress)

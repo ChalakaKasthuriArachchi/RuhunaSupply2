@@ -15,6 +15,7 @@ export class AppComponent{
   }
   onLogout(){
     this.service.onLogout();
+    this.router.navigateByUrl('user/login');
   }
   hasToken(){
     return localStorage.getItem('token') != null;

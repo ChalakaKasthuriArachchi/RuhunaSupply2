@@ -17,7 +17,7 @@ export class UserAccountComponent implements OnInit {
   constructor(
     private userAccountService : UserAccountService,
     private formBuilder : FormBuilder,
-    
+    private router: Router
   ) {
     this.checkoutForm = this.formBuilder.group({
       FullName: '',
@@ -36,12 +36,10 @@ export class UserAccountComponent implements OnInit {
   onSubmit(userAccountData) {
     this.userAccountService.postUserAccount(userAccountData.value)
       .subscribe(
-      data => console.log('Success!', data),
+      data => this.router.navigateByUrl('/user/login'),
       error=> console.log('Error',error)
     );
-    console.log('Account Created Successfully', userAccountData);
     this.checkoutForm.reset();
-
   }
 
   recordSubmit(fg: FormGroup) {

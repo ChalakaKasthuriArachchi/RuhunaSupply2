@@ -18,6 +18,7 @@ export class PurchaseRequestComponent implements OnInit {
   }
   getPurchaseRequestList(status){
     this.service.getPurchaseRequestList(status)
-      .subscribe(res => this.purchaseRequests = res as []);
+      .subscribe(res => { this.purchaseRequests = res as [];
+          console.log(res as [])});
   }
 }

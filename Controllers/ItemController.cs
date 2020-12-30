@@ -10,7 +10,8 @@ using ThirdParty.Json.LitJson;
 using static RuhunaSupply.Common.MyEnum;
 
 namespace RuhunaSupply.Controllers
-{   [Route("api/[controller]")]
+{   
+    [Route("api/[controller]")]
     [ApiController] 
     public class ItemController : ControllerBase // get Base because not view this
     {

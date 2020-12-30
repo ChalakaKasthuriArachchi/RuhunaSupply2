@@ -27,27 +27,26 @@ namespace RuhunaSupply.Controllers
         {
             return _db.Users.Where(cat => !cat.IsDeleted).ToArray();
         }
-        [HttpGet("api/[Controller]/positionlist")]
-        public string[] GetPositionList()
+        [HttpGet("getcurrentuser")]
+        public User GetUser()
         {
-            return Enum.GetNames(typeof(MyEnum.UserPositions));
+            return Functions.GetCurrentUser(HttpContext, _db);
         }
         [HttpPost]
         public IActionResult PostUser(object user)
         {
-            try
+            try { 
+            JsonData jd = JsonMapper.ToObject(user.ToString());
+            User u = new User()
             {
-                Functions.GetCurrentUserId(HttpContext, _db);
-                JsonData jd = JsonMapper.ToObject(user.ToString());
-                User u = new User()
-                {
-                    Id = Functions.GetCurrentUserId(HttpContext, _db),
-                    FacultyId = int.Parse(jd["Faculty"].ToString()),
-                    DepartmentId = int.Parse(jd["Department"].ToString()),
-                    FullName = jd["FullName"].ToString(),
-                    ShortName = jd["ShortName"].ToString(),
-                    Position = (UserPositions)int.Parse(jd["Position"].ToString()),
-                    MergedId = int.Parse(jd["MergedId"].ToString())
+                FacultyId = int.Parse(jd["Faculty"].ToString()),
+                DepartmentId = int.Parse (jd["Department"].ToString()),
+                FullName = jd["FullName"].ToString(),
+                ShortName = jd["ShortName"].ToString(),
+                PermissionList = jd["PermissionList"].ToString(),
+                Position = (UserPositions)int.Parse(jd["Position"].ToString()),
+                Type = (UserTypes)int.Parse(jd["Type"].ToString()),
+                MergedId = int.Parse(jd["UserAccount"].ToString())
 
                 };
                 _db.Users.Add(u);
@@ -57,29 +56,7 @@ namespace RuhunaSupply.Controllers
             }
             catch(Exception e) { return BadRequest(); }
         }
-            
-            
-
-        [HttpPut]
-        public IActionResult Edit(int Id, string Admin, string Branch, string FullName, string ShortName, string PermissionList, UserPositions Position, UserTypes Type, int MergedId)
-        {
-            _db.Users.Update(new User()
-            {
-                //Id = Id,
-                //Admin = Admin,
-                //Branch = Branch,
-                //FullName = FullName,
-                //ShortName = ShortName,
-                //PermissionList = PermissionList,
-                //Position = Position,
-                //Type = Type,
-                //MergedId = MergedId
-            });
-            _db.SaveChanges();
-            return Ok();
-        }
-
-        [HttpDelete]
+        [HttpPost]
         public IActionResult Delete(int Id)
         {
             //_db.Users.Remove(new User { Id = Id });

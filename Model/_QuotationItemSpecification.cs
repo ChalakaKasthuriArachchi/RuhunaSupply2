@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace RuhunaSupply.Model
 {
-    public class _QuatationItemSpecification
+    public class _QuotationItemSpecification
     {
-        public _QuatationItemSpecification()
+        public _QuotationItemSpecification()
         { 
         }
         #region Dynamic
-        public QuatationItem QuatationItem { get; set; }
+        public QuotationItem QuatationItem { get; set; }
         public Specification Specification { get; set; }
         #endregion
         #region Saved
