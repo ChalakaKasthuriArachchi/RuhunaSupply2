@@ -1,1 +1,41 @@
-<p>user works!</p>
+<blockquote class="blockquote ml-5">
+    <footer class="bloquote-footer">
+        <h2 style="color: #6d0505;">Current Users</h2>
+    </footer>
+  </blockquote>
+  <div mdbTable class="grid-table">
+      <div class="thead">
+        <div mdbTableCol class="tr">
+          <div class="td">No</div>
+          <div class="td">ID</div>
+          <div class="td">Faculty</div>
+          <div class="td">Department</div>
+          <div class="td">Full Name</div>
+          <div class="td">Position</div>
+          <div class="td"></div>
+        </div>
+      </div>
+      <div class="tbody">
+          <div class="tr" mdbTableCol *ngFor="let pr of User; let i = index;">
+              <div class="td" style="text-align: center">{{i + 1}}</div>
+              <div class="td">
+                  <label class="form-control">{{pr.id}}</label>
+                </div>
+              <div class="td">
+                  <label class="form-control">{{pr.faculty.name}}</label>
+                </div>
+                <div class="td">
+                    <label class="form-control">{{pr.department.name}}</label>
+                  </div>
+                  <div class="td">
+                    <label class="form-control">{{pr.fullName}}</label>
+                  </div>
+                  <div class="td">
+                    <label class="form-control">{{pr.positionText}}</label>
+                  </div>
+              <div class="td">
+                <a class="btn btn-outline-success" href="user/view?id={{pr.id}}" role="button">View</a>
+              </div>
+            </div>
+      </div>
+  </div>

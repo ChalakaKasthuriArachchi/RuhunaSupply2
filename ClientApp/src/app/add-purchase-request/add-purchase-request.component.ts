@@ -86,7 +86,7 @@ export class AddPurchaseRequestComponent implements OnInit {
     
    }
    ngOnInit(): void {
-      this.itemService.getItemList(0,null,true).subscribe(
+      this.itemService.getItemList(0,null).subscribe(
         res => this.itemList = res as []
       )
    }

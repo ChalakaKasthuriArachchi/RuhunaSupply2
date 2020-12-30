@@ -11,7 +11,7 @@ using static RuhunaSupply.Common.MyEnum;
 
 namespace RuhunaSupply.Controllers
 {
-    [Route("api/[Controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class UserController : Controller
     {
@@ -33,7 +33,7 @@ namespace RuhunaSupply.Controllers
             return Functions.GetCurrentUser(HttpContext, _db);
         }
         [HttpPost]
-        public async Task<ActionResult<User>> PostUser(object user)
+        public IActionResult PostUser(object user)
         {
             JsonData jd = JsonMapper.ToObject(user.ToString());
             User u = new User()
@@ -47,11 +47,13 @@ namespace RuhunaSupply.Controllers
                 Type = (UserTypes)int.Parse(jd["Type"].ToString()),
                 MergedId = int.Parse(jd["UserAccount"].ToString())
 
-            };
-            _db.Users.Add(u);
-            await _db.SaveChangesAsync();
+                };
+                _db.Users.Add(u);
+                _db.SaveChanges();
 
-            return CreatedAtAction("User", new { id = u.Id }, u);
+                return Ok();
+            }
+            catch(Exception e) { return BadRequest(); }
         }
         [HttpPost]
         public IActionResult Delete(int Id)

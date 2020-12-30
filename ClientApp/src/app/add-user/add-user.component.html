@@ -13,7 +13,10 @@
                 </div>
                 <div class="form-row">
 					<label for="Department">Department</label>
-					<input type="text" formControlName="Department" id="Department" class="input-text" placeholder="Department" required>
+					<select formControlName="Department" class="input-text" required>
+						<option value="0" selected hidden>Select The Department</option>
+                        <option *ngFor="let cat of DepartmentList; let i = index;" value="{{cat.id}}">{{cat.name}}</option>
+                      </select>
 					<i class="fas fa-envelope"></i>
                 </div>
                 <div class="form-row">
@@ -27,41 +30,27 @@
 					<i class="fas fa-envelope"></i>
 				</div>
 				<div class="form-row">
-					<label for="PermissionList">Permission List</label>
-					<input type="text" formControlName="PermissionList" id="PermissionList" class="input-text" placeholder="PermissionList" required>
-					<i class="fas fa-envelope"></i>
-				</div>
-				<div class="form-row">
-					<label for="Possition">Possition</label>
-					<select formControlName="Possition" id="Possition" class="input-text" required>
-						<option value="-1" selected hidden>Select the Possiton</option>
-						<option value="0">Dean</option>
-						<option value="1">Head</option>
-						<option value="2">Lecturer</option>
-						<option value="3">Senior Lecturer</option>
-						<option value="4">Probationary Lecturer</option>
-						<option value="5">Instructor</option>
-						<option value="6">Clerk</option>
-						<option value="7">TO</option>
-						<option value="8">VC</option>
-						<option value="9">DVC</option>
-						<option value="10">Bursar</option>
-						<option value="11">Assistent Bursar</option>
-						<option value="12">Store Keeper</option>
+					<label for="Position">Position</label>
+					<select formControlName="Position" id="Position" class="input-text" required>
+						<option value="-1" selected hidden>Select The Position</option>
+						<option value="1">Dean</option>
+						<option value="2">Head</option>
+						<option value="3">VC</option>
+						<option value="4">DVC</option>
+						<option value="5">SAB</option>
+						<option value="6">Lecturer</option>
+						<option value="7">Instructor</option>
+						<option value="8">TO</option>
+						<option value="9">Clerk</option>						
 					</select>
 					<i class="fas fa-envelope"></i>
 				</div>
 				<div class="form-row">
-					<label for="Type">User Type</label>
-					<select formControlName="Type" id="Type" class="input-text" required>
-						<option value="-1" selected hidden>Select the User Type</option>
-						<option value="0">Internal</option>
-						<option value="1">Supplier</option>
+					<label for="MergedId">Merged User</label>
+					<select formControlName="MergedId" id="MergedId" class="input-text" required>
+						<option value="0" selected hidden>Merged User</option>
+						<option *ngFor="let cat of UserList; let i = index;" value="{{cat.id}}">{{cat.fullName}}</option>
 					</select>
-				</div>
-				<div class="form-row">
-					<label for="MergedId">Merged Id</label>
-					<input type="text" formControlName="MergedId" id="MergedId" class="MergedId" placeholder="MergedId" required>
 				</div>
 				<div class="form-row-last">
 					<input type="submit" name="Add" class="Add" value="Add">

@@ -474,7 +474,6 @@ namespace RuhunaSupply.Migrations
             modelBuilder.Entity("RuhunaSupply.Model.User", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     b.Property<int>("DepartmentId")
@@ -512,7 +511,6 @@ namespace RuhunaSupply.Migrations
             modelBuilder.Entity("RuhunaSupply.Model.UserAccount", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     b.Property<string>("Email")

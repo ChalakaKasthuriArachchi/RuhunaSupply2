@@ -23,9 +23,9 @@ namespace RuhunaSupply.Controllers
 
         // GET: api/Departments
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Department>>> GetDepartment()
+        public List<Department> GetDepartments(int Faculty)
         {
-            return await _context.Departments.OrderBy(dep => dep.Name).ToListAsync();
+            return _context.Departments.Where(dep => dep.FacultyId == Faculty).OrderBy(dep => dep.Name).ToList();
         }
 
         // GET: api/Departments/5

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder,Validator,FormGroup} from '@angular/forms';
 import { UserService } from '../shared/user.service';
+import { FacultyService } from '../shared/faculty.service';
+import { DepartmentService } from '../shared/department.service';
 
 @Component({
   selector: 'app-add-user',
@@ -9,38 +11,51 @@ import { UserService } from '../shared/user.service';
 })
 export class AddUserComponent implements OnInit {
   checkoutForm;
-  userList;
+  UserList: [];
   FacultyList: [];
+  userPositions : [];
+  DepartmentList : [];
 
   constructor(
     private formBuilder : FormBuilder,
-    private userService : UserService,
+    private UserService : UserService,
+    private FacultyService : FacultyService,
+    private DepartmentService : DepartmentService
     ) { 
         this.checkoutForm=this.formBuilder.group({
           Faculty:'',
           Department:'',
           FullName:'',
           ShortName:'',
-          PermissionList:'',
-          Possition:'',
+          Position:'',
+          MergedId:''
 
         });
       }
 
   ngOnInit(): void {
-    this.userService.getUserList().subscribe(
-      res => this.userList = res as []
+    this.FacultyService.getFacultyList().subscribe(
+      res => this.FacultyList = res as []
+    );
+    this.UserService.getUserList().subscribe(
+      res => this.UserList = res as []
     );
   }
   onSubmit(userData){
-    this.userService.postUser(userData.value)
+    console.log("OK" + userData);
+    this.UserService.postUser(userData.value)
       .subscribe(
         data => console.log('Success!',data),
         error => console.log('Error!',error)
       );
   }
-  onFacultySelect(checkoutForm){
-    
+  recordSubmit(fg: FormGroup){
+    this.UserService.postUser(fg.value);
+  }
+  onFacultySelect(fg:FormGroup){
+    this.DepartmentService.getDepartmentList(fg.value.Faculty).subscribe(
+      res => this.DepartmentList = res as []
+    );
   }
   
 
