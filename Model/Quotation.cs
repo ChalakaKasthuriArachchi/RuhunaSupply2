@@ -43,6 +43,8 @@ namespace RuhunaSupply.Model
                 purchaseRequest = db.PurchaseRequests.Find(SupplierId);
             return purchaseRequest;
         }
+        public string StatusText => Status.ToString();
+        public string DateText => Date.ToString("yyyy-MM-dd");
         #endregion
         #region Saved
         [Key]

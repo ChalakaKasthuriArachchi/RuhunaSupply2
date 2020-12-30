@@ -21,7 +21,7 @@ namespace RuhunaSupply.Controllers
             int max_id = 0;
             try
             {
-                max_id = _db.QuotationItemSpecifications.Max((qis) => qis.Id);
+                max_id = _db.QuotationItemSpecification.Max((qis) => qis.Id);
             }
             catch
             {

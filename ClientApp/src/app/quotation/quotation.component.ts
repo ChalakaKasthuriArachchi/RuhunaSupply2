@@ -23,27 +23,27 @@ export class QuotationComponent implements OnInit {
     private cat2Service: Category2Service,
     private QuotationService: QuotationService,
     private SpecificationService: SpecificationService,
-
+    private activeRoute : ActivatedRoute,
   ) {
       //QuotationService.getQuotation().subscribe(
       //   res => this.quotation = res
       // );
 
    }
-   
-
-
   ngOnInit(): void {
-    this.QuotationService.getQuotation(0)
-    .subscribe(res => this.quotation = res as []);
-    this.getQuotation();
+    this.activeRoute.queryParams.subscribe(params => {
+        console.log(params['id']);
+        this.QuotationService.getQuotation(params['id'])
+          .subscribe(res =>
+            { 
+              this.quotation = res;
+              console.log(this.quotation);
+            });
+    });
   }
 
    onSubmit(quotationData){
-    this.QuotationService.postSupplier(quotationData.value).subscribe(
-      data => console.log('Success!', data),
-      error => console.log('Error!', error)
-    );
+   
   }
 
 
