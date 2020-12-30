@@ -35,6 +35,7 @@ namespace RuhunaSupply.Controllers
         [HttpPost]
         public IActionResult PostUser(object user)
         {
+            try { 
             JsonData jd = JsonMapper.ToObject(user.ToString());
             User u = new User()
             {

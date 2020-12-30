@@ -24,7 +24,6 @@ import { TestingComponent } from './testing/testing.component';
 import { AddPurchaseRequestComponent } from './add-purchase-request/add-purchase-request.component';
 import { AddUserComponent } from './add-user/add-user.component';
 import { UserComponent } from './user/user.component';
-import { QuotationComponent } from './view-quotation/view-quotation.component';
 
 
 const routes: Routes = [
@@ -47,7 +46,6 @@ const routes: Routes = [
   { path: 'item', component: ItemComponent },
   { path: 'item/new', component: AddItemComponent },
   { path: 'item/add', component: AddItemComponent },
-  { path: 'supplier', component: SuppliersComponent },
   { path: 'purchaserequest', component: PurchaseRequestComponent },
   { path: 'specification',component : SpecificationComponent},
   { path: 'specification-category',component : SpecificationCategoryComponent},
@@ -57,7 +55,7 @@ const routes: Routes = [
   { path: 'user/register',component : AddUserComponent},
   { path: 'user/view',component : AddUserComponent},
   { path: 'user',component : UserComponent},
-  { path: 'quotation/view',component:QuotationComponent}
+  { path: 'quotation/view',component:QuotationComponent},
   { path: 'testing', component: TestingComponent},
   { path: 'quotation', component: QuotationComponent},
   { path: 'purchaserequest/view', component: AddPurchaseRequestComponent }

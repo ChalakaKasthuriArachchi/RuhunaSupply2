@@ -16,7 +16,7 @@ export class Category3Service {
     return this.http.put(environment.apiBaseURI + '/Category3,',formData.Id);
   }
   getCategory3List(cat2,inc){
-    return this.http.get(environment.apiBaseURI + '/Category3?category2='+ cat2 + '&Include='+inc);
+    return this.http.get(environment.apiBaseURI + '/Category3?Category2='+ cat2);
   }
 
   

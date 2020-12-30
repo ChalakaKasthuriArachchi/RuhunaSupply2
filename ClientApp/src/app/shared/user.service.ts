@@ -25,6 +25,7 @@ export class UserService {
     {headers : tokenHeader});
     
   }
+}
   getUser(){
     var tok = localStorage.getItem('token');
     if(tok != null){
@@ -32,6 +33,4 @@ export class UserService {
       return this.http.get(environment.apiBaseURI + '/User/getcurrentuser', {headers : tokenHeader});
     }
   }
-}
-
 }
