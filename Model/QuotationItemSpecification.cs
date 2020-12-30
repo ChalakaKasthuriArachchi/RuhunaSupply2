@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RuhunaSupply.Common;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -9,18 +10,22 @@ namespace RuhunaSupply.Model
 {
     public class QuotationItemSpecification
     {
+        #region Dynamic
+        public Item Item
+        {
+            get => Cache.GetItem(ItemId, true);
+        }
+        #endregion
         #region Saved
         [Key]
         public int Id { get; set; }
         [ForeignKey("PurchaseRequestItemSpecification")]
         public int PurchaseRequestItemSpecificationId { get; set; }
-        public PurchaseRequestItemSpecification PurchaseRequestItemSpecification { get;set; }
-        [ForeignKey("Item")]
+        public PurchaseRequestItemSpecification PurchaseRequestItemSpecification { get; set; }
         public int ItemId { get; set; }
-        public Item Item { get; set; }
         public bool Satisfied { get; set; }
         [MaxLength(150)]
-        public string Remark { get; set; }
+        public string Remark { get; set; } = "";
         #endregion
     }
 }

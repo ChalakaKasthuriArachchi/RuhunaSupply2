@@ -10,6 +10,7 @@ namespace RuhunaSupply.Common
         public enum QuatationStatus
         {
             //pending done wge eawa   
+            Pending
         }
         public enum Faculties
         { 
@@ -74,6 +75,7 @@ namespace RuhunaSupply.Common
         public enum PurchaseRequestStatus
         {
             On_Approval, Rejected,
+            Done,
         }
         public enum SupplierStatus
         {

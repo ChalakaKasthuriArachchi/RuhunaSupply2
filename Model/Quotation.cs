@@ -1,4 +1,5 @@
 ﻿using cmlMySqlStandard;
+using Microsoft.EntityFrameworkCore;
 using RuhunaSupply.Data;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,17 @@ namespace RuhunaSupply.Model
         public Quotation()
         {
         }
+        #region Static
+        internal static int GetNextId(ApplicationDbContext db)
+        {
+            Quotation pr =
+                db.Quotations.FromSqlRaw("SELECT * FROM Quotations ORDER BY Id DESC").FirstOrDefault();
+            if (pr == null)
+                return 1;
+            return pr.Id + 1;
+        }
+        #endregion
+        
         #region Dynamic
         private Supplier supplier = null;
         private PurchaseRequest purchaseRequest = null;
@@ -34,13 +46,15 @@ namespace RuhunaSupply.Model
         #endregion
         #region Saved
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
         public int PurchaseRequestId { get; set; }
         public int SupplierId { get; set; }
         public QuatationStatus Status { get; set; }
         public DateTime Date { get; set; }
         public bool IsDeleted { get; set; }
-        public List<QuotationItem> Items { get; set; }
+        public List<QuotationItem> QuotationItems { get; set; } =
+            new List<QuotationItem>();
         public int Index => Id;
         #endregion
     }

@@ -31,7 +31,7 @@ namespace RuhunaSupply.Data
 
         public DbSet<PurchaseRequestItemSpecification> PurchaseRequestItemSpecifications { get; set; }
 
-        public DbSet<_QuotationItemSpecification> QuotationItemSpecifications { get; set; }
+        public DbSet<_QuatationItemSpecification> QuatationItemSpecification { get; set; }
        
 
         public DbSet<Category1> Category1s { get; set; }
