@@ -1,7 +1,8 @@
 import { Router } from '@angular/router';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UserAccountService } from './shared/user-account.service';
 import { NgModule } from '@angular/core';
+import { UserService } from './shared/user.service';
 
 @Component({
   selector: 'app-root',
@@ -10,8 +11,13 @@ import { NgModule } from '@angular/core';
 })
 export class AppComponent{
   title = 'Ruhuna Supply';
-  constructor(private service:UserAccountService, public router : Router){
-
+  navbarLinks = [];
+  constructor(private service:UserAccountService, 
+    public router : Router,private userService : UserService){
+      this.userService.getNavebarLinks().subscribe(res => {
+        this.navbarLinks = res as [];
+        console.log(this.navbarLinks);
+      });
   }
   onLogout(){
     this.service.onLogout();

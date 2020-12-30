@@ -20,5 +20,4 @@ export class UserComponent implements OnInit {
     this.UserService.getUserList()
       .subscribe(res => this.User = res as []);
   }
-
 }
