@@ -33,4 +33,11 @@ export class UserService {
       return this.http.get(environment.apiBaseURI + '/User/getcurrentuser', {headers : tokenHeader});
     }
   }
+  getNavebarLinks(){
+    var tok = localStorage.getItem('token');
+    if(tok != null){
+      var tokenHeader = new HttpHeaders({'Authorization':'Bearer ' + tok});
+      return this.http.get(environment.apiBaseURI + '/User/navbarlinks', {headers : tokenHeader});
+    }
+  }
 }

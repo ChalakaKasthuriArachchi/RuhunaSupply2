@@ -148,9 +148,22 @@ namespace RuhunaSupply.Controllers
                 }
                 #endregion
                 #region VC
-                
+
                 #endregion
-                using(IDbContextTransaction trans = db.Database.BeginTransaction())
+                #region TEC
+                db.Users.Add(new User()
+                {
+                    Id = uId++,
+                    FacultyId = faculties[2].Id,
+                    DepartmentId = departments[3].Id,
+                    FullName = "Technical Evaluation Comittee ",
+                    PermissionList = "100000",
+                    Position = UserPositions.TEC,
+                    ShortName = "TEC",
+                    Type = UserTypes.Internal
+                });
+                #endregion
+                using (IDbContextTransaction trans = db.Database.BeginTransaction())
                 {
                     try
                     {

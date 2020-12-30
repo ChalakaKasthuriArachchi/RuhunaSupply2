@@ -53,8 +53,8 @@ formModel = {
           const el: HTMLElement = document.getElementById('success_alert');
           el.style.display = 'block';
           const timer: ReturnType<typeof setTimeout> = setTimeout(() =>   el.style.display = 'none', 3000);  
-          const resetForm: HTMLFormElement = document.getElementById('checkform');
-          resetForm.reset();
+          //const resetForm: HTMLFormElement = document.getElementById('checkform');
+          fg.reset();
         },
 
         error => { 

@@ -53,7 +53,8 @@ namespace RuhunaSupply.Common
             Lecturer,
             Instructor,
             TO,
-            Cleark
+            Cleark,
+            TEC
         }
         public enum UserTypes
         {
