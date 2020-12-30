@@ -3,7 +3,7 @@ import { FormBuilder,Validator,FormGroup} from '@angular/forms';
 import { UserService } from '../shared/user.service';
 import { FacultyService } from '../shared/faculty.service';
 import { DepartmentService } from '../shared/department.service';
-
+import { Router } from "@angular/router";
 @Component({
   selector: 'app-add-user',
   templateUrl: './add-user.component.html',
@@ -20,7 +20,8 @@ export class AddUserComponent implements OnInit {
     private formBuilder : FormBuilder,
     private UserService : UserService,
     private FacultyService : FacultyService,
-    private DepartmentService : DepartmentService
+    private DepartmentService : DepartmentService,
+    private router : Router
     ) { 
         this.checkoutForm=this.formBuilder.group({
           Faculty:'',
@@ -45,9 +46,12 @@ export class AddUserComponent implements OnInit {
     console.log("OK" + userData);
     this.UserService.postUser(userData.value)
       .subscribe(
-        data => console.log('Success!',data),
+        data => { console.log('Success!',data);
+        this.router.navigateByUrl('');
+      },
         error => console.log('Error!',error)
       );
+      
   }
   recordSubmit(fg: FormGroup){
     this.UserService.postUser(fg.value);

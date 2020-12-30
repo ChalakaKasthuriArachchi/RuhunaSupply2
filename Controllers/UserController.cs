@@ -35,28 +35,29 @@ namespace RuhunaSupply.Controllers
         [HttpPost]
         public IActionResult PostUser(object user)
         {
-            try { 
-            JsonData jd = JsonMapper.ToObject(user.ToString());
-            User u = new User()
+            try
             {
-                FacultyId = int.Parse(jd["Faculty"].ToString()),
-                DepartmentId = int.Parse (jd["Department"].ToString()),
-                FullName = jd["FullName"].ToString(),
-                ShortName = jd["ShortName"].ToString(),
-                PermissionList = jd["PermissionList"].ToString(),
-                Position = (UserPositions)int.Parse(jd["Position"].ToString()),
-                Type = (UserTypes)int.Parse(jd["Type"].ToString()),
-                MergedId = int.Parse(jd["UserAccount"].ToString())
-
+                JsonData jd = JsonMapper.ToObject(user.ToString());
+                User u = new User()
+                {
+                    Id = Functions.GetCurrentUserAccount(HttpContext,_db).Id,
+                    FacultyId = int.Parse(jd["Faculty"].ToString()),
+                    DepartmentId = int.Parse(jd["Department"].ToString()),
+                    FullName = jd["FullName"].ToString(),
+                    ShortName = jd["ShortName"].ToString(),
+                    Position = (UserPositions)int.Parse(jd["Position"].ToString()),
                 };
+                int temp;
+                int.TryParse(jd["MergedId"].ToString(), out temp);
+                u.MergedId = temp;
                 _db.Users.Add(u);
                 _db.SaveChanges();
 
                 return Ok();
             }
-            catch(Exception e) { return BadRequest(); }
+            catch (Exception e) { return BadRequest(); }
         }
-        [HttpPost]
+        [HttpDelete]
         public IActionResult Delete(int Id)
         {
             //_db.Users.Remove(new User { Id = Id });

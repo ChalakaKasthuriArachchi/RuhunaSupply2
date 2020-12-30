@@ -45,6 +45,9 @@
             <li [ngClass]="(router.url == '/login')?'nav-item active' : 'nav-item'">
               <a class="nav-link" href="/user/login">Log In</a>
             </li>
+            <li [ngClass]="(router.url == '/user-account')?'nav-item active' : 'nav-item'">
+              <a class="nav-link" href="/user/signup">Sign Up</a>
+            </li>
             <li [ngClass]="(router.url == '')?'nav-item active' : 'nav-item'">
                 <a class="nav-link" (click)="onLogout()">Logout</a>
               </li>
@@ -53,5 +56,4 @@
    
   </nav>
 </div>
-
 <router-outlet></router-outlet>
