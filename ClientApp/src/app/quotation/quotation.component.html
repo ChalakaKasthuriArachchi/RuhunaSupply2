@@ -1,0 +1,213 @@
+<script type="text/javascript">
+      function toggleIcon(e) {
+        $(e.target)
+          .prev(".panel-heading")
+          .find(".more-less")
+          .toggleClass("glyphicon-plus glyphicon-minus");
+      }
+      $(".panel-group").on("hidden.bs.collapse", toggleIcon);
+      $(".panel-group").on("shown.bs.collapse", toggleIcon);
+</script>
+
+<div iv class="form-v5">
+    <div class="page-content">
+		<div class="form-v5-content">
+			<form class="form-detail"  (ngSubmit)="onSubmit(checkoutForm)" novalidate>
+      
+          <h2>Quatation</h2>
+          <!-- <div *ngFor="let qt of quataion;"> -->
+          <div>  
+            <div class="form-row">
+              <label for="QuotationNumber">Quatation Number</label>
+              <input type="text" value="{{quotation.id}}" formControlName="QuotationNumber" id="QuotationNumber" class="input-text" placeholder="Quotation Number"  readonly> 
+              <i class="fas fa-user"></i>
+            </div>
+            <div class="form-row">
+              <label for="SubmitedDate">Submited Date</label>
+              <input type="date" value="{{quotation.date}}" id="SubmitedDate" class="input-text" readonly >
+              <i class="fas fa-envelope"></i>
+            </div>
+            <div class="form-row">
+              <label for="Deadline">Deadline</label>
+              <input type="text" value="{{quotation.date}}" formControlName="Deadline" id="Deadline" class="input-text" placeholder="Deadline" readonly>
+              <i class="fas fa-envelope"></i>
+            </div>
+            <div class="form-row">
+              <label for="Status">Status</label>
+              <input type="text" value="{{quotation.Status}}" formControlName="Status" id="Status" class="input-text" placeholder="Status" readonly>
+              <i class="fas fa-envelope"></i>
+            </div>
+
+            <div class="form-row">
+              <label for="AcceptedDate">Accepted Date</label>
+              <input type="date" value="{{quotation.date}}" formControlName="AcceptedDate" id="AcceptedDate" class="input-text" readonly >
+              <i class="fas fa-envelope"></i>
+            </div>
+          </div>
+                <br><br>
+            
+              <div class="panel-group mt-2" id="accordion" role="tablist" aria-multiselectable="true">
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingOne">
+                        <div class="panel-title">
+                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="text-decoration: none;">
+                            <div class="row">
+                                <div class="form-group  mb-2">
+                                  <div class="form-row">
+                                      <div class="form-group">
+                                        <label for="" style="margin-right: 10px;margin-left: 10px;"><button type="button" class="btn btn-primary">+</button></label>
+                                      </div>
+                                  </div>    
+                                </div>
+                                <div class="form-group  mb-2">
+                                  <div class="form-row">
+                                      <div class="form-group">
+                                        <label for="" style="padding-right: 30px;padding-left: 30px;">{{specification.name}}</label>
+                                        <label for="" style="padding-right: 30px;padding-left: 30px;">{{category3.name}}</label>
+                                      </div>
+                                        <input type="text" class="form-control" style="margin-right: 10px;margin-left: 15px;width: 50px;" readonly>
+                                        <h1 style="margin-right: 10px;margin-left: 10px;">* </h1>
+                                        <input type="text" class="form-control" style="margin-right: 10px;margin-left: 15px;width: 50px;">
+                                        <h1 style="margin-right: 10px;margin-left: 10px;">= </h1>
+                                        <input type="text" class="form-control" style="margin-right: 10px;margin-left: 15px;width: 90px;" readonly>
+                                  
+                                  </div>    
+                                </div>
+                               <!-- <div>
+                                      <div class="form-group  mb-2">
+                                          <label for="value1" class="sr-only">value1</label>
+                                          <input type="value1" class="form-control" id="value1"  style="width: 70px;" placeholder="value 1">
+                                      </div>
+                                          <h1 style="margin-right: 10px;margin-left: 10px;">* </h1>
+                                      <div class="form-group  mb-2">
+                                          <label for="value2" class="sr-only">value2</label>
+                                          <input type="value2" class="form-control" id="value2" style="width: 70px;" placeholder="value 2">
+                                      </div>
+                                          <h1 style="margin-right: 10px;margin-left: 10px;">=</h1>
+                                      <div class="form-group  mb-2">
+                                          <label for="total" class="sr-only">total</label>
+                                          <input type="total" class="form-control" id="total" style="width: 100px;"placeholder="total">
+                                      </div>
+                               </div> -->
+                              </div> 
+                            </a>
+                        </div>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                        <div class="panel-body">
+                              
+                              
+                        <div class="row">
+                          <div class="input-group">
+                            <div class="input-group-prepend" style="padding-bottom: 10px;">
+                              <span class="input-group-text" id="" style="width: 100px;"></span>
+                            </div>
+                            <input type="text" class="form-control" style="margin-right: 10px;margin-left: 15px;width: 120px;">
+                            <input type="text" class="form-control" style="margin-right: 10px;margin-left: 15px;width: 120px;">
+                          </div>
+                          <br><br>
+                          <div class="input-group" style="padding-bottom: 10px; ">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text" id="" style="width: 100px;"></span>
+                              </div>
+                              <input type="text" class="form-control" style="margin-right: 10px;margin-left: 15px;width: 120px;">
+                              <input type="text" class="form-control" style="margin-right: 10px;margin-left: 15px;width: 120px;">
+                            </div>
+                         <br><br>
+                         <div class="input-group">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text" id="" style="width: 100px;"></span>
+                            </div>
+                            <input type="text" class="form-control" style="margin-right: 10px;margin-left: 15px;width: 120px;">
+                            <input type="text" class="form-control" style="margin-right: 10px;margin-left: 15px;width: 120px;">
+                         </div>
+                                                     
+                        </div>
+                    
+                      </div>
+                    </div>
+                </div>
+              </div>
+
+        </form>
+
+		</div>
+	</div>
+</div>
+
+<!-- 
+            <div class="dropdown"> -->
+
+
+
+
+
+
+    
+
+
+            
+            
+            <!-- <div class="dropdown">
+
+                <button class="btn btn-primary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  +
+                </button>
+              
+                <div class="dropdown-menu custom-dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item content btnOpen">
+                    <form class="form-inline">
+                        <div class="form-group  mb-2">
+                            <div class="form-row">
+                                <div class="form-group">
+                                  <label for="" style="margin-right: 10px;margin-left: 10px;">name</label>
+                                </div>
+                            </div>
+                        
+                        </div>
+                        
+                        <div class="form-group  mb-2">
+                            <label for="value1" class="sr-only">value1</label>
+                            <input type="value1" class="form-control" id="value1"  style="width: 70px;" placeholder="value 1">
+                        </div>
+                        <h1 style="margin-right: 10px;margin-left: 10px;">* </h1>
+                        <div class="form-group  mb-2">
+                            <label for="value2" class="sr-only">value2</label>
+                            <input type="value2" class="form-control" id="value2" style="width: 70px;" placeholder="value 2">
+                        </div>
+                        <h1 style="margin-right: 10px;margin-left: 10px;">=</h1>
+                        <div class="form-group  mb-2">
+                            <label for="total" class="sr-only">total</label>
+                            <input type="total" class="form-control" id="total" style="width: 100px;"placeholder="total">
+                        </div>
+                        <br><br>
+                          <div class="input-group">
+                            <div class="input-group-prepend" style="padding-bottom: 10px;">
+                              <span class="input-group-text" id="" style="width: 100px;"></span>
+                            </div>
+                            <input type="text" class="form-control" style="margin-right: 10px;margin-left: 15px;width: 120px;">
+                            <input type="text" class="form-control" style="margin-right: 10px;margin-left: 15px;width: 120px;">
+                          </div>
+                          <br><br>
+                          <div class="input-group" style="padding-bottom: 10px; ">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text" id="" style="width: 100px;"></span>
+                              </div>
+                              <input type="text" class="form-control" style="margin-right: 10px;margin-left: 15px;width: 120px;">
+                              <input type="text" class="form-control" style="margin-right: 10px;margin-left: 15px;width: 120px;">
+                            </div>
+                         <br><br>
+                         <div class="input-group">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text" id="" style="width: 100px;"></span>
+                            </div>
+                            <input type="text" class="form-control" style="margin-right: 10px;margin-left: 15px;width: 120px;">
+                            <input type="text" class="form-control" style="margin-right: 10px;margin-left: 15px;width: 120px;">
+                         </div>
+                      </form>
+                    </a>
+              
+                </div>
+              </div> -->
+
+		<!-- </div> -->

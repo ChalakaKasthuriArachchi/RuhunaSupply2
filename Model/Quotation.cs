@@ -40,7 +40,7 @@ namespace RuhunaSupply.Model
         public QuatationStatus Status { get; set; }
         public DateTime Date { get; set; }
         public bool IsDeleted { get; set; }
-
+        public List<QuotationItem> Items { get; set; }
         public int Index => Id;
         #endregion
     }

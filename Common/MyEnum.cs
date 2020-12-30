@@ -8,7 +8,7 @@ namespace RuhunaSupply.Common
     public static class MyEnum
     {
         public enum QuatationStatus
-        { 
+        {
             //pending done wge eawa   
         }
         public enum Faculties
@@ -55,8 +55,8 @@ namespace RuhunaSupply.Common
             Cleark
         }
         public enum UserTypes
-        { 
-            Internal,Supplier
+        {
+            Internal, Supplier
         }
         public enum BusinessCategories
         {
@@ -73,7 +73,7 @@ namespace RuhunaSupply.Common
         }
         public enum PurchaseRequestStatus
         {
-            On_Approval, Rejected, 
+            On_Approval, Rejected,
         }
         public enum SupplierStatus
         {
