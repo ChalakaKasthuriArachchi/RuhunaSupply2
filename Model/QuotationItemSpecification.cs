@@ -19,6 +19,7 @@ namespace RuhunaSupply.Model
         #region Saved
         [Key]
         public int Id { get; set; }
+        public int QuotationItemId { get; set; }
         [ForeignKey("PurchaseRequestItemSpecification")]
         public int PurchaseRequestItemSpecificationId { get; set; }
         public PurchaseRequestItemSpecification PurchaseRequestItemSpecification { get; set; }

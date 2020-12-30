@@ -6,15 +6,16 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class QuotationService {
-  postSupplier(value: any) {
-    throw new Error('Method not implemented.');
-  }
-
   constructor(private http: HttpClient) { }
   postQuotation(formData) {
     return this.http.post(environment.apiBaseURI + '/Quotation', formData);
   }
   getQuotation(id) {
-    return this.http.get(environment.apiBaseURI + '/Quotation/' + id);
+    var tok = localStorage.getItem('token');
+    if(tok != null){
+      var tokenHeader = new HttpHeaders({'Authorization':'Bearer ' + tok});
+      return this.http.get(environment.apiBaseURI + '/Quotation/' + id,
+      {headers : tokenHeader});
+    }
   }
 }

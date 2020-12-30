@@ -19,28 +19,28 @@
           <div>  
             <div class="form-row">
               <label for="QuotationNumber">Quatation Number</label>
-              <input type="text" value="{{quotation.id}}" formControlName="QuotationNumber" id="QuotationNumber" class="input-text" placeholder="Quotation Number"  readonly> 
+              <input type="text" value="{{quotation.id}}" id="QuotationNumber" class="input-text" readonly> 
               <i class="fas fa-user"></i>
             </div>
             <div class="form-row">
               <label for="SubmitedDate">Submited Date</label>
-              <input type="date" value="{{quotation.date}}" id="SubmitedDate" class="input-text" readonly >
+              <input type="date" value="{{quotation.dateText}}" id="SubmitedDate" class="input-text" readonly >
               <i class="fas fa-envelope"></i>
             </div>
             <div class="form-row">
               <label for="Deadline">Deadline</label>
-              <input type="text" value="{{quotation.date}}" formControlName="Deadline" id="Deadline" class="input-text" placeholder="Deadline" readonly>
+              <input type="text" value="" id="Deadline" class="input-text" readonly>
               <i class="fas fa-envelope"></i>
             </div>
             <div class="form-row">
               <label for="Status">Status</label>
-              <input type="text" value="{{quotation.Status}}" formControlName="Status" id="Status" class="input-text" placeholder="Status" readonly>
+              <input type="text" value="{{quotation.statusText}}" id="Status" class="input-text" readonly>
               <i class="fas fa-envelope"></i>
             </div>
 
             <div class="form-row">
               <label for="AcceptedDate">Accepted Date</label>
-              <input type="date" value="{{quotation.date}}" formControlName="AcceptedDate" id="AcceptedDate" class="input-text" readonly >
+              <input type="text" value="" id="AcceptedDate" class="input-text" readonly>
               <i class="fas fa-envelope"></i>
             </div>
           </div>
