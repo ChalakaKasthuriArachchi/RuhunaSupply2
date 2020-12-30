@@ -144,14 +144,16 @@ export class AddPurchaseRequestComponent implements OnInit {
       .subscribe(res => this.allowedForwards = res as []);
   }
   callQuotations(){
-
+    this.PurchaseRequestService.callQuotations(this.checkoutForm.value.Id).subscribe(
+      res => this.route.navigateByUrl('/purchaserequest')
+    );
   }
   getSuppliers(){
     this.supplierService.getActiveSupplierList(0).subscribe(
       res => this.suppliers = res as []
     )
   }
-  selectSupplier(event){
-    
+  selectSupplier(){
+   
   }
 }

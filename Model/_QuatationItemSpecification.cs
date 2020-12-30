@@ -13,7 +13,7 @@ namespace RuhunaSupply.Model
         { 
         }
         #region Dynamic
-        public QuatationItem QuatationItem { get; set; }
+        public QuotationItem QuatationItem { get; set; }
         public Specification Specification { get; set; }
         #endregion
         #region Saved

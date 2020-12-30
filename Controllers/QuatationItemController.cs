@@ -32,7 +32,7 @@ namespace RuhunaSupply.Controllers
                 
             }
 
-            QuatationItem qt = new QuatationItem()
+            QuotationItem qt = new QuotationItem()
             {
                 Id = max_id + 1,
                 //Quatation=Quatation,
@@ -62,7 +62,7 @@ namespace RuhunaSupply.Controllers
         [HttpPost]
         public IActionResult Delete(int Id)
         {
-            _db.QuatationItems.Remove(new QuatationItem { Id = Id });
+            _db.QuatationItems.Remove(new QuotationItem { Id = Id });
             _db.SaveChanges();
             return Ok();
         }

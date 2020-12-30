@@ -16,12 +16,12 @@ namespace RuhunaSupply.Controllers
         {
             this._db = context;
         }
-        public IActionResult Add(QuatationItem QuatationItem, Specification Specification, string Satisfied, string Description)
+        public IActionResult Add(QuotationItem QuatationItem, Specification Specification, string Satisfied, string Description)
         {
             int max_id = 0;
             try
             {
-                max_id = _db.QuatationItemSpecifications.Max((qis) => qis.Id);
+                max_id = _db.QuatationItemSpecification.Max((qis) => qis.Id);
             }
             catch
             {
@@ -35,14 +35,14 @@ namespace RuhunaSupply.Controllers
                 Satisfied = Satisfied,
                 Description = Description
             };
-            _db.QuatationItemSpecifications.Add(qis);
+            _db.QuatationItemSpecification.Add(qis);
             _db.SaveChanges();
             return Ok();
         }
         [HttpPost]
-        public IActionResult Edit(int Id, QuatationItem QuatationItem, Specification Specification, string Satisfied, string Description)
+        public IActionResult Edit(int Id, QuotationItem QuatationItem, Specification Specification, string Satisfied, string Description)
         {
-            _db.QuatationItemSpecifications.Update(new _QuatationItemSpecification()
+            _db.QuatationItemSpecification.Update(new _QuatationItemSpecification()
             {
                 Id = Id,
                 QuatationItem = QuatationItem,
@@ -57,7 +57,7 @@ namespace RuhunaSupply.Controllers
         [HttpPost]
         public IActionResult Delete(int Id)
         {
-            _db.QuatationItemSpecifications.Remove(new _QuatationItemSpecification() { Id = Id });
+            _db.QuatationItemSpecification.Remove(new _QuatationItemSpecification() { Id = Id });
             _db.SaveChanges();
             return Ok();
         }

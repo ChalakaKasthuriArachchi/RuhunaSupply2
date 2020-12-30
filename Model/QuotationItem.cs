@@ -10,9 +10,9 @@ using static RuhunaSupply.Common.MyEnum;
 
 namespace RuhunaSupply.Model
 {
-    public class QuatationItem : IndexedObject
+    public class QuotationItem : IndexedObject
     {
-        public QuatationItem() 
+        public QuotationItem() 
         {
         }
         #region Dynamic
@@ -45,8 +45,8 @@ namespace RuhunaSupply.Model
         public double Qty { get; set; }
         public double Total { get; set; }
         public double Rate { get; set; }
-        public List<Specification> Specifications { get; set; }
-            = new List<Specification>();
+        public List<QuotationItemSpecification> Specifications { get; set; }
+            = new List<QuotationItemSpecification>();
         public bool IsDeleted { get; set; }
 
         public int Index => Id;

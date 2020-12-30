@@ -8,8 +8,9 @@ namespace RuhunaSupply.Common
     public static class MyEnum
     {
         public enum QuatationStatus
-        { 
+        {
             //pending done wge eawa   
+            Pending
         }
         public enum Faculties
         { 
@@ -73,7 +74,8 @@ namespace RuhunaSupply.Common
         }
         public enum PurchaseRequestStatus
         {
-            On_Approval, Rejected, 
+            On_Approval, Rejected,
+            Done,
         }
         public enum SupplierStatus
         {

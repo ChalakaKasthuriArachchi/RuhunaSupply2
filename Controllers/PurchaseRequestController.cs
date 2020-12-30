@@ -69,20 +69,65 @@ namespace RuhunaSupply.Controllers
                 return null;
             }
         }
-        [HttpPost("callquotations")]
-        public IActionResult CallQuotations()
+        [HttpGet("callquotations/{id}")]
+        public IActionResult CallQuotations(int id)
         {
             try
             {
                 Supplier[] suppliers = _db.Suppliers./*Where(sup => sup.Category2Id)*/
                     ToArray();
+                PurchaseRequest pr = _db.PurchaseRequests.Include(pr => pr.Items).FirstOrDefault(pr => pr.Id == id);
+                pr.Status = PurchaseRequestStatus.Done;
+                _db.PurchaseRequests.Update(pr);
                 foreach (var sup in suppliers)
                 {
                     Quotation quotation = new Quotation()
                     {
-                        
+                        Id = Quotation.GetNextId(_db),
+                        Date = Functions.DateTime,
+                        PurchaseRequestId = id,
+                        Status = QuatationStatus.Pending,
+                        SupplierId = sup.Id
                     };
+                    foreach (var item in pr.Items)
+                    {
+                        PurchaseRequestItemSpecification[] specifications = 
+                            _db.PurchaseRequestItemSpecifications.
+                                Where(spec => spec.PurchaseRequestItemId == item.Id).ToArray();
+                        List<QuotationItemSpecification> qis = new List<QuotationItemSpecification>(specifications.Length);
+                        foreach (var spec in specifications)
+                        {
+                            qis.Add(new QuotationItemSpecification()
+                            {
+                                ItemId = item.Id,
+                                PurchaseRequestItemSpecificationId = spec.Id,
+                            });
+                        }
+                        quotation.QuotationItems.Add(new QuotationItem()
+                        {
+                             ItemId = item.ItemId,
+                             PurchaseRequestItemId = item.Id,
+                             Qty = item.QtyRequired,
+                             QuotationId = quotation.Id,
+                             Specifications = qis
+                        });
+                        _db.Quotations.Add(quotation);
+                    }
                 }
+                using(var trans = _db.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        _db.SaveChanges();
+                        trans.Commit();
+                    }
+                    catch(Exception ex)
+                    {
+                        trans.Rollback();
+                        throw ex;
+                    }
+                }
+                return Ok();
             }
             catch(Exception ex)
             {
