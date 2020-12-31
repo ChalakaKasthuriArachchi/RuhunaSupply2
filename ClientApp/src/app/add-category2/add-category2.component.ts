@@ -35,7 +35,7 @@ export class AddCategory2Component implements OnInit {
   }
   onSubmit(category2Data){
     this.cat2Service.postCategory2(category2Data.value).subscribe(
-      data =>console.log('success',data),
+      data =>this.checkoutForm.reset(),
       error =>console.log('error',error)
       );
       

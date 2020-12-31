@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using RuhunaSupply.Common;
 using RuhunaSupply.Data;
 using RuhunaSupply.Model;
 using ThirdParty.Json.LitJson;
@@ -54,7 +55,7 @@ namespace RuhunaSupply.Controllers
             };
             _db.Items.Add(I1);
             await _db.SaveChangesAsync();
-
+            await Task.Run(() => { Cache.RefreshItems(_db); });
             return CreatedAtAction("Items", new { id = I1.Id }, I1);
         }
         

@@ -123,17 +123,22 @@ export class AddPurchaseRequestComponent implements OnInit {
   }
   addSpec(event){
     var spec;
-    var item;
+    var item : any;
     this.specCatService.getSpecificationCategoryById(event.target.id).subscribe(
       res =>{ 
         spec = res;
         this.itemService.getItem(spec.item.id,true).subscribe(
           res => {
-            item = res;
-            item.quantity = (<HTMLInputElement>document.getElementById('qty')).value;
-            item.specificationCategoryId = spec.id;
-            item.specificationCategoryName = spec.title;
+            item = { item : res , 
+              name : res['name'], 
+              id : res['id'],
+              category2 : res['category2'],
+              specificationCategoryName : spec.title, 
+              specificationCategoryId : spec.id,
+              quantity : (<HTMLInputElement>document.getElementById('qty')).value
+              };
             this.selectedItems.push(item);
+            console.log(item);
           }
         )
       }

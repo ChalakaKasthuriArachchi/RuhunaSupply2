@@ -49,6 +49,8 @@ namespace RuhunaSupply.Controllers
                 };
                 _db.UserAccounts.Add(ua);
                 await _db.SaveChangesAsync();
+                await Task.Run(() => { Cache.RefreshUsers(_db); });
+                await Task.Run(() => { Cache.RefreshUserAccounts(_db); });
                 return CreatedAtAction("UseAccount", new { id = ua.Id }, ua);
             }
             catch(Exception ex)

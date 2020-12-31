@@ -43,7 +43,7 @@ export class AddItemComponent implements OnInit {
   }
   onSubmit(itemData){
     this.addItemService.postItem(itemData.value).subscribe(
-      data => console.log('success!', data),
+      data => this.checkoutForm.reset(),
       error => console.log('error', error)
     );
   }

@@ -169,3 +169,11 @@ Object reference not set to an instance of an object.
 Stack Trace:
    at RuhunaSupply.Controllers.PurchaseRequestController.PostPurchaseRequest(Object req) in D:\Programming\Asp.Net\Systems\RuhunaSupply\Controllers\PurchaseRequestController.cs:line 91
 --------------------------------------------------------------------------
+Date : 12/30/2020 | Time : 4:25 PM
+Error Text:
+Unable to Save Purchase Request
+Message:
+Object reference not set to an instance of an object.
+Stack Trace:
+   at RuhunaSupply.Controllers.PurchaseRequestController.PostPurchaseRequest(Object req) in D:\Programming\Asp.Net\Systems\RuhunaSupply\Controllers\PurchaseRequestController.cs:line 179
+--------------------------------------------------------------------------

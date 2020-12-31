@@ -45,8 +45,8 @@ export class RegisterSupplierComponent implements OnInit {
   ngOnInit(): void {
     this.category2Service.getCategory2List(0)
         .subscribe(
-        //res => this.category2List = res as []
-       data => console.log('Success!', data)
+        res => this.category2List = res as []
+       //data => console.log('Success!', data)
       );
 
   //     this.checkoutForm=this.formBuilder.group({

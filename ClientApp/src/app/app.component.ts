@@ -14,10 +14,13 @@ export class AppComponent{
   navbarLinks = [];
   constructor(private service:UserAccountService, 
     public router : Router,private userService : UserService){
-      this.userService.getNavebarLinks().subscribe(res => {
+      var temp = this.userService.getNavebarLinks();
+      if(temp != null){
+        temp.subscribe(res => {
         this.navbarLinks = res as [];
         console.log(this.navbarLinks);
-      });
+        });
+      }
   }
   onLogout(){
     this.service.onLogout();

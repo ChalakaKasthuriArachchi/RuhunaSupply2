@@ -46,13 +46,15 @@ namespace RuhunaSupply.Controllers
                     FullName = jd["FullName"].ToString(),
                     ShortName = jd["ShortName"].ToString(),
                     Position = (UserPositions)int.Parse(jd["Position"].ToString()),
+                    PermissionList = "1000000"
                 };
                 int temp;
                 int.TryParse(jd["MergedId"].ToString(), out temp);
                 u.MergedId = temp;
                 _db.Users.Add(u);
                 _db.SaveChanges();
-
+                Cache.RefreshUsers(_db);
+                Cache.RefreshUserAccounts(_db);
                 return Ok();
             }
             catch (Exception e) { return BadRequest(); }

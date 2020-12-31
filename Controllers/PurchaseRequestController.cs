@@ -79,11 +79,12 @@ namespace RuhunaSupply.Controllers
                 PurchaseRequest pr = _db.PurchaseRequests.Include(pr => pr.Items).FirstOrDefault(pr => pr.Id == id);
                 pr.Status = PurchaseRequestStatus.Done;
                 _db.PurchaseRequests.Update(pr);
+                int qid = Quotation.GetNextId(_db);
                 foreach (var sup in suppliers)
                 {
                     Quotation quotation = new Quotation()
                     {
-                        Id = Quotation.GetNextId(_db),
+                        Id = qid++,
                         Date = Functions.DateTime,
                         PurchaseRequestId = id,
                         Status = QuatationStatus.Pending,
@@ -111,8 +112,8 @@ namespace RuhunaSupply.Controllers
                              QuotationId = quotation.Id,
                              Specifications = qis
                         });
-                        _db.Quotations.Add(quotation);
                     }
+                    _db.Quotations.Add(quotation);
                 }
                 using(var trans = _db.Database.BeginTransaction())
                 {

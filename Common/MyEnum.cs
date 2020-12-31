@@ -58,7 +58,7 @@ namespace RuhunaSupply.Common
         }
         public enum UserTypes
         {
-            Internal, Supplier
+            Supplier, Internal
         }
         public enum BusinessCategories
         {
