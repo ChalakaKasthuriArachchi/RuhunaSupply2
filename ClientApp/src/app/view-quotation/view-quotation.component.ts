@@ -6,16 +6,16 @@ import { QuotationService } from './../shared/quotation.service';
   templateUrl: './view-quotation.component.html',
   styleUrls: ['./view-quotation.component.css']
 })
-export class QuotationComponent implements OnInit {
+export class ViewQuotationComponent implements OnInit {
   Quotation =[];
   constructor(private QuotationService : QuotationService, private router : Router) { }
   ngOnInit(): void {
-    if(localStorage.getQuotation('token') == null)
+    if(localStorage.getItem('token') == null)
     this.router.navigateByUrl('user/login');
     this.getQuotationList();
   }
   getQuotationList(){
-    this.QuotationService.getQuotation(0)
+    this.QuotationService.getQuotationList()
       .subscribe(res => this.Quotation = res as []);
   }
 

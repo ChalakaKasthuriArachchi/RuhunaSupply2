@@ -7,15 +7,17 @@ import { environment } from 'src/environments/environment';
 })
 export class QuotationService {
   constructor(private http: HttpClient) { }
-  postQuotation(formData) {
+  postQuotationList(formData) {
     return this.http.post(environment.apiBaseURI + '/Quotation', formData);
   }
   getQuotation(id) {
     var tok = localStorage.getItem('token');
     if(tok != null){
       var tokenHeader = new HttpHeaders({'Authorization':'Bearer ' + tok});
-      return this.http.get(environment.apiBaseURI + '/Quotation/' + id,
-      {headers : tokenHeader});
+      return this.http.get(environment.apiBaseURI + '/Quotation' +id, {headers : tokenHeader});
     }
+  }
+  getQuotationList(){
+    return this.http.get(environment.apiBaseURI + '/Quotation/');
   }
 }

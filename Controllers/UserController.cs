@@ -103,18 +103,18 @@ namespace RuhunaSupply.Controllers
             if (user.Position == UserPositions.SAB)
                 return new NavbarLink[]
                     {   new NavbarLink()  { title = "Purchase Requests" , route = "/purchaserequest" , comp = "/purchaserequest" } ,
-                        new NavbarLink()  { title = "Quotations" , route = "/quotation" , comp = "/quotation" },
+                        new NavbarLink()  { title = "Quotations" , route = "/quotation/view" , comp = "/view-quotation" },
                         new NavbarLink()  { title = "Suppliers" , route = "/supplier" , comp = "/supplier" },
                     };
             if (user.Position == UserPositions.Dean || user.Position == UserPositions.Head)
                 return new NavbarLink[]
                     {   new NavbarLink() { title = "Purchase Requests" , route = "/purchaserequest" , comp = "/purchaserequest" } ,
-                        new NavbarLink() { title = "Quotations" , route = "/view-quotation" , comp = "/view-quotation"  },
+                        new NavbarLink() { title = "Quotations" , route = "/quotation/view" , comp = "/view-quotation"  },
                         new NavbarLink() { title = "Users" , route = "/user", comp = "/user" },
                     };
             return new NavbarLink[]
                     {   new NavbarLink() { title = "Purchase Requests" , route = "/purchaserequest", comp = "/purchaserequest" } ,
-                        new NavbarLink() { title = "Quotations" , route = "/quotation", comp = "/quotation"   }
+                        new NavbarLink() { title = "Quotations" , route = "/quotation/view", comp = "/view-quotation"   }
                     };
 
         }
