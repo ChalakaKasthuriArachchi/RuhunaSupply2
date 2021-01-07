@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using RuhunaSupply.Common;
 using RuhunaSupply.Data;
 using RuhunaSupply.Model;
 using ThirdParty.Json.LitJson;
@@ -30,8 +31,8 @@ namespace RuhunaSupply.Controllers
                 SpecificationCategoryId = specId,
                 ItemId = itemId,
                 Name = jd["Name"].ToString(),
-                Value = jd["Value"].ToString()
-
+                Value = jd["Value"].ToString(),
+                TimeStamp = Functions.DateTime
             };
             _db.Specification.Add(sp);
             await _db.SaveChangesAsync();

@@ -39,6 +39,7 @@ namespace RuhunaSupply.Controllers
                 ParentCategoryId = int.Parse(jd["Category2"].ToString()),
                 Name = jd["Name"].ToString(),
                 Description = jd["Description"].ToString(),
+                TimeStamp = Functions.DateTime
             };
             _db.Category3s.Add(c3);
             await _db.SaveChangesAsync();

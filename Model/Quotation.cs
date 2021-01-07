@@ -58,6 +58,7 @@ namespace RuhunaSupply.Model
         public List<QuotationItem> QuotationItems { get; set; } =
             new List<QuotationItem>();
         public int Index => Id;
+        public DateTime TimeStamp { get; set; }
         #endregion
     }
 }

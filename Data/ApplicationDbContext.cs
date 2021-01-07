@@ -27,7 +27,7 @@ namespace RuhunaSupply.Data
 
         public DbSet<QuotationItem> QuatationItems { get; set; }
 
-        public DbSet<UserName> UserNames { get; set; }
+      
 
         public DbSet<PurchaseRequestItemSpecification> PurchaseRequestItemSpecifications { get; set; }
 

@@ -24,6 +24,7 @@ namespace RuhunaSupply.Model
         public string Description { get; set; }
         public bool IsDeleted { get; set; }
         public int Index => Id;
+        public DateTime TimeStamp { get; set; }
     }
     
 }

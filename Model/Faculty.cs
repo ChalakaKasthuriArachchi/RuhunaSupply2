@@ -29,5 +29,6 @@ namespace RuhunaSupply.Model
 
         public int Index => Id;
         //public List<Department> Departments { get; set; }
+        
     }
 }

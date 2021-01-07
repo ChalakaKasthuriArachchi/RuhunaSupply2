@@ -45,7 +45,8 @@ namespace RuhunaSupply.Controllers
                     Email = jd["Email"].ToString(),
                     HashedPassword = ComputeSha256Hash(jd["HashedPassword"].ToString()),
                     Type = (UserTypes)int.Parse(jd["Type"].ToString()),
-                    Privileges = "10000000"
+                    Privileges = "10000000",
+                    TimeStamp = Functions.DateTime
                 };
                 _db.UserAccounts.Add(ua);
                 await _db.SaveChangesAsync();

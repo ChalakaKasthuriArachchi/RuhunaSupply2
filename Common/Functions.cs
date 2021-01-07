@@ -23,8 +23,12 @@ namespace RuhunaSupply.Common
         }
         public static UserAccount GetCurrentUserAccount(HttpContext httpContext,ApplicationDbContext _db)
         {
-            int userId = int.Parse(httpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name).Value);
-            return _db.UserAccounts.FirstOrDefault(u => u.Id == userId);
+            try
+            {
+                int userId = int.Parse(httpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name).Value);
+                return _db.UserAccounts.FirstOrDefault(u => u.Id == userId);
+            }
+            catch { return null; }
         }
         public static User GetCurrentUser(HttpContext httpContext, ApplicationDbContext _db)
         {
