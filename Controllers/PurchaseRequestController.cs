@@ -155,7 +155,7 @@ namespace RuhunaSupply.Controllers
                         pr = new PurchaseRequest();
                     else
                         pr = _db.PurchaseRequests.Find(int.Parse(jform["Id"].ToString()));
-                    
+                    pr.TimeStamp = Functions.DateTime;
                     pr.FundGOSL = jform["Funds"].ToString();
                     pr.Project = jform["Project"].ToString();
                     pr.DepartmentId = user.DepartmentId;

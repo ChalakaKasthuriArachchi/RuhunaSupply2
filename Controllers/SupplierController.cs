@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using RuhunaSupply.Common;
 using RuhunaSupply.Data;
 using RuhunaSupply.Model;
 using ThirdParty.Json.LitJson;
@@ -88,7 +89,8 @@ namespace RuhunaSupply.Controllers
                     //Category2Id = int.Parse(jd["Category2"].ToString()),
                     RegisteredDate = DateTime.Now,
                     RegistrationNumber = jd["RegistrationNumber"].ToString(),
-                    ContactNumber = jd["ContactNumber"].ToString()
+                    ContactNumber = jd["ContactNumber"].ToString(),
+                    TimeStamp = Functions.DateTime
                 };
                 _db.Suppliers.Add(sp);
                 await _db.SaveChangesAsync();

@@ -33,35 +33,13 @@ namespace RuhunaSupply.Controllers
             Category1 c1 = new Category1()
             {
                 Name = jd["Name"].ToString(),
-                Description = jd["Description"].ToString()
-                
+                Description = jd["Description"].ToString(),
+                TimeStamp = Functions.DateTime
             };
             _db.Category1s.Add(c1);
             await _db.SaveChangesAsync();
             await Task.Run(() => { Cache.RefreshCategory1(_db); });
             return CreatedAtAction("Category1", new { id = c1.Id }, c1);
         }
-
-        //[HttpPut]
-        //public IActionResult Edit(int Id, string Name, string Description)
-        //{
-        //    _db.Category1s.Update(new Category1()
-        //    {
-        //        Id = Id,
-        //        Name = Name,
-        //        Description = Description
-        //    });
-        //    _db.SaveChanges();
-        //    return Ok();
-        //}
-
-        //[HttpDelete]
-        //public IActionResult Delete(int Id)
-        //{
-        //    _db.Category1s .Remove(new Category1() { Id = Id });
-        //    _db.SaveChanges();
-        //    return Ok();
-        //}
-
     }
 }

@@ -93,6 +93,7 @@ namespace RuhunaSupply.Model
         public bool IsDeleted { get; set; }
 
         public int Index => Id;
+        public DateTime TimeStamp { get; set; }
         #endregion
     }
 }

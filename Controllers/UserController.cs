@@ -46,7 +46,8 @@ namespace RuhunaSupply.Controllers
                     FullName = jd["FullName"].ToString(),
                     ShortName = jd["ShortName"].ToString(),
                     Position = (UserPositions)int.Parse(jd["Position"].ToString()),
-                    PermissionList = "1000000"
+                    PermissionList = "1000000",
+                    TimeStamp = Functions.DateTime
                 };
                 int temp;
                 int.TryParse(jd["MergedId"].ToString(), out temp);

@@ -54,7 +54,8 @@ namespace RuhunaSupply.Controllers
                 {
                     ItemId = itemId,
                     Title = jd["Title"].ToString(),
-                    Description = jd["Description"].ToString()
+                    Description = jd["Description"].ToString(),
+                    TimeStamp = Functions.DateTime
                 };
                 _db.SpecificationCategories.Add(sp);
                 await _db.SaveChangesAsync();

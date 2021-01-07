@@ -40,5 +40,6 @@ namespace RuhunaSupply.Model
 
         public int Index => Id;
         #endregion
+        
     }
 }
