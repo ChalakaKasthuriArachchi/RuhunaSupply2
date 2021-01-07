@@ -25,6 +25,7 @@ import { AddPurchaseRequestComponent } from './add-purchase-request/add-purchase
 import { AddUserComponent } from './add-user/add-user.component';
 import { UserComponent } from './user/user.component';
 import { ViewQuotationComponent } from './view-quotation/view-quotation.component';
+import { ViewSpecificationCategoryComponent } from './view-specification-category/view-specification-category.component';
 
 
 const routes: Routes = [
@@ -59,7 +60,9 @@ const routes: Routes = [
   { path: 'quotation/view', component:ViewQuotationComponent},
   { path: 'testing', component: TestingComponent},
   { path: 'quotation', component: QuotationComponent},
-  { path: 'purchaserequest/view', component: AddPurchaseRequestComponent }
+  { path: 'purchaserequest/view', component: AddPurchaseRequestComponent },
+  { path: 'SpecificationCategory/view', component : ViewSpecificationCategoryComponent},
+  { path: 'specification-category/add',component : SpecificationCategoryComponent}
 ];
 
 @NgModule({

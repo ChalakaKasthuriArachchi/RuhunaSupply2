@@ -38,6 +38,7 @@ import { AddPurchaseRequestComponent } from './add-purchase-request/add-purchase
 import { TestingComponent } from './testing/testing.component';
 import { ViewQuotationComponent } from './view-quotation/view-quotation.component';
 import { QuotationComponent } from './quotation/quotation.component';
+import { ViewSpecificationCategoryComponent } from './view-specification-category/view-specification-category.component';
 
 
 
@@ -70,7 +71,8 @@ import { QuotationComponent } from './quotation/quotation.component';
     AddUserComponent,
     UserComponent,
     ViewQuotationComponent,
-    QuotationComponent
+    QuotationComponent,
+    ViewSpecificationCategoryComponent
   ],
   imports: [
     CommonModule,

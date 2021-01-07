@@ -1,0 +1,23 @@
+        <h2 style="color: #161414;text-align: center">Specification Categories</h2>
+  <table class="table table-dark"  style="max-width: 50% ; margin-left: auto;margin-right: auto;">
+      <thead><tr>
+        <th scope="col">Item</th>
+        <th scope="col">Title</th>
+        <th scope="col">Description</th>
+        <th scope="col"><a class="btn btn-primary" href="/SpecificationCategory/add">New</a></th>
+      </tr>
+    </thead>
+        <tbody>
+          <tr scope="row" *ngFor="let pr of ViewSpecification; let i = index;">
+                <td>{{pr.item.name}}</td>
+                
+                <td>{{pr.title}}</td>
+                
+                <td>{{pr.description}}</td>
+                
+                <td>
+                    <a class="btn btn-outline-success" href="SpecificationCategory/view?id={{pr.id}}" role="button">View</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
