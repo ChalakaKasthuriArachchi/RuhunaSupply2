@@ -19,6 +19,16 @@ namespace RuhunaSupply.Controllers
         {
             this._db = context;
         }
+        [HttpGet("supplier/{id}")]
+        public Quotation[] GetQuotations(int id)
+        {
+            var vs = _db.Quotations.Where(s => s.SupplierId == id).ToArray();
+            foreach (var item in vs)
+            {
+                item.GetSupplier(_db);
+            }
+            return vs;
+        }
         [HttpGet("{id}")]
         public Quotation GetQuotation(int id)
         {
