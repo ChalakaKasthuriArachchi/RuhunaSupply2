@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using RuhunaSupply.Common;
 using RuhunaSupply.Data;
 using RuhunaSupply.Model;
 using System;
@@ -18,6 +19,17 @@ namespace RuhunaSupply.Controllers
         public QuotationController(ApplicationDbContext context)
         {
             this._db = context;
+        }
+        [HttpGet]
+        public Quotation[] GetQuotations()
+        {
+            //int userId = Functions.GetCurrentUserId(HttpContext, _db);
+            var vs = _db.Quotations.ToArray();
+            foreach (var item in vs)
+            {
+                item.GetSupplier(_db);
+            }
+            return vs;
         }
         [HttpGet("{id}")]
         public Quotation GetQuotation(int id)

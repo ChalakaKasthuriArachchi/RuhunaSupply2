@@ -45,15 +45,8 @@ export class QuotationComponent implements OnInit {
    onSubmit(quotationData){
    
   }
-
-
-
-
-
-
-
-  getQuotation(){
-    this.QuotationService.getQuotation(0)
+    getQuotationList(){
+    this.QuotationService.getQuotationList()
      .subscribe(res => this.quotation = res as []);
   }
 }

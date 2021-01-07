@@ -13,7 +13,8 @@ import { Input, Component, OnInit, NgModule } from '@angular/core';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-formModel = {
+  checkoutForm;
+  formModel = {
   Email : '',
   Password : ''
 }
@@ -21,7 +22,12 @@ formModel = {
     private service : UserAccountService,
     private formBuilder : FormBuilder,
     private router: Router,
-    ) {   }
+    ) { 
+      this.checkoutForm = this.formBuilder.group({
+        Email: '',
+        Password: '',
+      });
+      }
 
   ngOnInit(): void {
     if(localStorage.getItem('token') != null)

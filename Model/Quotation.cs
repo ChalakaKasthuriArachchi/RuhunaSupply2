@@ -28,7 +28,7 @@ namespace RuhunaSupply.Model
         #endregion
         
         #region Dynamic
-        private Supplier supplier = null;
+        public Supplier supplier { get; set; }
         private PurchaseRequest purchaseRequest = null;
         public Supplier GetSupplier(ApplicationDbContext db)
         {
