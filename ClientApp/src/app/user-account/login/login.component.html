@@ -1,4 +1,4 @@
-<div class="form-v5">
+<!-- <div class="form-v5">
     <div class="page-content">
 		<div class="form-v5-content">
 			<form #form='ngForm' id="checkform" class="mb-4" autocomplete="off" (submit)="onSubmit(form)">
@@ -25,5 +25,20 @@
 				Error.. login..!
 			  </div>
 		</div>
-	</div>
+	</div> -->
 
+	<div class="box-login col-md-4">
+		<form class="form-signin" #form='ngForm' id="checkform" class="mb-4" autocomplete="off" (submit)="onSubmit(form)" >       
+		  <h2 class="form-signin-heading">Log in</h2><br>
+		  <input type="text" class="form-control" placeholder="Email Address" #Email="ngModel"  name="Email" [(ngModel)]="formModel.Email" required="" autofocus="" /><br>
+		  <input type="password" class="form-control" #Password="ngModel" name="Password" [(ngModel)]="formModel.Password" placeholder="Password" required=""/><br>
+		  <button type="submit" class="btn btn-lg btn-primary btn-block" [disabled]="form.invalid">Login</button>   
+		</form>
+		<p>Don't Have an Account<a href="/user/signup"> Sign Up</a> here</p>
+			<div style="display: none;" id="success_alert"  class="alert alert-success" role="alert">
+				Successfull Log!
+			  </div>
+			  <div  style="display: none;" id="error_alert" class="alert alert-danger" role="alert">
+				Error.. login..!
+			  </div>
+	  </div>

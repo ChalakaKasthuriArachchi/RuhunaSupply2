@@ -5,6 +5,7 @@ import { combineLatest } from 'rxjs';
 import {FormControl } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { Input, Component, OnInit, NgModule } from '@angular/core';
+import { ResourceLoader } from '@angular/compiler';
 
 
 @Component({
@@ -63,6 +64,7 @@ export class LoginComponent implements OnInit {
           //const resetForm: HTMLFormElement = document.getElementById('checkform');
           fg.reset();
           this.router.navigateByUrl('');
+          
         },
 
         error => { 

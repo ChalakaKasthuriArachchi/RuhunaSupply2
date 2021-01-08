@@ -34,20 +34,24 @@
           <i class="fas fa-envelope"></i>
         </div>
         <br><br>
+        <table>
         <div class="form-row">
-          <label for="Type">Choose User Type</label>
-          <select formControlName="Type" id="Type" required>
-            <!--<option value='-1' selected hidden>User Type</option>-->
-            <option value='0'>Supplier</option>
-            <option value='1'>Internal User</option>
-          </select>
-          <i class="fas fa-envelope"></i>
-        </div>
+            
+              <tr>
+                <td><label for="Type">Choose User Type</label></td>
+                <td style="padding: 10px;"><select formControlName="Type" id="Type" required>
+                <!--<option value='-1' selected hidden>User Type</option>-->
+                    <option value='0'>Supplier</option>
+                    <option value='1'>Internal User</option>
+                </select>
+                </td>
+            </tr>
+            </div>
+          </table>
         <br><br>
-        <div class="form-row-last">
-          <button class="button" type="submit">Sign Up</button>
-          <i class="fas fa-envelope"></i>
-        </div>
+          <div class="form-row-last">
+						<input type="submit" name="signup" class="signup" value="Sign up">
+					</div>
 
       </form>
       <div style="display: none;" id="success_alert"  class="alert alert-success" role="alert">
